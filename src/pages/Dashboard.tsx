@@ -4,10 +4,11 @@ import { ModuleCard } from "@/components/dashboard/ModuleCard";
 import { GameModeCard } from "@/components/dashboard/GameModeCard";
 import { useGame } from "@/contexts/GameContext";
 import { useAuth } from "@/contexts/AuthContext";
-import { BookOpen, Gamepad2, Trophy, Target, Zap, Crown } from "lucide-react";
+import { Gamepad2, Flame, Star, Trophy } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 
 const gameModes = [
   {
@@ -16,6 +17,7 @@ const gameModes = [
     description: "Practice syntax with instant feedback",
     icon: "typing" as const,
     color: "primary" as const,
+    emoji: "⌨️",
   },
   {
     id: "ordering",
@@ -23,6 +25,7 @@ const gameModes = [
     description: "Arrange code blocks correctly",
     icon: "ordering" as const,
     color: "accent" as const,
+    emoji: "🧩",
   },
   {
     id: "speed",
@@ -30,6 +33,7 @@ const gameModes = [
     description: "Race against time",
     icon: "speed" as const,
     color: "secondary" as const,
+    emoji: "⚡",
   },
   {
     id: "pacman",
@@ -37,6 +41,7 @@ const gameModes = [
     description: "Collect code, avoid bugs",
     icon: "speed" as const,
     color: "warning" as const,
+    emoji: "👾",
   },
   {
     id: "system-builder",
@@ -44,6 +49,7 @@ const gameModes = [
     description: "Design systems visually",
     icon: "ordering" as const,
     color: "success" as const,
+    emoji: "🏗️",
   },
   {
     id: "complexity-arcade",
@@ -51,6 +57,7 @@ const gameModes = [
     description: "Master Big-O notation",
     icon: "typing" as const,
     color: "primary" as const,
+    emoji: "📊",
   },
 ];
 
@@ -65,8 +72,9 @@ export default function Dashboard() {
     }
   }, [user, loading, navigate]);
 
-  const level = Math.floor(xp / 100) + 1;
-  const xpToNextLevel = (level * 100) - xp;
+  const totalLessons = modules.reduce((acc, m) => acc + (m.lessons?.length || 3), 0);
+  const completedLessons = modules.reduce((acc, m) => acc + Math.floor((m.progress / 100) * (m.lessons?.length || 3)), 0);
+  const overallProgress = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
 
   if (loading) {
     return (
@@ -80,107 +88,113 @@ export default function Dashboard() {
     <div className="min-h-screen bg-background">
       <Header />
 
-      <main className="container mx-auto px-4 pt-24 pb-12">
+      <main className="container mx-auto px-4 pt-24 pb-12 max-w-4xl">
+        {/* Mascot Greeting */}
         <motion.div
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className="mb-8"
+          className="text-center mb-8"
         >
-          <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">
-            Welcome back
+          <motion.div 
+            className="text-7xl mb-4"
+            animate={{ y: [0, -10, 0] }}
+            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+          >
+            🚀
+          </motion.div>
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
+            Hey there, coder! 👋
           </h1>
           <p className="text-muted-foreground">
-            Continue mastering Java through play
+            Let's master Java together through fun games and challenges!
           </p>
         </motion.div>
 
+        {/* Stats Row */}
         <motion.div
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.1 }}
-          className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8"
+          className="grid grid-cols-3 gap-4 mb-8"
         >
-          <div className="bg-card rounded-xl p-4 border border-border">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
-                <Trophy className="w-5 h-5 text-primary" />
-              </div>
-              <div>
-                <p className="text-xs text-muted-foreground">Level</p>
-                <p className="text-xl font-bold text-primary">{level}</p>
-              </div>
+          <div className="bg-card rounded-2xl p-4 border border-border text-center">
+            <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-2">
+              <Star className="w-6 h-6 text-primary" />
             </div>
+            <p className="text-2xl sm:text-3xl font-bold text-primary">{xp}</p>
+            <p className="text-xs text-muted-foreground">Total XP</p>
           </div>
-          <div className="bg-card rounded-xl p-4 border border-border">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-success/20 flex items-center justify-center">
-                <Target className="w-5 h-5 text-success" />
-              </div>
-              <div>
-                <p className="text-xs text-muted-foreground">Total XP</p>
-                <p className="text-xl font-bold text-success">{xp}</p>
-              </div>
+          <div className="bg-card rounded-2xl p-4 border border-border text-center">
+            <div className="w-12 h-12 rounded-full bg-warning/20 flex items-center justify-center mx-auto mb-2">
+              <Flame className="w-6 h-6 text-warning" />
             </div>
+            <p className="text-2xl sm:text-3xl font-bold text-warning">{streak}</p>
+            <p className="text-xs text-muted-foreground">Day Streak</p>
           </div>
-          <div className="bg-card rounded-xl p-4 border border-border">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-warning/20 flex items-center justify-center">
-                <Zap className="w-5 h-5 text-warning" />
-              </div>
-              <div>
-                <p className="text-xs text-muted-foreground">Streak</p>
-                <p className="text-xl font-bold text-warning">{streak} days</p>
-              </div>
+          <div className="bg-card rounded-2xl p-4 border border-border text-center">
+            <div className="w-12 h-12 rounded-full bg-success/20 flex items-center justify-center mx-auto mb-2">
+              <Trophy className="w-6 h-6 text-success" />
             </div>
-          </div>
-          <div className="bg-card rounded-xl p-4 border border-border">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center">
-                <BookOpen className="w-5 h-5 text-accent" />
-              </div>
-              <div>
-                <p className="text-xs text-muted-foreground">Next Level</p>
-                <p className="text-xl font-bold text-accent">{xpToNextLevel} XP</p>
-              </div>
-            </div>
+            <p className="text-2xl sm:text-3xl font-bold text-success">{overallProgress}%</p>
+            <p className="text-xs text-muted-foreground">Complete</p>
           </div>
         </motion.div>
 
+        {/* Action Buttons */}
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.15 }}
+          className="flex flex-col sm:flex-row gap-3 mb-10"
+        >
+          <Button 
+            size="lg" 
+            className="flex-1 text-lg h-14 bg-primary hover:bg-primary/90"
+            onClick={() => navigate(`/module/${modules[0]?.id || 'java-basics'}`)}
+          >
+            🚀 Continue Learning
+          </Button>
+          <Button 
+            size="lg" 
+            variant="outline"
+            className="flex-1 text-lg h-14 border-2"
+            onClick={() => document.getElementById('games-section')?.scrollIntoView({ behavior: 'smooth' })}
+          >
+            <Gamepad2 className="w-5 h-5 mr-2" />
+            Play Mini Games
+          </Button>
+        </motion.div>
+
+        {/* Learning Path */}
         <motion.section
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2 }}
           className="mb-10"
         >
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-3">
-              <Gamepad2 className="w-6 h-6 text-primary" />
-              <h2 className="text-xl font-bold text-foreground">Game Modes</h2>
-            </div>
-            <Button variant="ghost" size="sm" onClick={() => navigate('/leaderboard')}>
-              <Crown className="w-4 h-4 mr-2" />
-              Leaderboard
-            </Button>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {gameModes.map((game, index) => (
-              <GameModeCard key={game.id} {...game} index={index} />
+          <h2 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
+            Your Learning Path 🛤️
+          </h2>
+          <div className="space-y-4">
+            {modules.map((module, index) => (
+              <ModuleCard key={module.id} module={module} index={index} />
             ))}
           </div>
         </motion.section>
 
+        {/* Game Modes */}
         <motion.section
+          id="games-section"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
-          <div className="flex items-center gap-3 mb-4">
-            <BookOpen className="w-6 h-6 text-accent" />
-            <h2 className="text-xl font-bold text-foreground">Learning Paths</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {modules.map((module, index) => (
-              <ModuleCard key={module.id} module={module} index={index} />
+          <h2 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
+            Mini Games 🎮
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {gameModes.map((game, index) => (
+              <GameModeCard key={game.id} {...game} index={index} />
             ))}
           </div>
         </motion.section>
