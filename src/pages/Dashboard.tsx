@@ -5,34 +5,59 @@ import { GameModeCard } from "@/components/dashboard/GameModeCard";
 import { Mascot } from "@/components/dashboard/Mascot";
 import { useGame } from "@/contexts/GameContext";
 import { useAuth } from "@/contexts/AuthContext";
+import { useProgress } from "@/hooks/useProgress";
 import { Gamepad2, Flame, Star, Trophy } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { supabase } from "@/integrations/supabase/client";
 
 const gameModes = [
-  { id: "typing", title: "Code Typing", description: "Practice syntax with instant feedback", icon: "typing" as const, color: "primary" as const, emoji: "⌨️" },
-  { id: "ordering", title: "Code Ordering", description: "Arrange code blocks correctly", icon: "ordering" as const, color: "accent" as const, emoji: "🧩" },
-  { id: "speed", title: "Speed Challenge", description: "Race against time", icon: "speed" as const, color: "secondary" as const, emoji: "⚡" },
-  { id: "pacman", title: "Pacman Coder", description: "Collect code, avoid bugs", icon: "speed" as const, color: "warning" as const, emoji: "👾" },
-  { id: "system-builder", title: "System Builder", description: "Design systems visually", icon: "ordering" as const, color: "success" as const, emoji: "🏗️" },
-  { id: "complexity-arcade", title: "Complexity Arcade", description: "Master Big-O notation", icon: "typing" as const, color: "primary" as const, emoji: "📊" },
+  { id: "typing", title: "Code Typing", description: "Practice syntax", icon: "typing" as const, color: "primary" as const, emoji: "⌨️" },
+  { id: "ordering", title: "Code Ordering", description: "Arrange blocks", icon: "ordering" as const, color: "accent" as const, emoji: "🧩" },
+  { id: "speed", title: "Speed Challenge", description: "Race the clock", icon: "speed" as const, color: "secondary" as const, emoji: "⚡" },
+  { id: "pacman", title: "Pacman Coder", description: "Collect code", icon: "speed" as const, color: "warning" as const, emoji: "👾" },
+  { id: "system-builder", title: "System Builder", description: "Design systems", icon: "ordering" as const, color: "success" as const, emoji: "🏗️" },
+  { id: "complexity-arcade", title: "Complexity Arcade", description: "Master Big-O", icon: "typing" as const, color: "primary" as const, emoji: "📊" },
 ];
 
 export default function Dashboard() {
-  const { modules, xp, streak } = useGame();
-  const { user, loading } = useAuth();
+  const { modules } = useGame();
+  const { user, loading: authLoading } = useAuth();
+  const { progress, loading: progressLoading } = useProgress();
   const navigate = useNavigate();
+  
+  const [stats, setStats] = useState({ xp: 0, streak: 0, gamesPlayed: 0 });
 
   useEffect(() => {
-    if (!loading && !user) navigate('/auth');
-  }, [user, loading, navigate]);
+    if (!authLoading && !user) navigate('/auth');
+  }, [user, authLoading, navigate]);
 
-  const totalLessons = modules.reduce((acc, m) => acc + (m.lessons?.length || 3), 0);
-  const completedLessons = modules.reduce((acc, m) => acc + Math.floor((m.progress / 100) * (m.lessons?.length || 3)), 0);
+  // Fetch user stats from database
+  useEffect(() => {
+    if (!user) return;
+    
+    const fetchStats = async () => {
+      const [profileRes, leaderboardRes] = await Promise.all([
+        supabase.from('profiles').select('xp, streak_days').eq('id', user.id).single(),
+        supabase.from('leaderboard').select('total_xp, current_streak, games_played').eq('user_id', user.id).maybeSingle(),
+      ]);
+      
+      setStats({
+        xp: leaderboardRes.data?.total_xp || profileRes.data?.xp || 0,
+        streak: leaderboardRes.data?.current_streak || profileRes.data?.streak_days || 0,
+        gamesPlayed: leaderboardRes.data?.games_played || 0,
+      });
+    };
+    
+    fetchStats();
+  }, [user, progress]);
+
+  const completedLessons = progress.filter(p => p.completed).length;
+  const totalLessons = 31; // Total lessons across all modules
   const overallProgress = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
 
-  if (loading) {
+  if (authLoading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="animate-pulse text-muted-foreground">Loading...</div>
@@ -46,11 +71,7 @@ export default function Dashboard() {
 
       <main className="container mx-auto px-4 pt-24 pb-12 max-w-4xl">
         {/* Mascot */}
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          className="mb-8"
-        >
+        <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="mb-8">
           <Mascot />
         </motion.div>
 
@@ -65,14 +86,14 @@ export default function Dashboard() {
             <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-2">
               <Star className="w-6 h-6 text-primary" />
             </div>
-            <p className="text-2xl sm:text-3xl font-bold text-primary">{xp}</p>
+            <p className="text-2xl sm:text-3xl font-bold text-primary">{stats.xp}</p>
             <p className="text-xs text-muted-foreground">Total XP</p>
           </div>
           <div className="bg-card rounded-2xl p-4 border border-border text-center">
             <div className="w-12 h-12 rounded-full bg-warning/20 flex items-center justify-center mx-auto mb-2">
               <Flame className="w-6 h-6 text-warning" />
             </div>
-            <p className="text-2xl sm:text-3xl font-bold text-warning">{streak}</p>
+            <p className="text-2xl sm:text-3xl font-bold text-warning">{stats.streak}</p>
             <p className="text-xs text-muted-foreground">Day Streak</p>
           </div>
           <div className="bg-card rounded-2xl p-4 border border-border text-center">
@@ -94,7 +115,7 @@ export default function Dashboard() {
           <Button 
             size="lg" 
             className="flex-1 text-lg h-14 bg-primary hover:bg-primary/90"
-            onClick={() => navigate(`/module/${modules[0]?.id || 'java-basics'}`)}
+            onClick={() => navigate('/module/java-foundations')}
           >
             🚀 Continue Learning
           </Button>
