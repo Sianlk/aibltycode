@@ -1,10 +1,11 @@
+import { forwardRef } from "react";
 import { motion } from "framer-motion";
 import { Settings, Volume2, VolumeX, User, Trophy, Flame } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useGame } from "@/contexts/GameContext";
 import { useNavigate, useLocation } from "react-router-dom";
 
-export function Header() {
+export const Header = forwardRef<HTMLDivElement>((_, ref) => {
   const { soundEnabled, setSoundEnabled, xp, streak, gameMode, playSound } = useGame();
   const navigate = useNavigate();
   const location = useLocation();
@@ -12,7 +13,6 @@ export function Header() {
   const handleSoundToggle = () => {
     setSoundEnabled(!soundEnabled);
     if (!soundEnabled) {
-      // Play a sound when enabling
       setTimeout(() => {
         const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
         const oscillator = audioContext.createOscillator();
@@ -32,6 +32,7 @@ export function Header() {
 
   return (
     <motion.header
+      ref={ref}
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/50"
@@ -118,4 +119,6 @@ export function Header() {
       </div>
     </motion.header>
   );
-}
+});
+
+Header.displayName = "Header";
