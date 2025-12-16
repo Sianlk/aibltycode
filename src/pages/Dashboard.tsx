@@ -2,63 +2,21 @@ import { motion } from "framer-motion";
 import { Header } from "@/components/layout/Header";
 import { ModuleCard } from "@/components/dashboard/ModuleCard";
 import { GameModeCard } from "@/components/dashboard/GameModeCard";
+import { Mascot } from "@/components/dashboard/Mascot";
 import { useGame } from "@/contexts/GameContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { Gamepad2, Flame, Star, Trophy } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
 
 const gameModes = [
-  {
-    id: "typing",
-    title: "Code Typing",
-    description: "Practice syntax with instant feedback",
-    icon: "typing" as const,
-    color: "primary" as const,
-    emoji: "⌨️",
-  },
-  {
-    id: "ordering",
-    title: "Code Ordering",
-    description: "Arrange code blocks correctly",
-    icon: "ordering" as const,
-    color: "accent" as const,
-    emoji: "🧩",
-  },
-  {
-    id: "speed",
-    title: "Speed Challenge",
-    description: "Race against time",
-    icon: "speed" as const,
-    color: "secondary" as const,
-    emoji: "⚡",
-  },
-  {
-    id: "pacman",
-    title: "Pacman Coder",
-    description: "Collect code, avoid bugs",
-    icon: "speed" as const,
-    color: "warning" as const,
-    emoji: "👾",
-  },
-  {
-    id: "system-builder",
-    title: "System Builder",
-    description: "Design systems visually",
-    icon: "ordering" as const,
-    color: "success" as const,
-    emoji: "🏗️",
-  },
-  {
-    id: "complexity-arcade",
-    title: "Complexity Arcade",
-    description: "Master Big-O notation",
-    icon: "typing" as const,
-    color: "primary" as const,
-    emoji: "📊",
-  },
+  { id: "typing", title: "Code Typing", description: "Practice syntax with instant feedback", icon: "typing" as const, color: "primary" as const, emoji: "⌨️" },
+  { id: "ordering", title: "Code Ordering", description: "Arrange code blocks correctly", icon: "ordering" as const, color: "accent" as const, emoji: "🧩" },
+  { id: "speed", title: "Speed Challenge", description: "Race against time", icon: "speed" as const, color: "secondary" as const, emoji: "⚡" },
+  { id: "pacman", title: "Pacman Coder", description: "Collect code, avoid bugs", icon: "speed" as const, color: "warning" as const, emoji: "👾" },
+  { id: "system-builder", title: "System Builder", description: "Design systems visually", icon: "ordering" as const, color: "success" as const, emoji: "🏗️" },
+  { id: "complexity-arcade", title: "Complexity Arcade", description: "Master Big-O notation", icon: "typing" as const, color: "primary" as const, emoji: "📊" },
 ];
 
 export default function Dashboard() {
@@ -67,9 +25,7 @@ export default function Dashboard() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!loading && !user) {
-      navigate('/auth');
-    }
+    if (!loading && !user) navigate('/auth');
   }, [user, loading, navigate]);
 
   const totalLessons = modules.reduce((acc, m) => acc + (m.lessons?.length || 3), 0);
@@ -89,25 +45,13 @@ export default function Dashboard() {
       <Header />
 
       <main className="container mx-auto px-4 pt-24 pb-12 max-w-4xl">
-        {/* Mascot Greeting */}
+        {/* Mascot */}
         <motion.div
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className="text-center mb-8"
+          className="mb-8"
         >
-          <motion.div 
-            className="text-7xl mb-4"
-            animate={{ y: [0, -10, 0] }}
-            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-          >
-            🚀
-          </motion.div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
-            Hey there, coder! 👋
-          </h1>
-          <p className="text-muted-foreground">
-            Let's master Java together through fun games and challenges!
-          </p>
+          <Mascot />
         </motion.div>
 
         {/* Stats Row */}
