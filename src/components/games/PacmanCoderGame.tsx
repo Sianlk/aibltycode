@@ -1,127 +1,112 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { useGame } from '@/contexts/GameContext';
-import { Bug, Code, Zap, RotateCcw } from 'lucide-react';
+import { RotateCcw, Trophy, Zap } from 'lucide-react';
 
-interface GridCell {
-  type: 'empty' | 'code' | 'bug' | 'player' | 'wall';
-  content?: string;
-  collected?: boolean;
+interface Position {
+  x: number;
+  y: number;
+}
+
+interface CodeToken {
+  id: string;
+  text: string;
+  position: Position;
+  collected: boolean;
+}
+
+interface Bug {
+  id: string;
+  position: Position;
+  direction: { x: number; y: number };
 }
 
 interface Level {
-  id: string;
+  id: number;
   name: string;
-  targetCode: string[];
-  grid: string[][];
-  playerStart: [number, number];
+  gridSize: number;
+  codeTokens: string[];
+  bugCount: number;
   timeLimit: number;
 }
 
 const levels: Level[] = [
-  {
-    id: '1',
-    name: 'Hello World',
-    targetCode: ['public', 'static', 'void', 'main'],
-    grid: [
-      ['W', 'W', 'W', 'W', 'W', 'W', 'W'],
-      ['W', 'P', ' ', 'C', ' ', 'B', 'W'],
-      ['W', ' ', 'W', 'W', 'W', ' ', 'W'],
-      ['W', 'C', ' ', 'B', ' ', 'C', 'W'],
-      ['W', ' ', 'W', ' ', 'W', ' ', 'W'],
-      ['W', 'B', ' ', 'C', ' ', ' ', 'W'],
-      ['W', 'W', 'W', 'W', 'W', 'W', 'W'],
-    ],
-    playerStart: [1, 1],
-    timeLimit: 30
-  },
-  {
-    id: '2',
-    name: 'Variables',
-    targetCode: ['int', 'String', 'boolean', 'double'],
-    grid: [
-      ['W', 'W', 'W', 'W', 'W', 'W', 'W', 'W'],
-      ['W', 'P', ' ', 'C', 'B', 'C', ' ', 'W'],
-      ['W', ' ', 'W', ' ', 'W', ' ', 'W', 'W'],
-      ['W', 'C', ' ', 'B', ' ', 'C', ' ', 'W'],
-      ['W', 'W', 'W', ' ', 'W', 'W', ' ', 'W'],
-      ['W', 'B', ' ', ' ', ' ', 'B', ' ', 'W'],
-      ['W', 'W', 'W', 'W', 'W', 'W', 'W', 'W'],
-    ],
-    playerStart: [1, 1],
-    timeLimit: 35
-  },
-  {
-    id: '3',
-    name: 'Control Flow',
-    targetCode: ['if', 'else', 'while', 'for', 'switch'],
-    grid: [
-      ['W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W'],
-      ['W', 'P', ' ', 'C', ' ', 'C', ' ', 'B', 'W'],
-      ['W', ' ', 'W', 'B', 'W', ' ', 'W', ' ', 'W'],
-      ['W', 'C', ' ', ' ', ' ', 'C', ' ', 'C', 'W'],
-      ['W', 'W', 'W', ' ', 'W', 'W', 'W', ' ', 'W'],
-      ['W', 'B', ' ', 'C', ' ', 'B', ' ', ' ', 'W'],
-      ['W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W'],
-    ],
-    playerStart: [1, 1],
-    timeLimit: 40
-  }
+  { id: 1, name: "Variables", gridSize: 6, codeTokens: ["int", "x", "=", "10", ";"], bugCount: 2, timeLimit: 45 },
+  { id: 2, name: "Printing", gridSize: 7, codeTokens: ["System", ".", "out", ".", "println"], bugCount: 3, timeLimit: 50 },
+  { id: 3, name: "Methods", gridSize: 8, codeTokens: ["public", "void", "run", "(", ")", "{", "}"], bugCount: 4, timeLimit: 60 },
 ];
 
 const PacmanCoderGame: React.FC = () => {
-  const { playSound } = useGame();
+  const { playSound, addXp } = useGame();
   const [levelIndex, setLevelIndex] = useState(0);
-  const [grid, setGrid] = useState<GridCell[][]>([]);
-  const [playerPos, setPlayerPos] = useState<[number, number]>([1, 1]);
-  const [collectedCode, setCollectedCode] = useState<string[]>([]);
+  const [playerPos, setPlayerPos] = useState<Position>({ x: 0, y: 0 });
+  const [codeTokens, setCodeTokens] = useState<CodeToken[]>([]);
+  const [bugs, setBugs] = useState<Bug[]>([]);
+  const [collectedOrder, setCollectedOrder] = useState<string[]>([]);
   const [score, setScore] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(30);
+  const [timeLeft, setTimeLeft] = useState(45);
   const [gameState, setGameState] = useState<'playing' | 'won' | 'lost' | 'complete'>('playing');
-  const [codeIndex, setCodeIndex] = useState(0);
-
+  const gameRef = useRef<HTMLDivElement>(null);
+  
   const level = levels[levelIndex];
-
-  const initializeLevel = useCallback(() => {
-    const newGrid: GridCell[][] = level.grid.map((row, y) =>
-      row.map((cell, x) => {
-        switch (cell) {
-          case 'W': return { type: 'wall' as const };
-          case 'P': return { type: 'player' as const };
-          case 'C': return { type: 'code' as const, content: level.targetCode[codeIndex % level.targetCode.length], collected: false };
-          case 'B': return { type: 'bug' as const };
-          default: return { type: 'empty' as const };
-        }
-      })
-    );
+  
+  // Initialize level
+  const initLevel = useCallback(() => {
+    const gridSize = level.gridSize;
     
-    // Assign actual code tokens
-    let tokenIdx = 0;
-    newGrid.forEach(row => {
-      row.forEach(cell => {
-        if (cell.type === 'code') {
-          cell.content = level.targetCode[tokenIdx % level.targetCode.length];
-          tokenIdx++;
-        }
-      });
-    });
-
-    setGrid(newGrid);
-    setPlayerPos(level.playerStart);
-    setCollectedCode([]);
+    // Place player at center
+    setPlayerPos({ x: Math.floor(gridSize / 2), y: Math.floor(gridSize / 2) });
+    
+    // Generate random positions for tokens (not overlapping)
+    const usedPositions = new Set<string>();
+    usedPositions.add(`${Math.floor(gridSize / 2)},${Math.floor(gridSize / 2)}`);
+    
+    const getRandomPos = (): Position => {
+      let pos: Position;
+      do {
+        pos = { 
+          x: Math.floor(Math.random() * gridSize), 
+          y: Math.floor(Math.random() * gridSize) 
+        };
+      } while (usedPositions.has(`${pos.x},${pos.y}`));
+      usedPositions.add(`${pos.x},${pos.y}`);
+      return pos;
+    };
+    
+    // Create code tokens
+    const tokens = level.codeTokens.map((text, i) => ({
+      id: `token-${i}`,
+      text,
+      position: getRandomPos(),
+      collected: false,
+    }));
+    setCodeTokens(tokens);
+    
+    // Create bugs with random movement directions
+    const newBugs = Array.from({ length: level.bugCount }, (_, i) => ({
+      id: `bug-${i}`,
+      position: getRandomPos(),
+      direction: { 
+        x: Math.random() > 0.5 ? 1 : -1, 
+        y: Math.random() > 0.5 ? 1 : -1 
+      },
+    }));
+    setBugs(newBugs);
+    
+    setCollectedOrder([]);
     setTimeLeft(level.timeLimit);
     setGameState('playing');
-    setCodeIndex(0);
-  }, [level, codeIndex]);
-
+  }, [level]);
+  
   useEffect(() => {
-    initializeLevel();
-  }, [levelIndex, initializeLevel]);
-
+    initLevel();
+  }, [levelIndex, initLevel]);
+  
+  // Timer
   useEffect(() => {
     if (gameState !== 'playing') return;
     
@@ -135,192 +120,308 @@ const PacmanCoderGame: React.FC = () => {
         return t - 1;
       });
     }, 1000);
-
+    
     return () => clearInterval(timer);
   }, [gameState, playSound]);
-
-  const movePlayer = useCallback((dx: number, dy: number) => {
+  
+  // Bug movement
+  useEffect(() => {
     if (gameState !== 'playing') return;
-
-    const newX = playerPos[0] + dx;
-    const newY = playerPos[1] + dy;
-
-    if (newX < 0 || newY < 0 || newY >= grid.length || newX >= grid[0].length) return;
     
-    const targetCell = grid[newY][newX];
-    if (targetCell.type === 'wall') return;
-
-    if (targetCell.type === 'bug') {
+    const moveInterval = setInterval(() => {
+      setBugs(prevBugs => 
+        prevBugs.map(bug => {
+          let newX = bug.position.x + bug.direction.x;
+          let newY = bug.position.y + bug.direction.y;
+          let newDir = { ...bug.direction };
+          
+          // Bounce off walls
+          if (newX < 0 || newX >= level.gridSize) {
+            newDir.x *= -1;
+            newX = bug.position.x + newDir.x;
+          }
+          if (newY < 0 || newY >= level.gridSize) {
+            newDir.y *= -1;
+            newY = bug.position.y + newDir.y;
+          }
+          
+          return {
+            ...bug,
+            position: { x: newX, y: newY },
+            direction: newDir,
+          };
+        })
+      );
+    }, 800);
+    
+    return () => clearInterval(moveInterval);
+  }, [gameState, level.gridSize]);
+  
+  // Check collision with bugs
+  useEffect(() => {
+    if (gameState !== 'playing') return;
+    
+    const hitBug = bugs.some(
+      bug => bug.position.x === playerPos.x && bug.position.y === playerPos.y
+    );
+    
+    if (hitBug) {
       setGameState('lost');
       playSound('error');
-      return;
     }
-
-    if (targetCell.type === 'code' && !targetCell.collected) {
-      const newCode = [...collectedCode, targetCell.content!];
-      setCollectedCode(newCode);
-      setScore(s => s + 10);
-      playSound('success');
+  }, [playerPos, bugs, gameState, playSound]);
+  
+  // Player movement
+  const movePlayer = useCallback((dx: number, dy: number) => {
+    if (gameState !== 'playing') return;
+    
+    setPlayerPos(prev => {
+      const newX = Math.max(0, Math.min(level.gridSize - 1, prev.x + dx));
+      const newY = Math.max(0, Math.min(level.gridSize - 1, prev.y + dy));
       
-      // Check win
-      if (newCode.length >= level.targetCode.length) {
-        if (levelIndex < levels.length - 1) {
-          setGameState('won');
-        } else {
-          setGameState('complete');
+      // Check for token collection
+      setCodeTokens(tokens => {
+        const token = tokens.find(
+          t => !t.collected && t.position.x === newX && t.position.y === newY
+        );
+        
+        if (token) {
+          playSound('success');
+          setScore(s => s + 20);
+          setCollectedOrder(prev => [...prev, token.text]);
+          
+          // Check win condition
+          const newCollected = [...collectedOrder, token.text];
+          if (newCollected.length === level.codeTokens.length) {
+            // Check if collected in correct order
+            const isCorrectOrder = newCollected.every(
+              (t, i) => t === level.codeTokens[i]
+            );
+            
+            if (isCorrectOrder) {
+              setScore(s => s + 100); // Bonus for correct order
+            }
+            
+            if (levelIndex < levels.length - 1) {
+              setGameState('won');
+            } else {
+              setGameState('complete');
+            }
+          }
+          
+          return tokens.map(t => 
+            t.id === token.id ? { ...t, collected: true } : t
+          );
         }
-        return;
-      }
-
-      // Mark as collected
-      const newGrid = [...grid];
-      newGrid[newY][newX] = { ...targetCell, collected: true, type: 'empty' };
-      setGrid(newGrid);
-    }
-
-    setPlayerPos([newX, newY]);
-  }, [gameState, playerPos, grid, collectedCode, level, levelIndex, playSound]);
-
+        
+        return tokens;
+      });
+      
+      return { x: newX, y: newY };
+    });
+  }, [gameState, level, collectedOrder, playSound, levelIndex]);
+  
+  // Keyboard controls
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       switch (e.key) {
-        case 'ArrowUp': case 'w': movePlayer(0, -1); break;
-        case 'ArrowDown': case 's': movePlayer(0, 1); break;
-        case 'ArrowLeft': case 'a': movePlayer(-1, 0); break;
-        case 'ArrowRight': case 'd': movePlayer(1, 0); break;
+        case 'ArrowUp': case 'w': case 'W': movePlayer(0, -1); break;
+        case 'ArrowDown': case 's': case 'S': movePlayer(0, 1); break;
+        case 'ArrowLeft': case 'a': case 'A': movePlayer(-1, 0); break;
+        case 'ArrowRight': case 'd': case 'D': movePlayer(1, 0); break;
       }
     };
-
+    
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [movePlayer]);
-
+  
   const nextLevel = () => {
+    addXp(50);
     setLevelIndex(i => i + 1);
+    playSound('levelUp');
   };
-
+  
   const resetGame = () => {
     setLevelIndex(0);
     setScore(0);
-    initializeLevel();
+    initLevel();
   };
-
+  
+  const retryLevel = () => {
+    initLevel();
+  };
+  
+  // Render grid
+  const renderGrid = () => {
+    const cells = [];
+    const cellSize = Math.min(40, (280 / level.gridSize));
+    
+    for (let y = 0; y < level.gridSize; y++) {
+      for (let x = 0; x < level.gridSize; x++) {
+        const isPlayer = playerPos.x === x && playerPos.y === y;
+        const token = codeTokens.find(t => !t.collected && t.position.x === x && t.position.y === y);
+        const bug = bugs.find(b => b.position.x === x && b.position.y === y);
+        
+        cells.push(
+          <motion.div
+            key={`${x}-${y}`}
+            className={`rounded-md flex items-center justify-center text-xs font-mono border
+              ${isPlayer ? 'bg-primary' : ''}
+              ${token ? 'bg-success/30 border-success' : 'bg-muted/30 border-border/50'}
+              ${bug ? 'bg-destructive/30 border-destructive' : ''}
+            `}
+            style={{ width: cellSize, height: cellSize }}
+            animate={isPlayer ? { scale: [1, 1.1, 1] } : {}}
+            transition={{ duration: 0.2 }}
+          >
+            {isPlayer && (
+              <motion.div 
+                className="w-3/4 h-3/4 bg-primary-foreground rounded-full"
+                animate={{ scale: [1, 0.9, 1] }}
+                transition={{ duration: 0.5, repeat: Infinity }}
+              />
+            )}
+            {token && !isPlayer && (
+              <span className="text-success font-bold text-[10px]">{token.text}</span>
+            )}
+            {bug && !isPlayer && (
+              <motion.span 
+                className="text-base"
+                animate={{ rotate: [0, 10, -10, 0] }}
+                transition={{ duration: 0.5, repeat: Infinity }}
+              >
+                🐛
+              </motion.span>
+            )}
+          </motion.div>
+        );
+      }
+    }
+    
+    return cells;
+  };
+  
   if (gameState === 'complete') {
     return (
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="text-center py-12"
+        className="text-center py-8"
       >
-        <h2 className="text-3xl font-bold mb-4">Code Master!</h2>
-        <p className="text-xl text-muted-foreground mb-6">
-          Final Score: {score}
-        </p>
-        <Button onClick={resetGame} size="lg">Play Again</Button>
+        <Trophy className="w-16 h-16 text-warning mx-auto mb-4" />
+        <h2 className="text-2xl font-bold text-foreground mb-2">Code Master!</h2>
+        <p className="text-muted-foreground mb-4">Final Score: {score}</p>
+        <Button onClick={resetGame}>
+          <RotateCcw className="w-4 h-4 mr-2" />
+          Play Again
+        </Button>
       </motion.div>
     );
   }
-
+  
   return (
-    <div className="space-y-4">
+    <div className="space-y-4" ref={gameRef}>
+      {/* Header */}
       <div className="flex items-center justify-between flex-wrap gap-2">
         <div>
-          <h3 className="font-semibold">{level.name}</h3>
+          <h3 className="font-bold text-foreground">{level.name}</h3>
           <p className="text-sm text-muted-foreground">Level {levelIndex + 1}/{levels.length}</p>
         </div>
-        <div className="flex items-center gap-4">
-          <Badge variant="outline" className="text-lg px-3">
-            <Zap className="h-4 w-4 mr-1" />
+        <div className="flex gap-2">
+          <Badge variant="outline" className="text-sm">
+            <Zap className="w-3 h-3 mr-1" />
             {score}
           </Badge>
-          <Badge variant={timeLeft < 10 ? 'destructive' : 'outline'} className="text-lg px-3">
+          <Badge 
+            variant={timeLeft < 10 ? "destructive" : "outline"} 
+            className="text-sm"
+          >
             {timeLeft}s
           </Badge>
         </div>
       </div>
-
+      
+      {/* Target code */}
       <Card>
-        <CardHeader className="py-3">
-          <CardTitle className="text-sm flex items-center gap-2">
-            <Code className="h-4 w-4" />
-            Collect: {level.targetCode.join(' → ')}
-          </CardTitle>
+        <CardHeader className="py-2">
+          <CardTitle className="text-sm">Collect in order:</CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="bg-muted/30 rounded-lg p-2 mb-4">
-            <Progress 
-              value={(collectedCode.length / level.targetCode.length) * 100} 
-              className="h-2"
-            />
-            <p className="text-xs text-center mt-1 text-muted-foreground">
-              {collectedCode.length}/{level.targetCode.length} collected
-            </p>
+        <CardContent className="py-2">
+          <div className="flex flex-wrap gap-1">
+            {level.codeTokens.map((token, i) => {
+              const isCollected = i < collectedOrder.length;
+              const isCorrect = collectedOrder[i] === token;
+              
+              return (
+                <span
+                  key={i}
+                  className={`px-2 py-1 rounded text-xs font-mono ${
+                    isCollected
+                      ? isCorrect
+                        ? 'bg-success/20 text-success'
+                        : 'bg-warning/20 text-warning'
+                      : 'bg-muted text-muted-foreground'
+                  }`}
+                >
+                  {isCollected ? collectedOrder[i] : token}
+                </span>
+              );
+            })}
           </div>
-
-          <div className="flex justify-center mb-4">
-            <div 
-              className="grid gap-1 bg-background p-2 rounded-lg border"
-              style={{ gridTemplateColumns: `repeat(${grid[0]?.length || 7}, minmax(0, 1fr))` }}
-            >
-              {grid.map((row, y) =>
-                row.map((cell, x) => (
-                  <motion.div
-                    key={`${x}-${y}`}
-                    className={`w-8 h-8 md:w-10 md:h-10 rounded flex items-center justify-center text-xs font-mono ${
-                      cell.type === 'wall' ? 'bg-muted-foreground/30' :
-                      cell.type === 'bug' ? 'bg-destructive/20' :
-                      cell.type === 'code' && !cell.collected ? 'bg-success/20' :
-                      'bg-muted/20'
-                    }`}
-                    animate={playerPos[0] === x && playerPos[1] === y ? { scale: [1, 1.1, 1] } : {}}
-                    transition={{ duration: 0.2 }}
-                  >
-                    {playerPos[0] === x && playerPos[1] === y ? (
-                      <div className="w-6 h-6 bg-primary rounded-full" />
-                    ) : cell.type === 'bug' ? (
-                      <Bug className="h-5 w-5 text-destructive" />
-                    ) : cell.type === 'code' && !cell.collected ? (
-                      <span className="text-success font-bold">{cell.content}</span>
-                    ) : null}
-                  </motion.div>
-                ))
-              )}
-            </div>
-          </div>
-
-          {/* Mobile controls */}
-          <div className="flex flex-col items-center gap-2 md:hidden">
-            <Button variant="outline" size="icon" onClick={() => movePlayer(0, -1)}>↑</Button>
-            <div className="flex gap-8">
-              <Button variant="outline" size="icon" onClick={() => movePlayer(-1, 0)}>←</Button>
-              <Button variant="outline" size="icon" onClick={() => movePlayer(1, 0)}>→</Button>
-            </div>
-            <Button variant="outline" size="icon" onClick={() => movePlayer(0, 1)}>↓</Button>
-          </div>
-
-          <p className="text-xs text-center text-muted-foreground mt-4 hidden md:block">
-            Use arrow keys or WASD to move
-          </p>
+          <Progress 
+            value={(collectedOrder.length / level.codeTokens.length) * 100} 
+            className="mt-2 h-1"
+          />
         </CardContent>
       </Card>
-
+      
+      {/* Game Grid */}
+      <div className="flex justify-center">
+        <div 
+          className="grid gap-1 p-3 rounded-lg bg-card border border-border"
+          style={{ 
+            gridTemplateColumns: `repeat(${level.gridSize}, 1fr)`,
+          }}
+        >
+          {renderGrid()}
+        </div>
+      </div>
+      
+      {/* Mobile Controls */}
+      <div className="flex flex-col items-center gap-2 md:hidden">
+        <Button variant="outline" size="icon" onClick={() => movePlayer(0, -1)}>↑</Button>
+        <div className="flex gap-6">
+          <Button variant="outline" size="icon" onClick={() => movePlayer(-1, 0)}>←</Button>
+          <Button variant="outline" size="icon" onClick={() => movePlayer(1, 0)}>→</Button>
+        </div>
+        <Button variant="outline" size="icon" onClick={() => movePlayer(0, 1)}>↓</Button>
+      </div>
+      
+      <p className="text-xs text-center text-muted-foreground hidden md:block">
+        Use arrow keys or WASD to move. Collect code tokens, avoid bugs!
+      </p>
+      
+      {/* Win/Lose modals */}
       {(gameState === 'won' || gameState === 'lost') && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className={`p-4 rounded-lg text-center ${
-            gameState === 'won' ? 'bg-success/10 border border-success/30' : 'bg-destructive/10 border border-destructive/30'
+            gameState === 'won'
+              ? 'bg-success/10 border border-success/30'
+              : 'bg-destructive/10 border border-destructive/30'
           }`}
         >
           <h3 className="text-lg font-bold mb-2">
-            {gameState === 'won' ? 'Level Complete!' : 'Bug Caught You!'}
+            {gameState === 'won' ? '🎉 Level Complete!' : '🐛 Bug Got You!'}
           </h3>
           <div className="flex justify-center gap-3">
             {gameState === 'won' ? (
               <Button onClick={nextLevel}>Next Level</Button>
             ) : (
-              <Button onClick={initializeLevel} variant="outline">
-                <RotateCcw className="h-4 w-4 mr-2" />
+              <Button onClick={retryLevel} variant="outline">
+                <RotateCcw className="w-4 h-4 mr-2" />
                 Try Again
               </Button>
             )}
