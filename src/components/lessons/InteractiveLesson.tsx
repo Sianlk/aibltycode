@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useGame } from "@/contexts/GameContext";
 import { useProgress } from "@/hooks/useProgress";
-import { getLesson, LessonStep } from "@/data/lessons";
+import { getLessonById, LessonStep } from "@/data/lessons";
 import { CheckCircle, XCircle, ArrowLeft } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 

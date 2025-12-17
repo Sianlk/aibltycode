@@ -1,6 +1,15 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { GameMode, User, Module, Badge, GameProgress } from "@/types/game";
 
+interface AccessibilitySettings {
+  calmMode: boolean;
+  dyslexiaFont: boolean;
+  highContrast: boolean;
+  stepByStep: boolean;
+  audioReadAloud: boolean;
+  reducedMotion: boolean;
+}
+
 interface GameContextType {
   user: User | null;
   setUser: (user: User | null) => void;
@@ -18,17 +27,28 @@ interface GameContextType {
   progress: GameProgress[];
   updateProgress: (progress: GameProgress) => void;
   playSound: (sound: "success" | "error" | "click" | "levelUp" | "badge") => void;
+  accessibility: AccessibilitySettings;
+  setAccessibility: (settings: Partial<AccessibilitySettings>) => void;
 }
 
 const GameContext = createContext<GameContextType | undefined>(undefined);
+
+const defaultAccessibility: AccessibilitySettings = {
+  calmMode: false,
+  dyslexiaFont: false,
+  highContrast: false,
+  stepByStep: false,
+  audioReadAloud: false,
+  reducedMotion: false,
+};
 
 // Mock modules data
 const initialModules: Module[] = [
   {
     id: "java-foundations",
-    title: "Java Galaxy",
-    description: "Master the basics of Java programming through cosmic adventures",
-    icon: "🚀",
+    title: "Programming with Java",
+    description: "Master Java from basics to advanced UI programming",
+    icon: "☕",
     color: "primary",
     lessons: [],
     unlocked: true,
@@ -36,9 +56,9 @@ const initialModules: Module[] = [
   },
   {
     id: "systems-analysis",
-    title: "System Nebula",
-    description: "Learn systems thinking and design through interactive challenges",
-    icon: "🌌",
+    title: "Business Information Systems",
+    description: "Systems analysis, modelling, and professional practices",
+    icon: "🏢",
     color: "accent",
     lessons: [],
     unlocked: true,
@@ -46,9 +66,9 @@ const initialModules: Module[] = [
   },
   {
     id: "math-computing",
-    title: "Math Constellation",
-    description: "Explore mathematical concepts through visual games",
-    icon: "✨",
+    title: "Maths for Computing",
+    description: "Essential mathematical concepts for programmers",
+    icon: "🔢",
     color: "secondary",
     lessons: [],
     unlocked: true,
@@ -66,6 +86,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const [streak, setStreak] = useState(0);
   const [badges, setBadges] = useState<Badge[]>([]);
   const [progress, setProgress] = useState<GameProgress[]>([]);
+  const [accessibility, setAccessibilityState] = useState<AccessibilitySettings>(defaultAccessibility);
 
   // Load saved state from localStorage
   useEffect(() => {
@@ -73,12 +94,26 @@ export function GameProvider({ children }: { children: ReactNode }) {
     const savedSound = localStorage.getItem("aibltycode-sound");
     const savedXp = localStorage.getItem("aibltycode-xp");
     const savedStreak = localStorage.getItem("aibltycode-streak");
+    const savedAccessibility = localStorage.getItem("aibltycode-accessibility");
 
     if (savedMode) setGameMode(savedMode);
     if (savedSound) setSoundEnabled(savedSound === "true");
     if (savedXp) setXp(parseInt(savedXp, 10));
     if (savedStreak) setStreak(parseInt(savedStreak, 10));
+    if (savedAccessibility) {
+      try {
+        setAccessibilityState({ ...defaultAccessibility, ...JSON.parse(savedAccessibility) });
+      } catch {}
+    }
   }, []);
+
+  // Apply accessibility classes to document
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.toggle('dyslexia-font', accessibility.dyslexiaFont);
+    root.classList.toggle('high-contrast', accessibility.highContrast);
+    root.classList.toggle('reduced-motion', accessibility.reducedMotion);
+  }, [accessibility]);
 
   // Save state changes
   useEffect(() => {
@@ -93,9 +128,16 @@ export function GameProvider({ children }: { children: ReactNode }) {
     localStorage.setItem("aibltycode-xp", String(xp));
   }, [xp]);
 
+  useEffect(() => {
+    localStorage.setItem("aibltycode-accessibility", JSON.stringify(accessibility));
+  }, [accessibility]);
+
+  const setAccessibility = (settings: Partial<AccessibilitySettings>) => {
+    setAccessibilityState(prev => ({ ...prev, ...settings }));
+  };
+
   const addXp = (amount: number) => {
     setXp((prev) => prev + amount);
-    // Check for level up or badge unlock
   };
 
   const updateProgress = (newProgress: GameProgress) => {
@@ -113,7 +155,6 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const playSound = (sound: "success" | "error" | "click" | "levelUp" | "badge") => {
     if (!soundEnabled) return;
     
-    // Web Audio API for sound effects
     const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
@@ -166,6 +207,8 @@ export function GameProvider({ children }: { children: ReactNode }) {
         progress,
         updateProgress,
         playSound,
+        accessibility,
+        setAccessibility,
       }}
     >
       {children}
