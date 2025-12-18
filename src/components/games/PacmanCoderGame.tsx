@@ -153,11 +153,7 @@ const PacmanCoderGame: React.FC = () => {
     initLevel();
   };
   
-  useEffect(() => {
-    if (gameState === 'playing') {
-      initLevel();
-    }
-  }, [levelIndex]);
+  // This effect no longer needed - initLevel is called directly in startGame and nextLevel
   
   // Timer
   useEffect(() => {
@@ -364,8 +360,52 @@ const PacmanCoderGame: React.FC = () => {
   
   const nextLevel = () => {
     addXp(50 + levelIndex * 10);
-    setLevelIndex(i => i + 1);
     playSound('levelUp');
+    const newLevelIndex = levelIndex + 1;
+    setLevelIndex(newLevelIndex);
+    // Directly initialize the new level
+    setTimeout(() => {
+      const newLevel = levels[newLevelIndex];
+      if (newLevel) {
+        const gridSize = newLevel.gridSize;
+        setPlayerPos({ x: Math.floor(gridSize / 2), y: Math.floor(gridSize / 2) });
+        
+        const usedPositions = new Set<string>();
+        usedPositions.add(`${Math.floor(gridSize / 2)},${Math.floor(gridSize / 2)}`);
+        
+        const getRandomPos = (): Position => {
+          let pos: Position;
+          do {
+            pos = { x: Math.floor(Math.random() * gridSize), y: Math.floor(Math.random() * gridSize) };
+          } while (usedPositions.has(`${pos.x},${pos.y}`));
+          usedPositions.add(`${pos.x},${pos.y}`);
+          return pos;
+        };
+        
+        setCodeTokens(newLevel.codeTokens.map((text, i) => ({
+          id: `token-${i}`, text, position: getRandomPos(), collected: false, order: i,
+        })));
+        
+        setBugs(Array.from({ length: newLevel.bugCount }, (_, i) => ({
+          id: `bug-${i}`, position: getRandomPos(),
+          direction: { x: Math.random() > 0.5 ? 1 : -1, y: Math.random() > 0.5 ? 1 : -1 },
+          isGhost: false,
+        })));
+        
+        const pillTypes: PowerPill['type'][] = ['slow', 'ghost', 'hint', 'checkpoint'];
+        setPowerPills(Array.from({ length: newLevel.powerPillCount }, (_, i) => ({
+          id: `pill-${i}`, position: getRandomPos(), collected: false, type: pillTypes[i % pillTypes.length],
+        })));
+        
+        setCollectedOrder([]);
+        setTimeLeft(newLevel.timeLimit);
+        setLives(settings.lives);
+        setCheckpoint(null);
+        setPowerUpActive(null);
+        setNextExpectedToken(newLevel.codeTokens[0]);
+        setGameState('playing');
+      }
+    }, 100);
   };
   
   const resetGame = () => {

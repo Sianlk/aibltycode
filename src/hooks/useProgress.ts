@@ -33,14 +33,14 @@ export function useProgress() {
     try {
       const { data, error } = await supabase
         .from('user_progress')
-        .select('*')
+        .select('id, user_id, lesson_id, module_id, completed, score, attempts, lesson_key, module_key')
         .eq('user_id', user.id);
 
       if (error) throw error;
 
-      setProgress(data?.map(p => ({
-        lessonId: p.lesson_id || '',
-        moduleId: p.module_id || '',
+      setProgress(data?.map((p: any) => ({
+        lessonId: p.lesson_key || p.lesson_id || '',
+        moduleId: p.module_key || p.module_id || '',
         completed: p.completed || false,
         score: p.score || 0,
         attempts: p.attempts || 0,
@@ -61,12 +61,12 @@ export function useProgress() {
     if (!user) return;
 
     try {
-      // Check if progress exists
+      // Check if progress exists using lesson_key (text column)
       const { data: existing } = await supabase
         .from('user_progress')
         .select('id, attempts')
         .eq('user_id', user.id)
-        .eq('lesson_id', lessonId)
+        .eq('lesson_key', lessonId)
         .maybeSingle();
 
       if (existing) {
@@ -81,13 +81,13 @@ export function useProgress() {
           })
           .eq('id', existing.id);
       } else {
-        // Insert new progress
+        // Insert new progress with lesson_key and module_key
         await supabase
           .from('user_progress')
           .insert({
             user_id: user.id,
-            module_id: moduleId,
-            lesson_id: lessonId,
+            module_key: moduleId,
+            lesson_key: lessonId,
             completed: true,
             score,
             attempts: 1,
