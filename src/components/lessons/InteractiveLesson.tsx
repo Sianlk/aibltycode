@@ -23,7 +23,7 @@ export function InteractiveLesson({ lessonId: propLessonId, onComplete, onExit }
   
   const { playSound, addXp } = useGame();
   const { completeLesson } = useProgress();
-  const lesson = getLesson(lessonId);
+  const lesson = getLessonById(lessonId);
   
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [userInput, setUserInput] = useState("");
@@ -31,6 +31,15 @@ export function InteractiveLesson({ lessonId: propLessonId, onComplete, onExit }
   const [showResult, setShowResult] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [totalScore, setTotalScore] = useState(0);
+  
+  if (!lesson) {
+    return (
+      <Card className="max-w-2xl mx-auto p-8 text-center">
+        <p className="text-muted-foreground">Lesson not found</p>
+        <Button onClick={() => navigate(-1)} className="mt-4">Go Back</Button>
+      </Card>
+    );
+  }
   
   const currentStep = lesson.steps[currentStepIndex];
   const progress = ((currentStepIndex) / lesson.steps.length) * 100;
