@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
+import { toast } from 'sonner';
 
 interface UserProgress {
   lessonId: string;
@@ -33,14 +34,17 @@ export function useProgress() {
     try {
       const { data, error } = await supabase
         .from('user_progress')
-        .select('id, user_id, lesson_id, module_id, completed, score, attempts, lesson_key, module_key')
+        .select('*')
         .eq('user_id', user.id);
 
-      if (error) throw error;
+      if (error) {
+        console.error('Fetch progress error:', error);
+        throw error;
+      }
 
       setProgress(data?.map((p: any) => ({
-        lessonId: p.lesson_key || p.lesson_id || '',
-        moduleId: p.module_key || p.module_id || '',
+        lessonId: p.lesson_key || '',
+        moduleId: p.module_key || '',
         completed: p.completed || false,
         score: p.score || 0,
         attempts: p.attempts || 0,
@@ -58,41 +62,57 @@ export function useProgress() {
 
   // Complete a lesson
   const completeLesson = useCallback(async (moduleId: string, lessonId: string, score: number = 100) => {
-    if (!user) return;
+    if (!user) {
+      toast.error('Please sign in to save progress');
+      return;
+    }
 
     try {
-      // Check if progress exists using lesson_key (text column)
-      const { data: existing } = await supabase
+      // Check if progress exists
+      const { data: existing, error: fetchError } = await supabase
         .from('user_progress')
-        .select('id, attempts')
+        .select('id, attempts, score')
         .eq('user_id', user.id)
         .eq('lesson_key', lessonId)
         .maybeSingle();
 
+      if (fetchError) {
+        console.error('Check existing error:', fetchError);
+      }
+
+      let result;
       if (existing) {
-        // Update existing progress
-        await supabase
+        // Update existing
+        result = await supabase
           .from('user_progress')
           .update({
             completed: true,
-            score: Math.max(existing.attempts ? score : 0, score),
+            score: Math.max(existing.score || 0, score),
             attempts: (existing.attempts || 0) + 1,
             completed_at: new Date().toISOString(),
           })
           .eq('id', existing.id);
       } else {
-        // Insert new progress with lesson_key and module_key
-        await supabase
+        // Insert new progress - cast to any to bypass strict typing for new columns
+        const insertData = {
+          user_id: user.id,
+          lesson_key: lessonId,
+          module_key: moduleId,
+          completed: true,
+          score,
+          attempts: 1,
+          completed_at: new Date().toISOString(),
+        } as any;
+        
+        result = await supabase
           .from('user_progress')
-          .insert({
-            user_id: user.id,
-            module_key: moduleId,
-            lesson_key: lessonId,
-            completed: true,
-            score,
-            attempts: 1,
-            completed_at: new Date().toISOString(),
-          });
+          .insert(insertData);
+      }
+
+      if (result.error) {
+        console.error('Save progress error:', result.error);
+        toast.error('Failed to save progress');
+        return;
       }
 
       // Update profile XP
@@ -121,14 +141,16 @@ export function useProgress() {
           .from('leaderboard')
           .update({
             total_xp: (leaderboard.total_xp || 0) + Math.floor(score / 10),
-            lessons_completed: (leaderboard.lessons_completed || 0) + 1,
+            lessons_completed: (leaderboard.lessons_completed || 0) + (existing ? 0 : 1),
           })
           .eq('user_id', user.id);
       }
 
+      toast.success('Progress saved!');
       await fetchProgress();
     } catch (err) {
       console.error('Error saving progress:', err);
+      toast.error('Failed to save progress');
     }
   }, [user, fetchProgress]);
 

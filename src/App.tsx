@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { GameProvider } from "@/contexts/GameContext";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import GamePage from "./pages/GamePage";
@@ -29,13 +30,13 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/auth" element={<AuthPage />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/game/:gameId" element={<GamePage />} />
-              <Route path="/module/:moduleId" element={<ModulePage />} />
-              <Route path="/lesson/:moduleId/:lessonId" element={<LessonPage />} />
-              <Route path="/settings" element={<Settings />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/leaderboard" element={<Leaderboard />} />
+              <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+              <Route path="/game/:gameId" element={<ProtectedRoute><GamePage /></ProtectedRoute>} />
+              <Route path="/module/:moduleId" element={<ProtectedRoute><ModulePage /></ProtectedRoute>} />
+              <Route path="/lesson/:moduleId/:lessonId" element={<ProtectedRoute><LessonPage /></ProtectedRoute>} />
+              <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+              <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+              <Route path="/leaderboard" element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
