@@ -337,7 +337,9 @@ export type Database = {
           created_at: string | null
           id: string
           lesson_id: string | null
+          lesson_key: string | null
           module_id: string | null
+          module_key: string | null
           score: number | null
           user_id: string
         }
@@ -348,7 +350,9 @@ export type Database = {
           created_at?: string | null
           id?: string
           lesson_id?: string | null
+          lesson_key?: string | null
           module_id?: string | null
+          module_key?: string | null
           score?: number | null
           user_id: string
         }
@@ -359,7 +363,9 @@ export type Database = {
           created_at?: string | null
           id?: string
           lesson_id?: string | null
+          lesson_key?: string | null
           module_id?: string | null
+          module_key?: string | null
           score?: number | null
           user_id?: string
         }

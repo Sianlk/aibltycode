@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -31,6 +31,7 @@ export function InteractiveLesson({ lessonId: propLessonId, onComplete, onExit }
   const [showResult, setShowResult] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [totalScore, setTotalScore] = useState(0);
+  const codeDisplayRef = useRef<HTMLDivElement>(null);
   
   if (!lesson) {
     return (
@@ -150,17 +151,29 @@ export function InteractiveLesson({ lessonId: propLessonId, onComplete, onExit }
                   <div className="space-y-5">
                     <p className="text-muted-foreground">{currentStep.prompt}</p>
                     
-                    {/* Code Display */}
-                    <div className="font-mono text-base sm:text-lg p-5 rounded-xl bg-accent/60 text-accent-foreground overflow-x-auto">
+                    {/* Code Display - auto-scrolling */}
+                    <div 
+                      ref={codeDisplayRef}
+                      className="font-mono text-base sm:text-lg p-5 rounded-xl bg-accent/60 text-accent-foreground overflow-x-auto scroll-smooth"
+                      style={{ scrollBehavior: 'smooth' }}
+                    >
                       {currentStep.codeToType?.split("").map((char, i) => {
                         const typedChar = userInput[i];
                         let cls = "text-muted-foreground/60";
                         if (typedChar !== undefined) {
-                          cls = typedChar === char ? "text-primary" : "text-destructive bg-destructive/20";
+                          cls = typedChar === char ? "text-primary font-bold" : "text-destructive bg-destructive/20";
                         } else if (i === userInput.length) {
-                          cls = "border-l-2 border-primary animate-pulse";
+                          cls = "border-l-2 border-primary animate-pulse bg-primary/10";
                         }
-                        return <span key={i} className={cls}>{char === " " ? "\u00A0" : char}</span>;
+                        return (
+                          <span 
+                            key={i} 
+                            className={cls}
+                            ref={i === userInput.length ? (el) => el?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }) : undefined}
+                          >
+                            {char === " " ? "\u00A0" : char}
+                          </span>
+                        );
                       })}
                     </div>
                     
