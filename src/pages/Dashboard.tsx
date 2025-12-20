@@ -13,12 +13,14 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 
 const gameModes = [
-  { id: "typing", title: "Code Typing", description: "Practice syntax", icon: "typing" as const, color: "primary" as const, emoji: "⌨️" },
-  { id: "ordering", title: "Code Ordering", description: "Arrange blocks", icon: "ordering" as const, color: "accent" as const, emoji: "🧩" },
-  { id: "speed", title: "Speed Challenge", description: "Race the clock", icon: "speed" as const, color: "secondary" as const, emoji: "⚡" },
-  { id: "pacman", title: "Pacman Coder", description: "Collect code", icon: "speed" as const, color: "warning" as const, emoji: "👾" },
-  { id: "system-builder", title: "System Builder", description: "Design systems", icon: "ordering" as const, color: "success" as const, emoji: "🏗️" },
-  { id: "complexity-arcade", title: "Complexity Arcade", description: "Master Big-O", icon: "typing" as const, color: "primary" as const, emoji: "📊" },
+  { id: "pattern", title: "Pattern Master", description: "if/else/while/switch", icon: "typing" as const, color: "primary" as const, emoji: "🧠" },
+  { id: "structure-builder", title: "Structure Builder", description: "Build code blocks", icon: "ordering" as const, color: "accent" as const, emoji: "🏗️" },
+  { id: "typing", title: "Code Typing", description: "Practice syntax", icon: "typing" as const, color: "secondary" as const, emoji: "⌨️" },
+  { id: "ordering", title: "Code Ordering", description: "Arrange blocks", icon: "ordering" as const, color: "success" as const, emoji: "🧩" },
+  { id: "speed", title: "Speed Challenge", description: "Race the clock", icon: "speed" as const, color: "warning" as const, emoji: "⚡" },
+  { id: "pacman", title: "Pacman Coder", description: "Collect code", icon: "speed" as const, color: "primary" as const, emoji: "👾" },
+  { id: "system-design", title: "System Design", description: "Design systems", icon: "ordering" as const, color: "accent" as const, emoji: "🔧" },
+  { id: "complexity-arcade", title: "Complexity Arcade", description: "Master Big-O", icon: "typing" as const, color: "secondary" as const, emoji: "📊" },
 ];
 
 export default function Dashboard() {

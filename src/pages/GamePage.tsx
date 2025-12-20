@@ -8,6 +8,8 @@ import { SpeedChallengeGame } from "@/components/games/SpeedChallengeGame";
 import PacmanCoderGame from "@/components/games/PacmanCoderGame";
 import SystemBuilderGame from "@/components/games/SystemBuilderGame";
 import ComplexityArcadeGame from "@/components/games/ComplexityArcadeGame";
+import PatternRecognitionGame from "@/components/games/PatternRecognitionGame";
+import StructureBuilderGame from "@/components/games/StructureBuilderGame";
 import { ArrowLeft } from "lucide-react";
 
 const gameComponents: Record<string, React.ComponentType> = {
@@ -15,8 +17,10 @@ const gameComponents: Record<string, React.ComponentType> = {
   ordering: CodeOrderingGame,
   speed: SpeedChallengeGame,
   pacman: PacmanCoderGame,
-  "system-builder": SystemBuilderGame,
+  "system-design": SystemBuilderGame,
   "complexity-arcade": ComplexityArcadeGame,
+  pattern: PatternRecognitionGame,
+  "structure-builder": StructureBuilderGame,
 };
 
 const gameInfo: Record<string, { title: string; emoji: string }> = {
@@ -24,8 +28,10 @@ const gameInfo: Record<string, { title: string; emoji: string }> = {
   ordering: { title: "Code Ordering Puzzle", emoji: "🧩" },
   speed: { title: "Speed Challenge", emoji: "⚡" },
   pacman: { title: "Pacman Coder", emoji: "👾" },
-  "system-builder": { title: "System Builder", emoji: "🏗️" },
+  "system-design": { title: "System Design", emoji: "🔧" },
   "complexity-arcade": { title: "Complexity Arcade", emoji: "📊" },
+  pattern: { title: "Pattern Master", emoji: "🧠" },
+  "structure-builder": { title: "Structure Builder", emoji: "🏗️" },
 };
 
 export default function GamePage() {
