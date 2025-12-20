@@ -235,35 +235,12 @@ export const javaLessons: Record<string, LessonData> = {
       { type: "quiz", title: "Multiple Interfaces", difficulty: "hard", question: "Can a class implement multiple interfaces?", options: [{ label: "A", text: "No" }, { label: "B", text: "Yes" }, { label: "C", text: "Only two" }], correctAnswer: "B", explanation: "Yes! class X implements A, B, C - multiple interfaces allowed!" },
     ],
   },
-  "exceptions": {
-    id: "exceptions", moduleId: "java-foundations", title: "Exception Handling", xpReward: 175, category: "OOP",
+  "constructors": {
+    id: "constructors", moduleId: "java-foundations", title: "Constructors", xpReward: 175, category: "OOP",
     steps: [
-      { type: "typing", title: "Try-Catch", difficulty: "hard", prompt: "Handle an exception!", codeToType: "try { } catch (Exception e) { }", explanation: "try contains risky code. catch handles errors gracefully." },
-      { type: "quiz", title: "Exception Purpose", difficulty: "hard", question: "Exceptions handle?", options: [{ label: "A", text: "Normal flow" }, { label: "B", text: "Runtime errors" }, { label: "C", text: "Comments" }], correctAnswer: "B", explanation: "Exceptions handle unexpected situations - file not found, null pointer, etc." },
-      { type: "typing", title: "Finally Block", difficulty: "hard", prompt: "Add finally block!", codeToType: "finally { cleanup(); }", explanation: "finally ALWAYS runs - even if exception occurs. Perfect for cleanup." },
-      { type: "typing", title: "Throw Exception", difficulty: "hard", prompt: "Throw an exception!", codeToType: 'throw new Exception("Error!");', explanation: "throw creates an exception. Program jumps to nearest catch block." },
-      { type: "quiz", title: "Checked vs Unchecked", difficulty: "hard", question: "RuntimeException is?", options: [{ label: "A", text: "Checked" }, { label: "B", text: "Unchecked" }, { label: "C", text: "Neither" }], correctAnswer: "B", explanation: "Unchecked exceptions don't require try-catch. Checked ones do!" },
-    ],
-  },
       { type: "typing", title: "Constructor", difficulty: "hard", prompt: "Create a constructor!", codeToType: "public Dog(String name) { this.name = name; }", explanation: "'this' refers to current object. Constructor initializes new objects." },
       { type: "quiz", title: "New Keyword", difficulty: "hard", question: "What does 'new' do?", options: [{ label: "A", text: "Deletes object" }, { label: "B", text: "Creates object" }, { label: "C", text: "Updates object" }], correctAnswer: "B", explanation: "new creates a new instance (object) of a class in memory." },
-    ],
-  },
-  "inheritance": {
-    id: "inheritance", moduleId: "java-foundations", title: "Inheritance", xpReward: 200, category: "OOP",
-    steps: [
-      { type: "typing", title: "Extends Keyword", difficulty: "hard", prompt: "Create a subclass!", codeToType: "public class Cat extends Animal { }", explanation: "extends inherits all non-private fields and methods from parent." },
-      { type: "quiz", title: "Inheritance", difficulty: "hard", question: "What does a subclass inherit?", options: [{ label: "A", text: "Only methods" }, { label: "B", text: "Methods and fields" }, { label: "C", text: "Nothing" }], correctAnswer: "B", explanation: "Subclasses inherit accessible methods AND fields from parent." },
-      { type: "typing", title: "Super Keyword", difficulty: "hard", prompt: "Call parent constructor!", codeToType: "super(name);", explanation: "super() calls parent constructor. Must be first line in child constructor." },
-      { type: "typing", title: "Override Method", difficulty: "hard", prompt: "Override parent method!", codeToType: "@Override public void speak() { }", explanation: "@Override tells compiler you're replacing parent's method." },
-    ],
-  },
-  "interfaces": {
-    id: "interfaces", moduleId: "java-foundations", title: "Interfaces", xpReward: 200, category: "OOP",
-    steps: [
-      { type: "typing", title: "Interface Definition", difficulty: "hard", prompt: "Create an interface!", codeToType: "public interface Drawable { void draw(); }", explanation: "Interfaces define contracts - what methods a class MUST have." },
-      { type: "typing", title: "Implement Interface", difficulty: "hard", prompt: "Implement the interface!", codeToType: "public class Circle implements Drawable { }", explanation: "implements = promise to provide all interface methods." },
-      { type: "quiz", title: "Multiple Interfaces", difficulty: "hard", question: "Can a class implement multiple interfaces?", options: [{ label: "A", text: "No" }, { label: "B", text: "Yes" }, { label: "C", text: "Only two" }], correctAnswer: "B", explanation: "Yes! Unlike single inheritance, a class can implement many interfaces." },
+      { type: "typing", title: "Default Constructor", difficulty: "hard", prompt: "No-arg constructor!", codeToType: "public Dog() { this.name = \"Unknown\"; }", explanation: "Default constructor takes no arguments and sets default values." },
     ],
   },
   "polymorphism": {
