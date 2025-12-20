@@ -45,9 +45,9 @@ export const Header = forwardRef<HTMLDivElement>((_, ref) => {
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          <span className="text-2xl">🚀</span>
+          <img src="/favicon.png" alt="AIblty" className="w-8 h-8 rounded-lg" />
           <span className="text-xl font-extrabold text-gradient-primary">
-            AibltyCode
+            AIblty
           </span>
           {!isLanding && (
             <span className="ml-2 px-2 py-0.5 text-xs font-bold rounded-full bg-accent/20 text-accent">
