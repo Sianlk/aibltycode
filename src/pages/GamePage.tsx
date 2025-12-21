@@ -11,6 +11,8 @@ import ComplexityArcadeGame from "@/components/games/ComplexityArcadeGame";
 import PatternRecognitionGame from "@/components/games/PatternRecognitionGame";
 import StructureBuilderGame from "@/components/games/StructureBuilderGame";
 import { MnemonicFlashcardGame } from "@/components/games/MnemonicFlashcardGame";
+import SpacedRepetitionGame from "@/components/games/SpacedRepetitionGame";
+import DebuggingGame from "@/components/games/DebuggingGame";
 import { ArrowLeft } from "lucide-react";
 
 const gameComponents: Record<string, React.ComponentType> = {
@@ -22,7 +24,9 @@ const gameComponents: Record<string, React.ComponentType> = {
   "complexity-arcade": ComplexityArcadeGame,
   pattern: PatternRecognitionGame,
   "structure-builder": StructureBuilderGame,
-  "flashcards": MnemonicFlashcardGame,
+  flashcards: MnemonicFlashcardGame,
+  "spaced-rep": SpacedRepetitionGame,
+  debugging: DebuggingGame,
 };
 
 const gameInfo: Record<string, { title: string; emoji: string }> = {
@@ -34,7 +38,9 @@ const gameInfo: Record<string, { title: string; emoji: string }> = {
   "complexity-arcade": { title: "Complexity Arcade", emoji: "📊" },
   pattern: { title: "Pattern Master", emoji: "🧠" },
   "structure-builder": { title: "Structure Builder", emoji: "🏗️" },
-  "flashcards": { title: "Mnemonic Flashcards", emoji: "🧠" },
+  flashcards: { title: "Visual Mnemonic Cards", emoji: "🃏" },
+  "spaced-rep": { title: "Spaced Repetition", emoji: "🧠" },
+  debugging: { title: "Bug Hunter", emoji: "🐛" },
 };
 
 export default function GamePage() {

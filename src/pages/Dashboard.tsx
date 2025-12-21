@@ -15,7 +15,9 @@ import { supabase } from "@/integrations/supabase/client";
 const gameModes = [
   { id: "pattern", title: "Pattern Master", description: "if/else/while/switch", icon: "typing" as const, color: "primary" as const, emoji: "🧠" },
   { id: "structure-builder", title: "Structure Builder", description: "Build code blocks", icon: "ordering" as const, color: "accent" as const, emoji: "🏗️" },
-  { id: "flashcards", title: "Mnemonic Cards", description: "Memory patterns", icon: "typing" as const, color: "warning" as const, emoji: "🃏" },
+  { id: "flashcards", title: "Mnemonic Cards", description: "Visual memory", icon: "typing" as const, color: "warning" as const, emoji: "🃏" },
+  { id: "spaced-rep", title: "Spaced Repetition", description: "Long-term memory", icon: "typing" as const, color: "success" as const, emoji: "🧠" },
+  { id: "debugging", title: "Bug Hunter", description: "Find & fix bugs", icon: "speed" as const, color: "warning" as const, emoji: "🐛" },
   { id: "typing", title: "Code Typing", description: "Practice syntax", icon: "typing" as const, color: "secondary" as const, emoji: "⌨️" },
   { id: "ordering", title: "Code Ordering", description: "Arrange blocks", icon: "ordering" as const, color: "success" as const, emoji: "🧩" },
   { id: "speed", title: "Speed Challenge", description: "Race the clock", icon: "speed" as const, color: "warning" as const, emoji: "⚡" },
