@@ -10,6 +10,7 @@ import SystemBuilderGame from "@/components/games/SystemBuilderGame";
 import ComplexityArcadeGame from "@/components/games/ComplexityArcadeGame";
 import PatternRecognitionGame from "@/components/games/PatternRecognitionGame";
 import StructureBuilderGame from "@/components/games/StructureBuilderGame";
+import { MnemonicFlashcardGame } from "@/components/games/MnemonicFlashcardGame";
 import { ArrowLeft } from "lucide-react";
 
 const gameComponents: Record<string, React.ComponentType> = {
@@ -21,6 +22,7 @@ const gameComponents: Record<string, React.ComponentType> = {
   "complexity-arcade": ComplexityArcadeGame,
   pattern: PatternRecognitionGame,
   "structure-builder": StructureBuilderGame,
+  "flashcards": MnemonicFlashcardGame,
 };
 
 const gameInfo: Record<string, { title: string; emoji: string }> = {
@@ -32,6 +34,7 @@ const gameInfo: Record<string, { title: string; emoji: string }> = {
   "complexity-arcade": { title: "Complexity Arcade", emoji: "📊" },
   pattern: { title: "Pattern Master", emoji: "🧠" },
   "structure-builder": { title: "Structure Builder", emoji: "🏗️" },
+  "flashcards": { title: "Mnemonic Flashcards", emoji: "🧠" },
 };
 
 export default function GamePage() {
