@@ -199,7 +199,7 @@ export default function Settings() {
             <Card variant="glass">
               <CardContent className="p-6 text-center">
                 <span className="text-4xl mb-4 block">🚀</span>
-                <h3 className="text-lg font-bold text-foreground mb-2">AibltyCode</h3>
+                <h3 className="text-lg font-bold text-foreground mb-2">AIblty</h3>
                 <p className="text-sm text-muted-foreground mb-4">Master coding through interactive learning</p>
                 <p className="text-xs text-muted-foreground">Version 2.0.0</p>
               </CardContent>
