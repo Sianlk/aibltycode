@@ -4,821 +4,784 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { useGame } from "@/contexts/GameContext";
-import { ArrowRight, RotateCcw, Check, X, Brain, Lightbulb, Star, Code, Zap } from "lucide-react";
+import { ArrowRight, RotateCcw, Check, X, Brain, Lightbulb, Star, Code, Zap, BookOpen, Terminal, Layers } from "lucide-react";
+
+interface CodingStep {
+  step: number;
+  code: string;
+  description: string;
+  color: string;
+}
 
 interface Flashcard {
   id: string;
   title: string;
-  visual: React.ReactNode;
-  steps: string[];
-  example: string;
-  memory_trick: string;
-  category: "loops" | "conditionals" | "methods" | "oop" | "data" | "security" | "systems";
+  mnemonic: string;
+  icon: string;
+  category: "program-structure" | "loops" | "conditionals" | "methods" | "oop" | "data" | "systems" | "security" | "ai" | "maths";
+  steps: CodingStep[];
+  fullExample: string;
   realWorld: string;
+  tip: string;
 }
 
-// Visual code block component
-const CodeBlock = ({ children, highlight }: { children: React.ReactNode; highlight?: boolean }) => (
-  <div className={`font-mono text-sm p-3 rounded-lg ${highlight ? 'bg-primary/20 border-2 border-primary' : 'bg-muted/50'}`}>
-    {children}
-  </div>
-);
-
-// Visual step indicator
-const StepIndicator = ({ step, label, active }: { step: number; label: string; active?: boolean }) => (
-  <div className={`flex items-center gap-2 p-2 rounded-lg transition-all ${active ? 'bg-primary/20 scale-105' : 'bg-muted/30'}`}>
-    <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold ${active ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'}`}>
-      {step}
-    </div>
-    <span className={active ? 'text-primary font-semibold' : 'text-muted-foreground'}>{label}</span>
-  </div>
-);
-
+// Step-by-step coding patterns - what to write WHEN
 const flashcards: Flashcard[] = [
-  // FOR LOOP - Visual step-by-step
+  // ==================== PROGRAM STRUCTURE ====================
   {
-    id: "for-loop",
-    title: "FOR Loop: F.I.C.U.",
-    visual: (
-      <div className="space-y-3">
-        <div className="text-4xl font-black text-primary mb-4">🔄 F.I.C.U.</div>
-        <div className="grid grid-cols-4 gap-2 text-center">
-          <div className="bg-primary/20 p-3 rounded-lg border-2 border-primary">
-            <div className="text-2xl font-black text-primary">F</div>
-            <div className="text-xs">for</div>
-          </div>
-          <div className="bg-accent/20 p-3 rounded-lg border-2 border-accent">
-            <div className="text-2xl font-black text-accent">I</div>
-            <div className="text-xs">i = 0</div>
-          </div>
-          <div className="bg-warning/20 p-3 rounded-lg border-2 border-warning">
-            <div className="text-2xl font-black text-warning">C</div>
-            <div className="text-xs">i &lt; 10</div>
-          </div>
-          <div className="bg-success/20 p-3 rounded-lg border-2 border-success">
-            <div className="text-2xl font-black text-success">U</div>
-            <div className="text-xs">i++</div>
-          </div>
-        </div>
-        <div className="text-lg font-mono bg-muted/50 p-3 rounded-lg">
-          for(<span className="text-accent">i=0</span>; <span className="text-warning">i&lt;10</span>; <span className="text-success">i++</span>)
-        </div>
-      </div>
-    ),
-    steps: ["FOR keyword", "INITIALIZE counter (i = 0)", "CONDITION to check (i < 10)", "UPDATE counter (i++)"],
-    example: "for (int i = 0; i < 10; i++) { }",
-    memory_trick: "🍕 Think: 'For I Can Understand' - For, Init, Condition, Update",
-    category: "loops",
-    realWorld: "Like a cashier counting items: Start at 0, check if more items, add 1"
+    id: "program-start",
+    title: "Starting Any Program",
+    mnemonic: "P.I.C.M. = Package → Import → Class → Main",
+    icon: "🚀",
+    category: "program-structure",
+    steps: [
+      { step: 1, code: "package com.myapp;", description: "PACKAGE - Where does this file live?", color: "primary" },
+      { step: 2, code: "import java.util.*;", description: "IMPORT - What tools do we need?", color: "accent" },
+      { step: 3, code: "public class MyApp {", description: "CLASS - What is this thing called?", color: "warning" },
+      { step: 4, code: "  public static void main(String[] args) {", description: "MAIN - Where does code start running?", color: "success" },
+    ],
+    fullExample: `package com.myapp;
+import java.util.*;
+public class MyApp {
+  public static void main(String[] args) {
+    // Your code starts here!
+  }
+}`,
+    realWorld: "Like writing a letter: Address (package) → Materials (imports) → Title (class) → Body (main)",
+    tip: "Every Java program needs this skeleton. Main is your entry point!"
   },
+  {
+    id: "variable-declaration",
+    title: "Creating Variables",
+    mnemonic: "T.N.V. = Type → Name → Value",
+    icon: "📦",
+    category: "program-structure",
+    steps: [
+      { step: 1, code: "int", description: "TYPE - What kind of data? (int, String, boolean...)", color: "primary" },
+      { step: 2, code: "age", description: "NAME - What should we call it? (camelCase)", color: "accent" },
+      { step: 3, code: "= 25;", description: "VALUE - What's inside? (don't forget semicolon!)", color: "success" },
+    ],
+    fullExample: `int age = 25;
+String name = "Alex";
+boolean isActive = true;
+double price = 19.99;`,
+    realWorld: "Like labeling boxes: Box type (int) → Label (age) → Contents (25)",
+    tip: "Type comes FIRST in Java. Use camelCase for names!"
+  },
+
+  // ==================== FOR LOOP - DETAILED ====================
+  {
+    id: "for-loop-build",
+    title: "Building a FOR Loop",
+    mnemonic: "F.I.C.U.B. = For → Init → Check → Update → Body",
+    icon: "🔄",
+    category: "loops",
+    steps: [
+      { step: 1, code: "for (", description: "FOR - Start with the keyword", color: "primary" },
+      { step: 2, code: "int i = 0;", description: "INIT - Create counter, usually i = 0", color: "accent" },
+      { step: 3, code: "i < 10;", description: "CHECK - When to stop? (condition)", color: "warning" },
+      { step: 4, code: "i++)", description: "UPDATE - How to change counter (usually i++)", color: "success" },
+      { step: 5, code: " { code }", description: "BODY - What to repeat inside { }", color: "secondary" },
+    ],
+    fullExample: `for (int i = 0; i < 10; i++) {
+  System.out.println("Count: " + i);
+}`,
+    realWorld: "Like counting steps: Start at 0, check if < 10, add 1 each time",
+    tip: "i++ means i = i + 1. The loop runs while condition is TRUE!"
+  },
+  {
+    id: "while-loop-build",
+    title: "Building a WHILE Loop",
+    mnemonic: "W.C.B.U. = While → Check → Body → Update",
+    icon: "⏳",
+    category: "loops",
+    steps: [
+      { step: 1, code: "while (", description: "WHILE - The keyword", color: "primary" },
+      { step: 2, code: "count < 10)", description: "CHECK - Condition (must become false eventually!)", color: "accent" },
+      { step: 3, code: " { code", description: "BODY - What to repeat", color: "warning" },
+      { step: 4, code: " count++; }", description: "UPDATE - MUST change condition or infinite loop!", color: "success" },
+    ],
+    fullExample: `int count = 0;
+while (count < 10) {
+  System.out.println(count);
+  count++;  // CRITICAL: Change the condition!
+}`,
+    realWorld: "Like waiting: While door is locked, keep knocking. Must unlock eventually!",
+    tip: "⚠️ Always update your condition inside the loop or it runs forever!"
+  },
+
+  // ==================== CONDITIONALS ====================
+  {
+    id: "if-else-build",
+    title: "Building IF-ELSE",
+    mnemonic: "I.C.T.E. = If → Condition → Then → Else",
+    icon: "🔀",
+    category: "conditionals",
+    steps: [
+      { step: 1, code: "if (", description: "IF - The keyword", color: "primary" },
+      { step: 2, code: "age >= 18)", description: "CONDITION - What are we checking?", color: "accent" },
+      { step: 3, code: " { adult(); }", description: "THEN - Do this if TRUE", color: "success" },
+      { step: 4, code: " else { minor(); }", description: "ELSE - Do this if FALSE", color: "warning" },
+    ],
+    fullExample: `if (age >= 18) {
+  System.out.println("Can vote!");
+} else {
+  System.out.println("Too young");
+}`,
+    realWorld: "Like a bouncer: If age >= 21, enter. Else, turned away.",
+    tip: "Use >= (greater or equal), == (equals), != (not equal)"
+  },
+  {
+    id: "switch-build",
+    title: "Building SWITCH",
+    mnemonic: "S.C.B.D. = Switch → Case → Break → Default",
+    icon: "🎛️",
+    category: "conditionals",
+    steps: [
+      { step: 1, code: "switch (day) {", description: "SWITCH - What variable to check?", color: "primary" },
+      { step: 2, code: "  case 1:", description: "CASE - Match this value", color: "accent" },
+      { step: 3, code: "    code; break;", description: "BREAK - Exit after match (or falls through!)", color: "warning" },
+      { step: 4, code: "  default:", description: "DEFAULT - If nothing matches", color: "success" },
+    ],
+    fullExample: `switch (day) {
+  case 1: System.out.println("Monday"); break;
+  case 2: System.out.println("Tuesday"); break;
+  default: System.out.println("Unknown");
+}`,
+    realWorld: "Like a vending machine: Press 1 → get chips. Press 2 → get soda.",
+    tip: "⚠️ Don't forget BREAK or code falls through to next case!"
+  },
+
+  // ==================== METHODS ====================
+  {
+    id: "method-build",
+    title: "Building a METHOD",
+    mnemonic: "A.R.N.P.B. = Access → Return → Name → Params → Body",
+    icon: "🔧",
+    category: "methods",
+    steps: [
+      { step: 1, code: "public", description: "ACCESS - Who can use it? (public/private)", color: "primary" },
+      { step: 2, code: "int", description: "RETURN - What does it give back? (int/void/String)", color: "accent" },
+      { step: 3, code: "add", description: "NAME - What's it called? (verb, camelCase)", color: "warning" },
+      { step: 4, code: "(int a, int b)", description: "PARAMS - What does it need?", color: "success" },
+      { step: 5, code: " { return a + b; }", description: "BODY - What does it do? Return if not void!", color: "secondary" },
+    ],
+    fullExample: `public int add(int a, int b) {
+  return a + b;
+}
+
+// Call it:
+int result = add(5, 3);  // result = 8`,
+    realWorld: "Like a recipe: Who can cook → What it makes → Recipe name → Ingredients → Steps",
+    tip: "void means no return. Otherwise MUST return matching type!"
+  },
+  {
+    id: "try-catch-build",
+    title: "Building TRY-CATCH",
+    mnemonic: "T.C.F. = Try → Catch → Finally",
+    icon: "🛡️",
+    category: "methods",
+    steps: [
+      { step: 1, code: "try {", description: "TRY - Risky code that might fail", color: "primary" },
+      { step: 2, code: "  riskyCode();", description: "RISKY - File reading, network, parsing...", color: "accent" },
+      { step: 3, code: "} catch (Exception e) {", description: "CATCH - Handle the error", color: "warning" },
+      { step: 4, code: "} finally {", description: "FINALLY - Always runs (cleanup)", color: "success" },
+    ],
+    fullExample: `try {
+  int result = 10 / 0;  // Risky!
+} catch (Exception e) {
+  System.out.println("Error: " + e.getMessage());
+} finally {
+  System.out.println("Done!");  // Always runs
+}`,
+    realWorld: "Like cooking: Try recipe, Catch if burnt (handle error), Finally clean up",
+    tip: "Finally is optional but great for cleanup (closing files, connections)"
+  },
+
+  // ==================== OOP ====================
+  {
+    id: "class-build",
+    title: "Building a CLASS",
+    mnemonic: "C.F.C.M. = Class → Fields → Constructor → Methods",
+    icon: "📦",
+    category: "oop",
+    steps: [
+      { step: 1, code: "public class Dog {", description: "CLASS - Blueprint name (PascalCase)", color: "primary" },
+      { step: 2, code: "  private String name;", description: "FIELDS - Data it holds (usually private)", color: "accent" },
+      { step: 3, code: "  public Dog(String n) { name = n; }", description: "CONSTRUCTOR - How to create it", color: "warning" },
+      { step: 4, code: "  public void bark() { }", description: "METHODS - Actions it can do", color: "success" },
+    ],
+    fullExample: `public class Dog {
+  private String name;
+  private int age;
   
-  // WHILE LOOP
-  {
-    id: "while-loop",
-    title: "WHILE Loop: W.C.B.",
-    visual: (
-      <div className="space-y-3">
-        <div className="text-4xl font-black text-primary mb-4">⏳ W.C.B.</div>
-        <div className="flex justify-center gap-4">
-          <div className="bg-primary/20 p-4 rounded-lg border-2 border-primary text-center">
-            <div className="text-3xl font-black text-primary">W</div>
-            <div className="text-sm">while</div>
-          </div>
-          <div className="text-3xl flex items-center">→</div>
-          <div className="bg-warning/20 p-4 rounded-lg border-2 border-warning text-center">
-            <div className="text-3xl font-black text-warning">C</div>
-            <div className="text-sm">condition</div>
-          </div>
-          <div className="text-3xl flex items-center">→</div>
-          <div className="bg-success/20 p-4 rounded-lg border-2 border-success text-center">
-            <div className="text-3xl font-black text-success">B</div>
-            <div className="text-sm">body</div>
-          </div>
-        </div>
-        <div className="text-center text-sm text-muted-foreground">⚠️ Check BEFORE running!</div>
-      </div>
-    ),
-    steps: ["WHILE keyword", "CHECK condition first", "RUN body if true", "REPEAT until false"],
-    example: "while (hungry) { eat(); }",
-    memory_trick: "🚦 Traffic Light: While(green) { drive(); } - Check first, then go!",
-    category: "loops",
-    realWorld: "Like waiting at a door: While it's locked, keep knocking"
+  public Dog(String name, int age) {
+    this.name = name;
+    this.age = age;
+  }
+  
+  public void bark() {
+    System.out.println(name + " says Woof!");
+  }
+}`,
+    realWorld: "Like a blueprint: Name (Dog) → Attributes (name, age) → Setup → Actions",
+    tip: "Use 'this.name' when parameter has same name as field!"
   },
-
-  // DO-WHILE LOOP
   {
-    id: "do-while",
-    title: "DO-WHILE: D.W.C.",
-    visual: (
-      <div className="space-y-3">
-        <div className="text-4xl font-black text-accent mb-4">🎯 D.W.C.</div>
-        <div className="flex justify-center gap-4">
-          <div className="bg-success/20 p-4 rounded-lg border-2 border-success text-center">
-            <div className="text-3xl font-black text-success">D</div>
-            <div className="text-sm">do { }</div>
-          </div>
-          <div className="text-3xl flex items-center">→</div>
-          <div className="bg-primary/20 p-4 rounded-lg border-2 border-primary text-center">
-            <div className="text-3xl font-black text-primary">W</div>
-            <div className="text-sm">while</div>
-          </div>
-          <div className="text-3xl flex items-center">→</div>
-          <div className="bg-warning/20 p-4 rounded-lg border-2 border-warning text-center">
-            <div className="text-3xl font-black text-warning">C</div>
-            <div className="text-sm">condition</div>
-          </div>
-        </div>
-        <div className="text-center text-sm text-success font-semibold">✓ Runs AT LEAST once!</div>
-      </div>
-    ),
-    steps: ["DO the action first", "THEN check WHILE condition", "REPEAT if still true"],
-    example: "do { askPassword(); } while (!correct);",
-    memory_trick: "🎰 Slot Machine: Do(pull) While(want-more) - You pull at least once!",
-    category: "loops",
-    realWorld: "Like tasting food: Do(taste) then check While(need-salt)"
-  },
-
-  // IF-ELSE
-  {
-    id: "if-else",
-    title: "IF-ELSE: I.T.E.",
-    visual: (
-      <div className="space-y-3">
-        <div className="text-4xl font-black text-primary mb-4">🔀 I.T.E.</div>
-        <div className="flex flex-col items-center gap-2">
-          <div className="bg-primary/20 p-3 rounded-lg border-2 border-primary w-48 text-center">
-            <span className="font-black text-primary">IF</span> condition?
-          </div>
-          <div className="flex gap-8">
-            <div className="flex flex-col items-center">
-              <div className="text-success text-xl">✓</div>
-              <div className="bg-success/20 p-2 rounded-lg border border-success text-sm">
-                THEN do this
-              </div>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="text-destructive text-xl">✗</div>
-              <div className="bg-destructive/20 p-2 rounded-lg border border-destructive text-sm">
-                ELSE do that
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    ),
-    steps: ["IF checks a condition", "THEN runs if true", "ELSE runs if false"],
-    example: "if (age >= 18) { vote(); } else { wait(); }",
-    memory_trick: "🚪 Door Decision: IF(unlocked) enter; ELSE knock",
-    category: "conditionals",
-    realWorld: "Like a bouncer: IF(age >= 21) let-in; ELSE turn-away"
-  },
-
-  // SWITCH-CASE
-  {
-    id: "switch-case",
-    title: "SWITCH: S.C.B.D.",
-    visual: (
-      <div className="space-y-3">
-        <div className="text-4xl font-black text-accent mb-4">🎛️ S.C.B.D.</div>
-        <div className="bg-muted/30 p-4 rounded-lg">
-          <div className="text-primary font-bold mb-2">switch(day) {`{`}</div>
-          <div className="ml-4 space-y-1">
-            <div className="flex items-center gap-2">
-              <span className="bg-accent/20 px-2 py-1 rounded text-sm">case "Mon":</span>
-              <span className="text-muted-foreground">work();</span>
-              <span className="text-warning font-bold">break;</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="bg-accent/20 px-2 py-1 rounded text-sm">case "Sat":</span>
-              <span className="text-muted-foreground">relax();</span>
-              <span className="text-warning font-bold">break;</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="bg-destructive/20 px-2 py-1 rounded text-sm">default:</span>
-              <span className="text-muted-foreground">sleep();</span>
-            </div>
-          </div>
-          <div className="text-primary font-bold">{`}`}</div>
-        </div>
-      </div>
-    ),
-    steps: ["SWITCH on a variable", "CASE matches values", "BREAK exits switch", "DEFAULT catches all else"],
-    example: "switch(grade) { case 'A': great(); break; default: tryAgain(); }",
-    memory_trick: "📺 TV Remote: Switch(channel) Case(1): news; Case(2): sports; Default: off",
-    category: "conditionals",
-    realWorld: "Like a vending machine: Press button → Get specific item"
-  },
-
-  // TERNARY OPERATOR
-  {
-    id: "ternary",
-    title: "TERNARY: C ? T : F",
-    visual: (
-      <div className="space-y-4">
-        <div className="text-4xl font-black text-warning mb-4">⚖️ C ? T : F</div>
-        <div className="flex items-center justify-center gap-2 text-xl">
-          <span className="bg-primary/20 px-3 py-2 rounded-lg border-2 border-primary">Condition</span>
-          <span className="text-2xl font-black">?</span>
-          <span className="bg-success/20 px-3 py-2 rounded-lg border-2 border-success">True</span>
-          <span className="text-2xl font-black">:</span>
-          <span className="bg-destructive/20 px-3 py-2 rounded-lg border-2 border-destructive">False</span>
-        </div>
-        <div className="font-mono bg-muted/50 p-3 rounded-lg text-center">
-          result = (age &gt;= 18) <span className="text-warning font-bold">?</span> "adult" <span className="text-warning font-bold">:</span> "minor"
-        </div>
-      </div>
-    ),
-    steps: ["Write the Condition", "? for what happens if TRUE", ": for what happens if FALSE"],
-    example: "String status = (score > 50) ? \"pass\" : \"fail\";",
-    memory_trick: "❓ Question Mark = 'is it true?' then pick left : or right",
-    category: "conditionals",
-    realWorld: "Like a quick decision: Raining? Umbrella : Sunglasses"
-  },
-
-  // METHOD STRUCTURE
-  {
-    id: "method",
-    title: "METHOD: A.R.N.P.",
-    visual: (
-      <div className="space-y-3">
-        <div className="text-4xl font-black text-success mb-4">🔧 A.R.N.P.</div>
-        <div className="flex flex-wrap justify-center gap-2 mb-4">
-          <div className="bg-primary/20 px-3 py-2 rounded-lg border-2 border-primary">
-            <div className="text-sm text-muted-foreground">Access</div>
-            <div className="font-bold text-primary">public</div>
-          </div>
-          <div className="bg-accent/20 px-3 py-2 rounded-lg border-2 border-accent">
-            <div className="text-sm text-muted-foreground">Return</div>
-            <div className="font-bold text-accent">int</div>
-          </div>
-          <div className="bg-warning/20 px-3 py-2 rounded-lg border-2 border-warning">
-            <div className="text-sm text-muted-foreground">Name</div>
-            <div className="font-bold text-warning">add</div>
-          </div>
-          <div className="bg-success/20 px-3 py-2 rounded-lg border-2 border-success">
-            <div className="text-sm text-muted-foreground">Params</div>
-            <div className="font-bold text-success">(a, b)</div>
-          </div>
-        </div>
-        <div className="font-mono bg-muted/50 p-3 rounded-lg text-center">
-          <span className="text-primary">public</span> <span className="text-accent">int</span> <span className="text-warning">add</span>(<span className="text-success">int a, int b</span>)
-        </div>
-      </div>
-    ),
-    steps: ["ACCESS modifier (public/private)", "RETURN type (int/void/String)", "NAME the method", "PARAMETERS in parentheses"],
-    example: "public int calculateSum(int a, int b) { return a + b; }",
-    memory_trick: "🎭 Actor's Resume: Public(visible) Actor(type) Named(name) Playing(role/params)",
-    category: "methods",
-    realWorld: "Like a recipe: Who can use it → What it makes → Name → Ingredients"
-  },
-
-  // TRY-CATCH
-  {
-    id: "try-catch",
-    title: "TRY-CATCH: T.C.F.",
-    visual: (
-      <div className="space-y-3">
-        <div className="text-4xl font-black text-destructive mb-4">🛡️ T.C.F.</div>
-        <div className="space-y-2">
-          <div className="bg-primary/20 p-3 rounded-lg border-2 border-primary">
-            <span className="font-bold text-primary">TRY</span> - Risky code here
-          </div>
-          <div className="bg-destructive/20 p-3 rounded-lg border-2 border-destructive">
-            <span className="font-bold text-destructive">CATCH</span> - Handle errors
-          </div>
-          <div className="bg-success/20 p-3 rounded-lg border-2 border-success">
-            <span className="font-bold text-success">FINALLY</span> - Always runs
-          </div>
-        </div>
-      </div>
-    ),
-    steps: ["TRY the risky code", "CATCH any exceptions", "FINALLY cleanup (optional, always runs)"],
-    example: "try { readFile(); } catch (Exception e) { log(e); } finally { close(); }",
-    memory_trick: "🎪 Trapeze Artist: TRY the trick, CATCH if fall, FINALLY bow",
-    category: "methods",
-    realWorld: "Like cooking: Try recipe, Catch if burnt, Finally clean kitchen"
-  },
-
-  // CLASS STRUCTURE
-  {
-    id: "class",
-    title: "CLASS: C.F.C.M.",
-    visual: (
-      <div className="space-y-3">
-        <div className="text-4xl font-black text-primary mb-4">📦 C.F.C.M.</div>
-        <div className="bg-muted/30 p-4 rounded-lg text-sm font-mono">
-          <div className="text-primary font-bold">class Dog {`{`}</div>
-          <div className="ml-4 space-y-1">
-            <div className="text-accent">// Fields (data)</div>
-            <div>String name;</div>
-            <div className="text-accent mt-2">// Constructor</div>
-            <div>Dog(String n) {`{`} name = n; {`}`}</div>
-            <div className="text-accent mt-2">// Methods (actions)</div>
-            <div>void bark() {`{`} ... {`}`}</div>
-          </div>
-          <div className="text-primary font-bold">{`}`}</div>
-        </div>
-      </div>
-    ),
-    steps: ["CLASS declaration", "FIELDS (variables/data)", "CONSTRUCTOR (setup)", "METHODS (actions)"],
-    example: "class Car { String color; Car(String c) { color = c; } void drive() {} }",
-    memory_trick: "🏠 House Blueprint: Class=House, Fields=Rooms, Constructor=Builder, Methods=Activities",
+    id: "inheritance-build",
+    title: "Using INHERITANCE",
+    mnemonic: "E.S.O. = Extends → Super → Override",
+    icon: "🧬",
     category: "oop",
-    realWorld: "Like a blueprint: Name, What it has, How to build, What it does"
+    steps: [
+      { step: 1, code: "class Dog extends Animal {", description: "EXTENDS - Child inherits from parent", color: "primary" },
+      { step: 2, code: "  super(name);", description: "SUPER - Call parent's constructor", color: "accent" },
+      { step: 3, code: "  @Override", description: "OVERRIDE - Replace parent's method", color: "warning" },
+      { step: 4, code: "  public void speak() { }", description: "NEW BEHAVIOR - Child's version", color: "success" },
+    ],
+    fullExample: `class Animal {
+  protected String name;
+  public Animal(String name) { this.name = name; }
+  public void speak() { System.out.println("..."); }
+}
+
+class Dog extends Animal {
+  public Dog(String name) { super(name); }
+  
+  @Override
+  public void speak() { System.out.println("Woof!"); }
+}`,
+    realWorld: "Like genetics: Dog extends Animal, inherits traits, can override behavior",
+    tip: "@Override helps compiler catch errors if parent method doesn't exist!"
   },
 
-  // INHERITANCE
+  // ==================== DATA STRUCTURES ====================
   {
-    id: "inheritance",
-    title: "INHERITANCE: E.S.O.",
-    visual: (
-      <div className="space-y-3">
-        <div className="text-4xl font-black text-accent mb-4">🧬 E.S.O.</div>
-        <div className="flex flex-col items-center gap-2">
-          <div className="bg-primary/20 p-3 rounded-lg border-2 border-primary w-32 text-center">
-            <div className="font-bold">Animal</div>
-            <div className="text-xs text-muted-foreground">(parent)</div>
-          </div>
-          <div className="text-2xl">↓ extends</div>
-          <div className="flex gap-4">
-            <div className="bg-accent/20 p-2 rounded-lg border border-accent text-center">
-              <div className="font-bold text-sm">Dog</div>
-            </div>
-            <div className="bg-accent/20 p-2 rounded-lg border border-accent text-center">
-              <div className="font-bold text-sm">Cat</div>
-            </div>
-          </div>
-        </div>
-        <div className="font-mono text-sm bg-muted/50 p-2 rounded-lg text-center">
-          class Dog <span className="text-primary font-bold">extends</span> Animal
-        </div>
-      </div>
-    ),
-    steps: ["Child EXTENDS parent", "SUPER calls parent", "OVERRIDE to customize"],
-    example: "class Dog extends Animal { @Override void speak() { bark(); } }",
-    memory_trick: "👨‍👧 Family Tree: Child Extends parent, gets Super's traits, can Override them",
-    category: "oop",
-    realWorld: "Like genetics: Dog extends Animal, inherits traits, can override behavior"
-  },
-
-  // ARRAY
-  {
-    id: "array",
-    title: "ARRAY: T.N.S.I.",
-    visual: (
-      <div className="space-y-3">
-        <div className="text-4xl font-black text-secondary mb-4">📊 T.N.S.I.</div>
-        <div className="flex justify-center gap-1 mb-4">
-          {[0, 1, 2, 3, 4].map(i => (
-            <div key={i} className="w-12 h-12 bg-primary/20 border-2 border-primary rounded flex flex-col items-center justify-center">
-              <div className="text-lg font-bold">{i * 10}</div>
-              <div className="text-[10px] text-muted-foreground">[{i}]</div>
-            </div>
-          ))}
-        </div>
-        <div className="font-mono text-sm bg-muted/50 p-2 rounded-lg text-center">
-          <span className="text-accent">int[]</span> nums = <span className="text-primary">new int[5]</span>;
-        </div>
-      </div>
-    ),
-    steps: ["TYPE with brackets []", "NAME the array", "SIZE is fixed", "INDEX starts at 0"],
-    example: "String[] names = new String[3]; names[0] = \"Alice\";",
-    memory_trick: "🗄️ Filing Cabinet: Type[] Name = new Type[Size]; Access by drawer number [0,1,2...]",
+    id: "array-build",
+    title: "Building an ARRAY",
+    mnemonic: "T.N.S.A. = Type → Name → Size → Access",
+    icon: "📊",
     category: "data",
-    realWorld: "Like parking spots: Fixed number, numbered from 0"
-  },
+    steps: [
+      { step: 1, code: "int[]", description: "TYPE - What kind of data? Add []", color: "primary" },
+      { step: 2, code: "numbers", description: "NAME - What's it called?", color: "accent" },
+      { step: 3, code: "= new int[5];", description: "SIZE - How many slots? (fixed!)", color: "warning" },
+      { step: 4, code: "numbers[0] = 10;", description: "ACCESS - Use index starting at 0", color: "success" },
+    ],
+    fullExample: `// Create array
+int[] numbers = new int[5];
+numbers[0] = 10;  // First slot
 
-  // LIST/ARRAYLIST
+// Or create with values
+String[] names = {"Alice", "Bob", "Carol"};
+System.out.println(names[1]);  // "Bob"`,
+    realWorld: "Like a row of lockers: All same type, numbered 0, 1, 2..., fixed count",
+    tip: "Index starts at 0! Array of size 5 has indices 0-4."
+  },
   {
-    id: "arraylist",
-    title: "ArrayList: A.G.A.",
-    visual: (
-      <div className="space-y-3">
-        <div className="text-4xl font-black text-success mb-4">📋 A.G.A.</div>
-        <div className="flex justify-center items-center gap-1 mb-4">
-          <div className="w-10 h-10 bg-success/20 border-2 border-success rounded flex items-center justify-center">A</div>
-          <div className="w-10 h-10 bg-success/20 border-2 border-success rounded flex items-center justify-center">B</div>
-          <div className="w-10 h-10 bg-success/20 border-2 border-success rounded flex items-center justify-center">C</div>
-          <div className="text-2xl mx-2">→</div>
-          <div className="w-10 h-10 bg-success/30 border-2 border-dashed border-success rounded flex items-center justify-center text-success">+</div>
-        </div>
-        <div className="text-center text-sm text-success font-semibold">Grows automatically!</div>
-        <div className="font-mono text-sm bg-muted/50 p-2 rounded-lg text-center">
-          ArrayList&lt;String&gt; list = new ArrayList&lt;&gt;();
-        </div>
-      </div>
-    ),
-    steps: ["ArrayList declaration", "GROWS dynamically", "ADD/remove anytime"],
-    example: "list.add(\"item\"); list.remove(0); list.get(1);",
-    memory_trick: "🎈 Balloon String: Add balloons anytime, remove anytime, no fixed size",
+    id: "arraylist-build",
+    title: "Building an ARRAYLIST",
+    mnemonic: "A.L.C.A.G.R. = ArrayList → List → Create → Add → Get → Remove",
+    icon: "📝",
     category: "data",
-    realWorld: "Like a shopping cart: Add items, remove items, grows as needed"
+    steps: [
+      { step: 1, code: "ArrayList<String>", description: "TYPE - ArrayList with <WrapperType>", color: "primary" },
+      { step: 2, code: "names", description: "NAME - What's it called?", color: "accent" },
+      { step: 3, code: "= new ArrayList<>();", description: "CREATE - Use diamond <>", color: "warning" },
+      { step: 4, code: "names.add(\"Alex\");", description: "ADD/GET/REMOVE - Use methods, not []", color: "success" },
+    ],
+    fullExample: `ArrayList<String> names = new ArrayList<>();
+names.add("Alice");        // Add to end
+names.add(0, "Bob");       // Add at index
+String first = names.get(0);  // Get by index
+names.remove(0);           // Remove by index
+int size = names.size();   // Get count`,
+    realWorld: "Like a stretchy list: Can grow/shrink, use methods not brackets",
+    tip: "Use Integer not int, Double not double in ArrayList<>!"
   },
 
-  // HASHMAP
+  // ==================== SYSTEMS ANALYSIS ====================
   {
-    id: "hashmap",
-    title: "HashMap: K.V.P.",
-    visual: (
-      <div className="space-y-3">
-        <div className="text-4xl font-black text-warning mb-4">🗺️ K.V.P.</div>
-        <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <div className="bg-primary/20 px-3 py-2 rounded-lg border border-primary font-mono">"name"</div>
-            <span className="text-xl">→</span>
-            <div className="bg-accent/20 px-3 py-2 rounded-lg border border-accent">"Alice"</div>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="bg-primary/20 px-3 py-2 rounded-lg border border-primary font-mono">"age"</div>
-            <span className="text-xl">→</span>
-            <div className="bg-accent/20 px-3 py-2 rounded-lg border border-accent">25</div>
-          </div>
-        </div>
-        <div className="font-mono text-sm bg-muted/50 p-2 rounded-lg text-center">
-          HashMap&lt;String, Integer&gt; map = new HashMap&lt;&gt;();
-        </div>
-      </div>
-    ),
-    steps: ["KEY to look up", "VALUE to retrieve", "PUT and GET pairs"],
-    example: "map.put(\"score\", 100); int s = map.get(\"score\");",
-    memory_trick: "📚 Dictionary: Word(key) → Definition(value). Look up word, get meaning!",
-    category: "data",
-    realWorld: "Like a phone book: Name → Number, look up name to get number"
+    id: "sdlc-phases",
+    title: "SDLC Phases",
+    mnemonic: "R.A.D.I.T.M. = Requirements → Analysis → Design → Implement → Test → Maintain",
+    icon: "🔄",
+    category: "systems",
+    steps: [
+      { step: 1, code: "1. Requirements", description: "WHAT does the client need?", color: "primary" },
+      { step: 2, code: "2. Analysis", description: "HOW will we solve it?", color: "accent" },
+      { step: 3, code: "3. Design", description: "DRAW the solution (UML, wireframes)", color: "warning" },
+      { step: 4, code: "4. Implementation", description: "CODE the solution", color: "success" },
+      { step: 5, code: "5. Testing", description: "VERIFY it works", color: "secondary" },
+      { step: 6, code: "6. Maintenance", description: "FIX and IMPROVE over time", color: "primary" },
+    ],
+    fullExample: `Requirements → What features?
+Analysis → Feasibility study
+Design → UML diagrams, database schema
+Implementation → Write code
+Testing → Unit, integration, UAT
+Maintenance → Bug fixes, updates`,
+    realWorld: "Like building a house: Plan → Blueprint → Build → Inspect → Repair",
+    tip: "Waterfall does this in sequence. Agile does it in short cycles!"
+  },
+  {
+    id: "use-case-build",
+    title: "Writing USE CASES",
+    mnemonic: "A.P.S.E. = Actor → Precondition → Steps → Extension",
+    icon: "🎭",
+    category: "systems",
+    steps: [
+      { step: 1, code: "Actor: Customer", description: "WHO is doing this action?", color: "primary" },
+      { step: 2, code: "Precondition: Logged in", description: "WHAT must be true first?", color: "accent" },
+      { step: 3, code: "Steps: 1. Select, 2. Pay", description: "HAPPY PATH - normal flow", color: "success" },
+      { step: 4, code: "Extension: Payment fails", description: "WHAT IF something goes wrong?", color: "warning" },
+    ],
+    fullExample: `Use Case: Purchase Item
+Actor: Customer
+Precondition: User is logged in
+Main Flow:
+  1. User selects item
+  2. User clicks checkout
+  3. User enters payment
+  4. System confirms order
+Extensions:
+  3a. Payment fails → Show error`,
+    realWorld: "Like a script: Who's acting, what they need, what happens, what if it fails",
+    tip: "Always include extensions for errors and edge cases!"
   },
 
-  // SECURITY - Authentication
+  // ==================== SECURITY ====================
   {
-    id: "auth",
-    title: "AUTH: A.A.A.",
-    visual: (
-      <div className="space-y-3">
-        <div className="text-4xl font-black text-destructive mb-4">🔐 A.A.A.</div>
-        <div className="space-y-2">
-          <div className="bg-primary/20 p-3 rounded-lg border-l-4 border-primary">
-            <span className="font-bold text-primary">Authentication</span> - WHO are you?
-          </div>
-          <div className="bg-accent/20 p-3 rounded-lg border-l-4 border-accent">
-            <span className="font-bold text-accent">Authorization</span> - WHAT can you do?
-          </div>
-          <div className="bg-warning/20 p-3 rounded-lg border-l-4 border-warning">
-            <span className="font-bold text-warning">Accounting</span> - WHAT did you do?
-          </div>
-        </div>
-      </div>
-    ),
-    steps: ["AUTHENTICATE identity (login)", "AUTHORIZE access (permissions)", "ACCOUNT for actions (logs)"],
-    example: "login() → checkPermissions() → logActivity()",
-    memory_trick: "🎫 Concert Entry: Show ID(auth), Check ticket type(authz), Log entry(accounting)",
+    id: "cia-triad",
+    title: "CIA Security Triad",
+    mnemonic: "C.I.A. = Confidentiality → Integrity → Availability",
+    icon: "🔐",
     category: "security",
-    realWorld: "Like entering a building: Badge(who), Floor access(what), Sign-in log(record)"
+    steps: [
+      { step: 1, code: "Confidentiality", description: "Only authorized people see data", color: "primary" },
+      { step: 2, code: "Integrity", description: "Data cannot be tampered with", color: "accent" },
+      { step: 3, code: "Availability", description: "System is up when needed", color: "success" },
+    ],
+    fullExample: `Confidentiality: Encryption, access control
+  → Prevents: Data breaches
+  
+Integrity: Hashing, digital signatures
+  → Prevents: Data tampering
+  
+Availability: Backups, redundancy
+  → Prevents: Downtime, data loss`,
+    realWorld: "Like a safe: Keep secrets (C), prevent forgery (I), always accessible (A)",
+    tip: "Every security decision balances these three. Can't max all three!"
+  },
+  {
+    id: "auth-vs-authz",
+    title: "Authentication vs Authorization",
+    mnemonic: "WHO vs WHAT = Identity → Permissions",
+    icon: "🎫",
+    category: "security",
+    steps: [
+      { step: 1, code: "Authentication", description: "WHO are you? (Login, password)", color: "primary" },
+      { step: 2, code: "Authorization", description: "WHAT can you do? (Permissions)", color: "accent" },
+      { step: 3, code: "Example: Login → Role check", description: "First verify identity, then check access", color: "success" },
+    ],
+    fullExample: `Authentication (AuthN):
+  - Password, biometrics, 2FA
+  - "Prove you are who you claim"
+  
+Authorization (AuthZ):
+  - Roles, permissions, ACLs
+  - "Are you allowed to do this?"
+  
+Order: AuthN first → then AuthZ`,
+    realWorld: "Like a concert: Ticket (AuthN proves identity) → Backstage pass (AuthZ grants access)",
+    tip: "You can be authenticated but not authorized for certain actions!"
   },
 
-  // SYSTEMS - Input-Process-Output
+  // ==================== MATHS ====================
   {
-    id: "ipo",
-    title: "SYSTEM: I.P.O.",
-    visual: (
-      <div className="space-y-3">
-        <div className="text-4xl font-black text-primary mb-4">⚙️ I.P.O.</div>
-        <div className="flex items-center justify-center gap-4">
-          <div className="bg-accent/20 p-4 rounded-lg border-2 border-accent text-center">
-            <div className="text-2xl mb-1">📥</div>
-            <div className="font-bold text-accent">INPUT</div>
-          </div>
-          <div className="text-2xl">→</div>
-          <div className="bg-primary/20 p-4 rounded-lg border-2 border-primary text-center">
-            <div className="text-2xl mb-1">⚙️</div>
-            <div className="font-bold text-primary">PROCESS</div>
-          </div>
-          <div className="text-2xl">→</div>
-          <div className="bg-success/20 p-4 rounded-lg border-2 border-success text-center">
-            <div className="text-2xl mb-1">📤</div>
-            <div className="font-bold text-success">OUTPUT</div>
-          </div>
-        </div>
-      </div>
-    ),
-    steps: ["INPUT data enters", "PROCESS transforms it", "OUTPUT result exits"],
-    example: "input(order) → process(payment) → output(receipt)",
-    memory_trick: "🏭 Factory: Raw materials IN, Machine PROCESSES, Products OUT",
-    category: "systems",
-    realWorld: "Like a coffee machine: Coffee beans(in), Grind & brew(process), Coffee(out)"
+    id: "big-o-notation",
+    title: "Big-O Complexity",
+    mnemonic: "O(1) < O(log n) < O(n) < O(n²) < O(2^n)",
+    icon: "⏱️",
+    category: "maths",
+    steps: [
+      { step: 1, code: "O(1) Constant", description: "Same time regardless of input size", color: "primary" },
+      { step: 2, code: "O(log n) Logarithmic", description: "Halving each step (binary search)", color: "accent" },
+      { step: 3, code: "O(n) Linear", description: "Time grows with input size", color: "warning" },
+      { step: 4, code: "O(n²) Quadratic", description: "Nested loops (slow!)", color: "destructive" },
+    ],
+    fullExample: `O(1): array[0] - instant
+O(log n): binary search - halves each time
+O(n): for loop - visits each once
+O(n log n): merge sort - efficient sorting
+O(n²): nested for loops - avoid if possible!
+O(2^n): recursive without memoization`,
+    realWorld: "Like finding a book: O(1) know exact spot, O(n) scan shelf, O(n²) compare every pair",
+    tip: "Always aim for O(n) or better. O(n²) gets slow fast!"
+  },
+  {
+    id: "binary-conversion",
+    title: "Binary Conversion",
+    mnemonic: "8-4-2-1 = Place values right to left",
+    icon: "🔢",
+    category: "maths",
+    steps: [
+      { step: 1, code: "128 64 32 16 8 4 2 1", description: "Write place values (powers of 2)", color: "primary" },
+      { step: 2, code: "Put 1 under values that sum to target", description: "Start from left, use largest that fits", color: "accent" },
+      { step: 3, code: "13 = 8+4+1 = 1101", description: "8(1) + 4(1) + 2(0) + 1(1)", color: "success" },
+    ],
+    fullExample: `Decimal 13 to Binary:
+  8 4 2 1
+  1 1 0 1  = 1101
+  
+Binary 1011 to Decimal:
+  8 + 0 + 2 + 1 = 11`,
+    realWorld: "Like giving change: Use biggest coins first, mark which you used",
+    tip: "For binary to decimal: multiply each digit by its place value and add!"
   },
 
-  // ACID Transactions
+  // ==================== AI / DATA SCIENCE ====================
   {
-    id: "acid",
-    title: "DATABASE: A.C.I.D.",
-    visual: (
-      <div className="space-y-3">
-        <div className="text-4xl font-black text-success mb-4">💾 A.C.I.D.</div>
-        <div className="grid grid-cols-2 gap-2 text-sm">
-          <div className="bg-primary/20 p-2 rounded-lg border border-primary">
-            <span className="font-bold text-primary">A</span>tomic - All or nothing
-          </div>
-          <div className="bg-accent/20 p-2 rounded-lg border border-accent">
-            <span className="font-bold text-accent">C</span>onsistent - Valid state
-          </div>
-          <div className="bg-warning/20 p-2 rounded-lg border border-warning">
-            <span className="font-bold text-warning">I</span>solated - No interference
-          </div>
-          <div className="bg-success/20 p-2 rounded-lg border border-success">
-            <span className="font-bold text-success">D</span>urable - Permanent
-          </div>
-        </div>
-      </div>
-    ),
-    steps: ["ATOMIC: Complete fully or not at all", "CONSISTENT: Database stays valid", "ISOLATED: Transactions don't interfere", "DURABLE: Changes are permanent"],
-    example: "Transfer money: Both accounts update or neither does",
-    memory_trick: "💰 Bank Transfer: Either BOTH accounts change or NEITHER - no half-done!",
-    category: "systems",
-    realWorld: "Like moving money: Debit AND credit happen together, or not at all"
+    id: "ml-workflow",
+    title: "ML Workflow",
+    mnemonic: "D.P.T.E.D. = Data → Preprocess → Train → Evaluate → Deploy",
+    icon: "🤖",
+    category: "ai",
+    steps: [
+      { step: 1, code: "1. Collect Data", description: "Gather training examples", color: "primary" },
+      { step: 2, code: "2. Preprocess", description: "Clean, normalize, split train/test", color: "accent" },
+      { step: 3, code: "3. Train Model", description: "Algorithm learns patterns", color: "warning" },
+      { step: 4, code: "4. Evaluate", description: "Test accuracy on unseen data", color: "success" },
+      { step: 5, code: "5. Deploy", description: "Use in production", color: "secondary" },
+    ],
+    fullExample: `Data: 10,000 labeled images
+Preprocess: Resize, normalize 0-1, 80/20 split
+Train: CNN learns features
+Evaluate: 95% accuracy on test set
+Deploy: API endpoint for predictions`,
+    realWorld: "Like learning to cook: Get recipes (data), prep (preprocess), practice (train), taste test (evaluate), serve (deploy)",
+    tip: "Never evaluate on training data - that's cheating!"
   },
-
-  // MVC Pattern
   {
-    id: "mvc",
-    title: "PATTERN: M.V.C.",
-    visual: (
-      <div className="space-y-3">
-        <div className="text-4xl font-black text-accent mb-4">🏗️ M.V.C.</div>
-        <div className="flex flex-col items-center gap-2">
-          <div className="flex gap-4">
-            <div className="bg-primary/20 p-3 rounded-lg border-2 border-primary text-center w-24">
-              <div className="font-bold text-primary">Model</div>
-              <div className="text-xs">Data</div>
-            </div>
-            <div className="bg-accent/20 p-3 rounded-lg border-2 border-accent text-center w-24">
-              <div className="font-bold text-accent">View</div>
-              <div className="text-xs">Display</div>
-            </div>
-            <div className="bg-success/20 p-3 rounded-lg border-2 border-success text-center w-24">
-              <div className="font-bold text-success">Controller</div>
-              <div className="text-xs">Logic</div>
-            </div>
-          </div>
-          <div className="text-sm text-muted-foreground">User → Controller → Model → View → User</div>
-        </div>
-      </div>
-    ),
-    steps: ["MODEL stores data", "VIEW displays to user", "CONTROLLER handles logic"],
-    example: "User clicks → Controller processes → Model updates → View refreshes",
-    memory_trick: "🎬 Movie Set: Model=Script, View=Screen, Controller=Director",
-    category: "systems",
-    realWorld: "Like a restaurant: Chef(Controller), Recipe(Model), Plate presentation(View)"
+    id: "data-visualization",
+    title: "Choosing Charts",
+    mnemonic: "C.B.L.P.S. = Comparison → Bar, Trend → Line, Part → Pie, Relation → Scatter",
+    icon: "📊",
+    category: "ai",
+    steps: [
+      { step: 1, code: "Comparison → Bar Chart", description: "Compare categories", color: "primary" },
+      { step: 2, code: "Trend over Time → Line Chart", description: "Show change over time", color: "accent" },
+      { step: 3, code: "Part of Whole → Pie Chart", description: "Show percentages (max 5-7 slices)", color: "warning" },
+      { step: 4, code: "Relationship → Scatter Plot", description: "Show correlation between variables", color: "success" },
+    ],
+    fullExample: `Sales by region → Bar Chart
+Revenue 2020-2024 → Line Chart
+Market share → Pie Chart
+Height vs Weight → Scatter Plot`,
+    realWorld: "Like choosing a tool: Different charts for different jobs",
+    tip: "When in doubt, bar charts are always readable!"
   },
 ];
 
 const categoryColors: Record<string, string> = {
-  loops: "bg-primary/20 text-primary border-primary/30",
-  conditionals: "bg-accent/20 text-accent border-accent/30",
-  methods: "bg-success/20 text-success border-success/30",
-  oop: "bg-warning/20 text-warning border-warning/30",
-  data: "bg-secondary/20 text-secondary border-secondary/30",
-  security: "bg-destructive/20 text-destructive border-destructive/30",
-  systems: "bg-primary/20 text-primary border-primary/30",
+  "program-structure": "bg-primary/20 text-primary",
+  "loops": "bg-accent/20 text-accent",
+  "conditionals": "bg-warning/20 text-warning",
+  "methods": "bg-success/20 text-success",
+  "oop": "bg-secondary/20 text-secondary",
+  "data": "bg-primary/20 text-primary",
+  "systems": "bg-accent/20 text-accent",
+  "security": "bg-destructive/20 text-destructive",
+  "ai": "bg-warning/20 text-warning",
+  "maths": "bg-success/20 text-success",
 };
 
 const categoryLabels: Record<string, string> = {
-  loops: "🔄 Loops",
-  conditionals: "🔀 Conditionals",
-  methods: "🔧 Methods",
-  oop: "📦 OOP",
-  data: "📊 Data Structures",
-  security: "🔐 Security",
-  systems: "⚙️ Systems",
+  "program-structure": "Program Structure",
+  "loops": "Loops",
+  "conditionals": "Conditionals",
+  "methods": "Methods",
+  "oop": "OOP",
+  "data": "Data Structures",
+  "systems": "Systems",
+  "security": "Security",
+  "ai": "AI & Data",
+  "maths": "Maths",
 };
 
-export function MnemonicFlashcardGame() {
-  const { playSound } = useGame();
+export const MnemonicFlashcardGame = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [showAnswer, setShowAnswer] = useState(false);
-  const [known, setKnown] = useState<string[]>([]);
-  const [learning, setLearning] = useState<string[]>([]);
+  const [flipped, setFlipped] = useState(false);
+  const [knownCards, setKnownCards] = useState<Set<string>>(new Set());
+  const [learningCards, setLearningCards] = useState<Set<string>>(new Set());
   const [showSteps, setShowSteps] = useState(false);
-  const [isComplete, setIsComplete] = useState(false);
+  const [currentStep, setCurrentStep] = useState(0);
+  const { playSound } = useGame();
 
   const currentCard = flashcards[currentIndex];
-  const progress = ((known.length + learning.length) / flashcards.length) * 100;
+  const progress = ((knownCards.size + learningCards.size) / flashcards.length) * 100;
 
-  const handleReveal = useCallback(() => {
-    setShowAnswer(true);
+  const handleFlip = useCallback(() => {
     playSound("click");
-  }, [playSound]);
+    setFlipped(!flipped);
+  }, [flipped, playSound]);
 
   const handleKnow = useCallback(() => {
-    if (!known.includes(currentCard.id)) {
-      setKnown([...known, currentCard.id]);
-    }
     playSound("success");
+    setKnownCards(prev => new Set(prev).add(currentCard.id));
     nextCard();
-  }, [currentCard, known, playSound]);
+  }, [currentCard, playSound]);
 
   const handleLearning = useCallback(() => {
-    if (!learning.includes(currentCard.id) && !known.includes(currentCard.id)) {
-      setLearning([...learning, currentCard.id]);
-    }
     playSound("click");
+    setLearningCards(prev => new Set(prev).add(currentCard.id));
     nextCard();
-  }, [currentCard, learning, known, playSound]);
+  }, [currentCard, playSound]);
 
   const nextCard = () => {
-    setShowAnswer(false);
+    setFlipped(false);
     setShowSteps(false);
+    setCurrentStep(0);
     if (currentIndex < flashcards.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
-      setIsComplete(true);
+      setCurrentIndex(0);
     }
   };
 
-  const resetGame = () => {
-    setCurrentIndex(0);
-    setShowAnswer(false);
-    setKnown([]);
-    setLearning([]);
-    setShowSteps(false);
-    setIsComplete(false);
+  const handleStepThrough = () => {
     playSound("click");
+    if (currentStep < currentCard.steps.length - 1) {
+      setCurrentStep(currentStep + 1);
+    } else {
+      setShowSteps(false);
+      setCurrentStep(0);
+    }
   };
 
-  if (isComplete) {
-    const accuracy = Math.round((known.length / flashcards.length) * 100);
-    return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="text-center py-12"
-      >
-        <div className="text-7xl mb-6">🎉</div>
-        <h2 className="text-3xl font-black text-foreground mb-4">Session Complete!</h2>
-        
-        <div className="grid grid-cols-2 gap-4 max-w-md mx-auto mb-8">
-          <Card className="bg-success/10 border-success/30">
-            <CardContent className="p-6 text-center">
-              <Check className="w-8 h-8 text-success mx-auto mb-2" />
-              <p className="text-3xl font-bold text-success">{known.length}</p>
-              <p className="text-sm text-muted-foreground">Mastered</p>
-            </CardContent>
-          </Card>
-          <Card className="bg-warning/10 border-warning/30">
-            <CardContent className="p-6 text-center">
-              <Brain className="w-8 h-8 text-warning mx-auto mb-2" />
-              <p className="text-3xl font-bold text-warning">{learning.length}</p>
-              <p className="text-sm text-muted-foreground">Learning</p>
-            </CardContent>
-          </Card>
-        </div>
+  const startStepMode = () => {
+    playSound("click");
+    setShowSteps(true);
+    setCurrentStep(0);
+  };
 
-        <div className="mb-8">
-          <p className="text-xl text-muted-foreground mb-2">Retention Rate</p>
-          <p className="text-5xl font-black text-primary">{accuracy}%</p>
-        </div>
-
-        <Button size="lg" onClick={resetGame} className="gap-2">
-          <RotateCcw className="w-5 h-5" />
-          Practice Again
-        </Button>
-      </motion.div>
-    );
-  }
+  const handleReset = () => {
+    playSound("click");
+    setKnownCards(new Set());
+    setLearningCards(new Set());
+    setCurrentIndex(0);
+    setFlipped(false);
+    setShowSteps(false);
+    setCurrentStep(0);
+  };
 
   return (
-    <div className="max-w-2xl mx-auto">
-      {/* Progress */}
-      <div className="mb-6">
-        <div className="flex justify-between items-center mb-2">
-          <span className="text-sm font-medium text-muted-foreground">
-            Card {currentIndex + 1} of {flashcards.length}
-          </span>
-          <div className="flex gap-4 text-sm">
-            <span className="flex items-center gap-1 text-success">
-              <Check className="w-4 h-4" /> {known.length}
-            </span>
-            <span className="flex items-center gap-1 text-warning">
-              <Brain className="w-4 h-4" /> {learning.length}
-            </span>
+    <div className="min-h-screen bg-background p-4 md:p-8">
+      <div className="max-w-2xl mx-auto">
+        {/* Header */}
+        <motion.div
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className="text-center mb-8"
+        >
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <Brain className="w-8 h-8 text-primary" />
+            <h1 className="text-3xl font-black">Code Builder Cards</h1>
           </div>
-        </div>
-        <Progress value={progress} className="h-2" />
-      </div>
-
-      {/* Category Badge */}
-      <div className="flex justify-center mb-4">
-        <span className={`px-4 py-1.5 rounded-full text-sm font-bold border ${categoryColors[currentCard.category]}`}>
-          {categoryLabels[currentCard.category]}
-        </span>
-      </div>
-
-      {/* Main Card */}
-      <Card className="mb-6 overflow-hidden">
-        <CardContent className="p-6">
-          {/* Title */}
-          <h3 className="text-2xl font-black text-foreground mb-6 text-center">
-            {currentCard.title}
-          </h3>
-
-          {/* Visual */}
-          <div className="mb-6">
-            {currentCard.visual}
-          </div>
-
-          {/* Memory Trick - Always visible */}
-          <div className="bg-warning/10 border border-warning/30 rounded-lg p-4 mb-4">
-            <div className="flex items-center gap-2 mb-2">
-              <Lightbulb className="w-5 h-5 text-warning" />
-              <span className="font-bold text-warning">Memory Trick</span>
+          <p className="text-muted-foreground">Learn step-by-step coding patterns</p>
+          
+          {/* Progress */}
+          <div className="mt-4 space-y-2">
+            <div className="flex justify-between text-sm">
+              <span className="text-success">✓ Know: {knownCards.size}</span>
+              <span className="text-warning">📚 Learning: {learningCards.size}</span>
+              <span className="text-muted-foreground">Remaining: {flashcards.length - knownCards.size - learningCards.size}</span>
             </div>
-            <p className="text-foreground">{currentCard.memory_trick}</p>
+            <Progress value={progress} className="h-2" />
           </div>
+        </motion.div>
 
-          {/* Show Steps Toggle */}
-          {!showAnswer && (
+        {/* Category Badge */}
+        <div className="flex justify-center mb-4">
+          <span className={`px-3 py-1 rounded-full text-sm font-medium ${categoryColors[currentCard.category]}`}>
+            {categoryLabels[currentCard.category]}
+          </span>
+        </div>
+
+        {/* Card */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentCard.id + (showSteps ? "-steps" : "")}
+            initial={{ rotateY: 90, opacity: 0 }}
+            animate={{ rotateY: 0, opacity: 1 }}
+            exit={{ rotateY: -90, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <Card 
+              className="cursor-pointer min-h-[400px] relative overflow-hidden"
+              onClick={showSteps ? undefined : handleFlip}
+            >
+              <CardContent className="p-6">
+                {showSteps ? (
+                  /* Step-by-step mode */
+                  <div className="space-y-4">
+                    <div className="text-center">
+                      <div className="text-4xl mb-2">{currentCard.icon}</div>
+                      <h2 className="text-xl font-bold">{currentCard.title}</h2>
+                      <p className="text-primary font-mono text-lg mt-2">{currentCard.mnemonic}</p>
+                    </div>
+
+                    <div className="space-y-3 mt-6">
+                      {currentCard.steps.map((step, idx) => (
+                        <motion.div
+                          key={step.step}
+                          initial={{ x: -20, opacity: 0 }}
+                          animate={{ 
+                            x: 0, 
+                            opacity: idx <= currentStep ? 1 : 0.3,
+                            scale: idx === currentStep ? 1.02 : 1
+                          }}
+                          transition={{ delay: idx * 0.1 }}
+                          className={`p-3 rounded-lg border-2 ${
+                            idx === currentStep 
+                              ? `border-${step.color} bg-${step.color}/10` 
+                              : 'border-muted bg-muted/30'
+                          }`}
+                        >
+                          <div className="flex items-center gap-3">
+                            <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold ${
+                              idx <= currentStep ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'
+                            }`}>
+                              {step.step}
+                            </div>
+                            <div>
+                              <code className="text-sm font-mono font-bold">{step.code}</code>
+                              <p className="text-xs text-muted-foreground">{step.description}</p>
+                            </div>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+
+                    <Button 
+                      onClick={handleStepThrough} 
+                      className="w-full mt-4"
+                      variant={currentStep >= currentCard.steps.length - 1 ? "secondary" : "default"}
+                    >
+                      {currentStep >= currentCard.steps.length - 1 ? (
+                        <>Done <Check className="w-4 h-4 ml-2" /></>
+                      ) : (
+                        <>Next Step <ArrowRight className="w-4 h-4 ml-2" /></>
+                      )}
+                    </Button>
+                  </div>
+                ) : !flipped ? (
+                  /* Front of card */
+                  <div className="text-center space-y-4">
+                    <div className="text-6xl">{currentCard.icon}</div>
+                    <h2 className="text-2xl font-black">{currentCard.title}</h2>
+                    <div className="bg-primary/10 p-4 rounded-xl">
+                      <p className="text-xl font-mono font-bold text-primary">{currentCard.mnemonic}</p>
+                    </div>
+                    <p className="text-muted-foreground text-sm">(tap to see details)</p>
+                    
+                    <div className="flex justify-center gap-2 mt-4">
+                      <Button variant="outline" size="sm" onClick={(e) => { e.stopPropagation(); startStepMode(); }}>
+                        <Layers className="w-4 h-4 mr-2" /> Step Through
+                      </Button>
+                    </div>
+                  </div>
+                ) : (
+                  /* Back of card */
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-2">
+                      <span className="text-2xl">{currentCard.icon}</span>
+                      <h3 className="font-bold">{currentCard.title}</h3>
+                    </div>
+
+                    {/* Steps summary */}
+                    <div className="bg-muted/30 p-3 rounded-lg">
+                      <div className="text-xs text-muted-foreground mb-2">Build Order:</div>
+                      <div className="flex flex-wrap gap-1">
+                        {currentCard.steps.map((step) => (
+                          <span key={step.step} className="px-2 py-1 bg-primary/10 rounded text-xs font-mono">
+                            {step.code.split(' ')[0]}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Full example */}
+                    <div className="bg-muted p-3 rounded-lg">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Terminal className="w-4 h-4" />
+                        <span className="text-xs font-medium">Full Example:</span>
+                      </div>
+                      <pre className="text-xs font-mono whitespace-pre-wrap overflow-x-auto">
+                        {currentCard.fullExample}
+                      </pre>
+                    </div>
+
+                    {/* Real world analogy */}
+                    <div className="bg-accent/10 p-3 rounded-lg">
+                      <div className="flex items-center gap-2">
+                        <Lightbulb className="w-4 h-4 text-accent" />
+                        <span className="text-sm">{currentCard.realWorld}</span>
+                      </div>
+                    </div>
+
+                    {/* Tip */}
+                    <div className="bg-warning/10 p-3 rounded-lg">
+                      <div className="flex items-center gap-2">
+                        <Star className="w-4 h-4 text-warning" />
+                        <span className="text-sm font-medium">{currentCard.tip}</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Action Buttons */}
+        {!showSteps && (
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            className="flex justify-center gap-4 mt-6"
+          >
             <Button
               variant="outline"
-              onClick={() => setShowSteps(!showSteps)}
-              className="w-full mb-4"
+              size="lg"
+              onClick={handleLearning}
+              className="gap-2 border-warning text-warning hover:bg-warning/10"
             >
-              <Code className="w-4 h-4 mr-2" />
-              {showSteps ? "Hide Steps" : "Show Step-by-Step"}
+              <BookOpen className="w-5 h-5" />
+              Still Learning
             </Button>
-          )}
-
-          {/* Steps */}
-          <AnimatePresence>
-            {showSteps && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                className="space-y-2 mb-4"
-              >
-                {currentCard.steps.map((step, i) => (
-                  <StepIndicator key={i} step={i + 1} label={step} active />
-                ))}
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* Answer Section */}
-          {!showAnswer ? (
-            <Button onClick={handleReveal} className="w-full" size="lg">
-              <Zap className="w-5 h-5 mr-2" />
-              Show Full Answer
-            </Button>
-          ) : (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="space-y-4"
+            <Button
+              size="lg"
+              onClick={handleKnow}
+              className="gap-2 bg-success hover:bg-success/90"
             >
-              {/* Code Example */}
-              <div className="bg-muted/50 rounded-lg p-4">
-                <p className="text-sm text-muted-foreground mb-2">Code Example:</p>
-                <code className="font-mono text-sm text-foreground">{currentCard.example}</code>
-              </div>
+              <Check className="w-5 h-5" />
+              Got It! (+15 XP)
+            </Button>
+          </motion.div>
+        )}
 
-              {/* Real World Analogy */}
-              <div className="bg-accent/10 border border-accent/30 rounded-lg p-4">
-                <p className="text-sm text-accent font-semibold mb-1">Real World:</p>
-                <p className="text-foreground">{currentCard.realWorld}</p>
-              </div>
-            </motion.div>
-          )}
-        </CardContent>
-      </Card>
-
-      {/* Action Buttons */}
-      {showAnswer && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="grid grid-cols-2 gap-4"
-        >
-          <Button
-            size="lg"
-            variant="outline"
-            onClick={handleLearning}
-            className="h-16 text-lg gap-2 border-warning text-warning hover:bg-warning/10"
-          >
-            <Brain className="w-6 h-6" />
-            Still Learning
+        {/* Navigation */}
+        <div className="flex justify-between items-center mt-6">
+          <span className="text-sm text-muted-foreground">
+            Card {currentIndex + 1} of {flashcards.length}
+          </span>
+          <Button variant="ghost" size="sm" onClick={handleReset}>
+            <RotateCcw className="w-4 h-4 mr-2" />
+            Reset
           </Button>
-          <Button
-            size="lg"
-            onClick={handleKnow}
-            className="h-16 text-lg gap-2 bg-success hover:bg-success/90"
-          >
-            <Check className="w-6 h-6" />
-            Got It!
-          </Button>
-        </motion.div>
-      )}
-
-      {/* Tip */}
-      <p className="text-center text-sm text-muted-foreground mt-6">
-        💡 Practice daily! Visual patterns stick better than text alone.
-      </p>
+        </div>
+      </div>
     </div>
   );
-}
+};
