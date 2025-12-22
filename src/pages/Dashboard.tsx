@@ -145,9 +145,24 @@ export default function Dashboard() {
           <h2 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
             Your Learning Path 🛤️
           </h2>
-          <div className="space-y-4">
-            {modules.map((module, index) => (
-              <ModuleCard key={module.id} module={module} index={index} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {[
+              { id: "java-foundations", title: "Java Programming", icon: "☕", color: "primary" },
+              { id: "systems-analysis", title: "Systems Analysis", icon: "🌌", color: "accent" },
+              { id: "math-computing", title: "Maths for Computing", icon: "🔢", color: "warning" },
+              { id: "cybersecurity", title: "Cybersecurity", icon: "🔐", color: "success" },
+              { id: "ai-data-science", title: "AI & Data Science", icon: "🤖", color: "secondary" },
+              { id: "business-systems", title: "Business Systems", icon: "💼", color: "primary" },
+              { id: "game-development", title: "Game Development", icon: "🎮", color: "accent" },
+            ].map((mod) => (
+              <div
+                key={mod.id}
+                onClick={() => navigate(`/module/${mod.id}`)}
+                className="bg-card border border-border rounded-xl p-4 cursor-pointer hover:shadow-lg transition-all hover:scale-[1.02]"
+              >
+                <div className="text-4xl mb-2">{mod.icon}</div>
+                <h3 className="font-bold">{mod.title}</h3>
+              </div>
             ))}
           </div>
         </motion.section>
