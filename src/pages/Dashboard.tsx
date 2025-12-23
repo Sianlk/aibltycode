@@ -34,7 +34,7 @@ export default function Dashboard() {
   const { user, loading: authLoading } = useAuth();
   const { progress, loading: progressLoading } = useProgress();
   const { isAdmin } = useAdmin();
-  const { subscribed, inTrial, trialEnd } = useSubscription();
+  const { subscribed, inTrial, trialEnd, openCustomerPortal } = useSubscription();
   const navigate = useNavigate();
   
   const [stats, setStats] = useState({ xp: 0, streak: 0, gamesPlayed: 0 });
@@ -81,7 +81,7 @@ export default function Dashboard() {
 
       <main className="container mx-auto px-4 pt-24 pb-12 max-w-4xl">
         {/* Admin & Subscription Status */}
-        {(isAdmin || inTrial) && (
+        {(isAdmin || inTrial || subscribed) && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mb-4 flex gap-2 flex-wrap">
             {isAdmin && (
               <Button variant="outline" size="sm" onClick={() => navigate('/admin')}>
@@ -89,7 +89,13 @@ export default function Dashboard() {
                 Admin Dashboard
               </Button>
             )}
-            {inTrial && trialEnd && (
+            {subscribed && (
+              <Button variant="outline" size="sm" onClick={openCustomerPortal}>
+                <Crown className="w-4 h-4 mr-2" />
+                Manage Subscription
+              </Button>
+            )}
+            {inTrial && trialEnd && !subscribed && (
               <div className="flex items-center gap-2 text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">
                 <Crown className="w-4 h-4" />
                 Trial ends {new Date(trialEnd).toLocaleDateString()}
