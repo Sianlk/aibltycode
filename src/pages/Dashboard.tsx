@@ -6,7 +6,10 @@ import { Mascot } from "@/components/dashboard/Mascot";
 import { useGame } from "@/contexts/GameContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useProgress } from "@/hooks/useProgress";
-import { Gamepad2, Flame, Star, Trophy } from "lucide-react";
+import { useAdmin } from "@/hooks/useAdmin";
+import { useSubscription } from "@/hooks/useSubscription";
+import { SubscriptionGate } from "@/components/subscription/SubscriptionGate";
+import { Gamepad2, Flame, Star, Trophy, Crown, Settings } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -30,6 +33,8 @@ export default function Dashboard() {
   const { modules } = useGame();
   const { user, loading: authLoading } = useAuth();
   const { progress, loading: progressLoading } = useProgress();
+  const { isAdmin } = useAdmin();
+  const { subscribed, inTrial, trialEnd } = useSubscription();
   const navigate = useNavigate();
   
   const [stats, setStats] = useState({ xp: 0, streak: 0, gamesPlayed: 0 });
@@ -75,6 +80,24 @@ export default function Dashboard() {
       <Header />
 
       <main className="container mx-auto px-4 pt-24 pb-12 max-w-4xl">
+        {/* Admin & Subscription Status */}
+        {(isAdmin || inTrial) && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mb-4 flex gap-2 flex-wrap">
+            {isAdmin && (
+              <Button variant="outline" size="sm" onClick={() => navigate('/admin')}>
+                <Settings className="w-4 h-4 mr-2" />
+                Admin Dashboard
+              </Button>
+            )}
+            {inTrial && trialEnd && (
+              <div className="flex items-center gap-2 text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">
+                <Crown className="w-4 h-4" />
+                Trial ends {new Date(trialEnd).toLocaleDateString()}
+              </div>
+            )}
+          </motion.div>
+        )}
+
         {/* Mascot */}
         <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="mb-8">
           <Mascot />
