@@ -65,9 +65,23 @@ export function useSubscription() {
     }
   };
 
+  const openCustomerPortal = async () => {
+    try {
+      const { data, error } = await supabase.functions.invoke("customer-portal");
+      if (error) throw error;
+      if (data?.url) {
+        window.open(data.url, "_blank");
+      }
+    } catch (err) {
+      console.error("Portal error:", err);
+      throw err;
+    }
+  };
+
   return {
     ...state,
     checkSubscription,
     startCheckout,
+    openCustomerPortal,
   };
 }
