@@ -4,12 +4,16 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { useGame } from "@/contexts/GameContext";
+import { useAuth } from "@/contexts/AuthContext";
+import { useSubscription } from "@/hooks/useSubscription";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Volume2, VolumeX, Zap, Gamepad2, Shield, Eye, Brain, Accessibility } from "lucide-react";
+import { ArrowLeft, Volume2, VolumeX, Zap, Gamepad2, Shield, Eye, Brain, Accessibility, Crown, User, CreditCard } from "lucide-react";
 
 export default function Settings() {
   const navigate = useNavigate();
   const { gameMode, setGameMode, soundEnabled, setSoundEnabled, playSound, accessibility, setAccessibility } = useGame();
+  const { user } = useAuth();
+  const { subscribed, inTrial, trialEnd, subscriptionEnd, openCustomerPortal, startCheckout, loading } = useSubscription();
 
   const handleModeChange = (mode: "kid" | "pro") => {
     playSound("click");
@@ -45,6 +49,82 @@ export default function Settings() {
         </motion.h1>
 
         <div className="space-y-6">
+          {/* Profile Section */}
+          <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.15 }}>
+            <Card variant="glow">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <User className="w-5 h-5 text-primary" />
+                  Profile
+                </CardTitle>
+                <CardDescription>Your account information</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-muted-foreground">Email</span>
+                  <span className="font-medium text-foreground">{user?.email || "Not logged in"}</span>
+                </div>
+                <Button variant="outline" size="sm" onClick={() => navigate('/profile')}>
+                  Edit Profile
+                </Button>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          {/* Subscription Section */}
+          <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.18 }}>
+            <Card variant="default">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Crown className="w-5 h-5 text-warning" />
+                  Subscription
+                </CardTitle>
+                <CardDescription>Manage your AibilityCode Pro subscription</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-muted-foreground">Status</span>
+                  <span className={`font-medium px-2 py-1 rounded-full text-sm ${
+                    subscribed ? "bg-success/20 text-success" : 
+                    inTrial ? "bg-warning/20 text-warning" : 
+                    "bg-muted text-muted-foreground"
+                  }`}>
+                    {subscribed ? "Active" : inTrial ? "Free Trial" : "Not Subscribed"}
+                  </span>
+                </div>
+                {(subscribed && subscriptionEnd) && (
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-foreground">Renews</span>
+                    <span className="font-medium text-foreground">{new Date(subscriptionEnd).toLocaleDateString()}</span>
+                  </div>
+                )}
+                {(inTrial && trialEnd) && (
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-foreground">Trial Ends</span>
+                    <span className="font-medium text-warning">{new Date(trialEnd).toLocaleDateString()}</span>
+                  </div>
+                )}
+                <div className="flex items-center justify-between">
+                  <span className="text-muted-foreground">Price</span>
+                  <span className="font-medium text-foreground">£5.99/month</span>
+                </div>
+                <div className="flex gap-2 pt-2">
+                  {subscribed ? (
+                    <Button variant="outline" onClick={openCustomerPortal} disabled={loading}>
+                      <CreditCard className="w-4 h-4 mr-2" />
+                      Manage Subscription
+                    </Button>
+                  ) : (
+                    <Button variant="hero" onClick={startCheckout} disabled={loading}>
+                      <Crown className="w-4 h-4 mr-2" />
+                      {inTrial ? "Subscribe Now" : "Start Free Trial"}
+                    </Button>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+
           {/* Game Mode */}
           <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2 }}>
             <Card variant="glow">
