@@ -692,11 +692,334 @@ export const mathLessons: Record<string, LessonData> = {
   },
 };
 
+// ==========================================
+// COURSE 4: CYBERSECURITY
+// ==========================================
+
+export const cybersecurityLessons: Record<string, LessonData> = {
+  "cia-triad": {
+    id: "cia-triad", moduleId: "cybersecurity", title: "CIA Triad", xpReward: 75, category: "Foundations",
+    steps: [
+      { type: "quiz", title: "CIA Meaning", difficulty: "easy", question: "CIA in security stands for?", options: [{ label: "A", text: "Central Intelligence Agency" }, { label: "B", text: "Confidentiality, Integrity, Availability" }, { label: "C", text: "Computer Information Access" }], correctAnswer: "B", explanation: "The CIA Triad is the foundation of information security!" },
+      { type: "quiz", title: "Confidentiality", difficulty: "medium", question: "Confidentiality ensures?", options: [{ label: "A", text: "Data is always available" }, { label: "B", text: "Only authorized access to data" }, { label: "C", text: "Data is accurate" }], correctAnswer: "B", explanation: "Confidentiality = keeping data secret from unauthorized users!" },
+      { type: "quiz", title: "Integrity", difficulty: "medium", question: "Integrity means?", options: [{ label: "A", text: "Data is encrypted" }, { label: "B", text: "Data is accurate and unmodified" }, { label: "C", text: "Data is backed up" }], correctAnswer: "B", explanation: "Integrity ensures data hasn't been tampered with or corrupted!" },
+      { type: "quiz", title: "Availability", difficulty: "medium", question: "Availability ensures?", options: [{ label: "A", text: "Data is encrypted" }, { label: "B", text: "Data is accessible when needed" }, { label: "C", text: "Data is private" }], correctAnswer: "B", explanation: "Availability = systems and data are accessible to authorized users when needed!" },
+    ],
+  },
+  "threats-vulnerabilities": {
+    id: "threats-vulnerabilities", moduleId: "cybersecurity", title: "Threats & Vulnerabilities", xpReward: 100, category: "Foundations",
+    steps: [
+      { type: "quiz", title: "Threat Definition", difficulty: "medium", question: "A threat is?", options: [{ label: "A", text: "A weakness in a system" }, { label: "B", text: "A potential danger to security" }, { label: "C", text: "A security control" }], correctAnswer: "B", explanation: "Threat = potential for harm. Could be hackers, malware, natural disasters!" },
+      { type: "quiz", title: "Vulnerability", difficulty: "medium", question: "A vulnerability is?", options: [{ label: "A", text: "A weakness that can be exploited" }, { label: "B", text: "An attack in progress" }, { label: "C", text: "A firewall" }], correctAnswer: "A", explanation: "Vulnerability = weakness. Unpatched software, weak passwords are examples!" },
+      { type: "quiz", title: "Risk Formula", difficulty: "hard", question: "Risk = ?", options: [{ label: "A", text: "Threat + Vulnerability" }, { label: "B", text: "Threat × Vulnerability × Impact" }, { label: "C", text: "Asset ÷ Control" }], correctAnswer: "B", explanation: "Risk combines likelihood of threat exploiting vulnerability and the impact!" },
+    ],
+  },
+  "malware-types": {
+    id: "malware-types", moduleId: "cybersecurity", title: "Malware Types", xpReward: 100, category: "Threats",
+    steps: [
+      { type: "quiz", title: "Virus", difficulty: "easy", question: "A virus needs what to spread?", options: [{ label: "A", text: "Network connection" }, { label: "B", text: "Human action (running infected file)" }, { label: "C", text: "Nothing" }], correctAnswer: "B", explanation: "Viruses attach to files and spread when users execute infected programs!" },
+      { type: "quiz", title: "Worm", difficulty: "medium", question: "Worms differ from viruses by?", options: [{ label: "A", text: "Being harmless" }, { label: "B", text: "Self-replicating without user action" }, { label: "C", text: "Only affecting mobile" }], correctAnswer: "B", explanation: "Worms spread automatically across networks without human interaction!" },
+      { type: "quiz", title: "Trojan", difficulty: "medium", question: "A Trojan horse?", options: [{ label: "A", text: "Self-replicates" }, { label: "B", text: "Disguises as legitimate software" }, { label: "C", text: "Encrypts files" }], correctAnswer: "B", explanation: "Trojans pretend to be useful software but contain malicious code!" },
+      { type: "quiz", title: "Ransomware", difficulty: "medium", question: "Ransomware?", options: [{ label: "A", text: "Steals passwords" }, { label: "B", text: "Encrypts files and demands payment" }, { label: "C", text: "Shows ads" }], correctAnswer: "B", explanation: "Ransomware encrypts your data and demands cryptocurrency for the key!" },
+    ],
+  },
+  "social-engineering": {
+    id: "social-engineering", moduleId: "cybersecurity", title: "Social Engineering", xpReward: 100, category: "Threats",
+    steps: [
+      { type: "quiz", title: "Phishing", difficulty: "easy", question: "Phishing attempts to?", options: [{ label: "A", text: "Install hardware" }, { label: "B", text: "Trick users into revealing information" }, { label: "C", text: "Speed up networks" }], correctAnswer: "B", explanation: "Phishing uses fake emails/websites to steal credentials!" },
+      { type: "quiz", title: "Spear Phishing", difficulty: "medium", question: "Spear phishing is?", options: [{ label: "A", text: "Random mass emails" }, { label: "B", text: "Targeted attack on specific person" }, { label: "C", text: "Phone scam" }], correctAnswer: "B", explanation: "Spear phishing targets specific individuals with personalized attacks!" },
+      { type: "quiz", title: "Pretexting", difficulty: "hard", question: "Pretexting involves?", options: [{ label: "A", text: "Creating a fabricated scenario" }, { label: "B", text: "USB drops" }, { label: "C", text: "Password guessing" }], correctAnswer: "A", explanation: "Pretexting = creating a fake scenario to manipulate victims into sharing info!" },
+    ],
+  },
+  "authentication": {
+    id: "authentication", moduleId: "cybersecurity", title: "Authentication Methods", xpReward: 125, category: "Controls",
+    steps: [
+      { type: "quiz", title: "Something You Know", difficulty: "easy", question: "Password is?", options: [{ label: "A", text: "Something you have" }, { label: "B", text: "Something you know" }, { label: "C", text: "Something you are" }], correctAnswer: "B", explanation: "Three factors: Know (password), Have (token), Are (biometrics)!" },
+      { type: "quiz", title: "MFA", difficulty: "medium", question: "MFA requires?", options: [{ label: "A", text: "Multiple passwords" }, { label: "B", text: "Two or more different factor types" }, { label: "C", text: "Fingerprint only" }], correctAnswer: "B", explanation: "Multi-Factor Authentication combines different types for stronger security!" },
+      { type: "quiz", title: "Biometrics", difficulty: "medium", question: "Biometrics include?", options: [{ label: "A", text: "Passwords" }, { label: "B", text: "Fingerprints, face, iris" }, { label: "C", text: "Smart cards" }], correctAnswer: "B", explanation: "Biometrics = unique physical characteristics. Hard to fake but can't be changed if compromised!" },
+    ],
+  },
+  "encryption-basics": {
+    id: "encryption-basics", moduleId: "cybersecurity", title: "Encryption Basics", xpReward: 150, category: "Controls",
+    steps: [
+      { type: "quiz", title: "Symmetric", difficulty: "medium", question: "Symmetric encryption uses?", options: [{ label: "A", text: "Same key for encrypt/decrypt" }, { label: "B", text: "Different keys" }, { label: "C", text: "No keys" }], correctAnswer: "A", explanation: "Symmetric = one shared secret key. Fast but key distribution is challenging!" },
+      { type: "quiz", title: "Asymmetric", difficulty: "hard", question: "Asymmetric uses?", options: [{ label: "A", text: "One key" }, { label: "B", text: "Public and private key pair" }, { label: "C", text: "Random keys" }], correctAnswer: "B", explanation: "Public key encrypts, private key decrypts. Solves key distribution problem!" },
+      { type: "quiz", title: "AES", difficulty: "hard", question: "AES is?", options: [{ label: "A", text: "Asymmetric algorithm" }, { label: "B", text: "Advanced Encryption Standard (symmetric)" }, { label: "C", text: "Hashing algorithm" }], correctAnswer: "B", explanation: "AES is the gold standard for symmetric encryption. 128/256-bit keys!" },
+    ],
+  },
+  "hashing": {
+    id: "hashing", moduleId: "cybersecurity", title: "Hashing & Integrity", xpReward: 150, category: "Controls",
+    steps: [
+      { type: "quiz", title: "Hash Purpose", difficulty: "medium", question: "Hashing is used for?", options: [{ label: "A", text: "Encrypting messages" }, { label: "B", text: "Verifying data integrity" }, { label: "C", text: "Compressing files" }], correctAnswer: "B", explanation: "Hashes create unique fingerprints - any change produces different hash!" },
+      { type: "quiz", title: "One-Way", difficulty: "medium", question: "Hash functions are?", options: [{ label: "A", text: "Reversible" }, { label: "B", text: "One-way (can't reverse)" }, { label: "C", text: "Optional" }], correctAnswer: "B", explanation: "You can't reverse a hash to get original data. Used for password storage!" },
+      { type: "quiz", title: "SHA-256", difficulty: "hard", question: "SHA-256 produces?", options: [{ label: "A", text: "128-bit hash" }, { label: "B", text: "256-bit hash" }, { label: "C", text: "512-bit hash" }], correctAnswer: "B", explanation: "SHA-256 creates 256-bit (32-byte) hash. Used in Bitcoin and SSL!" },
+    ],
+  },
+  "network-security": {
+    id: "network-security", moduleId: "cybersecurity", title: "Network Security", xpReward: 150, category: "Controls",
+    steps: [
+      { type: "quiz", title: "Firewall", difficulty: "medium", question: "A firewall?", options: [{ label: "A", text: "Encrypts all data" }, { label: "B", text: "Filters network traffic" }, { label: "C", text: "Stores passwords" }], correctAnswer: "B", explanation: "Firewalls filter traffic based on rules. Block or allow based on ports, IPs, protocols!" },
+      { type: "quiz", title: "IDS", difficulty: "hard", question: "IDS stands for?", options: [{ label: "A", text: "Internet Download System" }, { label: "B", text: "Intrusion Detection System" }, { label: "C", text: "Internal Data Storage" }], correctAnswer: "B", explanation: "IDS monitors and alerts on suspicious activity. IPS also blocks threats!" },
+      { type: "quiz", title: "VPN", difficulty: "medium", question: "VPN creates?", options: [{ label: "A", text: "Faster connection" }, { label: "B", text: "Encrypted tunnel" }, { label: "C", text: "New IP address only" }], correctAnswer: "B", explanation: "VPN encrypts traffic through a secure tunnel, protecting data in transit!" },
+    ],
+  },
+  "owasp-top10": {
+    id: "owasp-top10", moduleId: "cybersecurity", title: "OWASP Top 10", xpReward: 175, category: "Web Security",
+    steps: [
+      { type: "quiz", title: "OWASP", difficulty: "medium", question: "OWASP is?", options: [{ label: "A", text: "A hacking group" }, { label: "B", text: "Open Web Application Security Project" }, { label: "C", text: "Operating system" }], correctAnswer: "B", explanation: "OWASP is a nonprofit focused on web application security awareness!" },
+      { type: "quiz", title: "Top Risks", difficulty: "hard", question: "OWASP Top 10 lists?", options: [{ label: "A", text: "Best websites" }, { label: "B", text: "Most critical web vulnerabilities" }, { label: "C", text: "Programming languages" }], correctAnswer: "B", explanation: "Top 10 includes injection, broken auth, XSS, security misconfiguration, etc!" },
+    ],
+  },
+  "sql-injection": {
+    id: "sql-injection", moduleId: "cybersecurity", title: "SQL Injection", xpReward: 150, category: "Web Security",
+    steps: [
+      { type: "quiz", title: "SQLi Attack", difficulty: "medium", question: "SQL injection exploits?", options: [{ label: "A", text: "Network packets" }, { label: "B", text: "Unsanitized user input in queries" }, { label: "C", text: "Encryption" }], correctAnswer: "B", explanation: "Attackers insert SQL code via input fields to manipulate database queries!" },
+      { type: "quiz", title: "Prevention", difficulty: "hard", question: "Best SQLi prevention?", options: [{ label: "A", text: "Strong passwords" }, { label: "B", text: "Parameterized queries/prepared statements" }, { label: "C", text: "Firewall" }], correctAnswer: "B", explanation: "Parameterized queries separate code from data, preventing injection!" },
+      { type: "typing", title: "Safe Query", difficulty: "hard", prompt: "Type a parameterized query placeholder!", codeToType: "WHERE id = ?", explanation: "The ? placeholder is replaced safely by the database driver!" },
+    ],
+  },
+  "xss-attacks": {
+    id: "xss-attacks", moduleId: "cybersecurity", title: "XSS Attacks", xpReward: 150, category: "Web Security",
+    steps: [
+      { type: "quiz", title: "XSS Meaning", difficulty: "medium", question: "XSS stands for?", options: [{ label: "A", text: "Extra Secure System" }, { label: "B", text: "Cross-Site Scripting" }, { label: "C", text: "XML Security Standard" }], correctAnswer: "B", explanation: "XSS injects malicious scripts into web pages viewed by other users!" },
+      { type: "quiz", title: "XSS Impact", difficulty: "hard", question: "XSS can steal?", options: [{ label: "A", text: "Database files" }, { label: "B", text: "Session cookies/credentials" }, { label: "C", text: "Server hardware" }], correctAnswer: "B", explanation: "XSS can steal cookies, session tokens, and perform actions as the victim!" },
+      { type: "quiz", title: "Prevention", difficulty: "hard", question: "Prevent XSS by?", options: [{ label: "A", text: "Using HTTPS" }, { label: "B", text: "Encoding/escaping output" }, { label: "C", text: "Longer passwords" }], correctAnswer: "B", explanation: "Escape HTML characters so scripts render as text, not executable code!" },
+    ],
+  },
+  "incident-response": {
+    id: "incident-response", moduleId: "cybersecurity", title: "Incident Response", xpReward: 175, category: "Operations",
+    steps: [
+      { type: "quiz", title: "IR Phases", difficulty: "medium", question: "First IR phase is?", options: [{ label: "A", text: "Containment" }, { label: "B", text: "Preparation" }, { label: "C", text: "Recovery" }], correctAnswer: "B", explanation: "PICERL: Preparation, Identification, Containment, Eradication, Recovery, Lessons!" },
+      { type: "quiz", title: "Containment", difficulty: "hard", question: "Containment goal?", options: [{ label: "A", text: "Find root cause" }, { label: "B", text: "Stop spread of incident" }, { label: "C", text: "Notify press" }], correctAnswer: "B", explanation: "Containment limits damage while you investigate and plan remediation!" },
+    ],
+  },
+  "gdpr-compliance": {
+    id: "gdpr-compliance", moduleId: "cybersecurity", title: "GDPR Compliance", xpReward: 150, category: "Compliance",
+    steps: [
+      { type: "quiz", title: "GDPR Scope", difficulty: "medium", question: "GDPR protects?", options: [{ label: "A", text: "Company secrets" }, { label: "B", text: "Personal data of EU individuals" }, { label: "C", text: "Government data" }], correctAnswer: "B", explanation: "GDPR applies to any organization processing EU residents' personal data!" },
+      { type: "quiz", title: "Data Rights", difficulty: "hard", question: "Right to be forgotten means?", options: [{ label: "A", text: "Delete account" }, { label: "B", text: "Request erasure of personal data" }, { label: "C", text: "Password reset" }], correctAnswer: "B", explanation: "Users can request organizations delete their personal data!" },
+      { type: "quiz", title: "Breach Notification", difficulty: "hard", question: "GDPR breach report deadline?", options: [{ label: "A", text: "24 hours" }, { label: "B", text: "72 hours" }, { label: "C", text: "7 days" }], correctAnswer: "B", explanation: "Must notify supervisory authority within 72 hours of discovering a breach!" },
+    ],
+  },
+};
+
+// ==========================================
+// COURSE 5: AI & DATA SCIENCE
+// ==========================================
+
+export const aiDataScienceLessons: Record<string, LessonData> = {
+  "ai-intro": {
+    id: "ai-intro", moduleId: "ai-data-science", title: "What is AI?", xpReward: 75, category: "Foundations",
+    steps: [
+      { type: "quiz", title: "AI Definition", difficulty: "easy", question: "AI stands for?", options: [{ label: "A", text: "Automated Intelligence" }, { label: "B", text: "Artificial Intelligence" }, { label: "C", text: "Advanced Interface" }], correctAnswer: "B", explanation: "Artificial Intelligence = machines that can perform tasks requiring human intelligence!" },
+      { type: "quiz", title: "AI Goal", difficulty: "medium", question: "AI aims to?", options: [{ label: "A", text: "Replace all humans" }, { label: "B", text: "Simulate intelligent behavior" }, { label: "C", text: "Only play games" }], correctAnswer: "B", explanation: "AI creates systems that can learn, reason, perceive, and make decisions!" },
+    ],
+  },
+  "ml-types": {
+    id: "ml-types", moduleId: "ai-data-science", title: "Types of Machine Learning", xpReward: 100, category: "Foundations",
+    steps: [
+      { type: "quiz", title: "Supervised", difficulty: "medium", question: "Supervised learning uses?", options: [{ label: "A", text: "Unlabeled data" }, { label: "B", text: "Labeled training data" }, { label: "C", text: "No data" }], correctAnswer: "B", explanation: "Supervised = labeled examples. Model learns input→output mappings!" },
+      { type: "quiz", title: "Unsupervised", difficulty: "medium", question: "Unsupervised learning finds?", options: [{ label: "A", text: "Predetermined categories" }, { label: "B", text: "Hidden patterns in unlabeled data" }, { label: "C", text: "Specific predictions" }], correctAnswer: "B", explanation: "Unsupervised discovers structure: clustering, anomaly detection!" },
+      { type: "quiz", title: "Reinforcement", difficulty: "hard", question: "Reinforcement learning uses?", options: [{ label: "A", text: "Labels" }, { label: "B", text: "Rewards and penalties" }, { label: "C", text: "Only examples" }], correctAnswer: "B", explanation: "RL agents learn through trial and error with reward signals!" },
+    ],
+  },
+  "data-collection": {
+    id: "data-collection", moduleId: "ai-data-science", title: "Data Collection", xpReward: 100, category: "Data Pipeline",
+    steps: [
+      { type: "quiz", title: "Data Quality", difficulty: "medium", question: "GIGO means?", options: [{ label: "A", text: "Great Input Great Output" }, { label: "B", text: "Garbage In Garbage Out" }, { label: "C", text: "Get It Going On" }], correctAnswer: "B", explanation: "Bad data leads to bad models. Quality data is crucial for ML success!" },
+      { type: "quiz", title: "Data Sources", difficulty: "medium", question: "Data can come from?", options: [{ label: "A", text: "Only databases" }, { label: "B", text: "APIs, web scraping, sensors, surveys" }, { label: "C", text: "Only manual entry" }], correctAnswer: "B", explanation: "Data sources: databases, APIs, logs, sensors, social media, etc!" },
+    ],
+  },
+  "data-cleaning": {
+    id: "data-cleaning", moduleId: "ai-data-science", title: "Data Cleaning", xpReward: 125, category: "Data Pipeline",
+    steps: [
+      { type: "quiz", title: "Missing Values", difficulty: "medium", question: "Handle missing data by?", options: [{ label: "A", text: "Ignore always" }, { label: "B", text: "Drop, impute, or flag" }, { label: "C", text: "Set to zero" }], correctAnswer: "B", explanation: "Options: remove rows, fill with mean/median, or mark as missing!" },
+      { type: "quiz", title: "Outliers", difficulty: "hard", question: "Outliers are?", options: [{ label: "A", text: "Normal values" }, { label: "B", text: "Extreme values far from norm" }, { label: "C", text: "Missing values" }], correctAnswer: "B", explanation: "Outliers can skew models. Investigate: error or valid extreme?" },
+      { type: "quiz", title: "Normalization", difficulty: "hard", question: "Normalization scales data to?", options: [{ label: "A", text: "Remove duplicates" }, { label: "B", text: "Common range like 0-1" }, { label: "C", text: "Add more features" }], correctAnswer: "B", explanation: "Scaling helps algorithms that are sensitive to feature magnitudes!" },
+    ],
+  },
+  "train-test-split": {
+    id: "train-test-split", moduleId: "ai-data-science", title: "Train/Test Split", xpReward: 100, category: "Model Building",
+    steps: [
+      { type: "quiz", title: "Why Split", difficulty: "medium", question: "We split data to?", options: [{ label: "A", text: "Save storage" }, { label: "B", text: "Evaluate on unseen data" }, { label: "C", text: "Speed up training" }], correctAnswer: "B", explanation: "Test set simulates real-world performance on data model hasn't seen!" },
+      { type: "quiz", title: "Common Split", difficulty: "medium", question: "Typical train/test ratio?", options: [{ label: "A", text: "50/50" }, { label: "B", text: "80/20 or 70/30" }, { label: "C", text: "99/1" }], correctAnswer: "B", explanation: "80% train, 20% test is common. Enough data to learn and evaluate!" },
+    ],
+  },
+  "linear-regression": {
+    id: "linear-regression", moduleId: "ai-data-science", title: "Linear Regression", xpReward: 150, category: "Algorithms",
+    steps: [
+      { type: "quiz", title: "Purpose", difficulty: "medium", question: "Linear regression predicts?", options: [{ label: "A", text: "Categories" }, { label: "B", text: "Continuous values" }, { label: "C", text: "Images" }], correctAnswer: "B", explanation: "Regression predicts continuous numbers: price, temperature, sales!" },
+      { type: "quiz", title: "Line Fit", difficulty: "medium", question: "Best fit line minimizes?", options: [{ label: "A", text: "Points on line" }, { label: "B", text: "Sum of squared errors" }, { label: "C", text: "Number of features" }], correctAnswer: "B", explanation: "Least squares finds line that minimizes prediction errors!" },
+    ],
+  },
+  "classification": {
+    id: "classification", moduleId: "ai-data-science", title: "Classification", xpReward: 150, category: "Algorithms",
+    steps: [
+      { type: "quiz", title: "Purpose", difficulty: "medium", question: "Classification predicts?", options: [{ label: "A", text: "Continuous values" }, { label: "B", text: "Categories/classes" }, { label: "C", text: "Time series" }], correctAnswer: "B", explanation: "Classification: spam/not spam, cat/dog, fraud/legit!" },
+      { type: "quiz", title: "Binary", difficulty: "medium", question: "Binary classification has?", options: [{ label: "A", text: "1 class" }, { label: "B", text: "2 classes" }, { label: "C", text: "Many classes" }], correctAnswer: "B", explanation: "Binary = two outcomes: yes/no, true/false, positive/negative!" },
+    ],
+  },
+  "decision-trees": {
+    id: "decision-trees", moduleId: "ai-data-science", title: "Decision Trees", xpReward: 150, category: "Algorithms",
+    steps: [
+      { type: "quiz", title: "Structure", difficulty: "medium", question: "Decision tree splits on?", options: [{ label: "A", text: "Random features" }, { label: "B", text: "Most informative features" }, { label: "C", text: "All features equally" }], correctAnswer: "B", explanation: "Trees split on features that best separate classes (information gain)!" },
+      { type: "quiz", title: "Interpretable", difficulty: "medium", question: "Decision trees are?", options: [{ label: "A", text: "Black boxes" }, { label: "B", text: "Easy to interpret" }, { label: "C", text: "Only for images" }], correctAnswer: "B", explanation: "Trees show clear decision rules - great for explainability!" },
+    ],
+  },
+  "neural-networks": {
+    id: "neural-networks", moduleId: "ai-data-science", title: "Neural Networks Intro", xpReward: 200, category: "Deep Learning",
+    steps: [
+      { type: "quiz", title: "Inspiration", difficulty: "medium", question: "Neural networks are inspired by?", options: [{ label: "A", text: "Computer circuits" }, { label: "B", text: "Human brain neurons" }, { label: "C", text: "Internet" }], correctAnswer: "B", explanation: "Artificial neurons loosely model biological neurons!" },
+      { type: "quiz", title: "Layers", difficulty: "hard", question: "Deep learning means?", options: [{ label: "A", text: "Complex math" }, { label: "B", text: "Many hidden layers" }, { label: "C", text: "Large datasets" }], correctAnswer: "B", explanation: "Deep = multiple hidden layers. Learns hierarchical features!" },
+    ],
+  },
+  "model-evaluation": {
+    id: "model-evaluation", moduleId: "ai-data-science", title: "Model Evaluation", xpReward: 150, category: "Evaluation",
+    steps: [
+      { type: "quiz", title: "Accuracy", difficulty: "medium", question: "Accuracy measures?", options: [{ label: "A", text: "Speed" }, { label: "B", text: "Correct predictions / total" }, { label: "C", text: "Memory use" }], correctAnswer: "B", explanation: "Accuracy = (TP + TN) / Total. But can be misleading with imbalanced data!" },
+      { type: "quiz", title: "Precision", difficulty: "hard", question: "Precision focuses on?", options: [{ label: "A", text: "All negatives" }, { label: "B", text: "Positive predictions accuracy" }, { label: "C", text: "Speed" }], correctAnswer: "B", explanation: "Precision = TP / (TP + FP). Of predicted positives, how many correct?" },
+      { type: "quiz", title: "Recall", difficulty: "hard", question: "Recall measures?", options: [{ label: "A", text: "False positives" }, { label: "B", text: "True positives found" }, { label: "C", text: "Training time" }], correctAnswer: "B", explanation: "Recall = TP / (TP + FN). Of actual positives, how many did we find?" },
+    ],
+  },
+  "ethics-in-ai": {
+    id: "ethics-in-ai", moduleId: "ai-data-science", title: "Ethics in AI", xpReward: 125, category: "Ethics",
+    steps: [
+      { type: "quiz", title: "Bias", difficulty: "medium", question: "AI bias comes from?", options: [{ label: "A", text: "Random chance" }, { label: "B", text: "Biased training data" }, { label: "C", text: "Hardware" }], correctAnswer: "B", explanation: "Models learn biases present in training data. Garbage in, bias out!" },
+      { type: "quiz", title: "Fairness", difficulty: "hard", question: "Fair AI should?", options: [{ label: "A", text: "Maximize accuracy only" }, { label: "B", text: "Treat groups equitably" }, { label: "C", text: "Hide decisions" }], correctAnswer: "B", explanation: "Consider disparate impact across demographic groups!" },
+    ],
+  },
+};
+
+// ==========================================
+// COURSE 6: BUSINESS INFORMATION SYSTEMS
+// ==========================================
+
+export const businessSystemsLessons: Record<string, LessonData> = {
+  "bis-intro": {
+    id: "bis-intro", moduleId: "business-systems", title: "Business Information Systems", xpReward: 75, category: "Foundations",
+    steps: [
+      { type: "quiz", title: "BIS Purpose", difficulty: "easy", question: "Information systems help businesses?", options: [{ label: "A", text: "Only store data" }, { label: "B", text: "Make better decisions" }, { label: "C", text: "Avoid technology" }], correctAnswer: "B", explanation: "IS collects, processes, stores data to support operations and decisions!" },
+    ],
+  },
+  "info-system-types": {
+    id: "info-system-types", moduleId: "business-systems", title: "Types of IS", xpReward: 100, category: "Foundations",
+    steps: [
+      { type: "quiz", title: "TPS", difficulty: "medium", question: "TPS handles?", options: [{ label: "A", text: "Executive reports" }, { label: "B", text: "Day-to-day transactions" }, { label: "C", text: "Strategic planning" }], correctAnswer: "B", explanation: "Transaction Processing Systems: sales, orders, payroll - routine operations!" },
+      { type: "quiz", title: "MIS", difficulty: "medium", question: "MIS provides?", options: [{ label: "A", text: "Real-time trading" }, { label: "B", text: "Management reports from TPS data" }, { label: "C", text: "Customer chats" }], correctAnswer: "B", explanation: "Management Information Systems summarize TPS data for managers!" },
+      { type: "quiz", title: "DSS", difficulty: "hard", question: "DSS helps with?", options: [{ label: "A", text: "Routine tasks" }, { label: "B", text: "Semi-structured decisions" }, { label: "C", text: "Data entry" }], correctAnswer: "B", explanation: "Decision Support Systems use models and analysis for complex decisions!" },
+    ],
+  },
+  "erp-systems": {
+    id: "erp-systems", moduleId: "business-systems", title: "ERP Systems", xpReward: 125, category: "Enterprise Systems",
+    steps: [
+      { type: "quiz", title: "ERP Purpose", difficulty: "medium", question: "ERP integrates?", options: [{ label: "A", text: "Only finance" }, { label: "B", text: "All business functions" }, { label: "C", text: "Marketing only" }], correctAnswer: "B", explanation: "Enterprise Resource Planning unifies HR, finance, sales, inventory, etc!" },
+      { type: "quiz", title: "ERP Benefits", difficulty: "hard", question: "ERP advantage?", options: [{ label: "A", text: "Isolated data" }, { label: "B", text: "Single source of truth" }, { label: "C", text: "Simple implementation" }], correctAnswer: "B", explanation: "ERP eliminates data silos - one integrated database for all!" },
+    ],
+  },
+  "crm-basics": {
+    id: "crm-basics", moduleId: "business-systems", title: "CRM Basics", xpReward: 125, category: "Enterprise Systems",
+    steps: [
+      { type: "quiz", title: "CRM Focus", difficulty: "medium", question: "CRM manages?", options: [{ label: "A", text: "Employee schedules" }, { label: "B", text: "Customer relationships" }, { label: "C", text: "Server hardware" }], correctAnswer: "B", explanation: "Customer Relationship Management tracks interactions, sales, service!" },
+      { type: "quiz", title: "CRM Data", difficulty: "medium", question: "CRM stores?", options: [{ label: "A", text: "Only phone numbers" }, { label: "B", text: "Contact history, preferences, transactions" }, { label: "C", text: "Inventory only" }], correctAnswer: "B", explanation: "CRM = 360° customer view: communications, purchases, support tickets!" },
+    ],
+  },
+  "e-commerce": {
+    id: "e-commerce", moduleId: "business-systems", title: "E-Commerce Models", xpReward: 100, category: "Digital Business",
+    steps: [
+      { type: "quiz", title: "B2C", difficulty: "easy", question: "B2C means?", options: [{ label: "A", text: "Business to Contractor" }, { label: "B", text: "Business to Consumer" }, { label: "C", text: "Bank to Customer" }], correctAnswer: "B", explanation: "B2C: businesses selling directly to consumers. Amazon, retail websites!" },
+      { type: "quiz", title: "B2B", difficulty: "medium", question: "B2B example?", options: [{ label: "A", text: "Online shopping" }, { label: "B", text: "Wholesaler selling to retailer" }, { label: "C", text: "eBay auction" }], correctAnswer: "B", explanation: "B2B: businesses selling to other businesses. Bulk orders, supplies!" },
+      { type: "quiz", title: "C2C", difficulty: "medium", question: "C2C platform?", options: [{ label: "A", text: "Oracle" }, { label: "B", text: "eBay, Craigslist" }, { label: "C", text: "SAP" }], correctAnswer: "B", explanation: "C2C: consumers selling to consumers. Peer marketplaces!" },
+    ],
+  },
+  "cloud-computing": {
+    id: "cloud-computing", moduleId: "business-systems", title: "Cloud Computing", xpReward: 125, category: "Infrastructure",
+    steps: [
+      { type: "quiz", title: "Cloud Models", difficulty: "medium", question: "SaaS means?", options: [{ label: "A", text: "Server as a Service" }, { label: "B", text: "Software as a Service" }, { label: "C", text: "Storage as a Service" }], correctAnswer: "B", explanation: "SaaS = software delivered via internet. Gmail, Salesforce, Office 365!" },
+      { type: "quiz", title: "IaaS", difficulty: "hard", question: "IaaS provides?", options: [{ label: "A", text: "Applications" }, { label: "B", text: "Virtual infrastructure (servers, storage)" }, { label: "C", text: "Networking only" }], correctAnswer: "B", explanation: "Infrastructure as a Service: rent virtual machines, storage. AWS EC2!" },
+      { type: "quiz", title: "PaaS", difficulty: "hard", question: "PaaS includes?", options: [{ label: "A", text: "Hardware only" }, { label: "B", text: "Platform for developing apps" }, { label: "C", text: "End-user software" }], correctAnswer: "B", explanation: "Platform as a Service: development environment. Heroku, Google App Engine!" },
+    ],
+  },
+  "digital-marketing": {
+    id: "digital-marketing", moduleId: "business-systems", title: "Digital Marketing", xpReward: 125, category: "Marketing",
+    steps: [
+      { type: "quiz", title: "SEO", difficulty: "medium", question: "SEO improves?", options: [{ label: "A", text: "Server speed" }, { label: "B", text: "Search engine ranking" }, { label: "C", text: "Database queries" }], correctAnswer: "B", explanation: "Search Engine Optimization: rank higher in Google organically!" },
+      { type: "quiz", title: "PPC", difficulty: "medium", question: "PPC means?", options: [{ label: "A", text: "Pages Per Click" }, { label: "B", text: "Pay Per Click advertising" }, { label: "C", text: "Private Personal Chat" }], correctAnswer: "B", explanation: "Pay Per Click: advertisers pay when users click their ads!" },
+    ],
+  },
+  "project-management": {
+    id: "project-management", moduleId: "business-systems", title: "IT Project Management", xpReward: 150, category: "Management",
+    steps: [
+      { type: "quiz", title: "Triple Constraint", difficulty: "medium", question: "Project constraints are?", options: [{ label: "A", text: "Money only" }, { label: "B", text: "Scope, time, cost" }, { label: "C", text: "Team size" }], correctAnswer: "B", explanation: "The iron triangle: change one, affects others. Balance is key!" },
+      { type: "quiz", title: "Gantt Chart", difficulty: "medium", question: "Gantt chart shows?", options: [{ label: "A", text: "Budget" }, { label: "B", text: "Task timeline/schedule" }, { label: "C", text: "Team hierarchy" }], correctAnswer: "B", explanation: "Gantt = visual timeline. Tasks, durations, dependencies!" },
+    ],
+  },
+};
+
+// ==========================================
+// COURSE 7: GAME DEVELOPMENT
+// ==========================================
+
+export const gameDevLessons: Record<string, LessonData> = {
+  "game-design-basics": {
+    id: "game-design-basics", moduleId: "game-development", title: "Game Design Basics", xpReward: 75, category: "Design",
+    steps: [
+      { type: "quiz", title: "Game Loop", difficulty: "medium", question: "Game loop does?", options: [{ label: "A", text: "Runs once" }, { label: "B", text: "Continuously: input, update, render" }, { label: "C", text: "Only graphics" }], correctAnswer: "B", explanation: "Game loop repeats: handle input → update state → draw frame!" },
+      { type: "quiz", title: "FPS", difficulty: "easy", question: "FPS means?", options: [{ label: "A", text: "First Person Shooter" }, { label: "B", text: "Frames Per Second" }, { label: "C", text: "Free Play System" }], correctAnswer: "B", explanation: "FPS = how many frames rendered per second. 60 FPS is smooth!" },
+    ],
+  },
+  "sprites-animation": {
+    id: "sprites-animation", moduleId: "game-development", title: "Sprites & Animation", xpReward: 100, category: "Graphics",
+    steps: [
+      { type: "quiz", title: "Sprite Definition", difficulty: "easy", question: "A sprite is?", options: [{ label: "A", text: "3D model" }, { label: "B", text: "2D image/character" }, { label: "C", text: "Sound effect" }], correctAnswer: "B", explanation: "Sprites are 2D images used for characters, items, backgrounds!" },
+      { type: "quiz", title: "Sprite Sheet", difficulty: "medium", question: "Sprite sheet contains?", options: [{ label: "A", text: "One image" }, { label: "B", text: "Multiple animation frames" }, { label: "C", text: "Code" }], correctAnswer: "B", explanation: "Sprite sheets pack all animation frames into one image file!" },
+    ],
+  },
+  "collision-detection": {
+    id: "collision-detection", moduleId: "game-development", title: "Collision Detection", xpReward: 125, category: "Physics",
+    steps: [
+      { type: "quiz", title: "AABB", difficulty: "medium", question: "AABB stands for?", options: [{ label: "A", text: "Always Active Bounding Box" }, { label: "B", text: "Axis-Aligned Bounding Box" }, { label: "C", text: "Advanced Animation Blend Block" }], correctAnswer: "B", explanation: "AABB = simple rectangle collision. Fast to check!" },
+      { type: "quiz", title: "Circle Collision", difficulty: "medium", question: "Circle collision checks?", options: [{ label: "A", text: "Area overlap" }, { label: "B", text: "Distance between centers vs radius sum" }, { label: "C", text: "Pixel color" }], correctAnswer: "B", explanation: "If distance < radius1 + radius2, circles collide!" },
+    ],
+  },
+  "input-handling": {
+    id: "input-handling", moduleId: "game-development", title: "Input Handling", xpReward: 100, category: "Controls",
+    steps: [
+      { type: "quiz", title: "Event-Driven", difficulty: "medium", question: "Event-driven input?", options: [{ label: "A", text: "Check every frame" }, { label: "B", text: "React when event fires" }, { label: "C", text: "Only mouse" }], correctAnswer: "B", explanation: "Events fire on key press/release. Efficient for discrete actions!" },
+      { type: "quiz", title: "Polling", difficulty: "medium", question: "Polling input means?", options: [{ label: "A", text: "Wait for events" }, { label: "B", text: "Check state every frame" }, { label: "C", text: "Ignore input" }], correctAnswer: "B", explanation: "Polling checks current key state each frame. Good for continuous input!" },
+    ],
+  },
+  "game-physics": {
+    id: "game-physics", moduleId: "game-development", title: "Basic Game Physics", xpReward: 150, category: "Physics",
+    steps: [
+      { type: "quiz", title: "Velocity", difficulty: "medium", question: "Velocity is?", options: [{ label: "A", text: "Position" }, { label: "B", text: "Speed with direction" }, { label: "C", text: "Rotation" }], correctAnswer: "B", explanation: "Velocity = how fast and which direction. Vector with x,y components!" },
+      { type: "quiz", title: "Gravity", difficulty: "medium", question: "Simulate gravity by?", options: [{ label: "A", text: "Adding to x velocity" }, { label: "B", text: "Adding to y velocity each frame" }, { label: "C", text: "Rotating sprite" }], correctAnswer: "B", explanation: "Add constant downward acceleration to y velocity each frame!" },
+    ],
+  },
+  "audio-in-games": {
+    id: "audio-in-games", moduleId: "game-development", title: "Audio in Games", xpReward: 100, category: "Audio",
+    steps: [
+      { type: "quiz", title: "Sound Types", difficulty: "easy", question: "SFX are?", options: [{ label: "A", text: "Background music" }, { label: "B", text: "Sound effects (short sounds)" }, { label: "C", text: "Voice acting" }], correctAnswer: "B", explanation: "SFX = sound effects: jumps, explosions, clicks. Short, triggered!" },
+      { type: "quiz", title: "Audio Formats", difficulty: "medium", question: "Web-friendly audio?", options: [{ label: "A", text: "WAV only" }, { label: "B", text: "MP3, OGG, WebM" }, { label: "C", text: "FLAC only" }], correctAnswer: "B", explanation: "MP3 and OGG are compressed, work well in browsers!" },
+    ],
+  },
+  "level-design": {
+    id: "level-design", moduleId: "game-development", title: "Level Design Basics", xpReward: 125, category: "Design",
+    steps: [
+      { type: "quiz", title: "Flow", difficulty: "medium", question: "Good level flow means?", options: [{ label: "A", text: "Random obstacles" }, { label: "B", text: "Guiding player naturally" }, { label: "C", text: "Maximum difficulty" }], correctAnswer: "B", explanation: "Visual cues, pacing, difficulty curve guide players through levels!" },
+      { type: "quiz", title: "Difficulty Curve", difficulty: "hard", question: "Ideal difficulty curve?", options: [{ label: "A", text: "Constant hard" }, { label: "B", text: "Gradual increase with peaks" }, { label: "C", text: "Random" }], correctAnswer: "B", explanation: "Start easy, gradually increase with occasional spikes and rest!" },
+    ],
+  },
+};
+
 // Export all lessons combined
 export const allLessons: Record<string, LessonData> = {
   ...javaLessons,
   ...systemsLessons,
   ...mathLessons,
+  ...cybersecurityLessons,
+  ...aiDataScienceLessons,
+  ...businessSystemsLessons,
+  ...gameDevLessons,
 };
 
 // Get lessons by module
