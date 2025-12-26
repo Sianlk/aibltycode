@@ -416,6 +416,62 @@ export const systemsLessons: Record<string, LessonData> = {
     ],
   },
 
+  // === PROJECT PLANNING TOOLS ===
+  "gantt-charts": {
+    id: "gantt-charts", moduleId: "systems-analysis", title: "Gantt Charts", xpReward: 125, category: "Project Tools",
+    steps: [
+      { type: "quiz", title: "Gantt Purpose", difficulty: "easy", question: "Gantt charts show?", options: [{ label: "A", text: "Budget breakdown" }, { label: "B", text: "Tasks on a timeline" }, { label: "C", text: "Team hierarchy" }], correctAnswer: "B", explanation: "MEMORY TIP: 'Gantt = Got A Nice Timeline!' Shows tasks as bars on calendar!" },
+      { type: "quiz", title: "Bar Length", difficulty: "easy", question: "Task bar length represents?", options: [{ label: "A", text: "Cost" }, { label: "B", text: "Duration" }, { label: "C", text: "Priority" }], correctAnswer: "B", explanation: "Longer bar = longer task. Visual timeline at a glance!" },
+      { type: "quiz", title: "Dependencies", difficulty: "medium", question: "Arrows between bars show?", options: [{ label: "A", text: "Random connections" }, { label: "B", text: "Task dependencies" }, { label: "C", text: "Team assignments" }], correctAnswer: "B", explanation: "Arrows show which tasks must finish before others start!" },
+      { type: "quiz", title: "Critical Path", difficulty: "hard", question: "Critical path is?", options: [{ label: "A", text: "Optional tasks" }, { label: "B", text: "Longest path determining project duration" }, { label: "C", text: "Budget limit" }], correctAnswer: "B", explanation: "Critical path = tasks that directly affect end date. Delay one = delay project!" },
+      { type: "quiz", title: "Milestones", difficulty: "medium", question: "Milestones are shown as?", options: [{ label: "A", text: "Long bars" }, { label: "B", text: "Diamonds (zero duration)" }, { label: "C", text: "Circles" }], correctAnswer: "B", explanation: "Milestones mark key checkpoints - shown as diamonds with no duration!" },
+      { type: "quiz", title: "Float Time", difficulty: "hard", question: "Float/slack time means?", options: [{ label: "A", text: "Swimming break" }, { label: "B", text: "How late task can start without affecting end date" }, { label: "C", text: "Extra budget" }], correctAnswer: "B", explanation: "Float = flexibility. Tasks on critical path have zero float!" },
+    ],
+  },
+  "kanban-trello": {
+    id: "kanban-trello", moduleId: "systems-analysis", title: "Kanban & Trello", xpReward: 100, category: "Project Tools",
+    steps: [
+      { type: "quiz", title: "Kanban Origin", difficulty: "easy", question: "Kanban came from?", options: [{ label: "A", text: "Microsoft" }, { label: "B", text: "Toyota manufacturing" }, { label: "C", text: "NASA" }], correctAnswer: "B", explanation: "MEMORY TIP: Kanban = 'Card' in Japanese. Toyota invented it for factory flow!" },
+      { type: "quiz", title: "Kanban Columns", difficulty: "easy", question: "Basic Kanban columns are?", options: [{ label: "A", text: "Red, Yellow, Green" }, { label: "B", text: "To Do, Doing, Done" }, { label: "C", text: "High, Medium, Low" }], correctAnswer: "B", explanation: "Simple flow: To Do → Doing → Done. Cards move left to right!" },
+      { type: "quiz", title: "WIP Limits", difficulty: "medium", question: "WIP limit stands for?", options: [{ label: "A", text: "Weekly Improvement Plan" }, { label: "B", text: "Work In Progress limit" }, { label: "C", text: "Work Item Priority" }], correctAnswer: "B", explanation: "WIP limits prevent overload - max cards allowed in 'Doing' column!" },
+      { type: "quiz", title: "Pull System", difficulty: "medium", question: "Kanban is a 'pull' system because?", options: [{ label: "A", text: "Work is pushed to team" }, { label: "B", text: "Team pulls new work when ready" }, { label: "C", text: "Cards are pulled out" }], correctAnswer: "B", explanation: "Pull = team takes next task only when capacity available. No overloading!" },
+      { type: "quiz", title: "Trello Cards", difficulty: "easy", question: "Trello cards represent?", options: [{ label: "A", text: "Team members" }, { label: "B", text: "Individual tasks/items" }, { label: "C", text: "Projects" }], correctAnswer: "B", explanation: "Each card = one task. Add details, checklists, due dates, attachments!" },
+      { type: "quiz", title: "Swimlanes", difficulty: "hard", question: "Swimlanes divide board by?", options: [{ label: "A", text: "Team members or categories" }, { label: "B", text: "Colors" }, { label: "C", text: "Alphabetically" }], correctAnswer: "A", explanation: "Swimlanes add horizontal rows to separate work by team, priority, or type!" },
+    ],
+  },
+  "project-planning": {
+    id: "project-planning", moduleId: "systems-analysis", title: "Project Planning Tools", xpReward: 150, category: "Project Tools",
+    steps: [
+      { type: "quiz", title: "WBS", difficulty: "medium", question: "Work Breakdown Structure breaks project into?", options: [{ label: "A", text: "Random pieces" }, { label: "B", text: "Hierarchical deliverables" }, { label: "C", text: "Team roles" }], correctAnswer: "B", explanation: "WBS = project tree. Big deliverables → smaller tasks → work packages!" },
+      { type: "quiz", title: "PERT", difficulty: "hard", question: "PERT estimates use?", options: [{ label: "A", text: "Single estimate" }, { label: "B", text: "Optimistic, Most Likely, Pessimistic" }, { label: "C", text: "Random numbers" }], correctAnswer: "B", explanation: "PERT = (O + 4M + P) ÷ 6. Three-point estimates for better accuracy!" },
+      { type: "quiz", title: "Scope Creep", difficulty: "medium", question: "Scope creep is?", options: [{ label: "A", text: "Good planning" }, { label: "B", text: "Uncontrolled changes/additions" }, { label: "C", text: "Team expansion" }], correctAnswer: "B", explanation: "Scope creep kills projects! Features added without proper change control." },
+      { type: "quiz", title: "Baseline", difficulty: "medium", question: "Project baseline is?", options: [{ label: "A", text: "First guess" }, { label: "B", text: "Approved plan to measure against" }, { label: "C", text: "Budget" }], correctAnswer: "B", explanation: "Baseline = original approved scope, schedule, cost. Compare actual vs baseline!" },
+      { type: "quiz", title: "Risk Register", difficulty: "hard", question: "Risk register contains?", options: [{ label: "A", text: "Only problems" }, { label: "B", text: "Risks, probability, impact, mitigation" }, { label: "C", text: "Team names" }], correctAnswer: "B", explanation: "Risk register = living document tracking all identified risks and responses!" },
+    ],
+  },
+  "erd-mastery": {
+    id: "erd-mastery", moduleId: "systems-analysis", title: "ERD Design Mastery", xpReward: 175, category: "Modelling",
+    steps: [
+      { type: "quiz", title: "Chen Notation", difficulty: "medium", question: "In Chen notation, rectangles are?", options: [{ label: "A", text: "Attributes" }, { label: "B", text: "Entities" }, { label: "C", text: "Relationships" }], correctAnswer: "B", explanation: "MEMORY: 'RODE' - Rectangle=Entity, Oval=Attribute, Diamond=Relationship, Ellipse=Attribute!" },
+      { type: "quiz", title: "Crow's Foot", difficulty: "medium", question: "Crow's foot symbol means?", options: [{ label: "A", text: "One" }, { label: "B", text: "Many" }, { label: "C", text: "Optional" }], correctAnswer: "B", explanation: "MEMORY TIP: Crow's foot looks like bird tracks = 'many'. Single line = one!" },
+      { type: "quiz", title: "Composite Key", difficulty: "hard", question: "Composite key uses?", options: [{ label: "A", text: "Single attribute" }, { label: "B", text: "Multiple attributes together" }, { label: "C", text: "Foreign key only" }], correctAnswer: "B", explanation: "Composite key = two+ columns combined to uniquely identify. OrderID + ProductID!" },
+      { type: "quiz", title: "Weak Entity", difficulty: "hard", question: "Weak entity depends on?", options: [{ label: "A", text: "Nothing" }, { label: "B", text: "Strong entity for identification" }, { label: "C", text: "Attributes only" }], correctAnswer: "B", explanation: "Weak entity can't exist alone. Order Line depends on Order - double rectangle!" },
+      { type: "quiz", title: "Participation", difficulty: "hard", question: "Total participation (double line) means?", options: [{ label: "A", text: "Optional relationship" }, { label: "B", text: "Every instance must participate" }, { label: "C", text: "No relationship" }], correctAnswer: "B", explanation: "Double line = mandatory. Every Student MUST have a Department!" },
+      { type: "quiz", title: "Junction Table", difficulty: "hard", question: "M:N relationship needs?", options: [{ label: "A", text: "Nothing special" }, { label: "B", text: "Junction/associative table" }, { label: "C", text: "Delete relationship" }], correctAnswer: "B", explanation: "Many-to-many needs intermediate table. Student_Course holds both foreign keys!" },
+    ],
+  },
+  "use-case-mastery": {
+    id: "use-case-mastery", moduleId: "systems-analysis", title: "Use Case Diagrams", xpReward: 150, category: "Modelling",
+    steps: [
+      { type: "quiz", title: "Stick Figure", difficulty: "easy", question: "In use case diagrams, stick figure represents?", options: [{ label: "A", text: "Process" }, { label: "B", text: "Actor" }, { label: "C", text: "Database" }], correctAnswer: "B", explanation: "MEMORY TIP: Stick figure = person/thing that interacts from OUTSIDE!" },
+      { type: "quiz", title: "Oval Shape", difficulty: "easy", question: "Ovals in use case diagrams are?", options: [{ label: "A", text: "Actors" }, { label: "B", text: "Use cases" }, { label: "C", text: "Data stores" }], correctAnswer: "B", explanation: "Ovals = use cases (actions/goals). Use VERBS: 'Login', 'Place Order'!" },
+      { type: "quiz", title: "System Boundary", difficulty: "medium", question: "Rectangle around use cases shows?", options: [{ label: "A", text: "Database" }, { label: "B", text: "System boundary" }, { label: "C", text: "Optional features" }], correctAnswer: "B", explanation: "The box shows what's INSIDE the system vs outside (environment)!" },
+      { type: "quiz", title: "Include vs Extend", difficulty: "hard", question: "<<include>> means?", options: [{ label: "A", text: "Optional behavior" }, { label: "B", text: "Always required sub-behavior" }, { label: "C", text: "Error handling" }], correctAnswer: "B", explanation: "Include = ALWAYS happens. Extend = optional/conditional behavior!" },
+      { type: "quiz", title: "Actor Types", difficulty: "medium", question: "Can a system be an actor?", options: [{ label: "A", text: "No, only humans" }, { label: "B", text: "Yes, external systems can be actors" }, { label: "C", text: "Only robots" }], correctAnswer: "B", explanation: "Actors can be: people, external systems, hardware, time (scheduling)!" },
+      { type: "quiz", title: "Primary Actor", difficulty: "medium", question: "Primary actor?", options: [{ label: "A", text: "Receives service from system" }, { label: "B", text: "Triggers the use case" }, { label: "C", text: "Database" }], correctAnswer: "B", explanation: "Primary actor INITIATES the use case. Secondary actors assist or receive!" },
+    ],
+  },
+
   // === SDLC ===
   "sdlc-overview": {
     id: "sdlc-overview", moduleId: "systems-analysis", title: "SDLC Overview", xpReward: 100, category: "SDLC",
