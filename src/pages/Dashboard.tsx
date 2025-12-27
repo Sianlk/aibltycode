@@ -27,15 +27,20 @@ const gameModes = [
   { id: "pacman", title: "Pacman Coder", description: "Collect code", icon: "speed" as const, color: "primary" as const, emoji: "👾" },
   { id: "system-design", title: "System Design", description: "Design systems", icon: "ordering" as const, color: "accent" as const, emoji: "🔧" },
   { id: "complexity-arcade", title: "Complexity Arcade", description: "Master Big-O", icon: "typing" as const, color: "secondary" as const, emoji: "📊" },
+  { id: "erd-builder", title: "ERD Builder", description: "Design databases", icon: "ordering" as const, color: "primary" as const, emoji: "🗂️" },
+  { id: "project-planner", title: "Project Planner", description: "Gantt & Kanban", icon: "ordering" as const, color: "accent" as const, emoji: "📋" },
+  { id: "graph-visualizer", title: "Graph Explorer", description: "Graph algorithms", icon: "speed" as const, color: "success" as const, emoji: "📊" },
+  { id: "use-case", title: "Use Case Diagrams", description: "UML modeling", icon: "ordering" as const, color: "warning" as const, emoji: "👥" },
 ];
 
 export default function Dashboard() {
-  const { modules } = useGame();
+  const { modules, gameMode } = useGame();
   const { user, loading: authLoading } = useAuth();
   const { progress, loading: progressLoading } = useProgress();
   const { isAdmin } = useAdmin();
   const { subscribed, inTrial, trialEnd, openCustomerPortal } = useSubscription();
   const navigate = useNavigate();
+  const isKidsMode = gameMode === "kid";
   
   const [stats, setStats] = useState({ xp: 0, streak: 0, gamesPlayed: 0 });
 
@@ -76,7 +81,7 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className={`min-h-screen ${isKidsMode ? 'bg-gradient-to-b from-primary/5 via-background to-accent/5' : 'bg-background'}`}>
       <Header />
 
       <main className="container mx-auto px-4 pt-24 pb-12 max-w-4xl">
@@ -104,10 +109,20 @@ export default function Dashboard() {
           </motion.div>
         )}
 
-        {/* Mascot */}
-        <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="mb-8">
-          <Mascot />
-        </motion.div>
+        {/* Mascot - only show in Kids mode */}
+        {isKidsMode && (
+          <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="mb-8">
+            <Mascot />
+          </motion.div>
+        )}
+
+        {/* Welcome Message for Pro mode */}
+        {!isKidsMode && (
+          <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="mb-8">
+            <h1 className="text-2xl font-bold text-foreground">Welcome back!</h1>
+            <p className="text-muted-foreground">Continue your learning journey</p>
+          </motion.div>
+        )}
 
         {/* Stats Row */}
         <motion.div
@@ -116,26 +131,26 @@ export default function Dashboard() {
           transition={{ delay: 0.1 }}
           className="grid grid-cols-3 gap-4 mb-8"
         >
-          <div className="bg-card rounded-2xl p-4 border border-border text-center">
-            <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-2">
+          <div className={`rounded-2xl p-4 border text-center ${isKidsMode ? 'bg-primary/10 border-primary/30' : 'bg-card border-border'}`}>
+            <div className={`w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2 ${isKidsMode ? 'bg-primary/30' : 'bg-primary/20'}`}>
               <Star className="w-6 h-6 text-primary" />
             </div>
-            <p className="text-2xl sm:text-3xl font-bold text-primary">{stats.xp}</p>
-            <p className="text-xs text-muted-foreground">Total XP</p>
+            <p className={`font-bold text-primary ${isKidsMode ? 'text-3xl' : 'text-2xl'}`}>{stats.xp}</p>
+            <p className="text-xs text-muted-foreground">{isKidsMode ? '⭐ XP' : 'Total XP'}</p>
           </div>
-          <div className="bg-card rounded-2xl p-4 border border-border text-center">
-            <div className="w-12 h-12 rounded-full bg-warning/20 flex items-center justify-center mx-auto mb-2">
+          <div className={`rounded-2xl p-4 border text-center ${isKidsMode ? 'bg-warning/10 border-warning/30' : 'bg-card border-border'}`}>
+            <div className={`w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2 ${isKidsMode ? 'bg-warning/30' : 'bg-warning/20'}`}>
               <Flame className="w-6 h-6 text-warning" />
             </div>
-            <p className="text-2xl sm:text-3xl font-bold text-warning">{stats.streak}</p>
-            <p className="text-xs text-muted-foreground">Day Streak</p>
+            <p className={`font-bold text-warning ${isKidsMode ? 'text-3xl' : 'text-2xl'}`}>{stats.streak}</p>
+            <p className="text-xs text-muted-foreground">{isKidsMode ? '🔥 Days' : 'Day Streak'}</p>
           </div>
-          <div className="bg-card rounded-2xl p-4 border border-border text-center">
-            <div className="w-12 h-12 rounded-full bg-success/20 flex items-center justify-center mx-auto mb-2">
+          <div className={`rounded-2xl p-4 border text-center ${isKidsMode ? 'bg-success/10 border-success/30' : 'bg-card border-border'}`}>
+            <div className={`w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2 ${isKidsMode ? 'bg-success/30' : 'bg-success/20'}`}>
               <Trophy className="w-6 h-6 text-success" />
             </div>
-            <p className="text-2xl sm:text-3xl font-bold text-success">{overallProgress}%</p>
-            <p className="text-xs text-muted-foreground">Complete</p>
+            <p className={`font-bold text-success ${isKidsMode ? 'text-3xl' : 'text-2xl'}`}>{overallProgress}%</p>
+            <p className="text-xs text-muted-foreground">{isKidsMode ? '🏆 Done' : 'Complete'}</p>
           </div>
         </motion.div>
 
@@ -148,19 +163,19 @@ export default function Dashboard() {
         >
           <Button 
             size="lg" 
-            className="flex-1 text-lg h-14 bg-primary hover:bg-primary/90"
+            className={`flex-1 text-lg h-14 ${isKidsMode ? 'bg-gradient-to-r from-primary to-accent text-white' : 'bg-primary hover:bg-primary/90'}`}
             onClick={() => navigate('/module/java-foundations')}
           >
-            🚀 Continue Learning
+            {isKidsMode ? '🚀' : ''} Continue Learning
           </Button>
           <Button 
             size="lg" 
             variant="outline"
-            className="flex-1 text-lg h-14 border-2"
+            className={`flex-1 text-lg h-14 ${isKidsMode ? 'border-2 border-accent' : 'border-2'}`}
             onClick={() => document.getElementById('games-section')?.scrollIntoView({ behavior: 'smooth' })}
           >
             <Gamepad2 className="w-5 h-5 mr-2" />
-            Play Mini Games
+            {isKidsMode ? '🎮 Play Games!' : 'Play Mini Games'}
           </Button>
         </motion.div>
 
@@ -171,8 +186,8 @@ export default function Dashboard() {
           transition={{ delay: 0.2 }}
           className="mb-10"
         >
-          <h2 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
-            Your Learning Path 🛤️
+          <h2 className={`text-xl font-bold text-foreground mb-4 flex items-center gap-2 ${isKidsMode ? 'text-2xl' : ''}`}>
+            {isKidsMode ? '🛤️ Your Adventure!' : 'Your Learning Path'}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
@@ -187,10 +202,14 @@ export default function Dashboard() {
               <div
                 key={mod.id}
                 onClick={() => navigate(`/module/${mod.id}`)}
-                className="bg-card border border-border rounded-xl p-4 cursor-pointer hover:shadow-lg transition-all hover:scale-[1.02]"
+                className={`rounded-xl p-4 cursor-pointer transition-all hover:scale-[1.02] ${
+                  isKidsMode 
+                    ? 'bg-gradient-to-br from-card to-primary/5 border-2 border-primary/20 hover:border-primary/50 hover:shadow-xl' 
+                    : 'bg-card border border-border hover:shadow-lg'
+                }`}
               >
-                <div className="text-4xl mb-2">{mod.icon}</div>
-                <h3 className="font-bold">{mod.title}</h3>
+                <div className={`mb-2 ${isKidsMode ? 'text-5xl' : 'text-4xl'}`}>{mod.icon}</div>
+                <h3 className={`font-bold ${isKidsMode ? 'text-lg' : ''}`}>{mod.title}</h3>
               </div>
             ))}
           </div>
@@ -203,8 +222,8 @@ export default function Dashboard() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
-          <h2 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
-            Mini Games 🎮
+          <h2 className={`text-xl font-bold text-foreground mb-4 flex items-center gap-2 ${isKidsMode ? 'text-2xl' : ''}`}>
+            {isKidsMode ? '🎮 Fun Games!' : 'Mini Games'}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {gameModes.map((game, index) => (

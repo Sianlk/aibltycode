@@ -1,8 +1,18 @@
 import { motion } from "framer-motion";
-import { Code2, Zap, Trophy, BookOpen, ArrowRight } from "lucide-react";
+import { Code2, Zap, Trophy, BookOpen, ArrowRight, Shield, Brain, Gamepad2, Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+
+const courses = [
+  { icon: <Code2 className="w-6 h-6 text-primary" />, label: "Java Programming", desc: "OOP to Advanced Patterns" },
+  { icon: <BookOpen className="w-6 h-6 text-accent" />, label: "Systems Analysis", desc: "ERD, Use Cases, UML" },
+  { icon: <Zap className="w-6 h-6 text-warning" />, label: "Maths for Computing", desc: "Graphs, Big-O, Algorithms" },
+  { icon: <Shield className="w-6 h-6 text-success" />, label: "Cybersecurity", desc: "Network Security, Threats" },
+  { icon: <Brain className="w-6 h-6 text-secondary" />, label: "AI & Data Science", desc: "ML, Neural Networks" },
+  { icon: <Briefcase className="w-6 h-6 text-primary" />, label: "Business Systems", desc: "ERP, CRM, Workflows" },
+  { icon: <Gamepad2 className="w-6 h-6 text-accent" />, label: "Game Development", desc: "Unity, Game Design" },
+];
 
 export function HeroSection() {
   const navigate = useNavigate();
@@ -17,7 +27,7 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-12">
       {/* Subtle background */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-primary/5 blur-3xl" />
@@ -25,7 +35,7 @@ export function HeroSection() {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-5xl mx-auto text-center">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -39,12 +49,12 @@ export function HeroSection() {
             >
               <Code2 className="w-4 h-4 text-primary" />
               <span className="text-sm font-medium text-primary">
-                Interactive Java Learning Platform
+                Complete Tech Learning Platform
               </span>
             </motion.div>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
-              <span className="text-foreground">Master Java</span>
+              <span className="text-foreground">Master Tech Skills</span>
               <br />
               <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                 Through Play
@@ -52,8 +62,8 @@ export function HeroSection() {
             </h1>
 
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Learn Java, Systems Design, and Computational Thinking through 
-              interactive games and challenges. From fundamentals to advanced concepts.
+              Learn Java, Systems Design, Cybersecurity, AI, and more through 
+              interactive games and challenges. 7+ courses from fundamentals to expert level.
             </p>
           </motion.div>
 
@@ -68,54 +78,38 @@ export function HeroSection() {
               onClick={handleGetStarted}
               className="min-w-[180px] gap-2"
             >
-              {user ? "Go to Dashboard" : "Get Started"}
+              {user ? "Go to Dashboard" : "Get Started Free"}
               <ArrowRight className="w-4 h-4" />
             </Button>
-            {!user && (
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={() => navigate("/auth")}
-                className="min-w-[180px]"
-              >
-                Sign In
-              </Button>
-            )}
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={() => navigate("/pricing")}
+              className="min-w-[180px]"
+            >
+              View Pricing
+            </Button>
           </motion.div>
 
+          {/* All Courses Grid */}
           <motion.div
-            className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto"
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 max-w-4xl mx-auto mb-12"
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.6 }}
           >
-            {[
-              { 
-                icon: <Code2 className="w-6 h-6 text-primary" />, 
-                label: "Java Mastery", 
-                desc: "OOP to Advanced Patterns" 
-              },
-              { 
-                icon: <BookOpen className="w-6 h-6 text-accent" />, 
-                label: "Systems Design", 
-                desc: "Architecture & Modelling" 
-              },
-              { 
-                icon: <Zap className="w-6 h-6 text-warning" />, 
-                label: "Algorithm Skills", 
-                desc: "Big-O & Problem Solving" 
-              },
-            ].map((feature, i) => (
+            {courses.map((course, i) => (
               <motion.div
-                key={feature.label}
-                className="bg-card rounded-xl p-5 border border-border"
+                key={course.label}
+                className="bg-card rounded-xl p-4 border border-border hover:border-primary/50 transition-all cursor-pointer hover:shadow-lg"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.6 + i * 0.1 }}
+                transition={{ delay: 0.6 + i * 0.05 }}
+                onClick={() => navigate(user ? "/dashboard" : "/auth")}
               >
-                <div className="mb-3">{feature.icon}</div>
-                <h3 className="font-semibold text-foreground mb-1">{feature.label}</h3>
-                <p className="text-sm text-muted-foreground">{feature.desc}</p>
+                <div className="mb-2">{course.icon}</div>
+                <h3 className="font-semibold text-foreground text-sm mb-1">{course.label}</h3>
+                <p className="text-xs text-muted-foreground">{course.desc}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -124,7 +118,7 @@ export function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
-            className="mt-16 flex items-center justify-center gap-8 text-sm text-muted-foreground"
+            className="flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground"
           >
             <div className="flex items-center gap-2">
               <Trophy className="w-4 h-4 text-warning" />
@@ -136,7 +130,11 @@ export function HeroSection() {
             </div>
             <div className="flex items-center gap-2">
               <Code2 className="w-4 h-4 text-success" />
-              <span>6 Game Modes</span>
+              <span>15+ Game Modes</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <BookOpen className="w-4 h-4 text-accent" />
+              <span>7+ Courses</span>
             </div>
           </motion.div>
         </div>
