@@ -13,6 +13,10 @@ import StructureBuilderGame from "@/components/games/StructureBuilderGame";
 import { MnemonicFlashcardGame } from "@/components/games/MnemonicFlashcardGame";
 import SpacedRepetitionGame from "@/components/games/SpacedRepetitionGame";
 import DebuggingGame from "@/components/games/DebuggingGame";
+import ERDBuilderGame from "@/components/games/ERDBuilderGame";
+import ProjectPlannerGame from "@/components/games/ProjectPlannerGame";
+import GraphVisualizerGame from "@/components/games/GraphVisualizerGame";
+import UseCaseDiagramGame from "@/components/games/UseCaseDiagramGame";
 import { ArrowLeft } from "lucide-react";
 
 const gameComponents: Record<string, React.ComponentType> = {
@@ -27,6 +31,10 @@ const gameComponents: Record<string, React.ComponentType> = {
   flashcards: MnemonicFlashcardGame,
   "spaced-rep": SpacedRepetitionGame,
   debugging: DebuggingGame,
+  "erd-builder": ERDBuilderGame,
+  "project-planner": ProjectPlannerGame,
+  "graph-visualizer": GraphVisualizerGame,
+  "use-case": UseCaseDiagramGame,
 };
 
 const gameInfo: Record<string, { title: string; emoji: string }> = {
@@ -41,6 +49,10 @@ const gameInfo: Record<string, { title: string; emoji: string }> = {
   flashcards: { title: "Visual Mnemonic Cards", emoji: "🃏" },
   "spaced-rep": { title: "Spaced Repetition", emoji: "🧠" },
   debugging: { title: "Bug Hunter", emoji: "🐛" },
+  "erd-builder": { title: "ERD Builder", emoji: "🗂️" },
+  "project-planner": { title: "Project Planner", emoji: "📋" },
+  "graph-visualizer": { title: "Graph Explorer", emoji: "📊" },
+  "use-case": { title: "Use Case Diagrams", emoji: "👥" },
 };
 
 export default function GamePage() {
