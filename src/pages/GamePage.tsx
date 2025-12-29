@@ -19,6 +19,9 @@ import GraphVisualizerGame from "@/components/games/GraphVisualizerGame";
 import UseCaseDiagramGame from "@/components/games/UseCaseDiagramGame";
 import ExcelMasterGame from "@/components/games/ExcelMasterGame";
 import SQLQueryGame from "@/components/games/SQLQueryGame";
+import CybersecurityGame from "@/components/games/CybersecurityGame";
+import AIDataScienceGame from "@/components/games/AIDataScienceGame";
+import GameDevGame from "@/components/games/GameDevGame";
 import { ArrowLeft } from "lucide-react";
 
 const gameComponents: Record<string, React.ComponentType> = {
@@ -39,6 +42,9 @@ const gameComponents: Record<string, React.ComponentType> = {
   "use-case": UseCaseDiagramGame,
   "excel-master": ExcelMasterGame,
   "sql-query": SQLQueryGame,
+  "cybersecurity": CybersecurityGame,
+  "ai-data": AIDataScienceGame,
+  "game-dev": GameDevGame,
 };
 
 const gameInfo: Record<string, { title: string; emoji: string }> = {
@@ -59,6 +65,9 @@ const gameInfo: Record<string, { title: string; emoji: string }> = {
   "use-case": { title: "Use Case Diagrams", emoji: "👥" },
   "excel-master": { title: "Excel Master", emoji: "📊" },
   "sql-query": { title: "SQL Query Master", emoji: "🗄️" },
+  "cybersecurity": { title: "Security Challenge", emoji: "🛡️" },
+  "ai-data": { title: "AI & Data Science", emoji: "🤖" },
+  "game-dev": { title: "Game Development", emoji: "🎮" },
 };
 
 export default function GamePage() {

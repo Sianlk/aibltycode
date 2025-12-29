@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -8,6 +8,16 @@ import { useProgress } from "@/hooks/useProgress";
 import { getLessonById, LessonStep } from "@/data/lessons";
 import { CheckCircle, XCircle, ArrowLeft } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
+
+// Fisher-Yates shuffle
+const shuffleArray = <T,>(array: T[]): T[] => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
 
 interface InteractiveLessonProps {
   lessonId?: string;
@@ -32,6 +42,16 @@ export function InteractiveLesson({ lessonId: propLessonId, onComplete, onExit }
   const [isCorrect, setIsCorrect] = useState(false);
   const [totalScore, setTotalScore] = useState(0);
   const codeDisplayRef = useRef<HTMLDivElement>(null);
+  
+  // Shuffle options once per step - memoized by step index
+  const shuffledOptions = useMemo(() => {
+    if (!lesson) return [];
+    const step = lesson.steps[currentStepIndex];
+    if (step?.type === "quiz" && step.options) {
+      return shuffleArray(step.options);
+    }
+    return step?.options || [];
+  }, [lesson, currentStepIndex]);
   
   if (!lesson) {
     return (
@@ -209,7 +229,7 @@ export function InteractiveLesson({ lessonId: propLessonId, onComplete, onExit }
                     )}
                     
                     <div className="space-y-3">
-                      {currentStep.options?.map((opt) => {
+                      {shuffledOptions.map((opt) => {
                         const isSelected = selectedAnswer === opt.label;
                         const isCorrectAns = opt.label === currentStep.correctAnswer;
                         let cls = "border-2 border-border bg-card hover:border-primary/50";
