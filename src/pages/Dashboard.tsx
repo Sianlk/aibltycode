@@ -33,6 +33,9 @@ const gameModes = [
   { id: "use-case", title: "Use Case Diagrams", description: "UML modeling", icon: "ordering" as const, color: "warning" as const, emoji: "👥" },
   { id: "excel-master", title: "Excel Master", description: "Formulas & functions", icon: "typing" as const, color: "success" as const, emoji: "📊" },
   { id: "sql-query", title: "SQL Query", description: "Database queries", icon: "ordering" as const, color: "primary" as const, emoji: "🗄️" },
+  { id: "cybersecurity", title: "Security Challenge", description: "Cyber defense", icon: "speed" as const, color: "warning" as const, emoji: "🛡️" },
+  { id: "ai-data", title: "AI & ML", description: "Machine learning", icon: "typing" as const, color: "accent" as const, emoji: "🤖" },
+  { id: "game-dev", title: "Game Dev", description: "Game concepts", icon: "speed" as const, color: "primary" as const, emoji: "🎮" },
 ];
 
 export default function Dashboard() {
