@@ -17,6 +17,8 @@ import ERDBuilderGame from "@/components/games/ERDBuilderGame";
 import ProjectPlannerGame from "@/components/games/ProjectPlannerGame";
 import GraphVisualizerGame from "@/components/games/GraphVisualizerGame";
 import UseCaseDiagramGame from "@/components/games/UseCaseDiagramGame";
+import ExcelMasterGame from "@/components/games/ExcelMasterGame";
+import SQLQueryGame from "@/components/games/SQLQueryGame";
 import { ArrowLeft } from "lucide-react";
 
 const gameComponents: Record<string, React.ComponentType> = {
@@ -35,6 +37,8 @@ const gameComponents: Record<string, React.ComponentType> = {
   "project-planner": ProjectPlannerGame,
   "graph-visualizer": GraphVisualizerGame,
   "use-case": UseCaseDiagramGame,
+  "excel-master": ExcelMasterGame,
+  "sql-query": SQLQueryGame,
 };
 
 const gameInfo: Record<string, { title: string; emoji: string }> = {
@@ -53,6 +57,8 @@ const gameInfo: Record<string, { title: string; emoji: string }> = {
   "project-planner": { title: "Project Planner", emoji: "📋" },
   "graph-visualizer": { title: "Graph Explorer", emoji: "📊" },
   "use-case": { title: "Use Case Diagrams", emoji: "👥" },
+  "excel-master": { title: "Excel Master", emoji: "📊" },
+  "sql-query": { title: "SQL Query Master", emoji: "🗄️" },
 };
 
 export default function GamePage() {
