@@ -31,6 +31,8 @@ const gameModes = [
   { id: "project-planner", title: "Project Planner", description: "Gantt & Kanban", icon: "ordering" as const, color: "accent" as const, emoji: "📋" },
   { id: "graph-visualizer", title: "Graph Explorer", description: "Graph algorithms", icon: "speed" as const, color: "success" as const, emoji: "📊" },
   { id: "use-case", title: "Use Case Diagrams", description: "UML modeling", icon: "ordering" as const, color: "warning" as const, emoji: "👥" },
+  { id: "excel-master", title: "Excel Master", description: "Formulas & functions", icon: "typing" as const, color: "success" as const, emoji: "📊" },
+  { id: "sql-query", title: "SQL Query", description: "Database queries", icon: "ordering" as const, color: "primary" as const, emoji: "🗄️" },
 ];
 
 export default function Dashboard() {

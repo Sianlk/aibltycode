@@ -14,7 +14,7 @@ const plans = [
     id: "free",
     name: "Free",
     price: "£0",
-    period: "forever",
+    period: "limited features",
     description: "Perfect for trying out AIblty",
     features: [
       "Access to 3 modules",

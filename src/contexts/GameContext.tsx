@@ -181,8 +181,18 @@ export function GameProvider({ children }: { children: ReactNode }) {
     });
   };
 
+  // Debounce sound to prevent multiple plays
+  const lastSoundRef = React.useRef<{ sound: string; time: number }>({ sound: '', time: 0 });
+  
   const playSound = (sound: "success" | "error" | "click" | "levelUp" | "badge") => {
     if (!soundEnabled) return;
+    
+    // Debounce: prevent same sound within 100ms
+    const now = Date.now();
+    if (lastSoundRef.current.sound === sound && now - lastSoundRef.current.time < 100) {
+      return;
+    }
+    lastSoundRef.current = { sound, time: now };
     
     const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
     const oscillator = audioContext.createOscillator();

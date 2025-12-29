@@ -16,6 +16,7 @@ interface ERDChallenge {
 }
 
 const challenges: ERDChallenge[] = [
+  // Basic Relationship Challenges
   {
     id: 1,
     scenario: "A Customer can place many Orders, but each Order belongs to one Customer.",
@@ -52,23 +53,84 @@ const challenges: ERDChallenge[] = [
     hint: "Which side has 'many'?",
     explanation: "Department (1) → Employee (Many). Employee table has DepartmentID foreign key!"
   },
+  // Advanced: Foreign Key Constraints
   {
     id: 5,
-    scenario: "An Author can write many Books, and a Book can have multiple Authors.",
-    entities: ["Author", "Book"],
-    correctRelationship: "M:N (Many-to-Many)",
-    options: ["1:1 (One-to-One)", "1:M (One-to-Many)", "M:N (Many-to-Many)"],
-    hint: "Co-authored books exist! Can authors write multiple books?",
-    explanation: "Many-to-Many! Create 'AuthorBook' junction table with AuthorID and BookID!"
+    scenario: "An Order references a Customer. When a Customer is deleted, what should happen to their Orders?",
+    entities: ["Customer", "Order"],
+    correctRelationship: "ON DELETE CASCADE",
+    options: ["ON DELETE CASCADE", "ON DELETE SET NULL", "ON DELETE RESTRICT"],
+    hint: "CASCADE means 'delete together', RESTRICT means 'prevent deletion'",
+    explanation: "CASCADE deletes child records automatically. Use RESTRICT if orders must be preserved!"
   },
   {
     id: 6,
-    scenario: "Each Order contains many Order Lines (products), but each Order Line belongs to exactly one Order.",
-    entities: ["Order", "OrderLine"],
-    correctRelationship: "1:M (One-to-Many)",
-    options: ["1:1 (One-to-One)", "1:M (One-to-Many)", "M:N (Many-to-Many)"],
-    hint: "OrderLine is a WEAK entity - depends on Order!",
-    explanation: "OrderLine can't exist without Order. It's a weak entity (double rectangle in ERD)!"
+    scenario: "A Product references a Category. If a Category is deleted, Products should remain but have no category.",
+    entities: ["Category", "Product"],
+    correctRelationship: "ON DELETE SET NULL",
+    options: ["ON DELETE CASCADE", "ON DELETE SET NULL", "ON DELETE RESTRICT"],
+    hint: "Products should exist without a category after deletion",
+    explanation: "SET NULL keeps the record but clears the foreign key. Great for optional relationships!"
+  },
+  // Advanced: Composite Keys
+  {
+    id: 7,
+    scenario: "An Enrollment table tracks which Students take which Courses. What should be the primary key?",
+    entities: ["Enrollment"],
+    correctRelationship: "Composite Key (StudentID, CourseID)",
+    options: ["Auto-increment ID", "Composite Key (StudentID, CourseID)", "StudentID only"],
+    hint: "Each student can only enroll in a course once - what makes it unique?",
+    explanation: "Composite key! (StudentID + CourseID) together uniquely identify each enrollment."
+  },
+  {
+    id: 8,
+    scenario: "A FlightBooking records Passenger on a specific Flight on a Date. What's the primary key?",
+    entities: ["FlightBooking"],
+    correctRelationship: "Composite Key (PassengerID, FlightID, Date)",
+    options: ["Auto-increment ID", "Composite Key (PassengerID, FlightID, Date)", "FlightID only"],
+    hint: "Same passenger could be on the same flight on different dates!",
+    explanation: "Three columns together form the composite key to ensure uniqueness."
+  },
+  // Advanced: Normalization
+  {
+    id: 9,
+    scenario: "A table has: CustomerID, CustomerName, OrderID, OrderDate, ProductName. This violates which normal form?",
+    entities: ["Orders"],
+    correctRelationship: "1NF - Not normalized (repeating groups)",
+    options: ["1NF - Not normalized (repeating groups)", "2NF - Partial dependency", "3NF - Transitive dependency"],
+    hint: "Is there a clear repeating group or mixing of entities?",
+    explanation: "Mixing Customer, Order, and Product data violates 1NF! Split into separate tables."
+  },
+  {
+    id: 10,
+    scenario: "OrderLine(OrderID, ProductID, ProductName, Quantity) - ProductName depends only on ProductID, not the full key.",
+    entities: ["OrderLine"],
+    correctRelationship: "2NF - Partial dependency",
+    options: ["1NF - Not normalized (repeating groups)", "2NF - Partial dependency", "3NF - Transitive dependency"],
+    hint: "Does ProductName depend on the FULL composite key or just part of it?",
+    explanation: "ProductName depends only on ProductID (partial dependency). Move it to a Products table!"
+  },
+  {
+    id: 11,
+    scenario: "Employee(EmpID, DeptID, DeptName) - DeptName depends on DeptID, not directly on EmpID.",
+    entities: ["Employee"],
+    correctRelationship: "3NF - Transitive dependency",
+    options: ["1NF - Not normalized (repeating groups)", "2NF - Partial dependency", "3NF - Transitive dependency"],
+    hint: "EmpID → DeptID → DeptName. Is there an indirect dependency?",
+    explanation: "Transitive dependency! DeptName should be in a separate Departments table."
+  },
+  {
+    id: 12,
+    scenario: "To achieve 3NF, which statement is correct?",
+    entities: ["Database"],
+    correctRelationship: "Every non-key attribute depends on the key, the whole key, and nothing but the key",
+    options: [
+      "Every non-key attribute depends on the key, the whole key, and nothing but the key",
+      "All attributes must be numeric",
+      "Tables must have exactly 3 columns"
+    ],
+    hint: "Think of the famous 3NF rule mnemonic!",
+    explanation: "The 3NF rule: 'The key, the whole key, and nothing but the key!' (so help me Codd)"
   },
 ];
 
