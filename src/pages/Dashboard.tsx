@@ -3,16 +3,20 @@ import { Header } from "@/components/layout/Header";
 import { ModuleCard } from "@/components/dashboard/ModuleCard";
 import { GameModeCard } from "@/components/dashboard/GameModeCard";
 import { Mascot } from "@/components/dashboard/Mascot";
+import { ZoneCard } from "@/components/dashboard/ZoneCard";
+import { SessionCard } from "@/components/dashboard/SessionCard";
 import { useGame } from "@/contexts/GameContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useProgress } from "@/hooks/useProgress";
 import { useAdmin } from "@/hooks/useAdmin";
 import { useSubscription } from "@/hooks/useSubscription";
 import { SubscriptionGate } from "@/components/subscription/SubscriptionGate";
-import { Gamepad2, Flame, Star, Trophy, Crown, Settings } from "lucide-react";
+import { zones } from "@/data/learningSystem";
+import { Gamepad2, Flame, Star, Trophy, Crown, Settings, Map, BookOpen } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { supabase } from "@/integrations/supabase/client";
 
 const gameModes = [
@@ -184,58 +188,120 @@ export default function Dashboard() {
           </Button>
         </motion.div>
 
-        {/* Learning Path */}
-        <motion.section
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="mb-10"
-        >
-          <h2 className={`text-xl font-bold text-foreground mb-4 flex items-center gap-2 ${isKidsMode ? 'text-2xl' : ''}`}>
-            {isKidsMode ? '🛤️ Your Adventure!' : 'Your Learning Path'}
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {[
-              { id: "java-foundations", title: "Java Programming", icon: "☕", color: "primary" },
-              { id: "systems-analysis", title: "Systems Analysis", icon: "🌌", color: "accent" },
-              { id: "math-computing", title: "Maths for Computing", icon: "🔢", color: "warning" },
-              { id: "cybersecurity", title: "Cybersecurity", icon: "🔐", color: "success" },
-              { id: "ai-data-science", title: "AI & Data Science", icon: "🤖", color: "secondary" },
-              { id: "business-systems", title: "Business Systems", icon: "💼", color: "primary" },
-              { id: "game-development", title: "Game Development", icon: "🎮", color: "accent" },
-            ].map((mod) => (
-              <div
-                key={mod.id}
-                onClick={() => navigate(`/module/${mod.id}`)}
-                className={`rounded-xl p-4 cursor-pointer transition-all hover:scale-[1.02] ${
-                  isKidsMode 
-                    ? 'bg-gradient-to-br from-card to-primary/5 border-2 border-primary/20 hover:border-primary/50 hover:shadow-xl' 
-                    : 'bg-card border border-border hover:shadow-lg'
-                }`}
-              >
-                <div className={`mb-2 ${isKidsMode ? 'text-5xl' : 'text-4xl'}`}>{mod.icon}</div>
-                <h3 className={`font-bold ${isKidsMode ? 'text-lg' : ''}`}>{mod.title}</h3>
-              </div>
-            ))}
-          </div>
-        </motion.section>
+        {/* Content Tabs */}
+        <Tabs defaultValue="zones" className="w-full">
+          <TabsList className="grid w-full grid-cols-3 mb-6">
+            <TabsTrigger value="zones" className="flex items-center gap-2">
+              <Map className="w-4 h-4" />
+              {isKidsMode ? '🗺️ Zones' : 'Zones'}
+            </TabsTrigger>
+            <TabsTrigger value="courses" className="flex items-center gap-2">
+              <BookOpen className="w-4 h-4" />
+              {isKidsMode ? '📚 Courses' : 'Courses'}
+            </TabsTrigger>
+            <TabsTrigger value="games" className="flex items-center gap-2">
+              <Gamepad2 className="w-4 h-4" />
+              {isKidsMode ? '🎮 Games' : 'Games'}
+            </TabsTrigger>
+          </TabsList>
 
-        {/* Game Modes */}
-        <motion.section
-          id="games-section"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.3 }}
-        >
-          <h2 className={`text-xl font-bold text-foreground mb-4 flex items-center gap-2 ${isKidsMode ? 'text-2xl' : ''}`}>
-            {isKidsMode ? '🎮 Fun Games!' : 'Mini Games'}
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {gameModes.map((game, index) => (
-              <GameModeCard key={game.id} {...game} index={index} />
-            ))}
-          </div>
-        </motion.section>
+          {/* Zones Tab */}
+          <TabsContent value="zones">
+            <motion.section
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              className="mb-8"
+            >
+              <h2 className={`text-xl font-bold text-foreground mb-4 flex items-center gap-2 ${isKidsMode ? 'text-2xl' : ''}`}>
+                {isKidsMode ? '🌍 Explore the World!' : 'Learning Zones'}
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {zones.map((zone, index) => (
+                  <ZoneCard
+                    key={zone.id}
+                    zone={zone}
+                    index={index}
+                    unlocked={index < 4}
+                    progress={Math.max(0, 80 - index * 15)}
+                    gamesCompleted={Math.max(0, 4 - index)}
+                  />
+                ))}
+              </div>
+            </motion.section>
+
+            {/* Daily Session */}
+            <motion.section
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2 }}
+            >
+              <h2 className={`text-xl font-bold text-foreground mb-4 flex items-center gap-2 ${isKidsMode ? 'text-2xl' : ''}`}>
+                {isKidsMode ? '⭐ Today\'s Mission!' : 'Your Daily Session'}
+              </h2>
+              <SessionCard
+                trackName="Java Programming"
+                trackIcon="☕"
+                level="apprentice"
+                recommendedGame="pattern"
+                weakArea="if/else statements"
+              />
+            </motion.section>
+          </TabsContent>
+
+          {/* Courses Tab */}
+          <TabsContent value="courses">
+            <motion.section
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+            >
+              <h2 className={`text-xl font-bold text-foreground mb-4 flex items-center gap-2 ${isKidsMode ? 'text-2xl' : ''}`}>
+                {isKidsMode ? '🛤️ Your Adventure!' : 'Your Learning Path'}
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {[
+                  { id: "java-foundations", title: "Java Programming", icon: "☕", color: "primary" },
+                  { id: "systems-analysis", title: "Systems Analysis", icon: "🌌", color: "accent" },
+                  { id: "math-computing", title: "Maths for Computing", icon: "🔢", color: "warning" },
+                  { id: "cybersecurity", title: "Cybersecurity", icon: "🔐", color: "success" },
+                  { id: "ai-data-science", title: "AI & Data Science", icon: "🤖", color: "secondary" },
+                  { id: "business-systems", title: "Business Systems", icon: "💼", color: "primary" },
+                  { id: "game-development", title: "Game Development", icon: "🎮", color: "accent" },
+                ].map((mod) => (
+                  <div
+                    key={mod.id}
+                    onClick={() => navigate(`/module/${mod.id}`)}
+                    className={`rounded-xl p-4 cursor-pointer transition-all hover:scale-[1.02] ${
+                      isKidsMode 
+                        ? 'bg-gradient-to-br from-card to-primary/5 border-2 border-primary/20 hover:border-primary/50 hover:shadow-xl' 
+                        : 'bg-card border border-border hover:shadow-lg'
+                    }`}
+                  >
+                    <div className={`mb-2 ${isKidsMode ? 'text-5xl' : 'text-4xl'}`}>{mod.icon}</div>
+                    <h3 className={`font-bold ${isKidsMode ? 'text-lg' : ''}`}>{mod.title}</h3>
+                  </div>
+                ))}
+              </div>
+            </motion.section>
+          </TabsContent>
+
+          {/* Games Tab */}
+          <TabsContent value="games">
+            <motion.section
+              id="games-section"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+            >
+              <h2 className={`text-xl font-bold text-foreground mb-4 flex items-center gap-2 ${isKidsMode ? 'text-2xl' : ''}`}>
+                {isKidsMode ? '🎮 Fun Games!' : 'Mini Games'}
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {gameModes.map((game, index) => (
+                  <GameModeCard key={game.id} {...game} index={index} />
+                ))}
+              </div>
+            </motion.section>
+          </TabsContent>
+        </Tabs>
       </main>
     </div>
   );

@@ -799,6 +799,10 @@ export const learningTracks: LearningTrack[] = [
 ];
 
 // Helper functions
+export function getZoneById(zoneId: string): Zone | undefined {
+  return zones.find(zone => zone.id === zoneId);
+}
+
 export function getZoneByGameId(gameId: string): Zone | undefined {
   return zones.find(zone => zone.games.includes(gameId));
 }

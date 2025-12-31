@@ -9,6 +9,7 @@ import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import GamePage from "./pages/GamePage";
+import ZonePage from "./pages/ZonePage";
 import ModulePage from "./pages/ModulePage";
 import LessonPage from "./pages/LessonPage";
 import Settings from "./pages/Settings";
@@ -36,6 +37,7 @@ const App = () => (
               <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
               <Route path="/game/:gameId" element={<ProtectedRoute><GamePage /></ProtectedRoute>} />
               <Route path="/module/:moduleId" element={<ProtectedRoute><ModulePage /></ProtectedRoute>} />
+              <Route path="/zone/:zoneId" element={<ProtectedRoute><ZonePage /></ProtectedRoute>} />
               <Route path="/lesson/:moduleId/:lessonId" element={<ProtectedRoute><LessonPage /></ProtectedRoute>} />
               <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
               <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
