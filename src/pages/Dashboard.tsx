@@ -12,7 +12,7 @@ import { useAdmin } from "@/hooks/useAdmin";
 import { useSubscription } from "@/hooks/useSubscription";
 import { SubscriptionGate } from "@/components/subscription/SubscriptionGate";
 import { zones } from "@/data/learningSystem";
-import { Gamepad2, Flame, Star, Trophy, Crown, Settings, Map, BookOpen } from "lucide-react";
+import { Gamepad2, Flame, Star, Trophy, Crown, Settings, Map, BookOpen, BarChart3 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -103,6 +103,10 @@ export default function Dashboard() {
                 Admin Dashboard
               </Button>
             )}
+            <Button variant="outline" size="sm" onClick={() => navigate('/analytics')}>
+              <BarChart3 className="w-4 h-4 mr-2" />
+              Analytics
+            </Button>
             {subscribed && (
               <Button variant="outline" size="sm" onClick={openCustomerPortal}>
                 <Crown className="w-4 h-4 mr-2" />
