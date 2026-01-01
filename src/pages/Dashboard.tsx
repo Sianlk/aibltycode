@@ -12,7 +12,8 @@ import { useAdmin } from "@/hooks/useAdmin";
 import { useSubscription } from "@/hooks/useSubscription";
 import { SubscriptionGate } from "@/components/subscription/SubscriptionGate";
 import { zones } from "@/data/learningSystem";
-import { Gamepad2, Flame, Star, Trophy, Crown, Settings, Map, BookOpen, BarChart3 } from "lucide-react";
+import { ProjectSubmission } from "@/components/dashboard/ProjectSubmission";
+import { Gamepad2, Flame, Star, Trophy, Crown, Settings, Map, BookOpen, BarChart3, Award } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -194,7 +195,7 @@ export default function Dashboard() {
 
         {/* Content Tabs */}
         <Tabs defaultValue="zones" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 mb-6">
+          <TabsList className="grid w-full grid-cols-4 mb-6">
             <TabsTrigger value="zones" className="flex items-center gap-2">
               <Map className="w-4 h-4" />
               {isKidsMode ? '🗺️ Zones' : 'Zones'}
@@ -206,6 +207,10 @@ export default function Dashboard() {
             <TabsTrigger value="games" className="flex items-center gap-2">
               <Gamepad2 className="w-4 h-4" />
               {isKidsMode ? '🎮 Games' : 'Games'}
+            </TabsTrigger>
+            <TabsTrigger value="projects" className="flex items-center gap-2">
+              <Award className="w-4 h-4" />
+              {isKidsMode ? '🏆 Projects' : 'Projects'}
             </TabsTrigger>
           </TabsList>
 
@@ -303,6 +308,16 @@ export default function Dashboard() {
                   <GameModeCard key={game.id} {...game} index={index} />
                 ))}
               </div>
+            </motion.section>
+          </TabsContent>
+
+          {/* Projects Tab */}
+          <TabsContent value="projects">
+            <motion.section
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+            >
+              <ProjectSubmission />
             </motion.section>
           </TabsContent>
         </Tabs>
