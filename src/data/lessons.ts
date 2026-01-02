@@ -1067,7 +1067,10 @@ export const gameDevLessons: Record<string, LessonData> = {
   },
 };
 
-// Export all lessons combined
+// Import expanded lessons from the expanded module
+import { allExpandedLessons } from "./lessonsExpanded";
+
+// Export all lessons combined (including expanded lessons)
 export const allLessons: Record<string, LessonData> = {
   ...javaLessons,
   ...systemsLessons,
@@ -1076,6 +1079,7 @@ export const allLessons: Record<string, LessonData> = {
   ...aiDataScienceLessons,
   ...businessSystemsLessons,
   ...gameDevLessons,
+  ...allExpandedLessons, // Merged expanded content
 };
 
 // Get lessons by module
@@ -1086,4 +1090,9 @@ export function getLessonsByModule(moduleId: string): LessonData[] {
 // Get lesson by ID
 export function getLessonById(lessonId: string): LessonData | undefined {
   return allLessons[lessonId];
+}
+
+// Get drilling lessons only
+export function getDrillingLessons(): LessonData[] {
+  return Object.values(allLessons).filter(lesson => lesson.category === "Code Drilling");
 }

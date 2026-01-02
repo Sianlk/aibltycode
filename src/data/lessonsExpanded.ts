@@ -277,7 +277,7 @@ export const codeDrillingLessons: Record<string, LessonData> = {
     ],
   },
 
-  // === ARRAY DRILLING ===
+// === ARRAY DRILLING ===
   "array-drill": {
     id: "array-drill", moduleId: "java-foundations", title: "Array Drill", xpReward: 100, category: "Code Drilling",
     steps: [
@@ -287,6 +287,119 @@ export const codeDrillingLessons: Record<string, LessonData> = {
       { type: "typing", title: "Access Element", difficulty: "medium", prompt: "Get first element!", codeToType: "int first = nums[0];", explanation: "Arrays are zero-indexed - first element is [0]." },
       { type: "typing", title: "Array Length", difficulty: "medium", prompt: "Get array length!", codeToType: "int len = nums.length;", explanation: "length is property (no parentheses) not method." },
       { type: "typing", title: "Loop Array", difficulty: "hard", prompt: "For-each over array!", codeToType: "for (int n : nums) { }", explanation: "Enhanced for: for (type var : array) { }" },
+    ],
+  },
+
+  // === SWITCH STATEMENT DRILLING ===
+  "switch-drill": {
+    id: "switch-drill", moduleId: "java-foundations", title: "Switch Drill", xpReward: 100, category: "Code Drilling",
+    steps: [
+      { type: "typing", title: "Switch Start", difficulty: "easy", prompt: "Start switch block!", codeToType: "switch (day) {", explanation: "switch (variable) { - evaluates one variable." },
+      { type: "typing", title: "Case Statement", difficulty: "medium", prompt: "Add a case!", codeToType: 'case 1: break;', explanation: "case value: code; break; - stops fallthrough." },
+      { type: "typing", title: "Default Case", difficulty: "medium", prompt: "Add default!", codeToType: "default: break;", explanation: "default runs when no case matches." },
+      { type: "typing", title: "Full Switch", difficulty: "hard", prompt: "Complete switch!", codeToType: "switch (x) { case 1: break; default: break; }", explanation: "switch { cases + default }" },
+      { type: "typing", title: "String Switch", difficulty: "hard", prompt: "Switch on String!", codeToType: 'switch (cmd) { case "go": break; }', explanation: "Java 7+ allows String in switch!" },
+    ],
+  },
+
+  // === STRING OPERATIONS DRILLING ===
+  "string-drill": {
+    id: "string-drill", moduleId: "java-foundations", title: "String Drill", xpReward: 100, category: "Code Drilling",
+    steps: [
+      { type: "typing", title: "String Length", difficulty: "easy", prompt: "Get string length!", codeToType: "int len = text.length();", explanation: "length() is a method on String - note parentheses!" },
+      { type: "typing", title: "Uppercase", difficulty: "easy", prompt: "Convert to uppercase!", codeToType: "String upper = text.toUpperCase();", explanation: "Returns new String - original unchanged!" },
+      { type: "typing", title: "Substring", difficulty: "medium", prompt: "Extract substring!", codeToType: "String sub = text.substring(0, 5);", explanation: "substring(start, end) - end is exclusive!" },
+      { type: "typing", title: "Char At", difficulty: "medium", prompt: "Get character!", codeToType: "char c = text.charAt(0);", explanation: "charAt(index) returns single character." },
+      { type: "typing", title: "Contains Check", difficulty: "medium", prompt: "Check contains!", codeToType: 'boolean has = text.contains("java");', explanation: "contains() checks if substring exists." },
+      { type: "typing", title: "Split String", difficulty: "hard", prompt: "Split by comma!", codeToType: 'String[] parts = text.split(",");', explanation: "split(delimiter) returns array of parts." },
+    ],
+  },
+
+  // === PRINT STATEMENT DRILLING ===
+  "print-drill": {
+    id: "print-drill", moduleId: "java-foundations", title: "Print Statement Drill", xpReward: 50, category: "Code Drilling",
+    steps: [
+      { type: "typing", title: "Println", difficulty: "easy", prompt: "Print with newline!", codeToType: 'System.out.println("Hello");', explanation: "println adds newline after output." },
+      { type: "typing", title: "Print", difficulty: "easy", prompt: "Print no newline!", codeToType: 'System.out.print("Hi");', explanation: "print stays on same line." },
+      { type: "typing", title: "Print Variable", difficulty: "medium", prompt: "Print a variable!", codeToType: 'System.out.println(name);', explanation: "No quotes around variable names!" },
+      { type: "typing", title: "Concatenate", difficulty: "medium", prompt: "Print text + variable!", codeToType: 'System.out.println("Age: " + age);', explanation: "+ joins strings and variables." },
+      { type: "typing", title: "Printf", difficulty: "hard", prompt: "Formatted print!", codeToType: 'System.out.printf("Score: %d", score);', explanation: "printf with format specifiers: %d for int." },
+    ],
+  },
+
+  // === COMPARISON OPERATORS DRILLING ===
+  "comparison-drill": {
+    id: "comparison-drill", moduleId: "java-foundations", title: "Comparison Drill", xpReward: 75, category: "Code Drilling",
+    steps: [
+      { type: "typing", title: "Equals", difficulty: "easy", prompt: "Check equality!", codeToType: "boolean same = (a == b);", explanation: "== checks if values are equal." },
+      { type: "typing", title: "Not Equals", difficulty: "easy", prompt: "Check not equal!", codeToType: "boolean diff = (a != b);", explanation: "!= checks if values are different." },
+      { type: "typing", title: "Greater Than", difficulty: "easy", prompt: "Check greater!", codeToType: "boolean bigger = (a > b);", explanation: "> checks if left is greater than right." },
+      { type: "typing", title: "Less Or Equal", difficulty: "medium", prompt: "Check less or equal!", codeToType: "boolean small = (a <= b);", explanation: "<= checks less than OR equal to." },
+      { type: "typing", title: "String Equals", difficulty: "hard", prompt: "Compare strings!", codeToType: 'boolean eq = s1.equals(s2);', explanation: "Use .equals() for String comparison, not ==!" },
+    ],
+  },
+
+  // === VARIABLE DECLARATION DRILLING ===
+  "variable-drill": {
+    id: "variable-drill", moduleId: "java-foundations", title: "Variable Drill", xpReward: 75, category: "Code Drilling",
+    steps: [
+      { type: "typing", title: "Int Variable", difficulty: "easy", prompt: "Declare integer!", codeToType: "int count = 0;", explanation: "int for whole numbers." },
+      { type: "typing", title: "Double Variable", difficulty: "easy", prompt: "Declare decimal!", codeToType: "double price = 9.99;", explanation: "double for decimal numbers." },
+      { type: "typing", title: "String Variable", difficulty: "easy", prompt: "Declare string!", codeToType: 'String name = "Java";', explanation: "String with capital S, text in quotes." },
+      { type: "typing", title: "Boolean Variable", difficulty: "medium", prompt: "Declare boolean!", codeToType: "boolean active = true;", explanation: "boolean for true/false values." },
+      { type: "typing", title: "Final Constant", difficulty: "medium", prompt: "Declare constant!", codeToType: "final int MAX = 100;", explanation: "final makes it unchangeable." },
+      { type: "typing", title: "Char Variable", difficulty: "medium", prompt: "Declare character!", codeToType: "char grade = 'A';", explanation: "char uses single quotes, one character only." },
+    ],
+  },
+
+  // === ARITHMETIC DRILLING ===
+  "arithmetic-drill": {
+    id: "arithmetic-drill", moduleId: "java-foundations", title: "Arithmetic Drill", xpReward: 75, category: "Code Drilling",
+    steps: [
+      { type: "typing", title: "Addition", difficulty: "easy", prompt: "Add numbers!", codeToType: "int sum = a + b;", explanation: "+ adds values." },
+      { type: "typing", title: "Subtraction", difficulty: "easy", prompt: "Subtract!", codeToType: "int diff = a - b;", explanation: "- subtracts." },
+      { type: "typing", title: "Multiplication", difficulty: "easy", prompt: "Multiply!", codeToType: "int product = a * b;", explanation: "* multiplies." },
+      { type: "typing", title: "Division", difficulty: "medium", prompt: "Divide!", codeToType: "int quotient = a / b;", explanation: "/ divides (integer division truncates)." },
+      { type: "typing", title: "Modulo", difficulty: "medium", prompt: "Get remainder!", codeToType: "int remainder = a % b;", explanation: "% returns remainder after division." },
+      { type: "typing", title: "Increment", difficulty: "medium", prompt: "Add one!", codeToType: "count++;", explanation: "++ adds 1 to variable." },
+      { type: "typing", title: "Compound Add", difficulty: "hard", prompt: "Add and assign!", codeToType: "total += 10;", explanation: "+= adds and assigns in one step." },
+    ],
+  },
+
+  // === INTERFACE DRILLING ===
+  "interface-drill": {
+    id: "interface-drill", moduleId: "java-foundations", title: "Interface Drill", xpReward: 125, category: "Code Drilling",
+    steps: [
+      { type: "typing", title: "Interface Declaration", difficulty: "medium", prompt: "Declare interface!", codeToType: "public interface Drawable { }", explanation: "interface keyword, like class but abstract." },
+      { type: "typing", title: "Interface Method", difficulty: "medium", prompt: "Add abstract method!", codeToType: "void draw();", explanation: "No body, just signature - implementation comes later." },
+      { type: "typing", title: "Implement Interface", difficulty: "hard", prompt: "Implement interface!", codeToType: "public class Circle implements Drawable { }", explanation: "implements keyword connects class to interface." },
+      { type: "typing", title: "Override Method", difficulty: "hard", prompt: "Override draw!", codeToType: "@Override public void draw() { }", explanation: "@Override annotation marks implementation." },
+      { type: "typing", title: "Multiple Interfaces", difficulty: "hard", prompt: "Implement two!", codeToType: "class X implements A, B { }", explanation: "Comma-separated for multiple interfaces." },
+    ],
+  },
+
+  // === ARRAYLIST DRILLING ===
+  "arraylist-drill": {
+    id: "arraylist-drill", moduleId: "java-foundations", title: "ArrayList Drill", xpReward: 100, category: "Code Drilling",
+    steps: [
+      { type: "typing", title: "Create ArrayList", difficulty: "medium", prompt: "Create String list!", codeToType: "ArrayList<String> list = new ArrayList<>();", explanation: "ArrayList<Type> with diamond operator <>." },
+      { type: "typing", title: "Add Element", difficulty: "medium", prompt: "Add to list!", codeToType: 'list.add("item");', explanation: "add() appends to end of list." },
+      { type: "typing", title: "Get Element", difficulty: "medium", prompt: "Get by index!", codeToType: "String item = list.get(0);", explanation: "get(index) retrieves element." },
+      { type: "typing", title: "Remove Element", difficulty: "medium", prompt: "Remove by index!", codeToType: "list.remove(0);", explanation: "remove(index) deletes element." },
+      { type: "typing", title: "List Size", difficulty: "medium", prompt: "Get list size!", codeToType: "int size = list.size();", explanation: "size() returns count of elements." },
+      { type: "typing", title: "Loop ArrayList", difficulty: "hard", prompt: "For-each loop!", codeToType: "for (String s : list) { }", explanation: "Enhanced for works with ArrayList too." },
+    ],
+  },
+
+  // === SCANNER INPUT DRILLING ===
+  "scanner-drill": {
+    id: "scanner-drill", moduleId: "java-foundations", title: "Scanner Input Drill", xpReward: 100, category: "Code Drilling",
+    steps: [
+      { type: "typing", title: "Create Scanner", difficulty: "medium", prompt: "Create Scanner!", codeToType: "Scanner sc = new Scanner(System.in);", explanation: "Scanner reads from System.in (keyboard)." },
+      { type: "typing", title: "Read String", difficulty: "medium", prompt: "Read line!", codeToType: "String line = sc.nextLine();", explanation: "nextLine() reads entire line." },
+      { type: "typing", title: "Read Int", difficulty: "medium", prompt: "Read integer!", codeToType: "int num = sc.nextInt();", explanation: "nextInt() reads integer value." },
+      { type: "typing", title: "Read Double", difficulty: "medium", prompt: "Read decimal!", codeToType: "double val = sc.nextDouble();", explanation: "nextDouble() reads decimal." },
+      { type: "typing", title: "Close Scanner", difficulty: "medium", prompt: "Close scanner!", codeToType: "sc.close();", explanation: "Always close Scanner when done." },
     ],
   },
 };
