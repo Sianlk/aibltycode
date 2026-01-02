@@ -404,9 +404,227 @@ export const codeDrillingLessons: Record<string, LessonData> = {
   },
 };
 
+// ==========================================
+// ADVANCED PROFESSIONAL CONTENT
+// ==========================================
+
+// === ADVANCED JAVA PATTERNS ===
+export const advancedJavaLessons: Record<string, LessonData> = {
+  "streams-api": {
+    id: "streams-api", moduleId: "java-foundations", title: "Java Streams API", xpReward: 175, category: "Advanced Java",
+    steps: [
+      { type: "typing", title: "Create Stream", difficulty: "hard", prompt: "Stream from list!", codeToType: "list.stream()", explanation: ".stream() converts collection to a stream for functional processing." },
+      { type: "typing", title: "Filter Stream", difficulty: "hard", prompt: "Filter elements!", codeToType: ".filter(x -> x > 0)", explanation: "filter() keeps elements matching the predicate (condition)." },
+      { type: "typing", title: "Map Stream", difficulty: "hard", prompt: "Transform elements!", codeToType: ".map(x -> x * 2)", explanation: "map() transforms each element using the function." },
+      { type: "typing", title: "Collect Stream", difficulty: "hard", prompt: "Collect to list!", codeToType: ".collect(Collectors.toList())", explanation: "collect() gathers stream results into a collection." },
+      { type: "typing", title: "Full Pipeline", difficulty: "hard", prompt: "Complete stream pipeline!", codeToType: "list.stream().filter(x -> x > 0).map(x -> x * 2).collect(Collectors.toList())", explanation: "Chain operations: source → intermediate ops → terminal op." },
+    ],
+  },
+  "lambda-expressions": {
+    id: "lambda-expressions", moduleId: "java-foundations", title: "Lambda Expressions", xpReward: 150, category: "Advanced Java",
+    steps: [
+      { type: "typing", title: "Basic Lambda", difficulty: "hard", prompt: "Simple lambda!", codeToType: "x -> x * 2", explanation: "Lambda: parameter -> expression. Anonymous function!" },
+      { type: "typing", title: "Two Params", difficulty: "hard", prompt: "Lambda with two params!", codeToType: "(a, b) -> a + b", explanation: "Multiple parameters in parentheses." },
+      { type: "typing", title: "Lambda Block", difficulty: "hard", prompt: "Lambda with block!", codeToType: "x -> { return x * 2; }", explanation: "Braces needed for multiple statements, explicit return." },
+      { type: "typing", title: "Method Reference", difficulty: "hard", prompt: "Method reference!", codeToType: "System.out::println", explanation: ":: references a method. Shorthand for lambda." },
+    ],
+  },
+  "optionals": {
+    id: "optionals", moduleId: "java-foundations", title: "Optional Class", xpReward: 125, category: "Advanced Java",
+    steps: [
+      { type: "typing", title: "Create Optional", difficulty: "hard", prompt: "Create Optional!", codeToType: "Optional.of(value)", explanation: "Optional wraps values that might be null." },
+      { type: "typing", title: "Empty Optional", difficulty: "hard", prompt: "Empty Optional!", codeToType: "Optional.empty()", explanation: "empty() creates Optional with no value." },
+      { type: "typing", title: "Nullable", difficulty: "hard", prompt: "Optional from nullable!", codeToType: "Optional.ofNullable(value)", explanation: "ofNullable handles null safely - no exception." },
+      { type: "typing", title: "Get Value", difficulty: "hard", prompt: "Get or default!", codeToType: "opt.orElse(defaultValue)", explanation: "orElse returns value or default if empty." },
+    ],
+  },
+  "file-io": {
+    id: "file-io", moduleId: "java-foundations", title: "File I/O", xpReward: 150, category: "Advanced Java",
+    steps: [
+      { type: "typing", title: "Create Path", difficulty: "medium", prompt: "Create file path!", codeToType: "Path path = Paths.get(\"file.txt\");", explanation: "Paths.get() creates Path object from string." },
+      { type: "typing", title: "Read Lines", difficulty: "hard", prompt: "Read all lines!", codeToType: "List<String> lines = Files.readAllLines(path);", explanation: "readAllLines reads entire file into list." },
+      { type: "typing", title: "Write File", difficulty: "hard", prompt: "Write to file!", codeToType: "Files.write(path, lines);", explanation: "Files.write() writes list of strings to file." },
+      { type: "typing", title: "BufferedReader", difficulty: "hard", prompt: "Create reader!", codeToType: "BufferedReader br = new BufferedReader(new FileReader(file));", explanation: "BufferedReader efficiently reads text files." },
+    ],
+  },
+  "generics": {
+    id: "generics", moduleId: "java-foundations", title: "Generics", xpReward: 150, category: "Advanced Java",
+    steps: [
+      { type: "typing", title: "Generic Class", difficulty: "hard", prompt: "Generic class!", codeToType: "public class Box<T> { }", explanation: "<T> is type parameter - replaced with actual type." },
+      { type: "typing", title: "Generic Method", difficulty: "hard", prompt: "Generic method!", codeToType: "public <T> void print(T item) { }", explanation: "<T> before return type declares method's type parameter." },
+      { type: "typing", title: "Bounded Type", difficulty: "hard", prompt: "Bounded generic!", codeToType: "public class Box<T extends Number> { }", explanation: "extends bounds: T must be Number or subclass." },
+      { type: "typing", title: "Wildcard", difficulty: "hard", prompt: "Wildcard type!", codeToType: "List<? extends Number>", explanation: "? is wildcard - unknown type extending Number." },
+    ],
+  },
+  "concurrency-basics": {
+    id: "concurrency-basics", moduleId: "java-foundations", title: "Concurrency Basics", xpReward: 175, category: "Advanced Java",
+    steps: [
+      { type: "typing", title: "Create Thread", difficulty: "hard", prompt: "Create thread!", codeToType: "Thread t = new Thread(() -> { });", explanation: "Pass Runnable (lambda) to Thread constructor." },
+      { type: "typing", title: "Start Thread", difficulty: "hard", prompt: "Start thread!", codeToType: "t.start();", explanation: "start() begins thread execution. Never call run() directly!" },
+      { type: "typing", title: "Synchronized", difficulty: "hard", prompt: "Synchronized method!", codeToType: "public synchronized void update() { }", explanation: "synchronized prevents concurrent access - thread safety." },
+      { type: "typing", title: "Join Thread", difficulty: "hard", prompt: "Wait for thread!", codeToType: "t.join();", explanation: "join() waits for thread to complete." },
+    ],
+  },
+  "design-patterns-intro": {
+    id: "design-patterns-intro", moduleId: "java-foundations", title: "Design Patterns Intro", xpReward: 200, category: "Advanced Java",
+    steps: [
+      { type: "quiz", title: "Singleton", difficulty: "hard", question: "Singleton ensures?", options: [{ label: "A", text: "Multiple instances" }, { label: "B", text: "Only one instance" }, { label: "C", text: "No instances" }], correctAnswer: "B", explanation: "Singleton: exactly one instance. Global point of access." },
+      { type: "quiz", title: "Factory", difficulty: "hard", question: "Factory pattern?", options: [{ label: "A", text: "Creates objects without exposing creation logic" }, { label: "B", text: "Destroys objects" }, { label: "C", text: "Stores objects" }], correctAnswer: "A", explanation: "Factory encapsulates object creation - client doesn't know concrete class." },
+      { type: "quiz", title: "Observer", difficulty: "hard", question: "Observer pattern?", options: [{ label: "A", text: "One-to-one" }, { label: "B", text: "One-to-many notification" }, { label: "C", text: "No relationship" }], correctAnswer: "B", explanation: "Observer: when one changes, all dependents are notified." },
+      { type: "quiz", title: "Strategy", difficulty: "hard", question: "Strategy pattern?", options: [{ label: "A", text: "Fixed algorithm" }, { label: "B", text: "Interchangeable algorithms" }, { label: "C", text: "No algorithm" }], correctAnswer: "B", explanation: "Strategy: define family of algorithms, make them interchangeable." },
+    ],
+  },
+};
+
+// === ADVANCED AI & DATA SCIENCE ===
+export const advancedAILessons: Record<string, LessonData> = {
+  "deep-learning-advanced": {
+    id: "deep-learning-advanced", moduleId: "ai-data-science", title: "Deep Learning Advanced", xpReward: 200, category: "Deep Learning",
+    steps: [
+      { type: "quiz", title: "CNN Purpose", difficulty: "hard", question: "CNNs excel at?", options: [{ label: "A", text: "Text processing" }, { label: "B", text: "Image recognition" }, { label: "C", text: "Audio only" }], correctAnswer: "B", explanation: "Convolutional Neural Networks detect spatial patterns - perfect for images!" },
+      { type: "quiz", title: "RNN Purpose", difficulty: "hard", question: "RNNs are for?", options: [{ label: "A", text: "Static images" }, { label: "B", text: "Sequential data" }, { label: "C", text: "Classification only" }], correctAnswer: "B", explanation: "Recurrent Neural Networks process sequences - text, time series, speech!" },
+      { type: "quiz", title: "Transformer", difficulty: "hard", question: "Transformers use?", options: [{ label: "A", text: "Recurrence" }, { label: "B", text: "Attention mechanism" }, { label: "C", text: "Convolution only" }], correctAnswer: "B", explanation: "Transformers use attention to process all tokens in parallel - powers GPT, BERT!" },
+      { type: "quiz", title: "Overfitting", difficulty: "hard", question: "Overfitting means?", options: [{ label: "A", text: "Model learns training data too well" }, { label: "B", text: "Model can't learn" }, { label: "C", text: "Model is perfect" }], correctAnswer: "A", explanation: "Overfit = memorizes training data, fails on new data. Use regularization!" },
+    ],
+  },
+  "feature-engineering": {
+    id: "feature-engineering", moduleId: "ai-data-science", title: "Feature Engineering", xpReward: 175, category: "Data Pipeline",
+    steps: [
+      { type: "quiz", title: "Feature Definition", difficulty: "medium", question: "Features are?", options: [{ label: "A", text: "Model outputs" }, { label: "B", text: "Input variables for model" }, { label: "C", text: "Training errors" }], correctAnswer: "B", explanation: "Features are measurable properties used as model inputs!" },
+      { type: "quiz", title: "One-Hot Encoding", difficulty: "hard", question: "One-hot encoding for?", options: [{ label: "A", text: "Numeric data" }, { label: "B", text: "Categorical data" }, { label: "C", text: "Missing values" }], correctAnswer: "B", explanation: "Convert categories to binary columns: Red→[1,0,0], Blue→[0,1,0]!" },
+      { type: "quiz", title: "Feature Selection", difficulty: "hard", question: "Feature selection removes?", options: [{ label: "A", text: "All features" }, { label: "B", text: "Irrelevant/redundant features" }, { label: "C", text: "Training data" }], correctAnswer: "B", explanation: "Select most predictive features - reduces noise and overfitting!" },
+      { type: "quiz", title: "Dimensionality", difficulty: "hard", question: "PCA reduces?", options: [{ label: "A", text: "Data rows" }, { label: "B", text: "Number of features" }, { label: "C", text: "Training time only" }], correctAnswer: "B", explanation: "Principal Component Analysis reduces dimensions while preserving variance!" },
+    ],
+  },
+  "model-deployment": {
+    id: "model-deployment", moduleId: "ai-data-science", title: "Model Deployment", xpReward: 175, category: "Production",
+    steps: [
+      { type: "quiz", title: "API Serving", difficulty: "hard", question: "Models often deployed as?", options: [{ label: "A", text: "Desktop apps" }, { label: "B", text: "REST APIs" }, { label: "C", text: "Printed reports" }], correctAnswer: "B", explanation: "REST APIs expose model predictions via HTTP endpoints!" },
+      { type: "quiz", title: "Model Monitoring", difficulty: "hard", question: "Monitor models for?", options: [{ label: "A", text: "Code style" }, { label: "B", text: "Performance drift" }, { label: "C", text: "Server color" }], correctAnswer: "B", explanation: "Models degrade over time - monitor accuracy, latency, data drift!" },
+      { type: "quiz", title: "A/B Testing", difficulty: "hard", question: "A/B testing compares?", options: [{ label: "A", text: "Two models in production" }, { label: "B", text: "Training vs test data" }, { label: "C", text: "Two datasets" }], correctAnswer: "A", explanation: "Route traffic to different models to compare real-world performance!" },
+    ],
+  },
+  "nlp-basics": {
+    id: "nlp-basics", moduleId: "ai-data-science", title: "NLP Fundamentals", xpReward: 175, category: "NLP",
+    steps: [
+      { type: "quiz", title: "NLP Definition", difficulty: "medium", question: "NLP processes?", options: [{ label: "A", text: "Images" }, { label: "B", text: "Human language" }, { label: "C", text: "Numbers only" }], correctAnswer: "B", explanation: "Natural Language Processing: machines understanding/generating text!" },
+      { type: "quiz", title: "Tokenization", difficulty: "medium", question: "Tokenization splits text into?", options: [{ label: "A", text: "Sentences only" }, { label: "B", text: "Words or subwords" }, { label: "C", text: "Paragraphs" }], correctAnswer: "B", explanation: "Tokens are basic units - words, subwords, or characters!" },
+      { type: "quiz", title: "Embeddings", difficulty: "hard", question: "Word embeddings are?", options: [{ label: "A", text: "Random numbers" }, { label: "B", text: "Dense vector representations" }, { label: "C", text: "Character counts" }], correctAnswer: "B", explanation: "Embeddings capture semantic meaning - similar words have similar vectors!" },
+      { type: "quiz", title: "Sentiment", difficulty: "medium", question: "Sentiment analysis detects?", options: [{ label: "A", text: "Grammar errors" }, { label: "B", text: "Positive/negative opinion" }, { label: "C", text: "Language type" }], correctAnswer: "B", explanation: "Classify text as positive, negative, or neutral sentiment!" },
+    ],
+  },
+};
+
+// === ADVANCED CYBERSECURITY ===
+export const advancedCybersecurityLessons: Record<string, LessonData> = {
+  "penetration-testing": {
+    id: "penetration-testing", moduleId: "cybersecurity", title: "Penetration Testing", xpReward: 200, category: "Offensive Security",
+    steps: [
+      { type: "quiz", title: "Pentest Definition", difficulty: "hard", question: "Penetration testing is?", options: [{ label: "A", text: "Breaking into systems illegally" }, { label: "B", text: "Authorized security testing" }, { label: "C", text: "Installing software" }], correctAnswer: "B", explanation: "Ethical hacking: authorized attempts to find vulnerabilities before attackers do!" },
+      { type: "quiz", title: "Phases", difficulty: "hard", question: "First pentest phase?", options: [{ label: "A", text: "Exploitation" }, { label: "B", text: "Reconnaissance" }, { label: "C", text: "Reporting" }], correctAnswer: "B", explanation: "Recon first: gather information about target. Know before you attack!" },
+      { type: "quiz", title: "OWASP Top 10", difficulty: "hard", question: "OWASP Top 10 lists?", options: [{ label: "A", text: "Best programming languages" }, { label: "B", text: "Critical web security risks" }, { label: "C", text: "Fast computers" }], correctAnswer: "B", explanation: "OWASP Top 10 = most critical web application security risks!" },
+    ],
+  },
+  "incident-response": {
+    id: "incident-response", moduleId: "cybersecurity", title: "Incident Response", xpReward: 175, category: "Defense",
+    steps: [
+      { type: "quiz", title: "IR Purpose", difficulty: "hard", question: "Incident response is?", options: [{ label: "A", text: "Ignoring breaches" }, { label: "B", text: "Systematic approach to security events" }, { label: "C", text: "Only prevention" }], correctAnswer: "B", explanation: "IR: detect, contain, eradicate, recover from security incidents!" },
+      { type: "quiz", title: "IR Phases", difficulty: "hard", question: "First IR phase?", options: [{ label: "A", text: "Eradication" }, { label: "B", text: "Preparation" }, { label: "C", text: "Recovery" }], correctAnswer: "B", explanation: "Preparation: have plans, tools, team ready BEFORE incidents occur!" },
+      { type: "quiz", title: "Containment", difficulty: "hard", question: "Containment aims to?", options: [{ label: "A", text: "Delete all data" }, { label: "B", text: "Limit damage spread" }, { label: "C", text: "Ignore threat" }], correctAnswer: "B", explanation: "Contain: isolate affected systems, prevent further spread!" },
+    ],
+  },
+  "security-architecture": {
+    id: "security-architecture", moduleId: "cybersecurity", title: "Security Architecture", xpReward: 175, category: "Defense",
+    steps: [
+      { type: "quiz", title: "Defense in Depth", difficulty: "hard", question: "Defense in depth uses?", options: [{ label: "A", text: "Single strong defense" }, { label: "B", text: "Multiple layers of security" }, { label: "C", text: "No security" }], correctAnswer: "B", explanation: "Layered security: if one fails, others protect. Castle walls analogy!" },
+      { type: "quiz", title: "Zero Trust", difficulty: "hard", question: "Zero trust means?", options: [{ label: "A", text: "Trust everyone" }, { label: "B", text: "Never trust, always verify" }, { label: "C", text: "No passwords" }], correctAnswer: "B", explanation: "Verify every request regardless of source - no implicit trust!" },
+      { type: "quiz", title: "DMZ", difficulty: "hard", question: "DMZ separates?", options: [{ label: "A", text: "Users from admins" }, { label: "B", text: "Public services from internal network" }, { label: "C", text: "Nothing" }], correctAnswer: "B", explanation: "Demilitarized Zone: buffer between internet and internal network!" },
+    ],
+  },
+};
+
+// === ADVANCED BUSINESS SYSTEMS ===
+export const advancedBusinessLessons: Record<string, LessonData> = {
+  "data-analytics": {
+    id: "data-analytics", moduleId: "business-systems", title: "Business Analytics", xpReward: 175, category: "Analytics",
+    steps: [
+      { type: "quiz", title: "Descriptive", difficulty: "medium", question: "Descriptive analytics shows?", options: [{ label: "A", text: "Future predictions" }, { label: "B", text: "What happened" }, { label: "C", text: "Why it happened" }], correctAnswer: "B", explanation: "Descriptive: reports, dashboards showing historical data - what happened!" },
+      { type: "quiz", title: "Predictive", difficulty: "hard", question: "Predictive analytics?", options: [{ label: "A", text: "Shows past data" }, { label: "B", text: "Forecasts future outcomes" }, { label: "C", text: "Only real-time" }], correctAnswer: "B", explanation: "Predictive uses ML/statistics to forecast - what might happen!" },
+      { type: "quiz", title: "Prescriptive", difficulty: "hard", question: "Prescriptive analytics?", options: [{ label: "A", text: "Recommends actions" }, { label: "B", text: "Only describes" }, { label: "C", text: "Ignores data" }], correctAnswer: "A", explanation: "Prescriptive: what should we do? Optimization recommendations!" },
+      { type: "quiz", title: "KPI", difficulty: "medium", question: "KPI stands for?", options: [{ label: "A", text: "Key Process Input" }, { label: "B", text: "Key Performance Indicator" }, { label: "C", text: "Knowledge Processing Interface" }], correctAnswer: "B", explanation: "KPIs are metrics that measure progress toward business goals!" },
+    ],
+  },
+  "business-intelligence": {
+    id: "business-intelligence", moduleId: "business-systems", title: "Business Intelligence", xpReward: 175, category: "Analytics",
+    steps: [
+      { type: "quiz", title: "BI Purpose", difficulty: "medium", question: "BI transforms data into?", options: [{ label: "A", text: "More data" }, { label: "B", text: "Actionable insights" }, { label: "C", text: "Code" }], correctAnswer: "B", explanation: "Business Intelligence: turn raw data into meaningful insights for decisions!" },
+      { type: "quiz", title: "Data Warehouse", difficulty: "hard", question: "Data warehouse is?", options: [{ label: "A", text: "Real-time database" }, { label: "B", text: "Central repository for analysis" }, { label: "C", text: "Backup storage" }], correctAnswer: "B", explanation: "Data warehouse consolidates data from multiple sources for analysis!" },
+      { type: "quiz", title: "ETL", difficulty: "hard", question: "ETL stands for?", options: [{ label: "A", text: "Extract Transform Load" }, { label: "B", text: "Enter Transfer Leave" }, { label: "C", text: "Evaluate Test Launch" }], correctAnswer: "A", explanation: "ETL: extract from sources, transform/clean, load into warehouse!" },
+      { type: "quiz", title: "Dashboard", difficulty: "medium", question: "BI dashboards provide?", options: [{ label: "A", text: "Raw SQL queries" }, { label: "B", text: "Visual summary of key metrics" }, { label: "C", text: "Code editor" }], correctAnswer: "B", explanation: "Dashboards visualize KPIs and metrics at a glance!" },
+    ],
+  },
+  "digital-transformation": {
+    id: "digital-transformation", moduleId: "business-systems", title: "Digital Transformation", xpReward: 150, category: "Strategy",
+    steps: [
+      { type: "quiz", title: "Definition", difficulty: "medium", question: "Digital transformation is?", options: [{ label: "A", text: "Buying computers" }, { label: "B", text: "Fundamental change using digital tech" }, { label: "C", text: "Website redesign" }], correctAnswer: "B", explanation: "DX: reimagine business processes, culture, customer experience with tech!" },
+      { type: "quiz", title: "Challenges", difficulty: "hard", question: "Biggest DX challenge?", options: [{ label: "A", text: "Technology" }, { label: "B", text: "Culture and change resistance" }, { label: "C", text: "Budget" }], correctAnswer: "B", explanation: "People and culture are hardest to change - not technology!" },
+      { type: "quiz", title: "Customer Experience", difficulty: "medium", question: "CX focus means?", options: [{ label: "A", text: "Internal processes only" }, { label: "B", text: "Customer journey optimization" }, { label: "C", text: "Cost cutting" }], correctAnswer: "B", explanation: "Customer Experience: every touchpoint matters. Seamless, personalized!" },
+    ],
+  },
+  "it-governance": {
+    id: "it-governance", moduleId: "business-systems", title: "IT Governance", xpReward: 175, category: "Management",
+    steps: [
+      { type: "quiz", title: "Purpose", difficulty: "hard", question: "IT governance ensures?", options: [{ label: "A", text: "Fastest computers" }, { label: "B", text: "IT supports business goals" }, { label: "C", text: "No IT spending" }], correctAnswer: "B", explanation: "IT governance aligns IT with business strategy and manages risk!" },
+      { type: "quiz", title: "COBIT", difficulty: "hard", question: "COBIT is?", options: [{ label: "A", text: "Programming language" }, { label: "B", text: "IT governance framework" }, { label: "C", text: "Database system" }], correctAnswer: "B", explanation: "COBIT: Control Objectives for Information and Related Technologies!" },
+      { type: "quiz", title: "ITIL", difficulty: "hard", question: "ITIL covers?", options: [{ label: "A", text: "Hardware repair" }, { label: "B", text: "IT service management" }, { label: "C", text: "Software coding" }], correctAnswer: "B", explanation: "ITIL: best practices for IT service delivery and management!" },
+    ],
+  },
+};
+
+// === GAME DEVELOPMENT ADVANCED ===
+export const advancedGameDevLessons: Record<string, LessonData> = {
+  "game-architecture": {
+    id: "game-architecture", moduleId: "game-development", title: "Game Architecture", xpReward: 175, category: "Architecture",
+    steps: [
+      { type: "quiz", title: "Game Loop", difficulty: "hard", question: "Game loop does?", options: [{ label: "A", text: "Runs once" }, { label: "B", text: "Continuously: input, update, render" }, { label: "C", text: "Only at startup" }], correctAnswer: "B", explanation: "Game loop: handle input, update game state, render graphics - repeat forever!" },
+      { type: "quiz", title: "ECS", difficulty: "hard", question: "Entity-Component-System?", options: [{ label: "A", text: "UI framework" }, { label: "B", text: "Composition over inheritance pattern" }, { label: "C", text: "Database design" }], correctAnswer: "B", explanation: "ECS: entities are IDs, components are data, systems are logic. Flexible!" },
+      { type: "quiz", title: "State Machine", difficulty: "hard", question: "State machines manage?", options: [{ label: "A", text: "File storage" }, { label: "B", text: "Game/character states" }, { label: "C", text: "Network" }], correctAnswer: "B", explanation: "States: idle, walking, attacking. Clear transitions between behaviors!" },
+    ],
+  },
+  "physics-systems": {
+    id: "physics-systems", moduleId: "game-development", title: "Physics Systems", xpReward: 175, category: "Physics",
+    steps: [
+      { type: "quiz", title: "Collision Detection", difficulty: "hard", question: "AABB collision checks?", options: [{ label: "A", text: "Pixel-perfect overlap" }, { label: "B", text: "Bounding box overlap" }, { label: "C", text: "Distance only" }], correctAnswer: "B", explanation: "Axis-Aligned Bounding Box: simple rectangle overlap check. Fast!" },
+      { type: "quiz", title: "Rigid Body", difficulty: "hard", question: "Rigid body simulates?", options: [{ label: "A", text: "Soft materials" }, { label: "B", text: "Solid object physics" }, { label: "C", text: "Particles only" }], correctAnswer: "B", explanation: "Rigid bodies: mass, velocity, forces. Realistic movement!" },
+      { type: "quiz", title: "Raycasting", difficulty: "hard", question: "Raycasting shoots?", options: [{ label: "A", text: "Bullets" }, { label: "B", text: "Invisible line to detect hits" }, { label: "C", text: "Sound waves" }], correctAnswer: "B", explanation: "Raycast: project line to detect what it hits. Aiming, line of sight!" },
+    ],
+  },
+  "ai-for-games": {
+    id: "ai-for-games", moduleId: "game-development", title: "Game AI", xpReward: 175, category: "AI",
+    steps: [
+      { type: "quiz", title: "Pathfinding", difficulty: "hard", question: "A* algorithm finds?", options: [{ label: "A", text: "Random path" }, { label: "B", text: "Optimal path using heuristics" }, { label: "C", text: "Longest path" }], correctAnswer: "B", explanation: "A* combines distance traveled + estimated distance. Optimal pathfinding!" },
+      { type: "quiz", title: "Behavior Trees", difficulty: "hard", question: "Behavior trees for?", options: [{ label: "A", text: "Rendering" }, { label: "B", text: "AI decision making" }, { label: "C", text: "Audio" }], correctAnswer: "B", explanation: "Behavior trees: modular, reusable AI behaviors. Selector, sequence nodes!" },
+      { type: "quiz", title: "Steering", difficulty: "hard", question: "Steering behaviors include?", options: [{ label: "A", text: "Seek, flee, wander" }, { label: "B", text: "Only straight lines" }, { label: "C", text: "Teleporting" }], correctAnswer: "A", explanation: "Steering: seek target, flee from threats, wander randomly. Natural movement!" },
+    ],
+  },
+  "multiplayer-basics": {
+    id: "multiplayer-basics", moduleId: "game-development", title: "Multiplayer Basics", xpReward: 200, category: "Networking",
+    steps: [
+      { type: "quiz", title: "Client-Server", difficulty: "hard", question: "Client-server model?", options: [{ label: "A", text: "All players equal" }, { label: "B", text: "Server is authority" }, { label: "C", text: "No networking" }], correctAnswer: "B", explanation: "Server validates game state - prevents cheating, syncs all clients!" },
+      { type: "quiz", title: "Lag Compensation", difficulty: "hard", question: "Lag compensation handles?", options: [{ label: "A", text: "Graphics rendering" }, { label: "B", text: "Network delay" }, { label: "C", text: "AI behavior" }], correctAnswer: "B", explanation: "Predict, interpolate to mask network latency. Smooth experience!" },
+      { type: "quiz", title: "Netcode", difficulty: "hard", question: "Good netcode minimizes?", options: [{ label: "A", text: "Graphics quality" }, { label: "B", text: "Perceived latency" }, { label: "C", text: "Player count" }], correctAnswer: "B", explanation: "Netcode: prediction, rollback, interpolation for responsive feel!" },
+    ],
+  },
+};
+
 // Combine all expanded lessons
 export const allExpandedLessons = {
   ...systemsAnalysisLessons,
   ...mathsExpandedLessons,
   ...codeDrillingLessons,
+  ...advancedJavaLessons,
+  ...advancedAILessons,
+  ...advancedCybersecurityLessons,
+  ...advancedBusinessLessons,
+  ...advancedGameDevLessons,
 };
