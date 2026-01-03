@@ -13,7 +13,9 @@ import { useSubscription } from "@/hooks/useSubscription";
 import { SubscriptionGate } from "@/components/subscription/SubscriptionGate";
 import { zones } from "@/data/learningSystem";
 import { ProjectSubmission } from "@/components/dashboard/ProjectSubmission";
-import { Gamepad2, Flame, Star, Trophy, Crown, Settings, Map, BookOpen, BarChart3, Award } from "lucide-react";
+import DailyChallenges from "@/components/dashboard/DailyChallenges";
+import AchievementsGallery from "@/components/dashboard/AchievementsGallery";
+import { Gamepad2, Flame, Star, Trophy, Crown, Settings, Map, BookOpen, BarChart3, Award, Target, Medal } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -41,6 +43,9 @@ const gameModes = [
   { id: "cybersecurity", title: "Security Challenge", description: "Cyber defense", icon: "speed" as const, color: "warning" as const, emoji: "🛡️" },
   { id: "ai-data", title: "AI & ML", description: "Machine learning", icon: "typing" as const, color: "accent" as const, emoji: "🤖" },
   { id: "game-dev", title: "Game Dev", description: "Game concepts", icon: "speed" as const, color: "primary" as const, emoji: "🎮" },
+  { id: "adaptive", title: "Adaptive Learning", description: "AI-powered practice", icon: "typing" as const, color: "secondary" as const, emoji: "🧠" },
+  { id: "voice-coach", title: "Voice Coach", description: "Read code aloud", icon: "typing" as const, color: "accent" as const, emoji: "🗣️" },
+  { id: "puzzle-builder", title: "Code Puzzles", description: "Build code pieces", icon: "ordering" as const, color: "primary" as const, emoji: "🧩" },
 ];
 
 export default function Dashboard() {
@@ -195,22 +200,30 @@ export default function Dashboard() {
 
         {/* Content Tabs */}
         <Tabs defaultValue="zones" className="w-full">
-          <TabsList className="grid w-full grid-cols-4 mb-6">
-            <TabsTrigger value="zones" className="flex items-center gap-2">
-              <Map className="w-4 h-4" />
-              {isKidsMode ? '🗺️ Zones' : 'Zones'}
+          <TabsList className="grid w-full grid-cols-6 mb-6">
+            <TabsTrigger value="zones" className="flex items-center gap-1 text-xs sm:text-sm">
+              <Map className="w-3 h-3 sm:w-4 sm:h-4" />
+              <span className="hidden sm:inline">{isKidsMode ? '🗺️' : ''}Zones</span>
             </TabsTrigger>
-            <TabsTrigger value="courses" className="flex items-center gap-2">
-              <BookOpen className="w-4 h-4" />
-              {isKidsMode ? '📚 Courses' : 'Courses'}
+            <TabsTrigger value="courses" className="flex items-center gap-1 text-xs sm:text-sm">
+              <BookOpen className="w-3 h-3 sm:w-4 sm:h-4" />
+              <span className="hidden sm:inline">{isKidsMode ? '📚' : ''}Courses</span>
             </TabsTrigger>
-            <TabsTrigger value="games" className="flex items-center gap-2">
-              <Gamepad2 className="w-4 h-4" />
-              {isKidsMode ? '🎮 Games' : 'Games'}
+            <TabsTrigger value="games" className="flex items-center gap-1 text-xs sm:text-sm">
+              <Gamepad2 className="w-3 h-3 sm:w-4 sm:h-4" />
+              <span className="hidden sm:inline">{isKidsMode ? '🎮' : ''}Games</span>
             </TabsTrigger>
-            <TabsTrigger value="projects" className="flex items-center gap-2">
-              <Award className="w-4 h-4" />
-              {isKidsMode ? '🏆 Projects' : 'Projects'}
+            <TabsTrigger value="challenges" className="flex items-center gap-1 text-xs sm:text-sm">
+              <Target className="w-3 h-3 sm:w-4 sm:h-4" />
+              <span className="hidden sm:inline">{isKidsMode ? '🎯' : ''}Daily</span>
+            </TabsTrigger>
+            <TabsTrigger value="achievements" className="flex items-center gap-1 text-xs sm:text-sm">
+              <Medal className="w-3 h-3 sm:w-4 sm:h-4" />
+              <span className="hidden sm:inline">{isKidsMode ? '🏅' : ''}Badges</span>
+            </TabsTrigger>
+            <TabsTrigger value="projects" className="flex items-center gap-1 text-xs sm:text-sm">
+              <Award className="w-3 h-3 sm:w-4 sm:h-4" />
+              <span className="hidden sm:inline">{isKidsMode ? '🏆' : ''}Projects</span>
             </TabsTrigger>
           </TabsList>
 
@@ -309,6 +322,16 @@ export default function Dashboard() {
                 ))}
               </div>
             </motion.section>
+          </TabsContent>
+
+          {/* Daily Challenges Tab */}
+          <TabsContent value="challenges">
+            <DailyChallenges />
+          </TabsContent>
+
+          {/* Achievements Tab */}
+          <TabsContent value="achievements">
+            <AchievementsGallery />
           </TabsContent>
 
           {/* Projects Tab */}
