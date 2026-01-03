@@ -22,6 +22,9 @@ import SQLQueryGame from "@/components/games/SQLQueryGame";
 import CybersecurityGame from "@/components/games/CybersecurityGame";
 import AIDataScienceGame from "@/components/games/AIDataScienceGame";
 import GameDevGame from "@/components/games/GameDevGame";
+import AdaptiveLearningEngine from "@/components/games/AdaptiveLearningEngine";
+import VoiceCodeCoach from "@/components/games/VoiceCodeCoach";
+import CodePuzzleBuilder from "@/components/games/CodePuzzleBuilder";
 import { ArrowLeft } from "lucide-react";
 
 const gameComponents: Record<string, React.ComponentType> = {
@@ -45,6 +48,9 @@ const gameComponents: Record<string, React.ComponentType> = {
   "cybersecurity": CybersecurityGame,
   "ai-data": AIDataScienceGame,
   "game-dev": GameDevGame,
+  "adaptive": AdaptiveLearningEngine,
+  "voice-coach": VoiceCodeCoach,
+  "puzzle-builder": CodePuzzleBuilder,
 };
 
 const gameInfo: Record<string, { title: string; emoji: string }> = {
@@ -68,6 +74,9 @@ const gameInfo: Record<string, { title: string; emoji: string }> = {
   "cybersecurity": { title: "Security Challenge", emoji: "🛡️" },
   "ai-data": { title: "AI & Data Science", emoji: "🤖" },
   "game-dev": { title: "Game Development", emoji: "🎮" },
+  "adaptive": { title: "Adaptive Learning", emoji: "🧠" },
+  "voice-coach": { title: "Voice Code Coach", emoji: "🗣️" },
+  "puzzle-builder": { title: "Code Puzzle Builder", emoji: "🧩" },
 };
 
 export default function GamePage() {
