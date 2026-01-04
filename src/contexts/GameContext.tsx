@@ -12,7 +12,6 @@ interface AccessibilitySettings {
 
 export interface ParentalControls {
   enabled: boolean;
-  pin: string;
   dailyTimeLimit: number;
   allowedHours: { start: number; end: number };
 }
@@ -39,8 +38,7 @@ interface GameContextType {
   parentalControls: ParentalControls;
   setParentalControls: (controls: ParentalControls) => void;
   isParentalLocked: boolean;
-  unlockParental: (pin: string) => boolean;
-  lockParental: () => void;
+  setIsParentalLocked: (locked: boolean) => void;
 }
 
 const GameContext = createContext<GameContextType | undefined>(undefined);
@@ -101,21 +99,10 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const [accessibility, setAccessibilityState] = useState<AccessibilitySettings>(defaultAccessibility);
   const [parentalControls, setParentalControls] = useState<ParentalControls>({
     enabled: false,
-    pin: "",
     dailyTimeLimit: 60,
     allowedHours: { start: 9, end: 21 }
   });
   const [isParentalLocked, setIsParentalLocked] = useState(true);
-
-  const unlockParental = (pin: string): boolean => {
-    if (pin === parentalControls.pin) {
-      setIsParentalLocked(false);
-      return true;
-    }
-    return false;
-  };
-
-  const lockParental = () => setIsParentalLocked(true);
 
   // Load saved state from localStorage
   useEffect(() => {
@@ -251,8 +238,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
         parentalControls,
         setParentalControls,
         isParentalLocked,
-        unlockParental,
-        lockParental,
+        setIsParentalLocked,
       }}
     >
       {children}
