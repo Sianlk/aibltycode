@@ -20,6 +20,9 @@ import AdminDashboard from "./pages/AdminDashboard";
 import Analytics from "./pages/Analytics";
 import Pricing from "./pages/Pricing";
 import NotFound from "./pages/NotFound";
+import MultiplayerBattle from "./pages/MultiplayerBattle";
+import AITutor from "./pages/AITutor";
+import CodeSandbox from "./pages/CodeSandbox";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +48,9 @@ const App = () => (
               <Route path="/leaderboard" element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />
               <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
               <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
+              <Route path="/battle" element={<ProtectedRoute><MultiplayerBattle /></ProtectedRoute>} />
+              <Route path="/tutor" element={<ProtectedRoute><AITutor /></ProtectedRoute>} />
+              <Route path="/sandbox" element={<ProtectedRoute><CodeSandbox /></ProtectedRoute>} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

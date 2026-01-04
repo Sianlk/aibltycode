@@ -46,6 +46,8 @@ const gameModes = [
   { id: "adaptive", title: "Adaptive Learning", description: "AI-powered practice", icon: "typing" as const, color: "secondary" as const, emoji: "🧠" },
   { id: "voice-coach", title: "Voice Coach", description: "Read code aloud", icon: "typing" as const, color: "accent" as const, emoji: "🗣️" },
   { id: "puzzle-builder", title: "Code Puzzles", description: "Build code pieces", icon: "ordering" as const, color: "primary" as const, emoji: "🧩" },
+  { id: "battle", title: "Multiplayer Battle", description: "Challenge friends!", icon: "speed" as const, color: "warning" as const, emoji: "⚔️", link: "/battle" },
+  { id: "sandbox", title: "Code Lab", description: "Live code editor", icon: "typing" as const, color: "success" as const, emoji: "💻", link: "/sandbox" },
 ];
 
 export default function Dashboard() {

@@ -41,6 +41,179 @@ export type Database = {
         }
         Relationships: []
       }
+      battle_rooms: {
+        Row: {
+          created_at: string | null
+          difficulty: number | null
+          ended_at: string | null
+          game_type: string
+          host_id: string | null
+          host_score: number | null
+          id: string
+          opponent_id: string | null
+          opponent_score: number | null
+          room_code: string
+          started_at: string | null
+          status: string
+          total_rounds: number | null
+          winner_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          difficulty?: number | null
+          ended_at?: string | null
+          game_type?: string
+          host_id?: string | null
+          host_score?: number | null
+          id?: string
+          opponent_id?: string | null
+          opponent_score?: number | null
+          room_code: string
+          started_at?: string | null
+          status?: string
+          total_rounds?: number | null
+          winner_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          difficulty?: number | null
+          ended_at?: string | null
+          game_type?: string
+          host_id?: string | null
+          host_score?: number | null
+          id?: string
+          opponent_id?: string | null
+          opponent_score?: number | null
+          room_code?: string
+          started_at?: string | null
+          status?: string
+          total_rounds?: number | null
+          winner_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "battle_rooms_host_id_fkey"
+            columns: ["host_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "battle_rooms_opponent_id_fkey"
+            columns: ["opponent_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "battle_rooms_winner_id_fkey"
+            columns: ["winner_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      battle_rounds: {
+        Row: {
+          correct_answer: number
+          created_at: string | null
+          host_answer: number | null
+          host_time_ms: number | null
+          id: string
+          opponent_answer: number | null
+          opponent_time_ms: number | null
+          question: Json
+          room_id: string
+          round_number: number
+          round_winner: string | null
+        }
+        Insert: {
+          correct_answer: number
+          created_at?: string | null
+          host_answer?: number | null
+          host_time_ms?: number | null
+          id?: string
+          opponent_answer?: number | null
+          opponent_time_ms?: number | null
+          question: Json
+          room_id: string
+          round_number: number
+          round_winner?: string | null
+        }
+        Update: {
+          correct_answer?: number
+          created_at?: string | null
+          host_answer?: number | null
+          host_time_ms?: number | null
+          id?: string
+          opponent_answer?: number | null
+          opponent_time_ms?: number | null
+          question?: Json
+          room_id?: string
+          round_number?: number
+          round_winner?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "battle_rounds_room_id_fkey"
+            columns: ["room_id"]
+            isOneToOne: false
+            referencedRelation: "battle_rooms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      battle_stats: {
+        Row: {
+          avg_answer_time_ms: number | null
+          best_win_streak: number | null
+          current_win_streak: number | null
+          draws: number | null
+          id: string
+          losses: number | null
+          rating: number | null
+          total_rounds_won: number | null
+          updated_at: string | null
+          user_id: string
+          wins: number | null
+        }
+        Insert: {
+          avg_answer_time_ms?: number | null
+          best_win_streak?: number | null
+          current_win_streak?: number | null
+          draws?: number | null
+          id?: string
+          losses?: number | null
+          rating?: number | null
+          total_rounds_won?: number | null
+          updated_at?: string | null
+          user_id: string
+          wins?: number | null
+        }
+        Update: {
+          avg_answer_time_ms?: number | null
+          best_win_streak?: number | null
+          current_win_streak?: number | null
+          draws?: number | null
+          id?: string
+          losses?: number | null
+          rating?: number | null
+          total_rounds_won?: number | null
+          updated_at?: string | null
+          user_id?: string
+          wins?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "battle_stats_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       bug_reports: {
         Row: {
           created_at: string | null
@@ -70,6 +243,143 @@ export type Database = {
           user_id?: string | null
         }
         Relationships: []
+      }
+      challenge_completions: {
+        Row: {
+          attempts: number | null
+          best_time_ms: number | null
+          challenge_id: string
+          completed_at: string | null
+          id: string
+          passed: boolean | null
+          user_code: string
+          user_id: string
+        }
+        Insert: {
+          attempts?: number | null
+          best_time_ms?: number | null
+          challenge_id: string
+          completed_at?: string | null
+          id?: string
+          passed?: boolean | null
+          user_code: string
+          user_id: string
+        }
+        Update: {
+          attempts?: number | null
+          best_time_ms?: number | null
+          challenge_id?: string
+          completed_at?: string | null
+          id?: string
+          passed?: boolean | null
+          user_code?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "challenge_completions_challenge_id_fkey"
+            columns: ["challenge_id"]
+            isOneToOne: false
+            referencedRelation: "code_challenges"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "challenge_completions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      code_challenges: {
+        Row: {
+          category: string | null
+          created_at: string | null
+          description: string
+          difficulty: number | null
+          expected_output: string | null
+          hints: Json | null
+          id: string
+          solution_code: string | null
+          starter_code: string | null
+          test_cases: Json | null
+          title: string
+          xp_reward: number | null
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string | null
+          description: string
+          difficulty?: number | null
+          expected_output?: string | null
+          hints?: Json | null
+          id?: string
+          solution_code?: string | null
+          starter_code?: string | null
+          test_cases?: Json | null
+          title: string
+          xp_reward?: number | null
+        }
+        Update: {
+          category?: string | null
+          created_at?: string | null
+          description?: string
+          difficulty?: number | null
+          expected_output?: string | null
+          hints?: Json | null
+          id?: string
+          solution_code?: string | null
+          starter_code?: string | null
+          test_cases?: Json | null
+          title?: string
+          xp_reward?: number | null
+        }
+        Relationships: []
+      }
+      code_projects: {
+        Row: {
+          code: string
+          created_at: string | null
+          description: string | null
+          id: string
+          is_public: boolean | null
+          language: string | null
+          title: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          code?: string
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          is_public?: boolean | null
+          language?: string | null
+          title?: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          code?: string
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          is_public?: boolean | null
+          language?: string | null
+          title?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "code_projects_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       game_scores: {
         Row: {
@@ -370,6 +680,73 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      tutor_conversations: {
+        Row: {
+          created_at: string | null
+          id: string
+          title: string | null
+          topic: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          title?: string | null
+          topic?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          title?: string | null
+          topic?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tutor_conversations_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tutor_messages: {
+        Row: {
+          content: string
+          conversation_id: string
+          created_at: string | null
+          id: string
+          role: string
+        }
+        Insert: {
+          content: string
+          conversation_id: string
+          created_at?: string | null
+          id?: string
+          role: string
+        }
+        Update: {
+          content?: string
+          conversation_id?: string
+          created_at?: string | null
+          id?: string
+          role?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tutor_messages_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "tutor_conversations"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_badges: {
         Row: {
