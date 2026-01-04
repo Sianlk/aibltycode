@@ -217,11 +217,41 @@ export type Database = {
         }
         Relationships: []
       }
+      parental_unlock_log: {
+        Row: {
+          attempted_at: string
+          id: string
+          success: boolean
+          user_id: string
+        }
+        Insert: {
+          attempted_at?: string
+          id?: string
+          success?: boolean
+          user_id: string
+        }
+        Update: {
+          attempted_at?: string
+          id?: string
+          success?: boolean
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "parental_unlock_log_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
           created_at: string | null
           display_name: string | null
+          hashed_parental_pin: string | null
           id: string
           last_activity_date: string | null
           mode: string | null
@@ -235,6 +265,7 @@ export type Database = {
           avatar_url?: string | null
           created_at?: string | null
           display_name?: string | null
+          hashed_parental_pin?: string | null
           id: string
           last_activity_date?: string | null
           mode?: string | null
@@ -248,6 +279,7 @@ export type Database = {
           avatar_url?: string | null
           created_at?: string | null
           display_name?: string | null
+          hashed_parental_pin?: string | null
           id?: string
           last_activity_date?: string | null
           mode?: string | null
@@ -448,6 +480,8 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      clear_parental_pin: { Args: never; Returns: boolean }
+      has_parental_pin: { Args: never; Returns: boolean }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -455,6 +489,8 @@ export type Database = {
         }
         Returns: boolean
       }
+      set_parental_pin: { Args: { pin_value: string }; Returns: boolean }
+      verify_parental_pin: { Args: { pin_attempt: string }; Returns: boolean }
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
