@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { GameProvider } from "@/contexts/GameContext";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
+import { TutorFloatingButton } from "@/components/tutor/TutorFloatingButton";
 import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import GamePage from "./pages/GamePage";
@@ -53,6 +54,8 @@ const App = () => (
               <Route path="/sandbox" element={<ProtectedRoute><CodeSandbox /></ProtectedRoute>} />
               <Route path="*" element={<NotFound />} />
             </Routes>
+            {/* Global AI Tutor Button */}
+            <TutorFloatingButton />
           </BrowserRouter>
         </TooltipProvider>
       </GameProvider>
