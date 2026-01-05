@@ -53,6 +53,7 @@ export type Database = {
           opponent_id: string | null
           opponent_score: number | null
           room_code: string
+          spectator_count: number | null
           started_at: string | null
           status: string
           total_rounds: number | null
@@ -69,6 +70,7 @@ export type Database = {
           opponent_id?: string | null
           opponent_score?: number | null
           room_code: string
+          spectator_count?: number | null
           started_at?: string | null
           status?: string
           total_rounds?: number | null
@@ -85,6 +87,7 @@ export type Database = {
           opponent_id?: string | null
           opponent_score?: number | null
           room_code?: string
+          spectator_count?: number | null
           started_at?: string | null
           status?: string
           total_rounds?: number | null
@@ -160,6 +163,42 @@ export type Database = {
             columns: ["room_id"]
             isOneToOne: false
             referencedRelation: "battle_rooms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      battle_spectators: {
+        Row: {
+          id: string
+          joined_at: string | null
+          room_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          id?: string
+          joined_at?: string | null
+          room_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          id?: string
+          joined_at?: string | null
+          room_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "battle_spectators_room_id_fkey"
+            columns: ["room_id"]
+            isOneToOne: false
+            referencedRelation: "battle_rooms"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "battle_spectators_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
         ]
@@ -648,6 +687,7 @@ export type Database = {
           current_period_end: string | null
           current_period_start: string | null
           id: string
+          is_grandfathered: boolean | null
           status: string
           stripe_customer_id: string | null
           stripe_subscription_id: string | null
@@ -660,6 +700,7 @@ export type Database = {
           current_period_end?: string | null
           current_period_start?: string | null
           id?: string
+          is_grandfathered?: boolean | null
           status?: string
           stripe_customer_id?: string | null
           stripe_subscription_id?: string | null
@@ -672,6 +713,7 @@ export type Database = {
           current_period_end?: string | null
           current_period_start?: string | null
           id?: string
+          is_grandfathered?: boolean | null
           status?: string
           stripe_customer_id?: string | null
           stripe_subscription_id?: string | null
@@ -866,6 +908,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_admin_email: { Args: { email: string }; Returns: boolean }
       set_parental_pin: { Args: { pin_value: string }; Returns: boolean }
       verify_parental_pin: { Args: { pin_attempt: string }; Returns: boolean }
     }
