@@ -25,7 +25,9 @@ import GameDevGame from "@/components/games/GameDevGame";
 import AdaptiveLearningEngine from "@/components/games/AdaptiveLearningEngine";
 import VoiceCodeCoach from "@/components/games/VoiceCodeCoach";
 import CodePuzzleBuilder from "@/components/games/CodePuzzleBuilder";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Trophy, Star, Zap } from "lucide-react";
+import { useAchievements } from "@/contexts/AchievementContext";
+import { useEffect } from "react";
 
 const gameComponents: Record<string, React.ComponentType> = {
   typing: CodeTypingGame,
@@ -53,80 +55,118 @@ const gameComponents: Record<string, React.ComponentType> = {
   "puzzle-builder": CodePuzzleBuilder,
 };
 
-const gameInfo: Record<string, { title: string; emoji: string }> = {
-  typing: { title: "Code Typing Practice", emoji: "⌨️" },
-  ordering: { title: "Code Ordering Puzzle", emoji: "🧩" },
-  speed: { title: "Speed Challenge", emoji: "⚡" },
-  pacman: { title: "Pacman Coder", emoji: "👾" },
-  "system-design": { title: "System Design", emoji: "🔧" },
-  "complexity-arcade": { title: "Complexity Arcade", emoji: "📊" },
-  pattern: { title: "Pattern Master", emoji: "🧠" },
-  "structure-builder": { title: "Structure Builder", emoji: "🏗️" },
-  flashcards: { title: "Visual Mnemonic Cards", emoji: "🃏" },
-  "spaced-rep": { title: "Spaced Repetition", emoji: "🧠" },
-  debugging: { title: "Bug Hunter", emoji: "🐛" },
-  "erd-builder": { title: "ERD Builder", emoji: "🗂️" },
-  "project-planner": { title: "Project Planner", emoji: "📋" },
-  "graph-visualizer": { title: "Graph Explorer", emoji: "📊" },
-  "use-case": { title: "Use Case Diagrams", emoji: "👥" },
-  "excel-master": { title: "Excel Master", emoji: "📊" },
-  "sql-query": { title: "SQL Query Master", emoji: "🗄️" },
-  "cybersecurity": { title: "Security Challenge", emoji: "🛡️" },
-  "ai-data": { title: "AI & Data Science", emoji: "🤖" },
-  "game-dev": { title: "Game Development", emoji: "🎮" },
-  "adaptive": { title: "Adaptive Learning", emoji: "🧠" },
-  "voice-coach": { title: "Voice Code Coach", emoji: "🗣️" },
-  "puzzle-builder": { title: "Code Puzzle Builder", emoji: "🧩" },
+const gameInfo: Record<string, { title: string; emoji: string; color: string }> = {
+  typing: { title: "Code Typing Practice", emoji: "⌨️", color: "primary" },
+  ordering: { title: "Code Ordering Puzzle", emoji: "🧩", color: "success" },
+  speed: { title: "Speed Challenge", emoji: "⚡", color: "warning" },
+  pacman: { title: "Pacman Coder", emoji: "👾", color: "primary" },
+  "system-design": { title: "System Design", emoji: "🔧", color: "accent" },
+  "complexity-arcade": { title: "Complexity Arcade", emoji: "📊", color: "secondary" },
+  pattern: { title: "Pattern Master", emoji: "🧠", color: "primary" },
+  "structure-builder": { title: "Structure Builder", emoji: "🏗️", color: "accent" },
+  flashcards: { title: "Visual Mnemonic Cards", emoji: "🃏", color: "warning" },
+  "spaced-rep": { title: "Spaced Repetition", emoji: "🧠", color: "success" },
+  debugging: { title: "Bug Hunter", emoji: "🐛", color: "warning" },
+  "erd-builder": { title: "ERD Builder", emoji: "🗂️", color: "primary" },
+  "project-planner": { title: "Project Planner", emoji: "📋", color: "accent" },
+  "graph-visualizer": { title: "Graph Explorer", emoji: "📊", color: "success" },
+  "use-case": { title: "Use Case Diagrams", emoji: "👥", color: "warning" },
+  "excel-master": { title: "Excel Master", emoji: "📊", color: "success" },
+  "sql-query": { title: "SQL Query Master", emoji: "🗄️", color: "primary" },
+  "cybersecurity": { title: "Security Challenge", emoji: "🛡️", color: "warning" },
+  "ai-data": { title: "AI & Data Science", emoji: "🤖", color: "accent" },
+  "game-dev": { title: "Game Development", emoji: "🎮", color: "primary" },
+  "adaptive": { title: "Adaptive Learning", emoji: "🧠", color: "secondary" },
+  "voice-coach": { title: "Voice Code Coach", emoji: "🗣️", color: "accent" },
+  "puzzle-builder": { title: "Code Puzzle Builder", emoji: "🧩", color: "primary" },
 };
 
 export default function GamePage() {
   const { gameId } = useParams<{ gameId: string }>();
   const navigate = useNavigate();
+  const { unlockAchievement } = useAchievements();
 
   const GameComponent = gameId ? gameComponents[gameId] : null;
   const info = gameId ? gameInfo[gameId] : null;
 
+  // Unlock first game achievement
+  useEffect(() => {
+    if (gameId) {
+      unlockAchievement('first_game');
+    }
+  }, [gameId, unlockAchievement]);
+
   if (!GameComponent || !info) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-center">
+      <div className="min-h-screen bg-background battle-arena-bg flex items-center justify-center">
+        <motion.div 
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          className="text-center glass p-8 rounded-2xl"
+        >
           <p className="text-xl text-muted-foreground mb-4">Game not found</p>
-          <Button onClick={() => navigate("/dashboard")}>Back to Dashboard</Button>
-        </div>
+          <Button onClick={() => navigate("/dashboard")} className="btn-ps5">
+            Back to Dashboard
+          </Button>
+        </motion.div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen battle-arena-bg">
       <Header />
 
       <main className="container mx-auto px-4 pt-24 pb-12">
         <motion.div
-          initial={{ y: 20, opacity: 0 }}
+          initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           className="mb-8"
         >
           <Button
             variant="ghost"
             onClick={() => navigate("/dashboard")}
-            className="mb-4"
+            className="mb-4 hover:bg-primary/10"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Back
+            Back to Dashboard
           </Button>
-          <h1 className="text-3xl font-bold text-foreground">
-            {info.emoji} {info.title}
-          </h1>
+          
+          <div className="flex items-center gap-4">
+            <motion.div 
+              className={`w-16 h-16 rounded-2xl bg-gradient-to-br from-${info.color} to-${info.color}/60 flex items-center justify-center text-3xl shadow-lg pulse-glow`}
+              animate={{ scale: [1, 1.02, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              {info.emoji}
+            </motion.div>
+            <div>
+              <h1 className="text-3xl font-bold font-display text-foreground">
+                {info.title}
+              </h1>
+              <div className="flex items-center gap-3 mt-1">
+                <div className="flex items-center gap-1 text-warning">
+                  <Star className="w-4 h-4" />
+                  <span className="text-sm font-medium">+50-150 XP</span>
+                </div>
+                <div className="flex items-center gap-1 text-primary">
+                  <Zap className="w-4 h-4" />
+                  <span className="text-sm font-medium">Streak Bonus</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </motion.div>
 
         <motion.div
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.1 }}
-          className="max-w-3xl mx-auto"
+          className="max-w-4xl mx-auto"
         >
-          <GameComponent />
+          <div className="card-ps5 p-6">
+            <GameComponent />
+          </div>
         </motion.div>
       </main>
     </div>
