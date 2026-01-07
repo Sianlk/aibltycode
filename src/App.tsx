@@ -54,6 +54,7 @@ const App = () => (
                 <Route path="/battle" element={<ProtectedRoute><MultiplayerBattle /></ProtectedRoute>} />
                 <Route path="/tutor" element={<ProtectedRoute><AITutor /></ProtectedRoute>} />
                 <Route path="/sandbox" element={<ProtectedRoute><CodeSandbox /></ProtectedRoute>} />
+                <Route path="/avatar" element={<ProtectedRoute><AvatarPage /></ProtectedRoute>} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
               {/* Global AI Tutor Button */}

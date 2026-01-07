@@ -14,6 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
+      avatar_items: {
+        Row: {
+          category: string
+          created_at: string | null
+          icon: string | null
+          id: string
+          name: string
+          rarity: string | null
+          unlock_requirement: string | null
+          xp_cost: number | null
+        }
+        Insert: {
+          category: string
+          created_at?: string | null
+          icon?: string | null
+          id?: string
+          name: string
+          rarity?: string | null
+          unlock_requirement?: string | null
+          xp_cost?: number | null
+        }
+        Update: {
+          category?: string
+          created_at?: string | null
+          icon?: string | null
+          id?: string
+          name?: string
+          rarity?: string | null
+          unlock_requirement?: string | null
+          xp_cost?: number | null
+        }
+        Relationships: []
+      }
       badges: {
         Row: {
           created_at: string | null
@@ -331,6 +364,91 @@ export type Database = {
           },
         ]
       }
+      challenge_progress: {
+        Row: {
+          challenge_id: string
+          completed: boolean | null
+          completed_at: string | null
+          created_at: string | null
+          id: string
+          progress: Json | null
+          user_id: string
+        }
+        Insert: {
+          challenge_id: string
+          completed?: boolean | null
+          completed_at?: string | null
+          created_at?: string | null
+          id?: string
+          progress?: Json | null
+          user_id: string
+        }
+        Update: {
+          challenge_id?: string
+          completed?: boolean | null
+          completed_at?: string | null
+          created_at?: string | null
+          id?: string
+          progress?: Json | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "challenge_progress_challenge_id_fkey"
+            columns: ["challenge_id"]
+            isOneToOne: false
+            referencedRelation: "challenges"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      challenges: {
+        Row: {
+          active_from: string | null
+          active_until: string | null
+          created_at: string | null
+          description: string | null
+          id: string
+          requirements: Json | null
+          reward_item_id: string | null
+          reward_xp: number | null
+          title: string
+          type: string
+        }
+        Insert: {
+          active_from?: string | null
+          active_until?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          requirements?: Json | null
+          reward_item_id?: string | null
+          reward_xp?: number | null
+          title: string
+          type: string
+        }
+        Update: {
+          active_from?: string | null
+          active_until?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          requirements?: Json | null
+          reward_item_id?: string | null
+          reward_xp?: number | null
+          title?: string
+          type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "challenges_reward_item_id_fkey"
+            columns: ["reward_item_id"]
+            isOneToOne: false
+            referencedRelation: "avatar_items"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       code_challenges: {
         Row: {
           category: string | null
@@ -597,6 +715,7 @@ export type Database = {
       }
       profiles: {
         Row: {
+          avatar_config: Json | null
           avatar_url: string | null
           created_at: string | null
           display_name: string | null
@@ -611,6 +730,7 @@ export type Database = {
           xp: number | null
         }
         Insert: {
+          avatar_config?: Json | null
           avatar_url?: string | null
           created_at?: string | null
           display_name?: string | null
@@ -625,6 +745,7 @@ export type Database = {
           xp?: number | null
         }
         Update: {
+          avatar_config?: Json | null
           avatar_url?: string | null
           created_at?: string | null
           display_name?: string | null
@@ -786,6 +907,35 @@ export type Database = {
             columns: ["conversation_id"]
             isOneToOne: false
             referencedRelation: "tutor_conversations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_avatar_items: {
+        Row: {
+          id: string
+          item_id: string
+          unlocked_at: string | null
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          item_id: string
+          unlocked_at?: string | null
+          user_id: string
+        }
+        Update: {
+          id?: string
+          item_id?: string
+          unlocked_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_avatar_items_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "avatar_items"
             referencedColumns: ["id"]
           },
         ]
