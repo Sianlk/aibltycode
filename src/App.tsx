@@ -25,6 +25,7 @@ import NotFound from "./pages/NotFound";
 import MultiplayerBattle from "./pages/MultiplayerBattle";
 import AITutor from "./pages/AITutor";
 import CodeSandbox from "./pages/CodeSandbox";
+import AvatarPage from "./pages/AvatarPage";
 
 const queryClient = new QueryClient();
 
