@@ -15,7 +15,7 @@ import { zones } from "@/data/learningSystem";
 import { ProjectSubmission } from "@/components/dashboard/ProjectSubmission";
 import DailyChallenges from "@/components/dashboard/DailyChallenges";
 import AchievementsGallery from "@/components/dashboard/AchievementsGallery";
-import { Gamepad2, Flame, Star, Trophy, Crown, Settings, Map, BookOpen, BarChart3, Award, Target, Medal } from "lucide-react";
+import { Gamepad2, Flame, Star, Trophy, Crown, Settings, Map, BookOpen, BarChart3, Award, Target, Medal, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -180,23 +180,32 @@ export default function Dashboard() {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.15 }}
-          className="flex flex-col sm:flex-row gap-3 mb-10"
+          className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-10"
         >
           <Button 
             size="lg" 
-            className={`flex-1 text-lg h-14 ${isKidsMode ? 'bg-gradient-to-r from-primary to-accent text-white' : 'bg-primary hover:bg-primary/90'}`}
+            className={`text-lg h-14 ${isKidsMode ? 'bg-gradient-to-r from-primary to-accent text-white' : 'bg-primary hover:bg-primary/90'}`}
             onClick={() => navigate('/module/java-foundations')}
           >
-            {isKidsMode ? '🚀' : ''} Continue Learning
+            {isKidsMode ? '🚀' : ''} Continue
           </Button>
           <Button 
             size="lg" 
             variant="outline"
-            className={`flex-1 text-lg h-14 ${isKidsMode ? 'border-2 border-accent' : 'border-2'}`}
+            className={`text-lg h-14 ${isKidsMode ? 'border-2 border-accent' : 'border-2'}`}
             onClick={() => document.getElementById('games-section')?.scrollIntoView({ behavior: 'smooth' })}
           >
             <Gamepad2 className="w-5 h-5 mr-2" />
-            {isKidsMode ? '🎮 Play Games!' : 'Play Mini Games'}
+            {isKidsMode ? '🎮 Games' : 'Games'}
+          </Button>
+          <Button 
+            size="lg" 
+            variant="outline"
+            className={`col-span-2 sm:col-span-1 text-lg h-14 ${isKidsMode ? 'border-2 border-primary bg-gradient-to-r from-primary/10 to-accent/10' : 'border-2'}`}
+            onClick={() => navigate('/avatar')}
+          >
+            <Sparkles className="w-5 h-5 mr-2" />
+            {isKidsMode ? '✨ Avatar' : 'Avatar Builder'}
           </Button>
         </motion.div>
 
