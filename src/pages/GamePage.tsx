@@ -25,6 +25,11 @@ import GameDevGame from "@/components/games/GameDevGame";
 import AdaptiveLearningEngine from "@/components/games/AdaptiveLearningEngine";
 import VoiceCodeCoach from "@/components/games/VoiceCodeCoach";
 import CodePuzzleBuilder from "@/components/games/CodePuzzleBuilder";
+import LMCSimulatorGame from "@/components/games/LMCSimulatorGame";
+import SubnettingGame from "@/components/games/SubnettingGame";
+import NetworkProtocolGame from "@/components/games/NetworkProtocolGame";
+import HTMLCSSPlayground from "@/components/games/HTMLCSSPlayground";
+import NumberSystemsGame from "@/components/games/NumberSystemsGame";
 import { ArrowLeft, Trophy, Star, Zap } from "lucide-react";
 import { useAchievements } from "@/contexts/AchievementContext";
 import { useEffect } from "react";
@@ -53,6 +58,11 @@ const gameComponents: Record<string, React.ComponentType> = {
   "adaptive": AdaptiveLearningEngine,
   "voice-coach": VoiceCodeCoach,
   "puzzle-builder": CodePuzzleBuilder,
+  "lmc-simulator": LMCSimulatorGame,
+  "subnetting": SubnettingGame,
+  "network-protocols": NetworkProtocolGame,
+  "html-css": HTMLCSSPlayground,
+  "number-systems": NumberSystemsGame,
 };
 
 const gameInfo: Record<string, { title: string; emoji: string; color: string }> = {
@@ -79,6 +89,11 @@ const gameInfo: Record<string, { title: string; emoji: string; color: string }> 
   "adaptive": { title: "Adaptive Learning", emoji: "🧠", color: "secondary" },
   "voice-coach": { title: "Voice Code Coach", emoji: "🗣️", color: "accent" },
   "puzzle-builder": { title: "Code Puzzle Builder", emoji: "🧩", color: "primary" },
+  "lmc-simulator": { title: "LMC Simulator", emoji: "🖥️", color: "primary" },
+  "subnetting": { title: "IP Subnetting", emoji: "🌐", color: "success" },
+  "network-protocols": { title: "Network Protocols", emoji: "📡", color: "accent" },
+  "html-css": { title: "HTML & CSS", emoji: "🎨", color: "warning" },
+  "number-systems": { title: "Number Systems", emoji: "🔢", color: "secondary" },
 };
 
 export default function GamePage() {
