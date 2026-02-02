@@ -30,6 +30,7 @@ import SubnettingGame from "@/components/games/SubnettingGame";
 import NetworkProtocolGame from "@/components/games/NetworkProtocolGame";
 import HTMLCSSPlayground from "@/components/games/HTMLCSSPlayground";
 import NumberSystemsGame from "@/components/games/NumberSystemsGame";
+import PCBuilderGame from "@/components/games/PCBuilderGame";
 import { ArrowLeft, Trophy, Star, Zap } from "lucide-react";
 import { useAchievements } from "@/contexts/AchievementContext";
 import { useEffect } from "react";
@@ -63,6 +64,7 @@ const gameComponents: Record<string, React.ComponentType> = {
   "network-protocols": NetworkProtocolGame,
   "html-css": HTMLCSSPlayground,
   "number-systems": NumberSystemsGame,
+  "pc-builder": PCBuilderGame,
 };
 
 const gameInfo: Record<string, { title: string; emoji: string; color: string }> = {
@@ -94,6 +96,7 @@ const gameInfo: Record<string, { title: string; emoji: string; color: string }> 
   "network-protocols": { title: "Network Protocols", emoji: "📡", color: "accent" },
   "html-css": { title: "HTML & CSS", emoji: "🎨", color: "warning" },
   "number-systems": { title: "Number Systems", emoji: "🔢", color: "secondary" },
+  "pc-builder": { title: "PC Builder Lab", emoji: "🖥️", color: "primary" },
 };
 
 export default function GamePage() {
