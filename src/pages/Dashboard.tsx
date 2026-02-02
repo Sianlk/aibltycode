@@ -23,6 +23,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { supabase } from "@/integrations/supabase/client";
 
 const gameModes = [
+  // Core Learning Games
   { id: "pattern", title: "Pattern Master", description: "if/else/while/switch", icon: "typing" as const, color: "primary" as const, emoji: "🧠" },
   { id: "structure-builder", title: "Structure Builder", description: "Build code blocks", icon: "ordering" as const, color: "accent" as const, emoji: "🏗️" },
   { id: "flashcards", title: "Mnemonic Cards", description: "Visual memory", icon: "typing" as const, color: "warning" as const, emoji: "🃏" },
@@ -32,20 +33,42 @@ const gameModes = [
   { id: "ordering", title: "Code Ordering", description: "Arrange blocks", icon: "ordering" as const, color: "success" as const, emoji: "🧩" },
   { id: "speed", title: "Speed Challenge", description: "Race the clock", icon: "speed" as const, color: "warning" as const, emoji: "⚡" },
   { id: "pacman", title: "Pacman Coder", description: "Collect code", icon: "speed" as const, color: "primary" as const, emoji: "👾" },
+  
+  // Systems & Architecture Games
   { id: "system-design", title: "System Design", description: "Design systems", icon: "ordering" as const, color: "accent" as const, emoji: "🔧" },
+  { id: "pc-builder", title: "PC Builder Lab", description: "Build a PC like Tetris", icon: "ordering" as const, color: "primary" as const, emoji: "🖥️" },
+  { id: "lmc-simulator", title: "LMC Simulator", description: "CPU simulation", icon: "typing" as const, color: "secondary" as const, emoji: "👨‍💼" },
+  { id: "number-systems", title: "Number Systems", description: "Binary/Hex conversions", icon: "typing" as const, color: "accent" as const, emoji: "🔢" },
+  
+  // Networking Games
+  { id: "subnetting", title: "IP Subnetting", description: "IPv4 calculations", icon: "typing" as const, color: "success" as const, emoji: "🌐" },
+  { id: "network-protocols", title: "Network Protocols", description: "OSI & TCP/IP layers", icon: "ordering" as const, color: "accent" as const, emoji: "📡" },
+  
+  // Web Development Games
+  { id: "html-css", title: "HTML & CSS Lab", description: "Web development", icon: "typing" as const, color: "warning" as const, emoji: "🎨" },
+  
+  // Data & Database Games
   { id: "complexity-arcade", title: "Complexity Arcade", description: "Master Big-O", icon: "typing" as const, color: "secondary" as const, emoji: "📊" },
   { id: "erd-builder", title: "ERD Builder", description: "Design databases", icon: "ordering" as const, color: "primary" as const, emoji: "🗂️" },
-  { id: "project-planner", title: "Project Planner", description: "Gantt & Kanban", icon: "ordering" as const, color: "accent" as const, emoji: "📋" },
-  { id: "graph-visualizer", title: "Graph Explorer", description: "Graph algorithms", icon: "speed" as const, color: "success" as const, emoji: "📊" },
-  { id: "use-case", title: "Use Case Diagrams", description: "UML modeling", icon: "ordering" as const, color: "warning" as const, emoji: "👥" },
-  { id: "excel-master", title: "Excel Master", description: "Formulas & functions", icon: "typing" as const, color: "success" as const, emoji: "📊" },
   { id: "sql-query", title: "SQL Query", description: "Database queries", icon: "ordering" as const, color: "primary" as const, emoji: "🗄️" },
+  { id: "graph-visualizer", title: "Graph Explorer", description: "Graph algorithms", icon: "speed" as const, color: "success" as const, emoji: "📊" },
+  { id: "excel-master", title: "Excel Master", description: "Formulas & functions", icon: "typing" as const, color: "success" as const, emoji: "📊" },
+  
+  // Project & UML Games
+  { id: "project-planner", title: "Project Planner", description: "Gantt & Kanban", icon: "ordering" as const, color: "accent" as const, emoji: "📋" },
+  { id: "use-case", title: "Use Case Diagrams", description: "UML modeling", icon: "ordering" as const, color: "warning" as const, emoji: "👥" },
+  
+  // Security & AI Games
   { id: "cybersecurity", title: "Security Challenge", description: "Cyber defense", icon: "speed" as const, color: "warning" as const, emoji: "🛡️" },
   { id: "ai-data", title: "AI & ML", description: "Machine learning", icon: "typing" as const, color: "accent" as const, emoji: "🤖" },
   { id: "game-dev", title: "Game Dev", description: "Game concepts", icon: "speed" as const, color: "primary" as const, emoji: "🎮" },
+  
+  // Advanced Learning
   { id: "adaptive", title: "Adaptive Learning", description: "AI-powered practice", icon: "typing" as const, color: "secondary" as const, emoji: "🧠" },
   { id: "voice-coach", title: "Voice Coach", description: "Read code aloud", icon: "typing" as const, color: "accent" as const, emoji: "🗣️" },
   { id: "puzzle-builder", title: "Code Puzzles", description: "Build code pieces", icon: "ordering" as const, color: "primary" as const, emoji: "🧩" },
+  
+  // Multiplayer & Sandbox
   { id: "battle", title: "Multiplayer Battle", description: "Challenge friends!", icon: "speed" as const, color: "warning" as const, emoji: "⚔️", link: "/battle" },
   { id: "sandbox", title: "Code Lab", description: "Live code editor", icon: "typing" as const, color: "success" as const, emoji: "💻", link: "/sandbox" },
 ];
@@ -299,6 +322,8 @@ export default function Dashboard() {
                   { id: "ai-data-science", title: "AI & Data Science", icon: "🤖", color: "secondary" },
                   { id: "business-systems", title: "Business Systems", icon: "💼", color: "primary" },
                   { id: "game-development", title: "Game Development", icon: "🎮", color: "accent" },
+                  { id: "computer-systems", title: "Computer Systems & Networking", icon: "🖧", color: "success" },
+                  { id: "web-technologies", title: "Web Technologies", icon: "🌐", color: "warning" },
                 ].map((mod) => (
                   <div
                     key={mod.id}
