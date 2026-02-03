@@ -5,13 +5,15 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 
 const courses = [
-  { icon: <Code2 className="w-6 h-6 text-primary" />, label: "Java Programming", desc: "OOP to Advanced Patterns" },
-  { icon: <BookOpen className="w-6 h-6 text-accent" />, label: "Systems Analysis", desc: "ERD, Use Cases, UML" },
-  { icon: <Zap className="w-6 h-6 text-warning" />, label: "Maths for Computing", desc: "Graphs, Big-O, Algorithms" },
-  { icon: <Shield className="w-6 h-6 text-success" />, label: "Cybersecurity", desc: "Network Security, Threats" },
-  { icon: <Brain className="w-6 h-6 text-secondary" />, label: "AI & Data Science", desc: "ML, Neural Networks" },
-  { icon: <Briefcase className="w-6 h-6 text-primary" />, label: "Business Systems", desc: "ERP, CRM, Workflows" },
-  { icon: <Gamepad2 className="w-6 h-6 text-accent" />, label: "Game Development", desc: "Unity, Game Design" },
+  { icon: <Code2 className="w-6 h-6 text-primary" />, label: "Java Programming", desc: "OOP to Advanced Patterns", id: "java-foundations" },
+  { icon: <BookOpen className="w-6 h-6 text-accent" />, label: "Systems Analysis", desc: "ERD, Use Cases, UML", id: "systems-analysis" },
+  { icon: <Zap className="w-6 h-6 text-warning" />, label: "Maths for Computing", desc: "Graphs, Big-O, Algorithms", id: "math-computing" },
+  { icon: <Shield className="w-6 h-6 text-success" />, label: "Cybersecurity", desc: "Network Security, Threats", id: "cybersecurity" },
+  { icon: <Brain className="w-6 h-6 text-secondary" />, label: "AI & Data Science", desc: "ML, Neural Networks", id: "ai-data-science" },
+  { icon: <Briefcase className="w-6 h-6 text-primary" />, label: "Business Systems", desc: "ERP, CRM, Workflows", id: "business-systems" },
+  { icon: <Gamepad2 className="w-6 h-6 text-accent" />, label: "Game Development", desc: "Unity, Game Design", id: "game-development" },
+  { icon: "🖧", label: "Computer Systems", desc: "Hardware, LMC, Networking", id: "computer-systems" },
+  { icon: "🌐", label: "Web Technologies", desc: "HTML, CSS, JavaScript", id: "web-technologies" },
 ];
 
 export function HeroSection() {
@@ -93,23 +95,23 @@ export function HeroSection() {
 
           {/* All Courses Grid */}
           <motion.div
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 max-w-4xl mx-auto mb-12"
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 max-w-5xl mx-auto mb-12"
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.6 }}
           >
-            {courses.map((course, i) => (
+          {courses.map((course, i) => (
               <motion.div
                 key={course.label}
                 className="bg-card rounded-xl p-4 border border-border hover:border-primary/50 transition-all cursor-pointer hover:shadow-lg"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.6 + i * 0.05 }}
-                onClick={() => navigate(user ? "/dashboard" : "/auth")}
+                onClick={() => navigate(user ? `/module/${course.id}` : "/auth")}
               >
-                <div className="mb-2">{course.icon}</div>
-                <h3 className="font-semibold text-foreground text-sm mb-1">{course.label}</h3>
-                <p className="text-xs text-muted-foreground">{course.desc}</p>
+                <div className="mb-2 text-2xl">{typeof course.icon === 'string' ? course.icon : course.icon}</div>
+                <h3 className="font-semibold text-foreground text-sm mb-1 line-clamp-1">{course.label}</h3>
+                <p className="text-xs text-muted-foreground line-clamp-2">{course.desc}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -129,12 +131,12 @@ export function HeroSection() {
               <span>Track Progress</span>
             </div>
             <div className="flex items-center gap-2">
-              <Code2 className="w-4 h-4 text-success" />
-              <span>15+ Game Modes</span>
+              <Gamepad2 className="w-4 h-4 text-success" />
+              <span>25+ Game Modes</span>
             </div>
             <div className="flex items-center gap-2">
               <BookOpen className="w-4 h-4 text-accent" />
-              <span>7+ Courses</span>
+              <span>9 Courses</span>
             </div>
           </motion.div>
         </div>
