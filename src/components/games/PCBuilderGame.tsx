@@ -3,9 +3,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Monitor, Cpu, HardDrive, Fan, Power, Zap, CheckCircle, Lightbulb, Trophy, RotateCcw, ChevronRight } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { 
+  Monitor, Cpu, HardDrive, Fan, Power, Zap, CheckCircle, Lightbulb, 
+  Trophy, RotateCcw, ChevronRight, AlertTriangle, Info, ArrowRight
+} from "lucide-react";
 import { useGame } from "@/contexts/GameContext";
 
+// Component types with detailed specifications
 interface PCComponent {
   id: string;
   name: string;
@@ -14,222 +19,471 @@ interface PCComponent {
   description: string;
   specs: string;
   slot: string;
-  correctOrder: number;
+  isCompatible: boolean;
+  installOrder: number;
+  image: string;
 }
 
+// Slot definitions with visual positioning
 interface BuildSlot {
   id: string;
   name: string;
-  icon: React.ReactNode;
-  accepts: string;
-  component: PCComponent | null;
-  hint: string;
+  category: string;
+  position: { top: string; left: string; width: string; height: string };
+  color: string;
+  description: string;
+  installed: PCComponent | null;
 }
 
+// All available components - mix of compatible and incompatible
 const allComponents: PCComponent[] = [
-  // Correct components
-  { id: "cpu-intel", name: "Intel Core i7-12700K", category: "CPU", icon: "🔲", description: "12-core processor with high clock speeds", specs: "3.6GHz base, 5.0GHz boost", slot: "cpu", correctOrder: 1 },
-  { id: "mobo-asus", name: "ASUS ROG Z690", category: "Motherboard", icon: "🔌", description: "High-end gaming motherboard with DDR5 support", specs: "LGA1700, DDR5, PCIe 5.0", slot: "motherboard", correctOrder: 0 },
-  { id: "ram-corsair", name: "Corsair Vengeance 32GB DDR5", category: "RAM", icon: "📊", description: "High-speed memory for multitasking", specs: "5600MHz, CL36, Dual Channel", slot: "ram", correctOrder: 2 },
-  { id: "gpu-nvidia", name: "NVIDIA RTX 4080", category: "GPU", icon: "🎮", description: "High-performance graphics card for gaming", specs: "16GB GDDR6X, DLSS 3.0", slot: "gpu", correctOrder: 4 },
-  { id: "ssd-samsung", name: "Samsung 990 Pro 2TB", category: "Storage", icon: "💾", description: "Ultra-fast NVMe SSD", specs: "7450MB/s read, PCIe 4.0", slot: "storage", correctOrder: 5 },
-  { id: "psu-evga", name: "EVGA SuperNOVA 850W", category: "PSU", icon: "⚡", description: "80+ Gold certified power supply", specs: "850W, Fully Modular", slot: "psu", correctOrder: 6 },
-  { id: "cooler-noctua", name: "Noctua NH-D15", category: "Cooler", icon: "❄️", description: "Premium dual-tower CPU cooler", specs: "165mm height, 1500 RPM", slot: "cooler", correctOrder: 3 },
-  { id: "case-nzxt", name: "NZXT H510", category: "Case", icon: "🖥️", description: "Mid-tower ATX case with glass panel", specs: "ATX, 2x 120mm fans", slot: "case", correctOrder: 7 },
-  
-  // Incompatible/wrong components (distractors)
-  { id: "cpu-old", name: "Intel Pentium 4", category: "CPU", icon: "🔲", description: "Legacy processor - INCOMPATIBLE", specs: "3.0GHz, LGA775 socket", slot: "cpu", correctOrder: -1 },
-  { id: "ram-ddr3", name: "Kingston DDR3 8GB", category: "RAM", icon: "📊", description: "Old generation RAM - INCOMPATIBLE", specs: "1600MHz DDR3", slot: "ram", correctOrder: -1 },
-  { id: "gpu-old", name: "ATI Radeon 9800", category: "GPU", icon: "🎮", description: "AGP graphics card - INCOMPATIBLE", specs: "256MB, AGP slot", slot: "gpu", correctOrder: -1 },
-  { id: "psu-weak", name: "Generic 300W PSU", category: "PSU", icon: "⚡", description: "Insufficient power - UNDERPOWERED", specs: "300W, No certification", slot: "psu", correctOrder: -1 },
+  // ===== COMPATIBLE COMPONENTS =====
+  {
+    id: "mobo-z690",
+    name: "ASUS ROG Z690 Motherboard",
+    category: "Motherboard",
+    icon: "🔌",
+    description: "High-end ATX motherboard with DDR5 support, PCIe 5.0, and LGA1700 socket",
+    specs: "LGA1700 • DDR5 • PCIe 5.0 • ATX",
+    slot: "motherboard",
+    isCompatible: true,
+    installOrder: 1,
+    image: "motherboard"
+  },
+  {
+    id: "cpu-i7",
+    name: "Intel Core i7-12700K",
+    category: "CPU",
+    icon: "🧠",
+    description: "12-core processor with Performance and Efficiency cores. Requires LGA1700 socket.",
+    specs: "12 Cores • 3.6GHz Base • 5.0GHz Boost • 125W TDP",
+    slot: "cpu",
+    isCompatible: true,
+    installOrder: 2,
+    image: "cpu"
+  },
+  {
+    id: "ram-ddr5",
+    name: "Corsair Vengeance DDR5 32GB",
+    category: "RAM",
+    icon: "📊",
+    description: "High-speed DDR5 memory kit. Install in DIMM slots with correct orientation.",
+    specs: "32GB (2x16GB) • DDR5-5600 • CL36 • 1.25V",
+    slot: "ram",
+    isCompatible: true,
+    installOrder: 3,
+    image: "ram"
+  },
+  {
+    id: "cooler-noctua",
+    name: "Noctua NH-D15 Cooler",
+    category: "Cooler",
+    icon: "❄️",
+    description: "Premium dual-tower CPU cooler. Must be installed after CPU.",
+    specs: "165mm Height • Dual 140mm Fans • 6 Heatpipes",
+    slot: "cooler",
+    isCompatible: true,
+    installOrder: 4,
+    image: "cooler"
+  },
+  {
+    id: "gpu-rtx4080",
+    name: "NVIDIA RTX 4080 16GB",
+    category: "GPU",
+    icon: "🎮",
+    description: "High-performance graphics card. Install in the primary PCIe x16 slot.",
+    specs: "16GB GDDR6X • DLSS 3.0 • 320W TDP",
+    slot: "gpu",
+    isCompatible: true,
+    installOrder: 5,
+    image: "gpu"
+  },
+  {
+    id: "ssd-990pro",
+    name: "Samsung 990 Pro 2TB NVMe",
+    category: "Storage",
+    icon: "💾",
+    description: "Ultra-fast PCIe 4.0 NVMe SSD. Install in M.2 slot on motherboard.",
+    specs: "2TB • 7450MB/s Read • PCIe 4.0 • M.2 2280",
+    slot: "storage",
+    isCompatible: true,
+    installOrder: 6,
+    image: "ssd"
+  },
+  {
+    id: "psu-850w",
+    name: "EVGA SuperNOVA 850W Gold",
+    category: "PSU",
+    icon: "⚡",
+    description: "80+ Gold certified modular PSU. Provides power to all components.",
+    specs: "850W • 80+ Gold • Fully Modular • 140mm Fan",
+    slot: "psu",
+    isCompatible: true,
+    installOrder: 7,
+    image: "psu"
+  },
+  {
+    id: "case-h510",
+    name: "NZXT H510 Mid-Tower",
+    category: "Case",
+    icon: "🖥️",
+    description: "ATX mid-tower case with tempered glass panel and cable management.",
+    specs: "ATX • Tempered Glass • 2x 120mm Fans • USB-C",
+    slot: "case",
+    isCompatible: true,
+    installOrder: 8,
+    image: "case"
+  },
+
+  // ===== INCOMPATIBLE COMPONENTS (Distractors) =====
+  {
+    id: "cpu-pentium4",
+    name: "Intel Pentium 4 3.0GHz",
+    category: "CPU",
+    icon: "🧠",
+    description: "⚠️ INCOMPATIBLE: Legacy LGA775 socket - won't fit modern motherboards!",
+    specs: "1 Core • 3.0GHz • LGA775 • 84W TDP",
+    slot: "cpu",
+    isCompatible: false,
+    installOrder: -1,
+    image: "cpu-old"
+  },
+  {
+    id: "ram-ddr3",
+    name: "Kingston DDR3 8GB",
+    category: "RAM",
+    icon: "📊",
+    description: "⚠️ INCOMPATIBLE: DDR3 memory won't fit DDR5 motherboard slots!",
+    specs: "8GB • DDR3-1600 • 1.5V",
+    slot: "ram",
+    isCompatible: false,
+    installOrder: -1,
+    image: "ram-old"
+  },
+  {
+    id: "gpu-agp",
+    name: "ATI Radeon 9800 Pro AGP",
+    category: "GPU",
+    icon: "🎮",
+    description: "⚠️ INCOMPATIBLE: AGP slot - modern systems use PCIe!",
+    specs: "256MB • AGP 8x • 2002 Era",
+    slot: "gpu",
+    isCompatible: false,
+    installOrder: -1,
+    image: "gpu-old"
+  },
+  {
+    id: "psu-300w",
+    name: "Generic 300W PSU",
+    category: "PSU",
+    icon: "⚡",
+    description: "⚠️ UNDERPOWERED: Not enough wattage for RTX 4080 system!",
+    specs: "300W • No Certification • Non-Modular",
+    slot: "psu",
+    isCompatible: false,
+    installOrder: -1,
+    image: "psu-weak"
+  },
 ];
 
-const buildSlots: BuildSlot[] = [
-  { id: "motherboard", name: "Motherboard", icon: <Cpu className="w-5 h-5" />, accepts: "Motherboard", component: null, hint: "Foundation of the PC - install first" },
-  { id: "cpu", name: "CPU Socket", icon: <Cpu className="w-5 h-5" />, accepts: "CPU", component: null, hint: "The brain of the computer" },
-  { id: "ram", name: "RAM Slots", icon: <HardDrive className="w-5 h-5" />, accepts: "RAM", component: null, hint: "Memory for running applications" },
-  { id: "cooler", name: "CPU Cooler", icon: <Fan className="w-5 h-5" />, accepts: "Cooler", component: null, hint: "Keeps the CPU from overheating" },
-  { id: "gpu", name: "PCIe Slot", icon: <Monitor className="w-5 h-5" />, accepts: "GPU", component: null, hint: "Graphics processing for display" },
-  { id: "storage", name: "M.2 Slot", icon: <HardDrive className="w-5 h-5" />, accepts: "Storage", component: null, hint: "Fast storage for OS and files" },
-  { id: "psu", name: "Power Supply", icon: <Power className="w-5 h-5" />, accepts: "PSU", component: null, hint: "Provides power to all components" },
-  { id: "case", name: "PC Case", icon: <Monitor className="w-5 h-5" />, accepts: "Case", component: null, hint: "Houses all components" },
+// Initial slot definitions for the visual PC case
+const initialSlots: BuildSlot[] = [
+  {
+    id: "motherboard",
+    name: "Motherboard Tray",
+    category: "Motherboard",
+    position: { top: "15%", left: "10%", width: "55%", height: "70%" },
+    color: "from-emerald-500/20 to-emerald-600/10",
+    description: "The foundation - install this first!",
+    installed: null
+  },
+  {
+    id: "cpu",
+    name: "CPU Socket (LGA1700)",
+    category: "CPU",
+    position: { top: "25%", left: "25%", width: "15%", height: "12%" },
+    color: "from-blue-500/20 to-blue-600/10",
+    description: "The brain - install after motherboard",
+    installed: null
+  },
+  {
+    id: "ram",
+    name: "DIMM Slots (DDR5)",
+    category: "RAM",
+    position: { top: "20%", left: "45%", width: "8%", height: "25%" },
+    color: "from-purple-500/20 to-purple-600/10",
+    description: "Memory slots - align notch correctly!",
+    installed: null
+  },
+  {
+    id: "cooler",
+    name: "CPU Cooler Mount",
+    category: "Cooler",
+    position: { top: "22%", left: "22%", width: "20%", height: "18%" },
+    color: "from-cyan-500/20 to-cyan-600/10",
+    description: "Cooling - install after CPU",
+    installed: null
+  },
+  {
+    id: "gpu",
+    name: "PCIe x16 Slot",
+    category: "GPU",
+    position: { top: "55%", left: "15%", width: "45%", height: "12%" },
+    color: "from-red-500/20 to-red-600/10",
+    description: "Graphics card slot",
+    installed: null
+  },
+  {
+    id: "storage",
+    name: "M.2 NVMe Slot",
+    category: "Storage",
+    position: { top: "45%", left: "35%", width: "20%", height: "6%" },
+    color: "from-amber-500/20 to-amber-600/10",
+    description: "Fast storage - screw down after insertion",
+    installed: null
+  },
+  {
+    id: "psu",
+    name: "PSU Bay",
+    category: "PSU",
+    position: { top: "75%", left: "10%", width: "35%", height: "18%" },
+    color: "from-yellow-500/20 to-yellow-600/10",
+    description: "Power supply - bottom mount",
+    installed: null
+  },
+  {
+    id: "case",
+    name: "Case Frame",
+    category: "Case",
+    position: { top: "5%", left: "70%", width: "25%", height: "90%" },
+    color: "from-gray-500/20 to-gray-600/10",
+    description: "Houses all components",
+    installed: null
+  },
 ];
 
+// Challenge definitions
 const challenges = [
   {
     id: 1,
-    title: "Build a Gaming PC",
-    description: "Select compatible components to build a high-performance gaming system",
-    requirements: ["DDR5 RAM", "RTX GPU", "850W+ PSU", "NVMe SSD"],
-    difficulty: "Beginner",
-    xp: 100,
+    title: "Build Your First Gaming PC",
+    description: "Select and install all compatible components to build a high-performance gaming system.",
+    objectives: [
+      "Install motherboard first as the foundation",
+      "Add CPU to the LGA1700 socket",
+      "Insert DDR5 RAM into DIMM slots",
+      "Mount the CPU cooler",
+      "Install GPU in PCIe x16 slot",
+      "Add NVMe SSD storage",
+      "Connect 850W power supply",
+      "Complete the case assembly"
+    ],
+    xpReward: 200,
+    difficulty: "Beginner"
   },
   {
     id: 2,
-    title: "Identify Compatibility Issues",
-    description: "Find and avoid incompatible components",
-    requirements: ["Match socket types", "Correct RAM generation", "Adequate PSU wattage"],
-    difficulty: "Intermediate",
-    xp: 150,
+    title: "Spot the Incompatible Parts",
+    description: "Learn to identify components that won't work together. Avoid legacy or underpowered parts!",
+    objectives: [
+      "Identify DDR3 vs DDR5 RAM",
+      "Recognize legacy CPU sockets",
+      "Check PSU wattage requirements",
+      "Verify PCIe vs AGP compatibility"
+    ],
+    xpReward: 250,
+    difficulty: "Intermediate"
   },
   {
     id: 3,
-    title: "Optimal Build Order",
-    description: "Install components in the correct sequence",
-    requirements: ["Motherboard first", "CPU before cooler", "PSU last"],
-    difficulty: "Advanced",
-    xp: 200,
-  },
+    title: "Master Build Order",
+    description: "Install components in the optimal sequence for a professional build.",
+    objectives: [
+      "Motherboard → CPU → RAM → Cooler",
+      "GPU → Storage → PSU → Case",
+      "Follow proper installation sequence"
+    ],
+    xpReward: 300,
+    difficulty: "Advanced"
+  }
 ];
 
 export default function PCBuilderGame() {
   const { playSound } = useGame();
   const [currentChallenge, setCurrentChallenge] = useState(0);
-  const [slots, setSlots] = useState<BuildSlot[]>(buildSlots);
-  const [availableComponents, setAvailableComponents] = useState<PCComponent[]>([]);
+  const [phase, setPhase] = useState<"intro" | "building" | "complete">("intro");
+  const [slots, setSlots] = useState<BuildSlot[]>(initialSlots);
+  const [components, setComponents] = useState<PCComponent[]>([]);
   const [selectedComponent, setSelectedComponent] = useState<PCComponent | null>(null);
+  const [hoveredSlot, setHoveredSlot] = useState<string | null>(null);
   const [score, setScore] = useState(0);
-  const [showExplanation, setShowExplanation] = useState<string | null>(null);
-  const [isComplete, setIsComplete] = useState(false);
-  const [errors, setErrors] = useState<string[]>([]);
-  const [buildOrder, setBuildOrder] = useState<string[]>([]);
-  const [phase, setPhase] = useState<"intro" | "building" | "feedback">("intro");
   const [streak, setStreak] = useState(0);
+  const [errors, setErrors] = useState<string[]>([]);
+  const [feedback, setFeedback] = useState<{ type: "success" | "error" | "info"; message: string } | null>(null);
+  const [installOrder, setInstallOrder] = useState<string[]>([]);
+  const [showTutorial, setShowTutorial] = useState(true);
 
-  const shuffleComponents = useCallback(() => {
+  // Shuffle and set components
+  const initializeGame = useCallback(() => {
     const shuffled = [...allComponents].sort(() => Math.random() - 0.5);
-    setAvailableComponents(shuffled);
+    setComponents(shuffled);
+    setSlots(initialSlots.map(s => ({ ...s, installed: null })));
+    setSelectedComponent(null);
+    setFeedback(null);
+    setErrors([]);
+    setInstallOrder([]);
+    setStreak(0);
   }, []);
 
   useEffect(() => {
-    shuffleComponents();
-  }, [shuffleComponents, currentChallenge]);
+    initializeGame();
+  }, [initializeGame, currentChallenge]);
 
-  const handleComponentClick = (component: PCComponent) => {
-    if (isComplete) return;
+  // Handle component selection
+  const selectComponent = (component: PCComponent) => {
+    if (phase !== "building") return;
     setSelectedComponent(component);
     playSound?.("click");
+    
+    // Show guidance about this component
+    setFeedback({
+      type: "info",
+      message: `${component.name} - Click on the matching slot to install.`
+    });
   };
 
-  const handleSlotClick = (slot: BuildSlot) => {
-    if (isComplete || !selectedComponent) return;
+  // Handle slot click to install component
+  const installInSlot = (slot: BuildSlot) => {
+    if (phase !== "building" || !selectedComponent) return;
 
-    // Check if component category matches slot
-    if (selectedComponent.category !== slot.accepts) {
-      setShowExplanation(`❌ ${selectedComponent.name} cannot be installed in ${slot.name}. It requires a ${selectedComponent.category} slot.`);
-      setErrors(prev => [...prev, `Wrong slot for ${selectedComponent.name}`]);
+    // Check if slot is already filled
+    if (slot.installed) {
+      setFeedback({ type: "error", message: `${slot.name} already has a component installed!` });
       playSound?.("error");
-      setStreak(0);
       return;
     }
 
-    // Check if it's an incompatible component
-    if (selectedComponent.correctOrder === -1) {
-      setShowExplanation(`❌ ${selectedComponent.name} is incompatible! ${selectedComponent.description}`);
+    // Check category match
+    if (selectedComponent.category !== slot.category) {
+      setFeedback({ 
+        type: "error", 
+        message: `❌ ${selectedComponent.name} doesn't fit in ${slot.name}! It needs a ${selectedComponent.category} slot.` 
+      });
+      setErrors(prev => [...prev, `Wrong slot: ${selectedComponent.name}`]);
+      setStreak(0);
+      playSound?.("error");
+      return;
+    }
+
+    // Check compatibility
+    if (!selectedComponent.isCompatible) {
+      setFeedback({ 
+        type: "error", 
+        message: `❌ INCOMPATIBLE: ${selectedComponent.description}` 
+      });
       setErrors(prev => [...prev, `Incompatible: ${selectedComponent.name}`]);
-      playSound?.("error");
       setStreak(0);
+      playSound?.("error");
       return;
     }
 
-    // Check build order for advanced challenge
+    // Check install order for advanced challenge
     if (currentChallenge === 2) {
       const expectedOrder = ["motherboard", "cpu", "ram", "cooler", "gpu", "storage", "psu", "case"];
-      const currentStep = buildOrder.length;
-      if (slot.id !== expectedOrder[currentStep]) {
-        setShowExplanation(`⚠️ Build order matters! You should install the ${expectedOrder[currentStep].toUpperCase()} before the ${slot.name}.`);
-        setErrors(prev => [...prev, `Wrong order: ${slot.name}`]);
-        playSound?.("error");
+      const nextExpected = expectedOrder[installOrder.length];
+      if (slot.id !== nextExpected) {
+        const expectedSlot = initialSlots.find(s => s.id === nextExpected);
+        setFeedback({ 
+          type: "error", 
+          message: `⚠️ Build order matters! Install ${expectedSlot?.category} first.` 
+        });
+        setErrors(prev => [...prev, `Wrong order`]);
         setStreak(0);
+        playSound?.("error");
         return;
       }
     }
 
-    // Install component
+    // Success! Install the component
     setSlots(prev => prev.map(s => 
-      s.id === slot.id ? { ...s, component: selectedComponent } : s
+      s.id === slot.id ? { ...s, installed: selectedComponent } : s
     ));
-    setAvailableComponents(prev => prev.filter(c => c.id !== selectedComponent.id));
-    setBuildOrder(prev => [...prev, slot.id]);
-    setSelectedComponent(null);
+    setComponents(prev => prev.filter(c => c.id !== selectedComponent.id));
+    setInstallOrder(prev => [...prev, slot.id]);
+    
+    const bonusPoints = streak > 0 ? streak * 5 : 0;
+    const points = 15 + bonusPoints;
+    setScore(prev => prev + points);
     setStreak(prev => prev + 1);
     
-    const points = 10 + (streak * 5);
-    setScore(prev => prev + points);
+    setFeedback({ 
+      type: "success", 
+      message: `✅ ${selectedComponent.name} installed! ${selectedComponent.specs}` 
+    });
     playSound?.("success");
-    
-    setShowExplanation(`✅ ${selectedComponent.name} installed! ${selectedComponent.description}`);
+    setSelectedComponent(null);
 
-    // Check if build is complete
+    // Check for game completion
     const updatedSlots = slots.map(s => 
-      s.id === slot.id ? { ...s, component: selectedComponent } : s
+      s.id === slot.id ? { ...s, installed: selectedComponent } : s
     );
-    const allFilled = updatedSlots.every(s => s.component !== null);
-    const allCorrect = updatedSlots.every(s => s.component?.correctOrder !== -1);
-    
-    if (allFilled && allCorrect) {
-      setIsComplete(true);
-      setPhase("feedback");
-      const bonus = Math.max(0, 50 - errors.length * 10);
-      setScore(prev => prev + challenges[currentChallenge].xp + bonus);
-      playSound?.("levelUp");
+    const allInstalled = updatedSlots.every(s => s.installed !== null);
+    const allCompatible = updatedSlots.every(s => s.installed?.isCompatible);
+
+    if (allInstalled && allCompatible) {
+      setTimeout(() => {
+        setPhase("complete");
+        const bonus = Math.max(0, 100 - errors.length * 20);
+        setScore(prev => prev + challenges[currentChallenge].xpReward + bonus);
+        playSound?.("levelUp");
+      }, 500);
     }
   };
 
   const resetGame = () => {
-    setSlots(buildSlots.map(s => ({ ...s, component: null })));
-    setSelectedComponent(null);
-    setShowExplanation(null);
-    setIsComplete(false);
-    setErrors([]);
-    setBuildOrder([]);
-    setStreak(0);
-    shuffleComponents();
+    initializeGame();
     setPhase("building");
+    setShowTutorial(false);
   };
 
   const nextChallenge = () => {
     if (currentChallenge < challenges.length - 1) {
       setCurrentChallenge(prev => prev + 1);
-      resetGame();
+      initializeGame();
       setPhase("intro");
     }
   };
 
-  const filledSlots = slots.filter(s => s.component !== null).length;
-  const progress = (filledSlots / slots.length) * 100;
+  const installedCount = slots.filter(s => s.installed !== null).length;
+  const progress = (installedCount / slots.length) * 100;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Header */}
-      <div className="flex justify-between items-center">
-        <div>
-          <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
+      <div className="flex flex-wrap justify-between items-center gap-2">
+        <div className="min-w-0">
+          <h2 className="text-xl sm:text-2xl font-bold text-foreground flex items-center gap-2 flex-wrap">
             🖥️ PC Builder Lab
           </h2>
-          <p className="text-muted-foreground">
+          <p className="text-sm text-muted-foreground truncate">
             Challenge {currentChallenge + 1}: {challenges[currentChallenge].title}
           </p>
         </div>
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary">
-            <Zap className="w-4 h-4" />
-            <span className="font-bold">{score} XP</span>
-          </div>
+        <div className="flex items-center gap-2 flex-shrink-0">
+          <Badge variant="outline" className="bg-primary/10 text-primary border-primary/30">
+            <Zap className="w-3 h-3 mr-1" />
+            {score} XP
+          </Badge>
           {streak > 1 && (
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              className="px-3 py-1 rounded-full bg-warning/20 text-warning font-bold"
-            >
-              🔥 {streak}x Streak!
-            </motion.div>
+            <Badge variant="outline" className="bg-warning/10 text-warning border-warning/30 animate-pulse">
+              🔥 {streak}x
+            </Badge>
           )}
         </div>
       </div>
 
-      {/* Intro Phase */}
       <AnimatePresence mode="wait">
+        {/* INTRO PHASE */}
         {phase === "intro" && (
           <motion.div
             key="intro"
@@ -237,245 +491,291 @@ export default function PCBuilderGame() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
           >
-            <Card className="bg-gradient-to-br from-primary/10 to-accent/10 border-primary/30">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Monitor className="w-6 h-6 text-primary" />
+            <Card className="bg-gradient-to-br from-primary/5 to-accent/5 border-primary/20">
+              <CardHeader className="pb-2">
+                <CardTitle className="flex items-center gap-2 text-lg">
+                  <Monitor className="w-5 h-5 text-primary" />
                   {challenges[currentChallenge].title}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <p className="text-muted-foreground">{challenges[currentChallenge].description}</p>
-                
-                <div className="bg-card/50 rounded-lg p-4">
-                  <h4 className="font-semibold mb-2 flex items-center gap-2">
+                <p className="text-muted-foreground text-sm">
+                  {challenges[currentChallenge].description}
+                </p>
+
+                <div className="bg-card/50 rounded-lg p-3">
+                  <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
                     <Lightbulb className="w-4 h-4 text-warning" />
-                    Requirements:
+                    Objectives:
                   </h4>
-                  <ul className="space-y-1">
-                    {challenges[currentChallenge].requirements.map((req, i) => (
-                      <li key={i} className="text-sm text-muted-foreground flex items-center gap-2">
-                        <CheckCircle className="w-3 h-3 text-success" />
-                        {req}
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1">
+                    {challenges[currentChallenge].objectives.map((obj, i) => (
+                      <li key={i} className="text-xs text-muted-foreground flex items-start gap-1">
+                        <CheckCircle className="w-3 h-3 text-success mt-0.5 flex-shrink-0" />
+                        <span className="line-clamp-2">{obj}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="flex items-center justify-between">
-                  <span className="text-sm bg-accent/20 text-accent px-2 py-1 rounded">
+                <div className="flex items-center justify-between flex-wrap gap-2">
+                  <Badge variant="secondary" className="text-xs">
                     {challenges[currentChallenge].difficulty}
-                  </span>
+                  </Badge>
                   <span className="text-sm font-bold text-primary">
-                    +{challenges[currentChallenge].xp} XP
+                    +{challenges[currentChallenge].xpReward} XP
                   </span>
                 </div>
 
                 <Button onClick={() => setPhase("building")} className="w-full" size="lg">
-                  Start Building
-                  <ChevronRight className="w-4 h-4 ml-2" />
+                  Start Building <ChevronRight className="w-4 h-4 ml-2" />
                 </Button>
               </CardContent>
             </Card>
           </motion.div>
         )}
 
-        {/* Building Phase */}
+        {/* BUILDING PHASE */}
         {phase === "building" && (
           <motion.div
             key="building"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="space-y-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="space-y-4"
           >
-            {/* Progress Bar */}
-            <div className="space-y-2">
-              <div className="flex justify-between text-sm">
+            {/* Tutorial Tip */}
+            {showTutorial && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-info/10 border border-info/30 rounded-lg p-3 flex items-start gap-2"
+              >
+                <Info className="w-4 h-4 text-info mt-0.5 flex-shrink-0" />
+                <div className="text-xs">
+                  <strong>How to build:</strong> Click a component below to select it, then click the matching slot in the PC case to install. Match colors and watch for compatibility!
+                </div>
+                <Button variant="ghost" size="sm" className="ml-auto text-xs" onClick={() => setShowTutorial(false)}>
+                  Got it
+                </Button>
+              </motion.div>
+            )}
+
+            {/* Progress */}
+            <div className="space-y-1">
+              <div className="flex justify-between text-xs">
                 <span className="text-muted-foreground">Build Progress</span>
-                <span className="font-bold text-primary">{filledSlots}/{slots.length} Components</span>
+                <span className="font-semibold text-primary">{installedCount}/{slots.length}</span>
               </div>
-              <Progress value={progress} className="h-3" />
+              <Progress value={progress} className="h-2" />
             </div>
 
-            {/* Build Area - Visual PC Layout */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Main Build Area */}
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
               {/* PC Case Visualization */}
-              <Card className="bg-gradient-to-b from-muted/50 to-muted/30 border-2 border-border">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-lg flex items-center gap-2">
-                    <Monitor className="w-5 h-5" />
-                    PC Build Station
+              <Card className="lg:col-span-3 bg-gradient-to-b from-muted/30 to-muted/10 border-2">
+                <CardHeader className="py-2 px-3">
+                  <CardTitle className="text-sm flex items-center gap-2">
+                    <Monitor className="w-4 h-4" />
+                    PC Case - Click slots to install
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-2 gap-3">
+                <CardContent className="p-2">
+                  <div className="relative aspect-[4/3] bg-gradient-to-br from-gray-900 to-gray-800 rounded-lg border-4 border-gray-700 overflow-hidden">
+                    {/* Slot positions */}
                     {slots.map((slot) => (
                       <motion.div
                         key={slot.id}
+                        className={`absolute rounded-md border-2 cursor-pointer transition-all overflow-hidden ${
+                          slot.installed
+                            ? 'border-success bg-success/20'
+                            : selectedComponent?.category === slot.category
+                              ? 'border-primary bg-primary/30 animate-pulse'
+                              : hoveredSlot === slot.id
+                                ? 'border-accent bg-accent/20'
+                                : 'border-dashed border-gray-500 bg-gradient-to-br ' + slot.color
+                        }`}
+                        style={{
+                          top: slot.position.top,
+                          left: slot.position.left,
+                          width: slot.position.width,
+                          height: slot.position.height,
+                        }}
+                        onClick={() => installInSlot(slot)}
+                        onMouseEnter={() => setHoveredSlot(slot.id)}
+                        onMouseLeave={() => setHoveredSlot(null)}
                         whileHover={{ scale: selectedComponent ? 1.02 : 1 }}
-                        onClick={() => handleSlotClick(slot)}
-                        className={`p-3 rounded-lg border-2 cursor-pointer transition-all ${
-                          slot.component 
-                            ? 'bg-success/10 border-success/50' 
-                            : selectedComponent?.category === slot.accepts
-                              ? 'bg-primary/10 border-primary/50 animate-pulse'
-                              : 'bg-card border-border hover:border-muted-foreground'
-                        }`}
                       >
-                        <div className="flex items-center gap-2 mb-1">
-                          {slot.icon}
-                          <span className="text-xs font-medium">{slot.name}</span>
-                        </div>
-                        {slot.component ? (
-                          <div className="text-xs">
-                            <span className="text-lg">{slot.component.icon}</span>
-                            <p className="text-success font-medium truncate">{slot.component.name}</p>
-                          </div>
-                        ) : (
-                          <p className="text-xs text-muted-foreground">{slot.hint}</p>
-                        )}
-                      </motion.div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Available Components */}
-              <Card>
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-lg flex items-center gap-2">
-                    <HardDrive className="w-5 h-5" />
-                    Components ({availableComponents.length})
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-1 gap-2 max-h-[400px] overflow-y-auto pr-2">
-                    {availableComponents.map((component) => (
-                      <motion.div
-                        key={component.id}
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={() => handleComponentClick(component)}
-                        className={`p-3 rounded-lg border cursor-pointer transition-all ${
-                          selectedComponent?.id === component.id
-                            ? 'bg-primary/20 border-primary'
-                            : component.correctOrder === -1
-                              ? 'bg-destructive/5 border-border hover:border-destructive/50'
-                              : 'bg-card border-border hover:border-primary/50'
-                        }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <span className="text-2xl">{component.icon}</span>
-                          <div className="flex-1 min-w-0">
-                            <p className="font-medium text-sm truncate">{component.name}</p>
-                            <p className="text-xs text-muted-foreground">{component.category}</p>
-                          </div>
-                          {selectedComponent?.id === component.id && (
-                            <CheckCircle className="w-5 h-5 text-primary" />
+                        <div className="absolute inset-0 flex flex-col items-center justify-center p-1 text-center">
+                          {slot.installed ? (
+                            <>
+                              <span className="text-lg sm:text-2xl">{slot.installed.icon}</span>
+                              <span className="text-[8px] sm:text-[10px] font-medium text-success line-clamp-1 px-1">
+                                {slot.installed.name.split(' ').slice(0, 2).join(' ')}
+                              </span>
+                            </>
+                          ) : (
+                            <>
+                              <span className="text-[10px] sm:text-xs font-medium text-gray-300 line-clamp-1">{slot.name}</span>
+                              <span className="text-[8px] text-gray-400 hidden sm:block line-clamp-1">{slot.description}</span>
+                            </>
                           )}
                         </div>
                       </motion.div>
                     ))}
+
+                    {/* Case decoration */}
+                    <div className="absolute top-2 right-2 w-3 h-3 rounded-full bg-green-500 animate-pulse" />
+                    <div className="absolute top-2 right-6 w-3 h-3 rounded-full bg-red-500/50" />
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Component Inventory */}
+              <Card className="lg:col-span-2">
+                <CardHeader className="py-2 px-3">
+                  <CardTitle className="text-sm flex items-center gap-2">
+                    <HardDrive className="w-4 h-4" />
+                    Components ({components.length})
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-2">
+                  <div className="grid grid-cols-1 gap-2 max-h-[350px] overflow-y-auto pr-1">
+                    {components.map((component) => (
+                      <motion.div
+                        key={component.id}
+                        whileHover={{ scale: 1.01 }}
+                        whileTap={{ scale: 0.99 }}
+                        onClick={() => selectComponent(component)}
+                        className={`p-2 rounded-lg border cursor-pointer transition-all ${
+                          selectedComponent?.id === component.id
+                            ? 'bg-primary/20 border-primary ring-2 ring-primary/50'
+                            : !component.isCompatible
+                              ? 'bg-destructive/5 border-destructive/30 hover:border-destructive/50'
+                              : 'bg-card border-border hover:border-primary/50 hover:bg-primary/5'
+                        }`}
+                      >
+                        <div className="flex items-start gap-2">
+                          <span className="text-xl flex-shrink-0">{component.icon}</span>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-1">
+                              <p className="font-medium text-xs line-clamp-1">{component.name}</p>
+                              {!component.isCompatible && (
+                                <AlertTriangle className="w-3 h-3 text-destructive flex-shrink-0" />
+                              )}
+                            </div>
+                            <p className="text-[10px] text-muted-foreground line-clamp-1">{component.specs}</p>
+                          </div>
+                          {selectedComponent?.id === component.id && (
+                            <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
+                          )}
+                        </div>
+                      </motion.div>
+                    ))}
+                    {components.length === 0 && (
+                      <div className="text-center py-4 text-muted-foreground text-sm">
+                        All components installed! 🎉
+                      </div>
+                    )}
                   </div>
                 </CardContent>
               </Card>
             </div>
 
-            {/* Explanation Panel */}
+            {/* Feedback Panel */}
             <AnimatePresence>
-              {showExplanation && (
+              {feedback && (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className={`p-4 rounded-lg ${
-                    showExplanation.startsWith('✅')
-                      ? 'bg-success/10 border border-success/30'
-                      : 'bg-destructive/10 border border-destructive/30'
+                  exit={{ opacity: 0 }}
+                  className={`p-3 rounded-lg text-sm ${
+                    feedback.type === 'success' ? 'bg-success/10 border border-success/30 text-success' :
+                    feedback.type === 'error' ? 'bg-destructive/10 border border-destructive/30 text-destructive' :
+                    'bg-info/10 border border-info/30 text-info'
                   }`}
                 >
-                  <p className="text-sm">{showExplanation}</p>
+                  {feedback.message}
                 </motion.div>
               )}
             </AnimatePresence>
 
-            {/* Error Log */}
+            {/* Error Count */}
             {errors.length > 0 && (
-              <div className="bg-destructive/5 rounded-lg p-3">
-                <p className="text-xs text-destructive font-medium mb-1">Errors: {errors.length}</p>
-                <div className="flex flex-wrap gap-1">
-                  {errors.slice(-3).map((err, i) => (
-                    <span key={i} className="text-xs bg-destructive/10 text-destructive px-2 py-0.5 rounded">
-                      {err}
-                    </span>
-                  ))}
-                </div>
+              <div className="flex items-center gap-2 text-xs text-destructive">
+                <AlertTriangle className="w-3 h-3" />
+                {errors.length} mistake{errors.length > 1 ? 's' : ''} made
               </div>
             )}
+
+            {/* Reset Button */}
+            <Button variant="outline" size="sm" onClick={resetGame} className="w-full">
+              <RotateCcw className="w-3 h-3 mr-2" />
+              Reset Build
+            </Button>
           </motion.div>
         )}
 
-        {/* Feedback Phase */}
-        {phase === "feedback" && (
+        {/* COMPLETE PHASE */}
+        {phase === "complete" && (
           <motion.div
-            key="feedback"
-            initial={{ opacity: 0, scale: 0.9 }}
+            key="complete"
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
           >
             <Card className="bg-gradient-to-br from-success/10 to-primary/10 border-success/30">
-              <CardContent className="py-8 text-center">
+              <CardContent className="py-6 text-center">
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ type: "spring", damping: 10 }}
                 >
-                  <Trophy className="w-16 h-16 mx-auto text-warning mb-4" />
+                  <Trophy className="w-12 h-12 mx-auto text-warning mb-3" />
                 </motion.div>
-                
-                <h2 className="text-2xl font-bold mb-2">Build Complete! 🎉</h2>
-                <p className="text-muted-foreground mb-4">
-                  You successfully built a {challenges[currentChallenge].title.toLowerCase()}
+
+                <h2 className="text-xl font-bold mb-2">🎉 PC Build Complete!</h2>
+                <p className="text-sm text-muted-foreground mb-4">
+                  You successfully assembled a gaming PC!
                 </p>
 
-                <div className="grid grid-cols-3 gap-4 mb-6">
-                  <div className="bg-card/50 rounded-lg p-3">
-                    <p className="text-2xl font-bold text-primary">{score}</p>
-                    <p className="text-xs text-muted-foreground">Total XP</p>
+                <div className="grid grid-cols-3 gap-3 mb-4">
+                  <div className="bg-card/50 rounded-lg p-2">
+                    <p className="text-xl font-bold text-primary">{score}</p>
+                    <p className="text-[10px] text-muted-foreground">Total XP</p>
                   </div>
-                  <div className="bg-card/50 rounded-lg p-3">
-                    <p className="text-2xl font-bold text-success">{slots.length}/{slots.length}</p>
-                    <p className="text-xs text-muted-foreground">Components</p>
+                  <div className="bg-card/50 rounded-lg p-2">
+                    <p className="text-xl font-bold text-success">8/8</p>
+                    <p className="text-[10px] text-muted-foreground">Parts</p>
                   </div>
-                  <div className="bg-card/50 rounded-lg p-3">
-                    <p className="text-2xl font-bold text-warning">{Math.max(0, 3 - errors.length)}/3</p>
-                    <p className="text-xs text-muted-foreground">Stars</p>
+                  <div className="bg-card/50 rounded-lg p-2">
+                    <p className="text-xl font-bold text-warning">{Math.max(0, 3 - errors.length)}/3</p>
+                    <p className="text-[10px] text-muted-foreground">Stars</p>
                   </div>
                 </div>
 
-                {/* Learning Summary */}
-                <div className="bg-card/50 rounded-lg p-4 text-left mb-6">
-                  <h4 className="font-semibold mb-2 flex items-center gap-2">
+                <div className="bg-card/50 rounded-lg p-3 text-left mb-4">
+                  <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
                     <Lightbulb className="w-4 h-4 text-warning" />
                     What You Learned:
                   </h4>
-                  <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• PC components and their functions</li>
-                    <li>• Component compatibility (DDR5 vs DDR3, socket types)</li>
+                  <ul className="text-xs text-muted-foreground space-y-1">
+                    <li>• PC components: CPU, RAM, GPU, Storage, PSU</li>
+                    <li>• DDR5 vs DDR3 memory compatibility</li>
+                    <li>• LGA1700 socket for modern Intel CPUs</li>
+                    <li>• PSU wattage requirements (850W for RTX 4080)</li>
                     <li>• Proper build order for assembly</li>
-                    <li>• Power requirements and PSU sizing</li>
                   </ul>
                 </div>
 
-                <div className="flex gap-3 justify-center">
-                  <Button variant="outline" onClick={resetGame}>
-                    <RotateCcw className="w-4 h-4 mr-2" />
+                <div className="flex gap-2 justify-center">
+                  <Button variant="outline" size="sm" onClick={resetGame}>
+                    <RotateCcw className="w-3 h-3 mr-1" />
                     Rebuild
                   </Button>
                   {currentChallenge < challenges.length - 1 && (
-                    <Button onClick={nextChallenge}>
+                    <Button size="sm" onClick={nextChallenge}>
                       Next Challenge
-                      <ChevronRight className="w-4 h-4 ml-2" />
+                      <ArrowRight className="w-3 h-3 ml-1" />
                     </Button>
                   )}
                 </div>
