@@ -1,19 +1,19 @@
 import { motion } from "framer-motion";
-import { Code2, Zap, Trophy, BookOpen, ArrowRight, Shield, Brain, Gamepad2, Briefcase } from "lucide-react";
+import { Code2, Zap, Trophy, BookOpen, ArrowRight, Shield, Brain, Gamepad2, Briefcase, Download, Globe, Monitor } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 
 const courses = [
-  { icon: <Code2 className="w-6 h-6 text-primary" />, label: "Java Programming", desc: "OOP to Advanced Patterns", id: "java-foundations" },
-  { icon: <BookOpen className="w-6 h-6 text-accent" />, label: "Systems Analysis", desc: "ERD, Use Cases, UML", id: "systems-analysis" },
-  { icon: <Zap className="w-6 h-6 text-warning" />, label: "Maths", desc: "Graphs, Big-O, Algorithms", id: "math-computing" },
-  { icon: <Shield className="w-6 h-6 text-success" />, label: "Cybersecurity", desc: "Network Security, Threats", id: "cybersecurity" },
-  { icon: <Brain className="w-6 h-6 text-secondary" />, label: "AI & Data Science", desc: "ML, Neural Networks", id: "ai-data-science" },
-  { icon: <Briefcase className="w-6 h-6 text-primary" />, label: "Business Systems", desc: "ERP, CRM, Workflows", id: "business-systems" },
-  { icon: <Gamepad2 className="w-6 h-6 text-accent" />, label: "Game Development", desc: "Unity, Game Design", id: "game-development" },
-  { icon: <Zap className="w-6 h-6 text-success" />, label: "Computer Systems", desc: "Hardware, LMC, Networking", id: "computer-systems" },
-  { icon: "🌐", label: "Web Technologies", desc: "HTML, CSS, JavaScript", id: "web-technologies" },
+  { icon: <Code2 className="w-6 h-6 text-primary" />, label: "Java Programming", desc: "OOP, Streams, Design Patterns", id: "java-foundations" },
+  { icon: <BookOpen className="w-6 h-6 text-accent" />, label: "Systems Analysis", desc: "SDLC, Agile, Waterfall, UML", id: "systems-analysis" },
+  { icon: <Zap className="w-6 h-6 text-warning" />, label: "Maths", desc: "Logic, Big-O, Algorithms", id: "math-computing" },
+  { icon: <Shield className="w-6 h-6 text-success" />, label: "Cybersecurity", desc: "CompTIA, GDPR, Pen Testing", id: "cybersecurity" },
+  { icon: <Brain className="w-6 h-6 text-secondary" />, label: "AI & Data Science", desc: "ML, Deep Learning, Robotics", id: "ai-data-science" },
+  { icon: <Briefcase className="w-6 h-6 text-primary" />, label: "Business Systems", desc: "ERP, SaaS, AWS, CRM", id: "business-systems" },
+  { icon: <Gamepad2 className="w-6 h-6 text-accent" />, label: "Game Dev", desc: "Unity, Physics, AI", id: "game-development" },
+  { icon: <Monitor className="w-6 h-6 text-success" />, label: "Computer Systems", desc: "Hardware, LMC, Networking", id: "computer-systems" },
+  { icon: <Globe className="w-6 h-6 text-warning" />, label: "Web Technologies", desc: "HTML, CSS, JS, SEO", id: "web-technologies" },
 ];
 
 export function HeroSection() {
@@ -64,8 +64,12 @@ export function HeroSection() {
             </h1>
 
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Learn Java, Systems Design, Cybersecurity, AI, and more through 
-              interactive games and challenges. 9 courses from fundamentals to expert level.
+              Learn Java, Systems Design, Cybersecurity, AI, Data Science, Web Dev,
+              and more through interactive games and challenges. 9 comprehensive courses 
+              from fundamentals to professional mastery.
+            </p>
+            <p className="text-sm text-muted-foreground mb-8">
+              Includes CompTIA prep, AWS, ERP, SaaS, SEO, Agile, Waterfall & more
             </p>
           </motion.div>
 
@@ -90,6 +94,14 @@ export function HeroSection() {
               className="min-w-[180px]"
             >
               View Pricing
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={() => navigate("/install")}
+              className="min-w-[180px] gap-2"
+            >
+              <Download className="w-4 h-4" /> Get the App
             </Button>
           </motion.div>
 
