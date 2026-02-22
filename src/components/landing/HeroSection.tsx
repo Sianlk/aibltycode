@@ -29,7 +29,7 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-12">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-12">
       {/* Subtle background */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-primary/5 blur-3xl" />
