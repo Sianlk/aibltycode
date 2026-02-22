@@ -5,15 +5,15 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 
 const courses = [
-  { icon: <Code2 className="w-6 h-6 text-primary" />, label: "Java Programming", desc: "OOP, Streams, Design Patterns", id: "java-foundations" },
-  { icon: <BookOpen className="w-6 h-6 text-accent" />, label: "Systems Analysis", desc: "SDLC, Agile, Waterfall, UML", id: "systems-analysis" },
-  { icon: <Zap className="w-6 h-6 text-warning" />, label: "Maths", desc: "Logic, Big-O, Algorithms", id: "math-computing" },
-  { icon: <Shield className="w-6 h-6 text-success" />, label: "Cybersecurity", desc: "CompTIA, GDPR, Pen Testing", id: "cybersecurity" },
-  { icon: <Brain className="w-6 h-6 text-secondary" />, label: "AI & Data Science", desc: "ML, Deep Learning, Robotics", id: "ai-data-science" },
-  { icon: <Briefcase className="w-6 h-6 text-primary" />, label: "Business Systems", desc: "ERP, SaaS, AWS, CRM", id: "business-systems" },
-  { icon: <Gamepad2 className="w-6 h-6 text-accent" />, label: "Game Dev", desc: "Unity, Physics, AI", id: "game-development" },
-  { icon: <Monitor className="w-6 h-6 text-success" />, label: "Computer Systems", desc: "Hardware, LMC, Networking", id: "computer-systems" },
-  { icon: <Globe className="w-6 h-6 text-warning" />, label: "Web Technologies", desc: "HTML, CSS, JS, SEO", id: "web-technologies" },
+  { icon: <Code2 className="w-6 h-6 text-primary" />, label: "Java Programming", desc: "OOP, Streams, Spring Boot, Testing", id: "java-foundations" },
+  { icon: <BookOpen className="w-6 h-6 text-accent" />, label: "Systems Analysis", desc: "SDLC, Agile, UML, Microservices", id: "systems-analysis" },
+  { icon: <Zap className="w-6 h-6 text-warning" />, label: "Maths", desc: "Logic, Statistics, Algorithms", id: "math-computing" },
+  { icon: <Shield className="w-6 h-6 text-success" />, label: "Cybersecurity", desc: "CompTIA, Pen Testing, SOC, SIEM", id: "cybersecurity" },
+  { icon: <Brain className="w-6 h-6 text-secondary" />, label: "AI & Data Science", desc: "ML, Robotics, NLP, MLOps, CV", id: "ai-data-science" },
+  { icon: <Briefcase className="w-6 h-6 text-primary" />, label: "Business Systems", desc: "ERP, SaaS, AWS, Digital Marketing", id: "business-systems" },
+  { icon: <Gamepad2 className="w-6 h-6 text-accent" />, label: "Game Dev", desc: "Unity, 3D, Physics, AI, Multiplayer", id: "game-development" },
+  { icon: <Monitor className="w-6 h-6 text-success" />, label: "Computer Systems", desc: "Hardware, LMC, OS, Networking", id: "computer-systems" },
+  { icon: <Globe className="w-6 h-6 text-warning" />, label: "Web Technologies", desc: "React, TypeScript, SEO, APIs, PWA", id: "web-technologies" },
 ];
 
 export function HeroSection() {
@@ -64,12 +64,13 @@ export function HeroSection() {
             </h1>
 
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Learn Java, Systems Design, Cybersecurity, AI, Data Science, Web Dev,
-              and more through interactive games and challenges. 9 comprehensive courses 
-              from fundamentals to professional mastery.
+              Master Java, Systems Design, Cybersecurity, AI, Robotics, Data Science, 
+              Web Dev, and more through interactive games and challenges. 9 mastery courses 
+              with 800+ lessons from fundamentals to professional expertise.
             </p>
             <p className="text-sm text-muted-foreground mb-8">
-              Includes CompTIA prep, AWS, ERP, SaaS, SEO, Agile, Waterfall & more
+              Includes CompTIA Security+, AWS, Docker, Kubernetes, Spring Boot, React, TypeScript, 
+              SEO, Digital Marketing, ERP, SaaS, MLOps, NLP, Robotics & more
             </p>
           </motion.div>
 

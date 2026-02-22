@@ -148,6 +148,29 @@ const moduleLessons: Record<string, { id: string; title: string; description: st
     { id: "javafx-layouts", title: "Layout Managers", description: "VBox, HBox, GridPane", icon: "📐", xpReward: 200 },
     { id: "javafx-events", title: "Event Handling", description: "Button clicks, keyboard events", icon: "👆", xpReward: 225 },
     { id: "javafx-css", title: "JavaFX Styling", description: "CSS for JavaFX", icon: "🎨", xpReward: 200 },
+    
+    // Week 21: Concurrency & Multithreading
+    { id: "threads-intro", title: "Threads Introduction", description: "Creating and running threads", icon: "🧵", xpReward: 225 },
+    { id: "synchronization", title: "Synchronization", description: "Thread safety and locks", icon: "🔒", xpReward: 250 },
+    { id: "executor-framework", title: "Executor Framework", description: "Thread pools and executors", icon: "⚙️", xpReward: 250 },
+    { id: "concurrent-collections", title: "Concurrent Collections", description: "ConcurrentHashMap, BlockingQueue", icon: "📦", xpReward: 225 },
+    
+    // Week 22: Testing & Design Patterns
+    { id: "junit-testing", title: "JUnit Testing", description: "Unit testing in Java", icon: "🧪", xpReward: 200 },
+    { id: "test-driven-dev", title: "Test-Driven Development", description: "TDD methodology", icon: "🔄", xpReward: 225 },
+    { id: "singleton-pattern", title: "Singleton Pattern", description: "Single instance design", icon: "1️⃣", xpReward: 200 },
+    { id: "factory-pattern", title: "Factory Pattern", description: "Object creation patterns", icon: "🏭", xpReward: 225 },
+    { id: "observer-pattern", title: "Observer Pattern", description: "Event-driven design", icon: "👁️", xpReward: 225 },
+    { id: "mvc-pattern", title: "MVC Pattern", description: "Model-View-Controller", icon: "🏗️", xpReward: 250 },
+    { id: "strategy-pattern", title: "Strategy Pattern", description: "Interchangeable algorithms", icon: "🎯", xpReward: 225 },
+    
+    // Week 23: Full Project Mastery
+    { id: "project-structure", title: "Java Project Structure", description: "Packages, modules, build tools", icon: "📁", xpReward: 200 },
+    { id: "maven-gradle", title: "Maven & Gradle", description: "Build automation", icon: "🔨", xpReward: 200 },
+    { id: "logging", title: "Logging", description: "SLF4J, Log4j, best practices", icon: "📋", xpReward: 175 },
+    { id: "database-jdbc", title: "JDBC & Database", description: "Database connectivity", icon: "🗄️", xpReward: 250 },
+    { id: "spring-boot-intro", title: "Spring Boot Introduction", description: "Enterprise Java framework", icon: "🌱", xpReward: 275 },
+    { id: "rest-api-java", title: "REST APIs in Java", description: "Building web services", icon: "🔌", xpReward: 275 },
   ],
 
 
@@ -249,6 +272,14 @@ const moduleLessons: Record<string, { id: string; title: string; description: st
     { id: "quality-assurance", title: "Quality Assurance", description: "QA processes and standards", icon: "✅", xpReward: 125 },
     { id: "compliance", title: "Compliance & GDPR", description: "Data protection regulations", icon: "📜", xpReward: 100 },
     { id: "documentation", title: "Documentation Standards", description: "Technical and user docs", icon: "📄", xpReward: 100 },
+    
+    // Week 13: DevOps & Deployment
+    { id: "devops-systems", title: "DevOps for Systems", description: "CI/CD in system projects", icon: "🔄", xpReward: 150 },
+    { id: "cloud-deployment-sa", title: "Cloud Deployment", description: "Deploying systems to cloud", icon: "☁️", xpReward: 175 },
+    { id: "microservices", title: "Microservices Architecture", description: "Service-oriented design", icon: "🔲", xpReward: 200 },
+    { id: "api-design-sa", title: "API Design", description: "REST, GraphQL for systems", icon: "🔌", xpReward: 175 },
+    { id: "systems-integration", title: "Systems Integration", description: "Connecting disparate systems", icon: "🔗", xpReward: 175 },
+    { id: "legacy-migration", title: "Legacy System Migration", description: "Modernizing old systems", icon: "🏗️", xpReward: 175 },
   ],
 
   // ==================== MATHS FOR COMPUTING ====================
@@ -362,6 +393,21 @@ const moduleLessons: Record<string, { id: string; title: string; description: st
     { id: "matrix-operations", title: "Matrix Operations", description: "Add, subtract, multiply", icon: "➕", xpReward: 150 },
     { id: "matrix-identity", title: "Identity Matrix", description: "Special matrices", icon: "🔳", xpReward: 125 },
     { id: "matrix-inverse", title: "Matrix Inverse", description: "Inverse calculation", icon: "🔄", xpReward: 175 },
+    
+    // Week 15: Statistics
+    { id: "stats-intro", title: "Statistics Introduction", description: "Descriptive and inferential", icon: "📊", xpReward: 100 },
+    { id: "mean-median-mode", title: "Mean, Median, Mode", description: "Central tendency measures", icon: "📈", xpReward: 100 },
+    { id: "standard-deviation", title: "Standard Deviation", description: "Spread and variance", icon: "📉", xpReward: 125 },
+    { id: "normal-distribution", title: "Normal Distribution", description: "Bell curve and z-scores", icon: "📊", xpReward: 150 },
+    { id: "hypothesis-testing", title: "Hypothesis Testing", description: "Null and alternative hypotheses", icon: "❓", xpReward: 175 },
+    { id: "correlation", title: "Correlation", description: "Pearson and Spearman", icon: "📈", xpReward: 150 },
+    
+    // Week 16: Combinatorics & Counting
+    { id: "counting-principles", title: "Counting Principles", description: "Rule of sum and product", icon: "🔢", xpReward: 100 },
+    { id: "permutations", title: "Permutations", description: "Ordered arrangements", icon: "🔄", xpReward: 125 },
+    { id: "combinations", title: "Combinations", description: "Unordered selections", icon: "📦", xpReward: 125 },
+    { id: "pigeonhole", title: "Pigeonhole Principle", description: "Existence proofs", icon: "🐦", xpReward: 150 },
+    { id: "recurrence-relations", title: "Recurrence Relations", description: "Recursive formulas", icon: "🔁", xpReward: 175 },
   ],
 
   // ==================== CYBERSECURITY ====================
@@ -449,6 +495,33 @@ const moduleLessons: Record<string, { id: string; title: string; description: st
     { id: "iso-27001", title: "ISO 27001", description: "Security management standard", icon: "📋", xpReward: 175 },
     { id: "security-auditing", title: "Security Auditing", description: "Compliance verification", icon: "✅", xpReward: 150 },
     { id: "security-governance", title: "Security Governance", description: "Policies and frameworks", icon: "🏛️", xpReward: 150 },
+    
+    // Week 11: Penetration Testing
+    { id: "pentest-intro", title: "Penetration Testing Intro", description: "Ethical hacking methodology", icon: "🎯", xpReward: 175 },
+    { id: "pentest-recon", title: "Reconnaissance", description: "Information gathering (OSINT)", icon: "🔍", xpReward: 175 },
+    { id: "pentest-scanning", title: "Scanning & Enumeration", description: "Nmap, port scanning", icon: "📡", xpReward: 200 },
+    { id: "pentest-exploitation", title: "Exploitation", description: "Gaining access to systems", icon: "💥", xpReward: 225 },
+    { id: "pentest-post", title: "Post-Exploitation", description: "Privilege escalation, pivoting", icon: "⬆️", xpReward: 225 },
+    { id: "pentest-reporting", title: "Reporting", description: "Writing pentest reports", icon: "📄", xpReward: 150 },
+    { id: "kali-linux", title: "Kali Linux Tools", description: "Metasploit, Burp Suite, Wireshark", icon: "🐧", xpReward: 200 },
+    
+    // Week 12: CompTIA Security+ Prep
+    { id: "comptia-domains", title: "CompTIA Security+ Domains", description: "Exam overview and domains", icon: "📋", xpReward: 150 },
+    { id: "comptia-threats", title: "Threats & Attacks (SY0-701)", description: "Attack types and indicators", icon: "⚔️", xpReward: 175 },
+    { id: "comptia-architecture", title: "Security Architecture", description: "Enterprise security design", icon: "🏗️", xpReward: 175 },
+    { id: "comptia-implementation", title: "Security Implementation", description: "Controls and protocols", icon: "🔧", xpReward: 175 },
+    { id: "comptia-operations", title: "Security Operations", description: "Monitoring and response", icon: "📊", xpReward: 175 },
+    { id: "comptia-governance", title: "Governance & Compliance", description: "Risk and policy management", icon: "📜", xpReward: 175 },
+    
+    // Week 13: SOC Operations
+    { id: "soc-intro", title: "SOC Introduction", description: "Security Operations Center", icon: "🏢", xpReward: 150 },
+    { id: "siem", title: "SIEM Systems", description: "Security information & event management", icon: "📊", xpReward: 200 },
+    { id: "log-analysis", title: "Log Analysis", description: "Analyzing security logs", icon: "📋", xpReward: 175 },
+    { id: "threat-intelligence", title: "Threat Intelligence", description: "CTI feeds and analysis", icon: "🧠", xpReward: 200 },
+    { id: "vulnerability-management", title: "Vulnerability Management", description: "Scanning and remediation lifecycle", icon: "🔄", xpReward: 175 },
+    { id: "endpoint-security", title: "Endpoint Security", description: "EDR, antivirus, host hardening", icon: "🖥️", xpReward: 175 },
+    { id: "zero-trust", title: "Zero Trust Architecture", description: "Never trust, always verify", icon: "🚫", xpReward: 200 },
+    { id: "cloud-sec-advanced", title: "Advanced Cloud Security", description: "AWS/Azure/GCP security controls", icon: "☁️", xpReward: 200 },
   ],
 
   // ==================== AI & DATA SCIENCE ====================
@@ -538,6 +611,39 @@ const moduleLessons: Record<string, { id: string; title: string; description: st
     { id: "explainable-ai", title: "Explainable AI", description: "Interpretable models", icon: "🔍", xpReward: 175 },
     { id: "ai-in-industry", title: "AI in Industry", description: "Real-world applications", icon: "🏭", xpReward: 125 },
     { id: "model-deployment", title: "Model Deployment", description: "Production systems", icon: "🚀", xpReward: 175 },
+    
+    // Week 13: Natural Language Processing
+    { id: "nlp-intro", title: "NLP Introduction", description: "Processing human language", icon: "💬", xpReward: 150 },
+    { id: "text-preprocessing", title: "Text Preprocessing", description: "Tokenization, stemming, lemmatization", icon: "✂️", xpReward: 150 },
+    { id: "word-embeddings", title: "Word Embeddings", description: "Word2Vec, GloVe, FastText", icon: "📐", xpReward: 200 },
+    { id: "transformers", title: "Transformers", description: "Attention mechanism and BERT", icon: "🤖", xpReward: 250 },
+    { id: "llms", title: "Large Language Models", description: "GPT, LLaMA, fine-tuning", icon: "🧠", xpReward: 250 },
+    { id: "prompt-engineering", title: "Prompt Engineering", description: "Effective AI prompting", icon: "✍️", xpReward: 175 },
+    
+    // Week 14: Computer Vision
+    { id: "cv-intro", title: "Computer Vision Intro", description: "Image understanding", icon: "👁️", xpReward: 150 },
+    { id: "image-processing", title: "Image Processing", description: "Filters, edges, transformations", icon: "🖼️", xpReward: 150 },
+    { id: "object-detection", title: "Object Detection", description: "YOLO, SSD, R-CNN", icon: "🎯", xpReward: 225 },
+    { id: "image-segmentation", title: "Image Segmentation", description: "Semantic and instance", icon: "🔲", xpReward: 200 },
+    { id: "gan-intro", title: "GANs", description: "Generative Adversarial Networks", icon: "🎨", xpReward: 250 },
+    
+    // Week 15: Robotics & IoT AI
+    { id: "robotics-intro", title: "Robotics Introduction", description: "Robots and automation", icon: "🦾", xpReward: 150 },
+    { id: "robot-kinematics", title: "Robot Kinematics", description: "Movement and positioning", icon: "🔄", xpReward: 200 },
+    { id: "sensors-actuators", title: "Sensors & Actuators", description: "Robot perception and action", icon: "📡", xpReward: 175 },
+    { id: "robot-programming", title: "Robot Programming", description: "ROS and control systems", icon: "💻", xpReward: 225 },
+    { id: "autonomous-systems", title: "Autonomous Systems", description: "Self-driving and drones", icon: "🚗", xpReward: 225 },
+    { id: "iot-ai", title: "IoT & Edge AI", description: "AI on embedded devices", icon: "📱", xpReward: 200 },
+    
+    // Week 16: MLOps & Data Engineering
+    { id: "mlops-intro", title: "MLOps Introduction", description: "ML in production", icon: "⚙️", xpReward: 175 },
+    { id: "ml-pipelines", title: "ML Pipelines", description: "Automated workflows", icon: "🔄", xpReward: 200 },
+    { id: "model-monitoring", title: "Model Monitoring", description: "Drift detection and retraining", icon: "📊", xpReward: 200 },
+    { id: "data-engineering", title: "Data Engineering", description: "ETL, data lakes, warehouses", icon: "🏗️", xpReward: 200 },
+    { id: "spark-basics", title: "Apache Spark Basics", description: "Big data processing", icon: "⚡", xpReward: 225 },
+    { id: "python-for-ds", title: "Python for Data Science", description: "NumPy, Pandas, Matplotlib", icon: "🐍", xpReward: 175 },
+    { id: "r-programming", title: "R Programming Basics", description: "Statistical computing", icon: "📊", xpReward: 175 },
+    { id: "ai-chatbot-creation", title: "AI Chatbot Creation", description: "Building conversational AI", icon: "💬", xpReward: 225 },
   ],
 
   // ==================== BUSINESS INFORMATION SYSTEMS ====================
@@ -632,6 +738,40 @@ const moduleLessons: Record<string, { id: string; title: string; description: st
     { id: "innovation-management", title: "Innovation Management", description: "Fostering innovation", icon: "💡", xpReward: 150 },
     { id: "agile-business", title: "Agile for Business", description: "Agile in non-IT contexts", icon: "🏃", xpReward: 150 },
     { id: "data-ethics", title: "Data Ethics", description: "Responsible data use", icon: "⚖️", xpReward: 125 },
+    
+    // Week 13: SaaS & Cloud Architecture
+    { id: "saas-intro", title: "SaaS Architecture", description: "Software as a Service design", icon: "☁️", xpReward: 175 },
+    { id: "saas-multi-tenant", title: "Multi-Tenancy", description: "Shared infrastructure patterns", icon: "🏢", xpReward: 175 },
+    { id: "saas-pricing", title: "SaaS Pricing Models", description: "Freemium, tiered, usage-based", icon: "💰", xpReward: 150 },
+    { id: "saas-metrics", title: "SaaS Metrics", description: "MRR, churn, LTV, CAC", icon: "📊", xpReward: 175 },
+    { id: "api-economy", title: "API Economy", description: "API-first business models", icon: "🔗", xpReward: 175 },
+    
+    // Week 14: AWS Services Deep Dive
+    { id: "aws-core", title: "AWS Core Services", description: "EC2, S3, RDS, Lambda", icon: "☁️", xpReward: 175 },
+    { id: "aws-compute", title: "AWS Compute", description: "EC2, ECS, Lambda, Fargate", icon: "🖥️", xpReward: 200 },
+    { id: "aws-storage", title: "AWS Storage", description: "S3, EBS, EFS, Glacier", icon: "💾", xpReward: 175 },
+    { id: "aws-networking", title: "AWS Networking", description: "VPC, Route 53, CloudFront", icon: "🌐", xpReward: 200 },
+    { id: "aws-databases", title: "AWS Databases", description: "RDS, DynamoDB, Aurora", icon: "🗄️", xpReward: 200 },
+    { id: "aws-security", title: "AWS Security", description: "IAM, KMS, security groups", icon: "🔒", xpReward: 200 },
+    { id: "aws-serverless", title: "Serverless Architecture", description: "Lambda, API Gateway, DynamoDB", icon: "⚡", xpReward: 225 },
+    
+    // Week 15: Digital Marketing Mastery
+    { id: "marketing-strategy", title: "Digital Marketing Strategy", description: "Planning digital campaigns", icon: "📋", xpReward: 150 },
+    { id: "seo-advanced", title: "Advanced SEO", description: "Technical SEO, schema markup", icon: "🔍", xpReward: 175 },
+    { id: "content-marketing", title: "Content Marketing", description: "Blog, video, podcast strategy", icon: "📝", xpReward: 150 },
+    { id: "email-marketing", title: "Email Marketing", description: "Automation and segmentation", icon: "📧", xpReward: 150 },
+    { id: "ppc-advertising", title: "PPC Advertising", description: "Google Ads, Facebook Ads", icon: "💰", xpReward: 175 },
+    { id: "analytics-marketing", title: "Marketing Analytics", description: "Google Analytics, attribution", icon: "📊", xpReward: 175 },
+    { id: "conversion-optimization", title: "Conversion Optimization", description: "A/B testing, CRO", icon: "📈", xpReward: 175 },
+    { id: "social-media-strategy", title: "Social Media Strategy", description: "Platform-specific tactics", icon: "📱", xpReward: 150 },
+    
+    // Week 16: DevOps & CI/CD
+    { id: "devops-intro", title: "DevOps Introduction", description: "Culture and practices", icon: "🔄", xpReward: 150 },
+    { id: "ci-cd", title: "CI/CD Pipelines", description: "Continuous integration/deployment", icon: "🚀", xpReward: 200 },
+    { id: "docker-basics", title: "Docker Basics", description: "Containerization fundamentals", icon: "🐳", xpReward: 200 },
+    { id: "kubernetes-intro", title: "Kubernetes Introduction", description: "Container orchestration", icon: "☸️", xpReward: 225 },
+    { id: "infrastructure-as-code", title: "Infrastructure as Code", description: "Terraform, CloudFormation", icon: "📄", xpReward: 200 },
+    { id: "monitoring-observability", title: "Monitoring & Observability", description: "Prometheus, Grafana, logging", icon: "📊", xpReward: 200 },
   ],
 
   // ==================== GAME DEVELOPMENT ====================
@@ -730,6 +870,14 @@ const moduleLessons: Record<string, { id: string; title: string; description: st
     { id: "game-testing", title: "Game Testing", description: "QA for games", icon: "🧪", xpReward: 150 },
     { id: "game-analytics", title: "Game Analytics", description: "Player data analysis", icon: "📊", xpReward: 150 },
     { id: "game-marketing", title: "Game Marketing", description: "Promoting your game", icon: "📢", xpReward: 125 },
+    
+    // Week 13: 3D Game Development
+    { id: "3d-basics", title: "3D Game Basics", description: "3D space and coordinates", icon: "🧊", xpReward: 175 },
+    { id: "3d-models", title: "3D Models & Meshes", description: "Vertices, faces, textures", icon: "🎨", xpReward: 175 },
+    { id: "lighting-shaders", title: "Lighting & Shaders", description: "Phong, PBR materials", icon: "💡", xpReward: 200 },
+    { id: "camera-systems", title: "Camera Systems", description: "FPS, third-person, cinematic", icon: "🎥", xpReward: 175 },
+    { id: "animation-systems", title: "Animation Systems", description: "Skeletal, blend trees", icon: "🦴", xpReward: 200 },
+    { id: "particle-systems", title: "Particle Systems", description: "Effects and VFX", icon: "✨", xpReward: 200 },
   ],
 
   // ==================== COMPUTER SYSTEMS & NETWORKING ====================
@@ -921,6 +1069,44 @@ const moduleLessons: Record<string, { id: string; title: string; description: st
     { id: "code-organization", title: "Code Organization", description: "File structure and naming", icon: "📁", xpReward: 100 },
     { id: "testing-debugging", title: "Testing & Debugging", description: "DevTools and testing strategies", icon: "🔍", xpReward: 125 },
     { id: "progressive-enhancement", title: "Progressive Enhancement", description: "Building resilient websites", icon: "📈", xpReward: 125 },
+    
+    // Modern Frameworks & TypeScript
+    { id: "typescript-intro", title: "TypeScript Introduction", description: "Type-safe JavaScript", icon: "📘", xpReward: 150 },
+    { id: "ts-types", title: "TypeScript Types", description: "Interfaces, generics, unions", icon: "📋", xpReward: 150 },
+    { id: "react-intro", title: "React Introduction", description: "Component-based UI", icon: "⚛️", xpReward: 175 },
+    { id: "react-hooks", title: "React Hooks", description: "useState, useEffect, custom hooks", icon: "🪝", xpReward: 200 },
+    { id: "react-state", title: "State Management", description: "Context, Redux, Zustand", icon: "📦", xpReward: 200 },
+    { id: "nextjs-intro", title: "Next.js Introduction", description: "Full-stack React framework", icon: "▲", xpReward: 200 },
+    { id: "tailwind-css", title: "Tailwind CSS", description: "Utility-first CSS framework", icon: "🎨", xpReward: 150 },
+    
+    // PWA & Mobile Web
+    { id: "pwa-intro", title: "Progressive Web Apps", description: "Installable web applications", icon: "📱", xpReward: 175 },
+    { id: "service-workers", title: "Service Workers", description: "Offline functionality", icon: "⚙️", xpReward: 200 },
+    { id: "web-app-manifest", title: "Web App Manifest", description: "App-like experience", icon: "📋", xpReward: 125 },
+    { id: "push-notifications", title: "Push Notifications", description: "Engaging users", icon: "🔔", xpReward: 175 },
+    { id: "responsive-mastery", title: "Responsive Design Mastery", description: "Mobile-first advanced patterns", icon: "📱", xpReward: 175 },
+    
+    // SEO Mastery
+    { id: "seo-technical", title: "Technical SEO", description: "Crawling, indexing, sitemaps", icon: "🔍", xpReward: 175 },
+    { id: "seo-on-page", title: "On-Page SEO", description: "Content optimization, keywords", icon: "📝", xpReward: 150 },
+    { id: "seo-off-page", title: "Off-Page SEO", description: "Link building, authority", icon: "🔗", xpReward: 175 },
+    { id: "schema-markup", title: "Schema Markup", description: "Structured data for search", icon: "📊", xpReward: 175 },
+    { id: "core-web-vitals", title: "Core Web Vitals", description: "LCP, FID, CLS optimization", icon: "📈", xpReward: 200 },
+    
+    // API Development
+    { id: "rest-api", title: "REST API Design", description: "RESTful web services", icon: "🔌", xpReward: 175 },
+    { id: "graphql-intro", title: "GraphQL Introduction", description: "Query language for APIs", icon: "📊", xpReward: 200 },
+    { id: "api-authentication", title: "API Authentication", description: "JWT, OAuth, API keys", icon: "🔑", xpReward: 200 },
+    { id: "api-documentation", title: "API Documentation", description: "Swagger, OpenAPI", icon: "📄", xpReward: 150 },
+    { id: "websockets", title: "WebSockets", description: "Real-time communication", icon: "🔄", xpReward: 200 },
+    
+    // Full-Stack App Development
+    { id: "fullstack-architecture", title: "Full-Stack Architecture", description: "Frontend + backend design", icon: "🏗️", xpReward: 200 },
+    { id: "database-integration", title: "Database Integration", description: "SQL and NoSQL in web apps", icon: "🗄️", xpReward: 200 },
+    { id: "auth-implementation", title: "Auth Implementation", description: "Login, signup, sessions", icon: "🔐", xpReward: 225 },
+    { id: "file-upload", title: "File Upload Systems", description: "Handling uploads and storage", icon: "📤", xpReward: 175 },
+    { id: "web-deployment-advanced", title: "Advanced Deployment", description: "CI/CD, Docker, cloud hosting", icon: "🚀", xpReward: 225 },
+    { id: "web-app-security-advanced", title: "Advanced Web Security", description: "Rate limiting, WAF, DDoS", icon: "🛡️", xpReward: 225 },
   ],
 };
 
