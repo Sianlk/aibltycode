@@ -109,7 +109,7 @@ export default function Dashboard() {
   }, [user, progress]);
 
   const completedLessons = progress.filter(p => p.completed).length;
-  const totalLessons = 31; // Total lessons across all modules
+  const totalLessons = 600; // Total lessons across all 9 modules
   const overallProgress = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
 
   if (authLoading) {
@@ -322,7 +322,7 @@ export default function Dashboard() {
                   { id: "ai-data-science", title: "AI & Data Science", icon: "🤖", color: "secondary" },
                   { id: "business-systems", title: "Business Systems", icon: "💼", color: "primary" },
                   { id: "game-development", title: "Game Development", icon: "🎮", color: "accent" },
-                  { id: "computer-systems", title: "Computer Systems & Networking", icon: "🖧", color: "success" },
+                  { id: "computer-systems", title: "Computer Systems & Networking", icon: "🖥️", color: "success" },
                   { id: "web-technologies", title: "Web Technologies", icon: "🌐", color: "warning" },
                 ].map((mod) => (
                   <div

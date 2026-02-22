@@ -618,6 +618,20 @@ const moduleLessons: Record<string, { id: string; title: string; description: st
     { id: "rpa", title: "Robotic Process Automation", description: "Automating tasks", icon: "🤖", xpReward: 175 },
     { id: "ai-in-business", title: "AI in Business", description: "AI applications", icon: "🧠", xpReward: 175 },
     { id: "future-trends", title: "Future Trends", description: "Emerging technologies", icon: "🔮", xpReward: 125 },
+    
+    // Week 11: Business Process Engineering
+    { id: "bpr", title: "Business Process Reengineering", description: "Redesigning processes", icon: "🔄", xpReward: 175 },
+    { id: "process-automation", title: "Process Automation", description: "Workflow automation tools", icon: "⚙️", xpReward: 150 },
+    { id: "lean-thinking", title: "Lean IT", description: "Eliminating waste", icon: "📉", xpReward: 150 },
+    { id: "six-sigma", title: "Six Sigma for IT", description: "Quality improvement", icon: "📊", xpReward: 150 },
+    { id: "business-cases", title: "Building Business Cases", description: "Justifying IT investments", icon: "💰", xpReward: 150 },
+    { id: "stakeholder-management", title: "Stakeholder Management", description: "Managing expectations", icon: "👥", xpReward: 125 },
+    
+    // Week 12: Digital Strategy & Innovation
+    { id: "digital-strategy", title: "Digital Strategy", description: "Planning digital initiatives", icon: "🎯", xpReward: 175 },
+    { id: "innovation-management", title: "Innovation Management", description: "Fostering innovation", icon: "💡", xpReward: 150 },
+    { id: "agile-business", title: "Agile for Business", description: "Agile in non-IT contexts", icon: "🏃", xpReward: 150 },
+    { id: "data-ethics", title: "Data Ethics", description: "Responsible data use", icon: "⚖️", xpReward: 125 },
   ],
 
   // ==================== GAME DEVELOPMENT ====================
@@ -702,6 +716,20 @@ const moduleLessons: Record<string, { id: string; title: string; description: st
     { id: "scene-management", title: "Scene Management", description: "Organizing game levels", icon: "🗂️", xpReward: 125 },
     { id: "game-optimization", title: "Optimization", description: "Performance tuning", icon: "🚀", xpReward: 175 },
     { id: "game-publishing", title: "Publishing Games", description: "Distribution platforms", icon: "📤", xpReward: 150 },
+    
+    // Week 11: Multiplayer & Networking
+    { id: "multiplayer-basics", title: "Multiplayer Basics", description: "Networked games", icon: "👥", xpReward: 175 },
+    { id: "client-server", title: "Client-Server Model", description: "Game networking architecture", icon: "🖥️", xpReward: 175 },
+    { id: "p2p-networking", title: "P2P Networking", description: "Peer-to-peer games", icon: "🔗", xpReward: 150 },
+    { id: "lag-compensation", title: "Lag Compensation", description: "Handling latency", icon: "⏱️", xpReward: 200 },
+    { id: "game-serialization", title: "Game Serialization", description: "Save and load systems", icon: "💾", xpReward: 150 },
+    { id: "replay-systems", title: "Replay Systems", description: "Recording gameplay", icon: "📹", xpReward: 150 },
+    
+    // Week 12: Monetization & Game Business
+    { id: "monetization", title: "Game Monetization", description: "Revenue models", icon: "💰", xpReward: 125 },
+    { id: "game-testing", title: "Game Testing", description: "QA for games", icon: "🧪", xpReward: 150 },
+    { id: "game-analytics", title: "Game Analytics", description: "Player data analysis", icon: "📊", xpReward: 150 },
+    { id: "game-marketing", title: "Game Marketing", description: "Promoting your game", icon: "📢", xpReward: 125 },
   ],
 
   // ==================== COMPUTER SYSTEMS & NETWORKING ====================
@@ -904,7 +932,7 @@ const moduleInfo: Record<string, { title: string; icon: string }> = {
   "ai-data-science": { title: "AI & Data Science", icon: "🤖" },
   "business-systems": { title: "Business Information Systems", icon: "💼" },
   "game-development": { title: "Game Development", icon: "🎮" },
-  "computer-systems": { title: "Computer Systems & Networking", icon: "🖧" },
+  "computer-systems": { title: "Computer Systems & Networking", icon: "🖥️" },
   "web-technologies": { title: "Web Technologies", icon: "🌐" },
 };
 

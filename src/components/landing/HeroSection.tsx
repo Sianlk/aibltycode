@@ -7,12 +7,12 @@ import { useAuth } from "@/contexts/AuthContext";
 const courses = [
   { icon: <Code2 className="w-6 h-6 text-primary" />, label: "Java Programming", desc: "OOP to Advanced Patterns", id: "java-foundations" },
   { icon: <BookOpen className="w-6 h-6 text-accent" />, label: "Systems Analysis", desc: "ERD, Use Cases, UML", id: "systems-analysis" },
-  { icon: <Zap className="w-6 h-6 text-warning" />, label: "Maths for Computing", desc: "Graphs, Big-O, Algorithms", id: "math-computing" },
+  { icon: <Zap className="w-6 h-6 text-warning" />, label: "Maths", desc: "Graphs, Big-O, Algorithms", id: "math-computing" },
   { icon: <Shield className="w-6 h-6 text-success" />, label: "Cybersecurity", desc: "Network Security, Threats", id: "cybersecurity" },
   { icon: <Brain className="w-6 h-6 text-secondary" />, label: "AI & Data Science", desc: "ML, Neural Networks", id: "ai-data-science" },
   { icon: <Briefcase className="w-6 h-6 text-primary" />, label: "Business Systems", desc: "ERP, CRM, Workflows", id: "business-systems" },
   { icon: <Gamepad2 className="w-6 h-6 text-accent" />, label: "Game Development", desc: "Unity, Game Design", id: "game-development" },
-  { icon: "🖧", label: "Computer Systems", desc: "Hardware, LMC, Networking", id: "computer-systems" },
+  { icon: <Zap className="w-6 h-6 text-success" />, label: "Computer Systems", desc: "Hardware, LMC, Networking", id: "computer-systems" },
   { icon: "🌐", label: "Web Technologies", desc: "HTML, CSS, JavaScript", id: "web-technologies" },
 ];
 
@@ -65,7 +65,7 @@ export function HeroSection() {
 
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
               Learn Java, Systems Design, Cybersecurity, AI, and more through 
-              interactive games and challenges. 7+ courses from fundamentals to expert level.
+              interactive games and challenges. 9 courses from fundamentals to expert level.
             </p>
           </motion.div>
 
