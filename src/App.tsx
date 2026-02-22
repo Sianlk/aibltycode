@@ -26,6 +26,7 @@ import MultiplayerBattle from "./pages/MultiplayerBattle";
 import AITutor from "./pages/AITutor";
 import CodeSandbox from "./pages/CodeSandbox";
 import AvatarPage from "./pages/AvatarPage";
+import InstallApp from "./pages/InstallApp";
 
 const queryClient = new QueryClient();
 
@@ -56,6 +57,7 @@ const App = () => (
                 <Route path="/tutor" element={<ProtectedRoute><AITutor /></ProtectedRoute>} />
                 <Route path="/sandbox" element={<ProtectedRoute><CodeSandbox /></ProtectedRoute>} />
                 <Route path="/avatar" element={<ProtectedRoute><AvatarPage /></ProtectedRoute>} />
+                <Route path="/install" element={<InstallApp />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
               {/* Global AI Tutor Button */}
