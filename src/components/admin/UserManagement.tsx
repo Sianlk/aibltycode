@@ -67,30 +67,33 @@ export function UserManagement() {
 
   async function grantFreeAccess(userId: string) {
     setActionLoading(userId);
-    try {
-      const existing = subscriptions[userId];
-      if (existing) {
-        await supabase.from("subscriptions").update({ is_grandfathered: true, status: "active" }).eq("user_id", userId);
-      } else {
-        await supabase.from("subscriptions").insert({ user_id: userId, is_grandfathered: true, status: "active" });
-      }
-      toast({ title: "Free access granted!" });
-      await fetchUsers();
-    } catch (err: any) {
-      toast({ title: "Error", description: err.message, variant: "destructive" });
+    const existing = subscriptions[userId];
+    let error;
+    if (existing) {
+      ({ error } = await supabase.from("subscriptions").update({ is_grandfathered: true, status: "active" }).eq("user_id", userId));
+    } else {
+      ({ error } = await supabase.from("subscriptions").insert({ user_id: userId, is_grandfathered: true, status: "active" }));
     }
+    if (error) {
+      console.error("Grant free access error:", error);
+      toast({ title: "Error granting access", description: error.message, variant: "destructive" });
+    } else {
+      toast({ title: "Free access granted!" });
+    }
+    await fetchUsers();
     setActionLoading(null);
   }
 
   async function revokeFreeAccess(userId: string) {
     setActionLoading(userId);
-    try {
-      await supabase.from("subscriptions").update({ is_grandfathered: false, status: "inactive" }).eq("user_id", userId);
+    const { error } = await supabase.from("subscriptions").update({ is_grandfathered: false, status: "inactive" }).eq("user_id", userId);
+    if (error) {
+      console.error("Revoke access error:", error);
+      toast({ title: "Error revoking access", description: error.message, variant: "destructive" });
+    } else {
       toast({ title: "Access revoked" });
-      await fetchUsers();
-    } catch (err: any) {
-      toast({ title: "Error", description: err.message, variant: "destructive" });
     }
+    await fetchUsers();
     setActionLoading(null);
   }
 
