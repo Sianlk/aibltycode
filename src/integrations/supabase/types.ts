@@ -1046,7 +1046,19 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      battle_leaderboard: {
+        Row: {
+          best_win_streak: number | null
+          current_win_streak: number | null
+          display_name: string | null
+          draws: number | null
+          id: string | null
+          losses: number | null
+          rating: number | null
+          wins: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       clear_parental_pin: { Args: never; Returns: boolean }

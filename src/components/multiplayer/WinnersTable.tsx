@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Crown, Trophy, Medal, Award, Flame, Star, Zap, TrendingUp } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Crown, Trophy, Medal, Award, Flame, TrendingUp } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
@@ -9,14 +9,13 @@ import { cn } from '@/lib/utils';
 
 interface BattleChampion {
   id: string;
-  user_id: string;
   wins: number;
   losses: number;
   draws: number;
   rating: number;
   current_win_streak: number;
   best_win_streak: number;
-  display_name?: string;
+  display_name: string;
 }
 
 export function WinnersTable() {
@@ -24,51 +23,38 @@ export function WinnersTable() {
   const [champions, setChampions] = useState<BattleChampion[]>([]);
   const [loading, setLoading] = useState(true);
   const [userRank, setUserRank] = useState<number | null>(null);
-  const [userStats, setUserStats] = useState<BattleChampion | null>(null);
+  const [userStats, setUserStats] = useState<{ wins: number; losses: number; rating: number } | null>(null);
 
   useEffect(() => {
     fetchChampions();
   }, [user]);
 
   const fetchChampions = async () => {
+    // Use the secure leaderboard view (no user_id exposed)
     const { data, error } = await supabase
-      .from('battle_stats')
-      .select(`
-        *,
-        profiles:user_id (display_name)
-      `)
-      .order('rating', { ascending: false })
+      .from('battle_leaderboard' as any)
+      .select('*')
       .limit(10);
 
     if (!error && data) {
-      const championsWithNames = data.map((c: any) => ({
-        ...c,
-        display_name: c.profiles?.display_name || 'Anonymous Player'
-      }));
-      setChampions(championsWithNames);
+      setChampions(data as unknown as BattleChampion[]);
 
-      // Find user's rank
+      // Get user's own stats from their own battle_stats row (RLS-protected)
       if (user) {
-        const userIndex = championsWithNames.findIndex((c: BattleChampion) => c.user_id === user.id);
-        if (userIndex !== -1) {
-          setUserRank(userIndex + 1);
-          setUserStats(championsWithNames[userIndex]);
-        } else {
-          // Fetch user's stats if not in top 10
-          const { data: userData } = await supabase
-            .from('battle_stats')
-            .select('*')
-            .eq('user_id', user.id)
-            .single();
-          
-          if (userData) {
-            setUserStats(userData);
-            // Get their rank
-            const { count } = await supabase
-              .from('battle_stats')
-              .select('*', { count: 'exact', head: true })
-              .gt('rating', userData.rating);
-            setUserRank((count || 0) + 1);
+        const { data: ownStats } = await supabase
+          .from('battle_stats')
+          .select('wins, losses, draws, rating')
+          .eq('user_id', user.id)
+          .single();
+
+        if (ownStats) {
+          setUserStats({ wins: ownStats.wins || 0, losses: ownStats.losses || 0, rating: ownStats.rating || 1000 });
+          // Determine rank by checking position in leaderboard
+          const userInTop = (data as any[]).findIndex((c: any) => c.rating <= (ownStats.rating || 1000));
+          if (userInTop === -1) {
+            setUserRank((data as any[]).length + 1);
+          } else {
+            setUserRank(userInTop + 1);
           }
         }
       }
@@ -167,7 +153,6 @@ export function WinnersTable() {
               {champions.map((champion, index) => {
                 const rank = index + 1;
                 const winRate = getWinRate(champion.wins || 0, champion.losses || 0, champion.draws || 0);
-                const isUser = user?.id === champion.user_id;
 
                 return (
                   <motion.div
@@ -177,8 +162,7 @@ export function WinnersTable() {
                     transition={{ delay: index * 0.05 }}
                     className={cn(
                       'flex items-center justify-between p-4 transition-colors',
-                      getRankBg(rank),
-                      isUser && 'ring-2 ring-primary/50 ring-inset'
+                      getRankBg(rank)
                     )}
                   >
                     <div className="flex items-center gap-4">
@@ -188,7 +172,6 @@ export function WinnersTable() {
                       <div>
                         <div className="flex items-center gap-2">
                           <p className="font-semibold">{champion.display_name}</p>
-                          {isUser && <Badge variant="outline" className="text-xs">You</Badge>}
                           {champion.current_win_streak && champion.current_win_streak >= 3 && (
                             <Badge variant="secondary" className="gap-1 text-xs">
                               <Flame className="h-3 w-3 text-orange-500" />
@@ -221,3 +204,4 @@ export function WinnersTable() {
     </div>
   );
 }
+
