@@ -811,8 +811,11 @@ function getComputerSystemsContent(id: string): LessonStep[] | null {
 
 // ======================== WEB TECHNOLOGIES ========================
 function generateWebSteps(id: string, title: string, desc: string): LessonStep[] {
-  const steps: LessonStep[] = [];
+  const topicContent = getWebContent(id);
+  if (topicContent) return topicContent;
 
+  // Fallback with code snippet
+  const steps: LessonStep[] = [];
   steps.push(generateQuizStep(`${title} Introduction`, `What is ${title.toLowerCase()}?`,
     [{ label: "A", text: "A database system" }, { label: "B", text: desc }, { label: "C", text: "An operating system" }],
     "B", `${title}: ${desc}. This is a key web development concept.`, "easy"));
@@ -821,56 +824,364 @@ function generateWebSteps(id: string, title: string, desc: string): LessonStep[]
   if (webSnippet) {
     steps.push(generateTypingStep(webSnippet.title, webSnippet.prompt, webSnippet.code, webSnippet.explanation, webSnippet.difficulty));
   }
-
   steps.push(generateQuizStep(`${title} Usage`, `When would you use ${title.toLowerCase()}?`,
     [{ label: "A", text: "Never" }, { label: "B", text: "When building modern web applications" }, { label: "C", text: "Only for desktop apps" }],
     "B", `${title} is commonly used when building modern, responsive web applications.`, "medium"));
-
   steps.push(generateQuizStep(`${title} Best Practices`, `What is important when implementing ${title.toLowerCase()}?`,
     [{ label: "A", text: "Ignoring browser compatibility" }, { label: "B", text: "Following web standards and accessibility guidelines" }, { label: "C", text: "Using deprecated features" }],
     "B", `Following web standards ensures your implementation of ${title.toLowerCase()} works across all browsers and devices.`, "medium"));
-
   return steps;
 }
 
-function getWebCodeSnippet(id: string, title: string): { title: string; prompt: string; code: string; explanation: string; difficulty: "easy" | "medium" | "hard" } | null {
-  const snippets: Record<string, { title: string; prompt: string; code: string; explanation: string; difficulty: "easy" | "medium" | "hard" }> = {
-    "html-structure": { title: "HTML Document", prompt: "Create an HTML structure!", code: "<!DOCTYPE html>\n<html>\n<head><title>Page</title></head>\n<body></body>\n</html>", explanation: "Every HTML document starts with DOCTYPE and has head and body sections.", difficulty: "easy" },
-    "html-text": { title: "Heading Element", prompt: "Create a heading!", code: "<h1>Welcome to My Page</h1>", explanation: "h1 is the largest heading. Use h1-h6 for hierarchy.", difficulty: "easy" },
-    "html-links": { title: "Hyperlink", prompt: "Create a link!", code: '<a href="https://example.com">Visit</a>', explanation: "The <a> tag creates clickable hyperlinks to other pages.", difficulty: "easy" },
-    "html-images": { title: "Image Element", prompt: "Add an image!", code: '<img src="photo.jpg" alt="A photo">', explanation: "Always include alt text for accessibility.", difficulty: "easy" },
-    "html-lists": { title: "Unordered List", prompt: "Create a list!", code: "<ul>\n  <li>Item 1</li>\n  <li>Item 2</li>\n</ul>", explanation: "<ul> creates bullet points, <ol> creates numbered lists.", difficulty: "easy" },
-    "html-tables": { title: "HTML Table", prompt: "Create a table!", code: "<table>\n  <tr><th>Name</th><th>Age</th></tr>\n  <tr><td>Alice</td><td>25</td></tr>\n</table>", explanation: "<tr> = table row, <th> = header cell, <td> = data cell.", difficulty: "medium" },
-    "html-forms": { title: "HTML Form", prompt: "Create a form!", code: '<form action="/submit" method="POST">\n  <input type="text" name="email">\n  <button type="submit">Send</button>\n</form>', explanation: "Forms collect user input and submit data to a server.", difficulty: "medium" },
-    "html-semantic": { title: "Semantic HTML", prompt: "Use semantic elements!", code: "<header>\n  <nav>Menu</nav>\n</header>\n<main>\n  <article>Content</article>\n</main>\n<footer>Copyright</footer>", explanation: "Semantic elements describe their content's meaning to browsers and screen readers.", difficulty: "medium" },
-    "css-selectors": { title: "CSS Class Selector", prompt: "Style a class!", code: ".highlight {\n  color: blue;\n  font-weight: bold;\n}", explanation: "Class selectors target elements with a specific class attribute.", difficulty: "easy" },
-    "css-colors": { title: "CSS Colors", prompt: "Set colors!", code: "body {\n  color: #333;\n  background-color: rgb(240, 240, 245);\n}", explanation: "Colors can be hex (#333), rgb(), hsl(), or named values.", difficulty: "easy" },
-    "css-box-model": { title: "Box Model", prompt: "Apply box model properties!", code: ".card {\n  margin: 20px;\n  padding: 16px;\n  border: 1px solid #ccc;\n}", explanation: "The box model: content → padding → border → margin.", difficulty: "medium" },
-    "css-flexbox": { title: "Flexbox Container", prompt: "Create a flex layout!", code: ".container {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}", explanation: "Flexbox provides powerful one-dimensional layout capabilities.", difficulty: "medium" },
-    "css-grid": { title: "CSS Grid Layout", prompt: "Create a grid!", code: ".grid {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  gap: 1rem;\n}", explanation: "CSS Grid enables two-dimensional layouts with rows and columns.", difficulty: "medium" },
-    "css-responsive": { title: "Media Query", prompt: "Write a media query!", code: "@media (max-width: 768px) {\n  .sidebar {\n    display: none;\n  }\n}", explanation: "Media queries apply styles based on screen size for responsive design.", difficulty: "medium" },
-    "css-animations": { title: "CSS Animation", prompt: "Create an animation!", code: "@keyframes fadeIn {\n  from { opacity: 0; }\n  to { opacity: 1; }\n}\n.element { animation: fadeIn 0.3s; }", explanation: "@keyframes defines the animation, then apply it with the animation property.", difficulty: "medium" },
-    "css-variables": { title: "CSS Custom Properties", prompt: "Use CSS variables!", code: ":root {\n  --primary: #3b82f6;\n}\n.btn {\n  background: var(--primary);\n}", explanation: "CSS variables (custom properties) enable reusable, themeable values.", difficulty: "medium" },
-    "js-variables": { title: "JavaScript Variables", prompt: "Declare variables!", code: 'const name = "JavaScript";\nlet count = 0;', explanation: "Use const for values that don't change, let for variables that do.", difficulty: "easy" },
-    "js-functions": { title: "Arrow Function", prompt: "Write an arrow function!", code: "const greet = (name) => `Hello, ${name}!`;", explanation: "Arrow functions provide concise syntax for function expressions.", difficulty: "easy" },
-    "js-arrays": { title: "Array Methods", prompt: "Use array methods!", code: "const doubled = nums.map(n => n * 2);", explanation: "map() creates a new array by transforming each element.", difficulty: "medium" },
-    "js-objects": { title: "JavaScript Object", prompt: "Create an object!", code: 'const user = {\n  name: "Alice",\n  age: 25,\n  greet() { return `Hi, I am ${this.name}`; }\n};', explanation: "Objects store data as key-value pairs with optional methods.", difficulty: "medium" },
-    "dom-selection": { title: "DOM Selection", prompt: "Select an element!", code: 'const btn = document.querySelector(".btn");', explanation: "querySelector selects the first element matching a CSS selector.", difficulty: "easy" },
-    "dom-manipulation": { title: "DOM Manipulation", prompt: "Create and add an element!", code: 'const div = document.createElement("div");\ndiv.textContent = "Hello";\ndocument.body.appendChild(div);', explanation: "createElement creates a new element, appendChild adds it to the page.", difficulty: "medium" },
-    "js-events": { title: "Event Listener", prompt: "Add an event listener!", code: 'btn.addEventListener("click", () => {\n  alert("Clicked!");\n});', explanation: "addEventListener attaches a function to run when an event occurs.", difficulty: "medium" },
-    "js-async": { title: "Async/Await", prompt: "Fetch data asynchronously!", code: "const data = await fetch(url);\nconst json = await data.json();", explanation: "async/await makes asynchronous code look synchronous and readable.", difficulty: "medium" },
-    "fetch-api": { title: "Fetch API", prompt: "Make an API request!", code: 'const response = await fetch("/api/users");\nconst users = await response.json();', explanation: "fetch() makes HTTP requests and returns a Promise.", difficulty: "medium" },
-    "json-handling": { title: "JSON Operations", prompt: "Parse and stringify JSON!", code: 'const obj = JSON.parse(jsonString);\nconst str = JSON.stringify(obj);', explanation: "JSON.parse converts string to object, JSON.stringify converts object to string.", difficulty: "easy" },
-    "local-storage": { title: "Local Storage", prompt: "Save data locally!", code: 'localStorage.setItem("theme", "dark");\nconst theme = localStorage.getItem("theme");', explanation: "localStorage persists key-value pairs in the browser.", difficulty: "easy" },
+function getWebContent(id: string): LessonStep[] | null {
+  const content: Record<string, LessonStep[]> = {
+    // ===== Introduction =====
+    "web-intro": [
+      generateQuizStep("How the Web Works", "What protocol powers the World Wide Web?", [{ label: "A", text: "FTP" }, { label: "B", text: "HTTP/HTTPS" }, { label: "C", text: "SMTP" }], "B", "HTTP (HyperText Transfer Protocol) is the foundation of data communication on the web."),
+      generateQuizStep("Client-Server", "In web architecture, what is the client?", [{ label: "A", text: "The server that hosts files" }, { label: "B", text: "The browser that requests and displays pages" }, { label: "C", text: "The database" }], "B", "The client (browser) sends requests to servers and renders the responses."),
+      generateTypingStep("URL Structure", "Type a URL!", "https://www.example.com/page?id=1", "URLs have protocol, domain, path, and optional query parameters.", "easy"),
+    ],
+    "web-architecture": [
+      generateQuizStep("Client-Server Model", "What is the client-server model?", [{ label: "A", text: "Clients request resources, servers provide them" }, { label: "B", text: "All computers are equal" }, { label: "C", text: "Only one computer exists" }], "A", "In client-server architecture, clients initiate requests and servers process and respond to them."),
+      generateQuizStep("Frontend vs Backend", "What is frontend development?", [{ label: "A", text: "Database management" }, { label: "B", text: "Building the user interface users see and interact with" }, { label: "C", text: "Server configuration" }], "B", "Frontend = what users see (HTML/CSS/JS). Backend = server logic, databases, APIs."),
+    ],
+    "http-basics": [
+      generateQuizStep("HTTP Methods", "Which HTTP method retrieves data?", [{ label: "A", text: "POST" }, { label: "B", text: "GET" }, { label: "C", text: "DELETE" }], "B", "GET requests retrieve data without modifying it. POST sends data to create/update resources."),
+      generateQuizStep("Status Codes", "What does HTTP 404 mean?", [{ label: "A", text: "Server error" }, { label: "B", text: "Not Found" }, { label: "C", text: "Success" }], "B", "404 = Not Found. 200 = OK. 301 = Redirect. 500 = Server Error."),
+      generateTypingStep("HTTP Request", "Type an HTTP method!", "GET /api/users HTTP/1.1", "HTTP requests specify method, path, and protocol version.", "medium"),
+    ],
+    // ===== HTML Essentials =====
+    "html-intro": [
+      generateQuizStep("HTML Purpose", "What does HTML stand for?", [{ label: "A", text: "HyperText Markup Language" }, { label: "B", text: "High Tech Modern Language" }, { label: "C", text: "Home Tool Markup Language" }], "A", "HTML is the standard markup language for creating web pages."),
+      generateQuizStep("HTML Elements", "What are HTML elements made of?", [{ label: "A", text: "Opening tag, content, closing tag" }, { label: "B", text: "Only text" }, { label: "C", text: "Only images" }], "A", "Most HTML elements have an opening tag, content, and closing tag: <p>content</p>"),
+      generateTypingStep("Paragraph", "Create a paragraph!", "<p>Hello, World!</p>", "The <p> tag defines a paragraph of text.", "easy"),
+    ],
+    "html-structure": [
+      generateQuizStep("DOCTYPE", "What does <!DOCTYPE html> declare?", [{ label: "A", text: "That the document is HTML5" }, { label: "B", text: "A comment" }, { label: "C", text: "A variable" }], "A", "DOCTYPE tells the browser this is an HTML5 document."),
+      generateTypingStep("HTML Document", "Create an HTML structure!", "<!DOCTYPE html>\n<html>\n<head><title>Page</title></head>\n<body></body>\n</html>", "Every HTML document starts with DOCTYPE and has head and body sections.", "easy"),
+    ],
+    "html-text": [
+      generateQuizStep("Heading Hierarchy", "Which heading is the largest?", [{ label: "A", text: "<h6>" }, { label: "B", text: "<h1>" }, { label: "C", text: "<h3>" }], "B", "h1 is the largest heading, h6 is the smallest. Use only one h1 per page."),
+      generateTypingStep("Heading Element", "Create a heading!", "<h1>Welcome to My Page</h1>", "h1 is the largest heading. Use h1-h6 for hierarchy.", "easy"),
+    ],
+    "html-links": [
+      generateQuizStep("Anchor Tag", "Which attribute specifies the URL in a link?", [{ label: "A", text: "src" }, { label: "B", text: "href" }, { label: "C", text: "link" }], "B", "The href attribute specifies the destination URL of a hyperlink."),
+      generateTypingStep("Hyperlink", "Create a link!", '<a href="https://example.com">Visit</a>', "The <a> tag creates clickable hyperlinks to other pages.", "easy"),
+    ],
+    "html-images": [
+      generateQuizStep("Alt Attribute", "Why is the alt attribute important on images?", [{ label: "A", text: "It makes images bigger" }, { label: "B", text: "Screen readers use it for accessibility" }, { label: "C", text: "It's optional decoration" }], "B", "Alt text provides description for screen readers and displays when images fail to load."),
+      generateTypingStep("Image Element", "Add an image!", '<img src="photo.jpg" alt="A photo">', "Always include alt text for accessibility.", "easy"),
+    ],
+    "html-lists": [
+      generateTypingStep("Unordered List", "Create a list!", "<ul>\n  <li>Item 1</li>\n  <li>Item 2</li>\n</ul>", "<ul> creates bullet points, <ol> creates numbered lists.", "easy"),
+      generateQuizStep("List Types", "Which creates a numbered list?", [{ label: "A", text: "<ul>" }, { label: "B", text: "<ol>" }, { label: "C", text: "<dl>" }], "B", "<ol> creates ordered (numbered) lists. <ul> creates unordered (bullet) lists."),
+    ],
+    "html-tables": [
+      generateTypingStep("HTML Table", "Create a table!", "<table>\n  <tr><th>Name</th><th>Age</th></tr>\n  <tr><td>Alice</td><td>25</td></tr>\n</table>", "<tr> = table row, <th> = header cell, <td> = data cell.", "medium"),
+      generateQuizStep("Table Elements", "What does <th> create?", [{ label: "A", text: "A table header cell (bold, centered)" }, { label: "B", text: "A table row" }, { label: "C", text: "A table footer" }], "A", "<th> creates header cells, which are bold and centered by default."),
+    ],
+    // ===== CSS =====
+    "css-intro": [
+      generateQuizStep("CSS Purpose", "What does CSS stand for?", [{ label: "A", text: "Cascading Style Sheets" }, { label: "B", text: "Computer Style System" }, { label: "C", text: "Creative Style Syntax" }], "A", "CSS controls the visual presentation of HTML elements."),
+      generateTypingStep("Basic CSS", "Write a CSS rule!", "p {\n  color: blue;\n  font-size: 16px;\n}", "CSS rules have a selector, property, and value.", "easy"),
+    ],
+    "css-selectors": [
+      generateTypingStep("CSS Class Selector", "Style a class!", ".highlight {\n  color: blue;\n  font-weight: bold;\n}", "Class selectors target elements with a specific class attribute.", "easy"),
+      generateQuizStep("Specificity", "Which selector has highest specificity?", [{ label: "A", text: "Element (p)" }, { label: "B", text: "Class (.btn)" }, { label: "C", text: "ID (#header)" }], "C", "Specificity order: ID > Class > Element. Inline styles override all."),
+    ],
+    "css-colors": [
+      generateTypingStep("CSS Colors", "Set colors!", "body {\n  color: #333;\n  background-color: rgb(240, 240, 245);\n}", "Colors can be hex (#333), rgb(), hsl(), or named values.", "easy"),
+      generateQuizStep("Color Formats", "Which is a valid CSS color format?", [{ label: "A", text: "hsl(200, 80%, 50%)" }, { label: "B", text: "color(200)" }, { label: "C", text: "rgb(300, 100, 50)" }], "A", "HSL uses hue (0-360), saturation (0-100%), lightness (0-100%)."),
+    ],
+    "css-text": [
+      generateTypingStep("Text Styling", "Style text!", ".title {\n  font-family: Arial, sans-serif;\n  font-size: 24px;\n  text-align: center;\n}", "font-family sets the typeface, font-size controls size.", "easy"),
+      generateQuizStep("Font Properties", "What does font-weight: bold do?", [{ label: "A", text: "Makes text italic" }, { label: "B", text: "Makes text thicker/bolder" }, { label: "C", text: "Changes text color" }], "B", "font-weight controls thickness: normal (400), bold (700), or numeric values."),
+    ],
+    "css-box-model": [
+      generateTypingStep("Box Model", "Apply box model properties!", ".card {\n  margin: 20px;\n  padding: 16px;\n  border: 1px solid #ccc;\n}", "The box model: content → padding → border → margin.", "medium"),
+      generateQuizStep("Box Sizing", "What does box-sizing: border-box do?", [{ label: "A", text: "Includes padding and border in the element's total width/height" }, { label: "B", text: "Removes all borders" }, { label: "C", text: "Makes the box invisible" }], "A", "border-box makes width/height include padding and border, preventing layout overflow."),
+    ],
+    "css-display": [
+      generateQuizStep("Display Values", "What does display: none do?", [{ label: "A", text: "Hides element but keeps space" }, { label: "B", text: "Removes element from layout entirely" }, { label: "C", text: "Makes element transparent" }], "B", "display: none removes the element. visibility: hidden hides it but keeps the space."),
+      generateTypingStep("Display Property", "Set display types!", ".inline { display: inline; }\n.block { display: block; }\n.flex { display: flex; }", "Block takes full width. Inline flows with text. Flex enables flexible layouts.", "medium"),
+    ],
+    // ===== CSS Advanced =====
+    "css-flexbox": [
+      generateTypingStep("Flexbox Container", "Create a flex layout!", ".container {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}", "Flexbox provides powerful one-dimensional layout capabilities.", "medium"),
+      generateQuizStep("Flex Direction", "What does flex-direction: column do?", [{ label: "A", text: "Stacks items vertically" }, { label: "B", text: "Stacks items horizontally" }, { label: "C", text: "Hides items" }], "A", "flex-direction: column stacks flex items top-to-bottom instead of left-to-right."),
+      generateQuizStep("Justify vs Align", "What does justify-content control in a row?", [{ label: "A", text: "Vertical alignment" }, { label: "B", text: "Horizontal distribution" }, { label: "C", text: "Font size" }], "B", "justify-content distributes items along the main axis (horizontal in row)."),
+    ],
+    "css-grid": [
+      generateTypingStep("CSS Grid Layout", "Create a grid!", ".grid {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  gap: 1rem;\n}", "CSS Grid enables two-dimensional layouts with rows and columns.", "medium"),
+      generateQuizStep("Grid vs Flexbox", "When should you use Grid over Flexbox?", [{ label: "A", text: "For two-dimensional layouts (rows AND columns)" }, { label: "B", text: "For one-dimensional layouts" }, { label: "C", text: "Never" }], "A", "Grid excels at 2D layouts. Flexbox is better for 1D (row OR column)."),
+    ],
+    "css-positioning": [
+      generateQuizStep("Position Values", "What does position: absolute do?", [{ label: "A", text: "Positions relative to nearest positioned ancestor" }, { label: "B", text: "Stays in normal flow" }, { label: "C", text: "Fixed to viewport" }], "A", "absolute removes from flow and positions relative to the nearest positioned ancestor."),
+      generateTypingStep("Fixed Position", "Create a fixed header!", ".header {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n}", "Fixed elements stay in place when scrolling.", "medium"),
+    ],
+    "css-responsive": [
+      generateTypingStep("Media Query", "Write a media query!", "@media (max-width: 768px) {\n  .sidebar {\n    display: none;\n  }\n}", "Media queries apply styles based on screen size for responsive design.", "medium"),
+      generateQuizStep("Mobile First", "What is mobile-first design?", [{ label: "A", text: "Write base styles for mobile, then add media queries for larger screens" }, { label: "B", text: "Only support mobile" }, { label: "C", text: "Desktop design only" }], "A", "Mobile-first uses min-width media queries to progressively enhance for larger screens."),
+    ],
+    "css-animations": [
+      generateTypingStep("CSS Animation", "Create an animation!", "@keyframes fadeIn {\n  from { opacity: 0; }\n  to { opacity: 1; }\n}\n.element { animation: fadeIn 0.3s; }", "@keyframes defines the animation, then apply it with the animation property.", "medium"),
+      generateQuizStep("Transition vs Animation", "When use transitions vs animations?", [{ label: "A", text: "Transitions for state changes, animations for complex sequences" }, { label: "B", text: "They are identical" }, { label: "C", text: "Never use animations" }], "A", "Transitions animate between two states (hover). Animations can have multiple keyframes."),
+    ],
+    "css-transforms": [
+      generateTypingStep("CSS Transform", "Apply transforms!", ".card:hover {\n  transform: scale(1.05) rotate(2deg);\n  transition: transform 0.3s;\n}", "Transform modifies an element's visual rendering without affecting layout.", "medium"),
+      generateQuizStep("Transform Functions", "Which is NOT a transform function?", [{ label: "A", text: "rotate()" }, { label: "B", text: "scale()" }, { label: "C", text: "color()" }], "C", "Common transforms: translate(), rotate(), scale(), skew(). color() is not a transform."),
+    ],
+    "css-variables": [
+      generateTypingStep("CSS Custom Properties", "Use CSS variables!", ":root {\n  --primary: #3b82f6;\n}\n.btn {\n  background: var(--primary);\n}", "CSS variables (custom properties) enable reusable, themeable values.", "medium"),
+      generateQuizStep("Variable Scope", "Where should you define global CSS variables?", [{ label: "A", text: "On :root pseudo-class" }, { label: "B", text: "On body only" }, { label: "C", text: "In JavaScript" }], "A", ":root targets the document root, making variables available everywhere."),
+    ],
+    "css-pseudo": [
+      generateTypingStep("Pseudo-classes", "Use pseudo-classes!", "a:hover {\n  color: red;\n}\na:visited {\n  color: purple;\n}", "Pseudo-classes style elements based on state (:hover, :focus, :active).", "medium"),
+      generateQuizStep("::before vs :before", "What do pseudo-elements create?", [{ label: "A", text: "Virtual elements for decorative content" }, { label: "B", text: "Real HTML elements" }, { label: "C", text: "JavaScript variables" }], "A", "::before and ::after create virtual elements for decorative content via CSS."),
+    ],
+    // ===== JavaScript =====
+    "js-intro": [
+      generateQuizStep("JavaScript Role", "What is JavaScript's role in web development?", [{ label: "A", text: "Styling pages" }, { label: "B", text: "Adding interactivity and dynamic behavior" }, { label: "C", text: "Structuring content" }], "B", "JS adds interactivity. HTML = structure, CSS = style, JS = behavior."),
+      generateTypingStep("Hello World", "Write your first JS!", 'console.log("Hello, World!");', "console.log() outputs messages to the browser's developer console.", "easy"),
+    ],
+    "js-variables": [
+      generateTypingStep("JavaScript Variables", "Declare variables!", 'const name = "JavaScript";\nlet count = 0;', "Use const for values that don't change, let for variables that do.", "easy"),
+      generateQuizStep("const vs let", "What happens if you reassign a const?", [{ label: "A", text: "It works fine" }, { label: "B", text: "TypeError: Assignment to constant variable" }, { label: "C", text: "The value becomes undefined" }], "B", "const prevents reassignment. Use let when the value needs to change."),
+    ],
+    "js-operators": [
+      generateQuizStep("Strict Equality", "What does === check?", [{ label: "A", text: "Value only" }, { label: "B", text: "Value AND type" }, { label: "C", text: "Type only" }], "B", "=== checks both value and type. == only checks value (with coercion). Always prefer ===."),
+      generateTypingStep("Operators", "Use comparison operators!", 'const isEqual = (5 === "5"); // false\nconst isLoose = (5 == "5"); // true', "=== is strict (no coercion), == is loose (with coercion).", "easy"),
+    ],
+    "js-control-flow": [
+      generateTypingStep("If Statement", "Write a conditional!", 'if (age >= 18) {\n  console.log("Adult");\n} else {\n  console.log("Minor");\n}', "if/else controls which code runs based on conditions.", "easy"),
+      generateQuizStep("Falsy Values", "Which is a falsy value in JS?", [{ label: "A", text: '""' }, { label: "B", text: '"false"' }, { label: "C", text: "[]" }], "A", 'Falsy values: false, 0, "", null, undefined, NaN. Empty string is falsy!'),
+    ],
+    "js-functions": [
+      generateTypingStep("Arrow Function", "Write an arrow function!", "const greet = (name) => `Hello, ${name}!`;", "Arrow functions provide concise syntax for function expressions.", "easy"),
+      generateQuizStep("Function Types", "What is a callback function?", [{ label: "A", text: "A function passed as an argument to another function" }, { label: "B", text: "A function that calls itself" }, { label: "C", text: "A function with no parameters" }], "A", "Callbacks are functions passed to other functions, executed later (e.g., event handlers)."),
+    ],
+    "js-arrays": [
+      generateTypingStep("Array Methods", "Use array methods!", "const doubled = nums.map(n => n * 2);", "map() creates a new array by transforming each element.", "medium"),
+      generateQuizStep("Filter vs Map", "What does filter() return?", [{ label: "A", text: "A new array with only elements that pass the test" }, { label: "B", text: "A single value" }, { label: "C", text: "The same array modified" }], "A", "filter() returns elements where the callback returns true. map() transforms each element."),
+      generateTypingStep("Array Chaining", "Chain array methods!", "const result = data\n  .filter(x => x > 0)\n  .map(x => x * 2)\n  .reduce((a, b) => a + b, 0);", "Chaining methods processes data in a readable pipeline.", "hard"),
+    ],
+    "js-objects": [
+      generateTypingStep("JavaScript Object", "Create an object!", 'const user = {\n  name: "Alice",\n  age: 25,\n  greet() { return `Hi, I am ${this.name}`; }\n};', "Objects store data as key-value pairs with optional methods.", "medium"),
+      generateQuizStep("Destructuring", "What does destructuring do?", [{ label: "A", text: "Deletes object properties" }, { label: "B", text: "Extracts values into variables" }, { label: "C", text: "Creates a copy" }], "B", "Destructuring: const { name, age } = user; extracts properties into variables."),
+    ],
+    // ===== Advanced JS =====
+    "dom-intro": [
+      generateQuizStep("DOM Definition", "What is the DOM?", [{ label: "A", text: "A tree-like representation of the HTML document" }, { label: "B", text: "A CSS framework" }, { label: "C", text: "A JavaScript library" }], "A", "The DOM is a programming interface representing the page as a tree of objects."),
+      generateTypingStep("DOM Access", "Access the DOM!", 'const title = document.getElementById("main-title");', "document is the entry point to the DOM API.", "easy"),
+    ],
+    "dom-selection": [
+      generateTypingStep("DOM Selection", "Select an element!", 'const btn = document.querySelector(".btn");', "querySelector selects the first element matching a CSS selector.", "easy"),
+      generateQuizStep("querySelectorAll", "What does querySelectorAll return?", [{ label: "A", text: "A single element" }, { label: "B", text: "A NodeList of all matching elements" }, { label: "C", text: "An array" }], "B", "querySelectorAll returns a NodeList. Use forEach or Array.from() to iterate."),
+    ],
+    "dom-manipulation": [
+      generateTypingStep("DOM Manipulation", "Create and add an element!", 'const div = document.createElement("div");\ndiv.textContent = "Hello";\ndocument.body.appendChild(div);', "createElement creates a new element, appendChild adds it to the page.", "medium"),
+      generateQuizStep("innerHTML vs textContent", "Which is safer to prevent XSS?", [{ label: "A", text: "innerHTML" }, { label: "B", text: "textContent" }, { label: "C", text: "Both are equal" }], "B", "textContent sets plain text (safe). innerHTML parses HTML (XSS risk with user input)."),
+    ],
+    "js-events": [
+      generateTypingStep("Event Listener", "Add an event listener!", 'btn.addEventListener("click", () => {\n  alert("Clicked!");\n});', "addEventListener attaches a function to run when an event occurs.", "medium"),
+      generateQuizStep("Event Bubbling", "What is event bubbling?", [{ label: "A", text: "Events propagate from target up to ancestors" }, { label: "B", text: "Events only fire on the target" }, { label: "C", text: "Events propagate downward" }], "A", "Events bubble up: click on button → div → body → document. Use stopPropagation() to stop."),
+    ],
+    "js-async": [
+      generateTypingStep("Async/Await", "Fetch data asynchronously!", "const data = await fetch(url);\nconst json = await data.json();", "async/await makes asynchronous code look synchronous and readable.", "medium"),
+      generateQuizStep("Promise States", "What are the three Promise states?", [{ label: "A", text: "Pending, fulfilled, rejected" }, { label: "B", text: "Start, middle, end" }, { label: "C", text: "Open, closed, error" }], "A", "Promises start pending, then resolve to fulfilled (success) or rejected (error)."),
+      generateTypingStep("Try/Catch", "Handle async errors!", "try {\n  const res = await fetch(url);\n  const data = await res.json();\n} catch (err) {\n  console.error(err);\n}", "Always wrap await calls in try/catch to handle network errors.", "medium"),
+    ],
+    "fetch-api": [
+      generateTypingStep("Fetch API", "Make an API request!", 'const response = await fetch("/api/users");\nconst users = await response.json();', "fetch() makes HTTP requests and returns a Promise.", "medium"),
+      generateQuizStep("POST Request", "How do you send data with fetch?", [{ label: "A", text: 'fetch(url, { method: "POST", body: JSON.stringify(data) })' }, { label: "B", text: "fetch.post(url, data)" }, { label: "C", text: "fetch(url, data)" }], "A", "POST requests need method, body, and usually Content-Type headers."),
+    ],
+    "json-handling": [
+      generateTypingStep("JSON Operations", "Parse and stringify JSON!", 'const obj = JSON.parse(jsonString);\nconst str = JSON.stringify(obj);', "JSON.parse converts string to object, JSON.stringify converts object to string.", "easy"),
+      generateQuizStep("JSON Format", "Which is valid JSON?", [{ label: "A", text: '{"name": "Alice", "age": 25}' }, { label: "B", text: "{name: 'Alice'}" }, { label: "C", text: "{'name': 'Alice'}" }], "A", "JSON requires double quotes for keys and string values. No trailing commas."),
+    ],
+    "local-storage": [
+      generateTypingStep("Local Storage", "Save data locally!", 'localStorage.setItem("theme", "dark");\nconst theme = localStorage.getItem("theme");', "localStorage persists key-value pairs in the browser.", "easy"),
+      generateQuizStep("Storage Limits", "How much data can localStorage hold?", [{ label: "A", text: "~5-10 MB per origin" }, { label: "B", text: "Unlimited" }, { label: "C", text: "1 KB" }], "A", "localStorage holds ~5-10 MB per origin. Use IndexedDB for larger datasets."),
+    ],
+    "form-validation": [
+      generateTypingStep("Form Validation", "Validate an input!", 'const email = input.value;\nif (!email.includes("@")) {\n  showError("Invalid email");\n}', "Client-side validation provides instant feedback before server submission.", "medium"),
+      generateQuizStep("HTML5 Validation", "Which attribute makes a field required?", [{ label: "A", text: "required" }, { label: "B", text: "mandatory" }, { label: "C", text: "validate" }], "A", "The required attribute prevents form submission if the field is empty."),
+    ],
+    // ===== Modern Frameworks =====
+    "typescript-intro": [
+      generateQuizStep("TypeScript Purpose", "What is TypeScript?", [{ label: "A", text: "A typed superset of JavaScript that compiles to JS" }, { label: "B", text: "A completely different language" }, { label: "C", text: "A CSS framework" }], "A", "TypeScript adds static types to JavaScript, catching errors at compile time."),
+      generateTypingStep("TypeScript Variable", "Add types to variables!", 'const name: string = "Alice";\nconst age: number = 25;\nconst active: boolean = true;', "TypeScript uses : type annotations after variable names.", "easy"),
+      generateQuizStep("TS Benefits", "What is the main benefit of TypeScript?", [{ label: "A", text: "Faster runtime performance" }, { label: "B", text: "Catch type errors before runtime" }, { label: "C", text: "Smaller file sizes" }], "B", "TypeScript catches bugs at compile time that JavaScript only finds at runtime."),
+    ],
+    "ts-types": [
+      generateTypingStep("Interface", "Define an interface!", "interface User {\n  name: string;\n  age: number;\n  email?: string;\n}", "Interfaces define the shape of objects. ? makes properties optional.", "medium"),
+      generateQuizStep("Generics", "What are generics in TypeScript?", [{ label: "A", text: "Types that work with multiple types parameterically" }, { label: "B", text: "Generic error messages" }, { label: "C", text: "Default values" }], "A", "Generics like Array<T> let you write reusable code that works with any type."),
+      generateTypingStep("Generic Function", "Write a generic!", "function first<T>(arr: T[]): T | undefined {\n  return arr[0];\n}", "T is a type parameter — replaced with the actual type when called.", "hard"),
+    ],
+    "react-intro": [
+      generateQuizStep("React Purpose", "What is React?", [{ label: "A", text: "A JavaScript library for building user interfaces with components" }, { label: "B", text: "A CSS framework" }, { label: "C", text: "A database" }], "A", "React builds UIs from reusable components using a virtual DOM for efficient updates."),
+      generateTypingStep("React Component", "Create a React component!", "function Welcome({ name }) {\n  return <h1>Hello, {name}!</h1>;\n}", "Components are functions that return JSX — a syntax extension mixing HTML with JS.", "medium"),
+      generateQuizStep("Virtual DOM", "What is the Virtual DOM?", [{ label: "A", text: "A lightweight copy of the real DOM for efficient diffing and updates" }, { label: "B", text: "A hidden HTML page" }, { label: "C", text: "A browser extension" }], "A", "React compares virtual DOM snapshots to minimize actual DOM changes (reconciliation)."),
+      generateQuizStep("JSX", "What is JSX?", [{ label: "A", text: "A syntax extension that lets you write HTML-like code in JavaScript" }, { label: "B", text: "A new programming language" }, { label: "C", text: "A testing framework" }], "A", "JSX compiles to React.createElement() calls. It's syntactic sugar for creating elements."),
+    ],
+    "react-hooks": [
+      generateTypingStep("useState Hook", "Manage component state!", "const [count, setCount] = useState(0);\n\nreturn (\n  <button onClick={() => setCount(count + 1)}>\n    Count: {count}\n  </button>\n);", "useState returns [currentValue, setterFunction]. Call setter to re-render.", "medium"),
+      generateQuizStep("useEffect Purpose", "What does useEffect do?", [{ label: "A", text: "Runs side effects after render (API calls, subscriptions, DOM updates)" }, { label: "B", text: "Creates new components" }, { label: "C", text: "Styles elements" }], "A", "useEffect handles side effects. The dependency array controls when it re-runs."),
+      generateTypingStep("useEffect", "Fetch data on mount!", "useEffect(() => {\n  fetch('/api/data')\n    .then(r => r.json())\n    .then(setData);\n}, []);", "Empty dependency array [] means run once on mount.", "medium"),
+      generateQuizStep("Rules of Hooks", "Where can you call hooks?", [{ label: "A", text: "Only at the top level of function components" }, { label: "B", text: "Inside loops and conditions" }, { label: "C", text: "In regular functions" }], "A", "Hooks must be called at the top level — never inside loops, conditions, or nested functions."),
+    ],
+    "react-state": [
+      generateQuizStep("State Management", "When should you use global state?", [{ label: "A", text: "When multiple distant components need the same data" }, { label: "B", text: "For every piece of data" }, { label: "C", text: "Never" }], "A", "Use global state (Context, Redux) when data is needed by many components at different levels."),
+      generateTypingStep("Context API", "Create a context!", "const ThemeContext = createContext('light');\n\nfunction App() {\n  return (\n    <ThemeContext.Provider value=\"dark\">\n      <Page />\n    </ThemeContext.Provider>\n  );\n}", "Context avoids prop drilling by making data available to the entire tree.", "medium"),
+      generateQuizStep("Prop Drilling", "What is prop drilling?", [{ label: "A", text: "Passing props through many intermediate components" }, { label: "B", text: "Drilling holes in hardware" }, { label: "C", text: "A testing technique" }], "A", "Prop drilling passes data through components that don't use it. Context/Redux solves this."),
+    ],
+    "nextjs-intro": [
+      generateQuizStep("Next.js Purpose", "What does Next.js add to React?", [{ label: "A", text: "Server-side rendering, routing, API routes, and full-stack capabilities" }, { label: "B", text: "Only styling" }, { label: "C", text: "Database management" }], "A", "Next.js extends React with SSR, SSG, file-based routing, and API routes."),
+      generateQuizStep("SSR vs SSG", "What is the difference between SSR and SSG?", [{ label: "A", text: "SSR renders per request; SSG pre-builds at build time" }, { label: "B", text: "They are identical" }, { label: "C", text: "SSG is slower" }], "A", "SSR = fresh HTML per request. SSG = HTML generated at build time (faster, cacheable)."),
+      generateTypingStep("Next.js Page", "Create a Next.js page!", "export default function Home() {\n  return <h1>Welcome to Next.js!</h1>;\n}", "Files in the pages/ directory automatically become routes.", "easy"),
+    ],
+    "tailwind-css": [
+      generateQuizStep("Tailwind Approach", "What is Tailwind CSS?", [{ label: "A", text: "A utility-first CSS framework with pre-built classes" }, { label: "B", text: "A JavaScript framework" }, { label: "C", text: "A backend tool" }], "A", "Tailwind provides utility classes like p-4, text-blue-500, flex instead of custom CSS."),
+      generateTypingStep("Tailwind Classes", "Style with Tailwind!", '<button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">\n  Click Me\n</button>', "Tailwind classes apply styles directly — no separate CSS file needed.", "easy"),
+      generateQuizStep("Responsive Tailwind", "How does Tailwind handle responsive design?", [{ label: "A", text: "Prefix classes with breakpoint: sm:, md:, lg:" }, { label: "B", text: "Media queries only" }, { label: "C", text: "It doesn't support responsive" }], "A", "Tailwind uses mobile-first breakpoints: sm:text-lg md:text-xl lg:text-2xl."),
+    ],
+    // ===== PWA & Mobile =====
+    "pwa-intro": [
+      generateQuizStep("PWA Definition", "What is a Progressive Web App?", [{ label: "A", text: "A web app that can be installed and work offline like a native app" }, { label: "B", text: "A mobile-only app" }, { label: "C", text: "A desktop application" }], "A", "PWAs combine web and native app features: offline support, push notifications, installability."),
+      generateQuizStep("PWA Requirements", "What are the three core PWA requirements?", [{ label: "A", text: "HTTPS, service worker, web app manifest" }, { label: "B", text: "React, Node, MongoDB" }, { label: "C", text: "HTML, CSS, JS only" }], "A", "PWAs need HTTPS (security), a service worker (offline/caching), and a manifest (install info)."),
+    ],
+    "service-workers": [
+      generateQuizStep("Service Worker", "What is a service worker?", [{ label: "A", text: "A script that runs in the background, intercepting network requests" }, { label: "B", text: "A web server" }, { label: "C", text: "A CSS preprocessor" }], "A", "Service workers act as a proxy between the app and network, enabling offline support and caching."),
+      generateTypingStep("Register SW", "Register a service worker!", "if ('serviceWorker' in navigator) {\n  navigator.serviceWorker.register('/sw.js');\n}", "Check for support first, then register the service worker file.", "medium"),
+    ],
+    "web-app-manifest": [
+      generateTypingStep("Manifest File", "Create a manifest!", '{\n  "name": "My App",\n  "short_name": "App",\n  "start_url": "/",\n  "display": "standalone"\n}', "The manifest defines app name, icons, colors, and display mode.", "easy"),
+      generateQuizStep("Display Modes", "What does display: standalone do?", [{ label: "A", text: "Opens the app without browser UI (like a native app)" }, { label: "B", text: "Shows in a small window" }, { label: "C", text: "Opens in a new tab" }], "A", "standalone removes the browser address bar, making the PWA feel native."),
+    ],
+    // ===== API Development =====
+    "rest-api": [
+      generateQuizStep("REST Principles", "What does REST stand for?", [{ label: "A", text: "Representational State Transfer" }, { label: "B", text: "Remote Execution Service Technology" }, { label: "C", text: "Rapid Endpoint Service Tool" }], "A", "REST is an architectural style using standard HTTP methods on resource URLs."),
+      generateQuizStep("REST Methods", "Which HTTP method updates an existing resource?", [{ label: "A", text: "POST" }, { label: "B", text: "PUT" }, { label: "C", text: "GET" }], "B", "PUT updates/replaces a resource. POST creates new resources. PATCH partially updates."),
+      generateTypingStep("RESTful URL", "Design a REST endpoint!", "GET /api/users/:id\nPOST /api/users\nDELETE /api/users/:id", "REST URLs represent resources. HTTP methods define the action.", "medium"),
+    ],
+    "graphql-intro": [
+      generateQuizStep("GraphQL Purpose", "How does GraphQL differ from REST?", [{ label: "A", text: "Clients specify exactly what data they want in a single query" }, { label: "B", text: "It's identical to REST" }, { label: "C", text: "It only supports GET" }], "A", "GraphQL lets clients request exactly the data they need — no over-fetching or under-fetching."),
+      generateTypingStep("GraphQL Query", "Write a GraphQL query!", "query {\n  user(id: 1) {\n    name\n    email\n    posts { title }\n  }\n}", "GraphQL queries specify the exact shape of data you want returned.", "medium"),
+    ],
+    "api-authentication": [
+      generateQuizStep("JWT", "What is a JWT?", [{ label: "A", text: "JSON Web Token — a self-contained token for authentication" }, { label: "B", text: "Java Web Tool" }, { label: "C", text: "JavaScript Widget Template" }], "A", "JWTs contain encoded user data and a signature, eliminating server-side session storage."),
+      generateQuizStep("OAuth Flow", "What does OAuth 2.0 provide?", [{ label: "A", text: "Delegated authorization — access without sharing passwords" }, { label: "B", text: "Data encryption" }, { label: "C", text: "Database access" }], "A", "OAuth lets users grant third-party access to their data without sharing credentials."),
+    ],
+    "websockets": [
+      generateQuizStep("WebSocket Purpose", "How do WebSockets differ from HTTP?", [{ label: "A", text: "Full-duplex persistent connection for real-time communication" }, { label: "B", text: "Faster page loading" }, { label: "C", text: "Better styling" }], "A", "WebSockets maintain an open connection for bidirectional real-time data exchange."),
+      generateTypingStep("WebSocket Connection", "Create a WebSocket!", 'const ws = new WebSocket("wss://example.com/chat");\nws.onmessage = (e) => console.log(e.data);', "WebSockets use ws:// or wss:// protocol for persistent connections.", "medium"),
+    ],
+    // ===== Accessibility & Security =====
+    "web-accessibility": [
+      generateQuizStep("WCAG", "What does WCAG stand for?", [{ label: "A", text: "Web Content Accessibility Guidelines" }, { label: "B", text: "Web Code Analysis Guide" }, { label: "C", text: "Website Creation And Governance" }], "A", "WCAG defines how to make web content accessible to people with disabilities."),
+      generateQuizStep("POUR Principles", "What are the 4 WCAG principles?", [{ label: "A", text: "Perceivable, Operable, Understandable, Robust" }, { label: "B", text: "Pretty, Original, Unique, Responsive" }, { label: "C", text: "Public, Open, Universal, Reliable" }], "A", "POUR: content must be perceivable, operable, understandable, and robust."),
+    ],
+    "web-security": [
+      generateQuizStep("XSS", "What is Cross-Site Scripting (XSS)?", [{ label: "A", text: "Injecting malicious scripts into web pages viewed by other users" }, { label: "B", text: "A CSS technique" }, { label: "C", text: "A server configuration" }], "A", "XSS occurs when attackers inject scripts into trusted websites. Sanitize all user input!"),
+      generateQuizStep("CSRF", "What is CSRF?", [{ label: "A", text: "Tricking a user's browser into making unauthorized requests" }, { label: "B", text: "A database attack" }, { label: "C", text: "A network protocol" }], "A", "CSRF exploits the trust a site has in the user's browser. Use CSRF tokens to prevent it."),
+      generateTypingStep("HTTPS", "Set security headers!", "Content-Security-Policy: default-src 'self';\nX-Frame-Options: DENY;", "Security headers protect against common attacks like XSS and clickjacking.", "medium"),
+    ],
+    // ===== SEO =====
+    "seo-fundamentals": [
+      generateQuizStep("SEO Purpose", "What is SEO?", [{ label: "A", text: "Optimizing websites to rank higher in search engine results" }, { label: "B", text: "A programming language" }, { label: "C", text: "A hosting service" }], "A", "SEO improves visibility in Google, Bing, etc. through content, technical, and link strategies."),
+      generateTypingStep("Meta Tags", "Add SEO meta tags!", '<meta name="description" content="Learn web development">\n<title>Web Dev Guide | Learn HTML CSS JS</title>', "Title tags and meta descriptions are crucial for search engine results.", "easy"),
+    ],
+    "core-web-vitals": [
+      generateQuizStep("Core Web Vitals", "What are the 3 Core Web Vitals?", [{ label: "A", text: "LCP (loading), FID/INP (interactivity), CLS (visual stability)" }, { label: "B", text: "HTML, CSS, JS" }, { label: "C", text: "Speed, size, security" }], "A", "LCP measures loading, FID/INP measures interactivity, CLS measures visual stability."),
+      generateQuizStep("Good LCP", "What is a good LCP score?", [{ label: "A", text: "Under 2.5 seconds" }, { label: "B", text: "Under 10 seconds" }, { label: "C", text: "Under 30 seconds" }], "A", "LCP under 2.5s is good. 2.5-4s needs improvement. Over 4s is poor."),
+    ],
+    // ===== Backend & Full-Stack =====
+    "nodejs-intro": [
+      generateQuizStep("Node.js Purpose", "What is Node.js?", [{ label: "A", text: "A JavaScript runtime for running JS outside the browser (server-side)" }, { label: "B", text: "A web browser" }, { label: "C", text: "A CSS framework" }], "A", "Node.js uses Chrome's V8 engine to run JavaScript on servers, enabling full-stack JS development."),
+      generateTypingStep("Node Server", "Create a simple server!", 'const http = require("http");\nhttp.createServer((req, res) => {\n  res.end("Hello World!");\n}).listen(3000);', "Node.js can create HTTP servers natively.", "medium"),
+      generateQuizStep("npm", "What is npm?", [{ label: "A", text: "Node Package Manager — the world's largest software registry" }, { label: "B", text: "A programming language" }, { label: "C", text: "A browser extension" }], "A", "npm hosts millions of packages and manages project dependencies."),
+    ],
+    "express-api": [
+      generateTypingStep("Express Route", "Create an API route!", 'app.get("/api/users", (req, res) => {\n  res.json({ users: [] });\n});', "Express routes handle HTTP requests with method + path + handler.", "medium"),
+      generateQuizStep("Middleware", "What is Express middleware?", [{ label: "A", text: "Functions that run between request and response" }, { label: "B", text: "CSS plugins" }, { label: "C", text: "Database connectors" }], "A", "Middleware functions have access to req, res, and next() to process requests in a pipeline."),
+    ],
+    "fullstack-architecture": [
+      generateQuizStep("Full-Stack", "What does full-stack development cover?", [{ label: "A", text: "Frontend (UI), backend (server/API), and database" }, { label: "B", text: "Only CSS styling" }, { label: "C", text: "Only mobile apps" }], "A", "Full-stack developers work across the entire application: client, server, and database."),
+      generateQuizStep("Architecture Patterns", "What is MVC?", [{ label: "A", text: "Model-View-Controller — separates data, display, and logic" }, { label: "B", text: "Most Valuable Code" }, { label: "C", text: "Multi-Version Control" }], "A", "MVC separates concerns: Model (data), View (UI), Controller (logic/routing)."),
+    ],
+    "database-integration": [
+      generateQuizStep("SQL vs NoSQL", "When would you choose SQL over NoSQL?", [{ label: "A", text: "When data has strong relationships and needs ACID compliance" }, { label: "B", text: "When data is unstructured" }, { label: "C", text: "Always" }], "A", "SQL databases excel with relational data, complex queries, and transactional integrity."),
+      generateTypingStep("SQL Query", "Write a SQL query!", "SELECT name, email FROM users\nWHERE active = true\nORDER BY created_at DESC;", "SQL queries SELECT columns FROM tables with optional WHERE, ORDER BY clauses.", "medium"),
+    ],
+    "auth-implementation": [
+      generateQuizStep("Auth Methods", "What is session-based authentication?", [{ label: "A", text: "Server stores session data, client gets a session cookie" }, { label: "B", text: "No authentication needed" }, { label: "C", text: "Client stores everything" }], "A", "Session auth: server creates session → sends cookie → client includes cookie in requests."),
+      generateQuizStep("JWT vs Sessions", "When to use JWT over sessions?", [{ label: "A", text: "Stateless APIs, microservices, mobile apps" }, { label: "B", text: "Always use JWT" }, { label: "C", text: "Never use JWT" }], "A", "JWT is stateless (no server storage needed), ideal for distributed systems and APIs."),
+    ],
+    // ===== Mobile =====
+    "mobile-app-intro": [
+      generateQuizStep("Native vs Cross-Platform", "What is cross-platform development?", [{ label: "A", text: "Writing one codebase that runs on both iOS and Android" }, { label: "B", text: "Building separate apps for each platform" }, { label: "C", text: "Web-only development" }], "A", "Cross-platform frameworks like React Native and Flutter share code across platforms."),
+      generateQuizStep("Approaches", "Which is NOT a cross-platform approach?", [{ label: "A", text: "React Native" }, { label: "B", text: "Swift" }, { label: "C", text: "Flutter" }], "B", "Swift is Apple's native iOS language. React Native and Flutter are cross-platform."),
+    ],
+    "react-native": [
+      generateQuizStep("React Native", "How does React Native differ from React?", [{ label: "A", text: "It renders native mobile components instead of DOM elements" }, { label: "B", text: "It uses a different language" }, { label: "C", text: "It only works on Android" }], "A", "React Native uses <View>, <Text>, <TouchableOpacity> instead of <div>, <p>, <button>."),
+      generateTypingStep("RN Component", "Create a React Native component!", 'import { View, Text } from "react-native";\n\nfunction App() {\n  return <View><Text>Hello!</Text></View>;\n}', "React Native uses native components instead of HTML elements.", "medium"),
+    ],
+    "flutter-intro": [
+      generateQuizStep("Flutter", "What language does Flutter use?", [{ label: "A", text: "Dart" }, { label: "B", text: "JavaScript" }, { label: "C", text: "Python" }], "A", "Flutter uses Dart, Google's language optimized for UI development."),
+      generateTypingStep("Flutter Widget", "Create a Flutter widget!", "class MyApp extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return Text('Hello Flutter!');\n  }\n}", "Everything in Flutter is a widget — the building blocks of the UI.", "medium"),
+    ],
+    "capacitor-apps": [
+      generateQuizStep("Capacitor", "What does Capacitor do?", [{ label: "A", text: "Wraps web apps in a native container for iOS/Android" }, { label: "B", text: "Compiles Dart code" }, { label: "C", text: "Creates databases" }], "A", "Capacitor bridges web apps to native platforms, accessing native APIs from JavaScript."),
+      generateTypingStep("Capacitor Plugin", "Use a Capacitor plugin!", 'import { Camera } from "@capacitor/camera";\nconst photo = await Camera.getPhoto({\n  resultType: "uri"\n});', "Capacitor plugins provide native functionality with a JavaScript API.", "medium"),
+    ],
+    // ===== Version Control & Deployment =====
+    "version-control": [
+      generateQuizStep("Git Purpose", "What is Git?", [{ label: "A", text: "A distributed version control system for tracking code changes" }, { label: "B", text: "A programming language" }, { label: "C", text: "A web hosting service" }], "A", "Git tracks every change to your codebase, enabling collaboration and history."),
+      generateTypingStep("Git Commands", "Use basic Git commands!", "git add .\ngit commit -m \"Add new feature\"\ngit push origin main", "add stages changes, commit saves them, push uploads to remote.", "easy"),
+    ],
+    "deployment": [
+      generateQuizStep("Deployment Options", "What is Vercel/Netlify used for?", [{ label: "A", text: "Hosting and deploying frontend applications with CI/CD" }, { label: "B", text: "Email services" }, { label: "C", text: "Database hosting only" }], "A", "Platforms like Vercel and Netlify auto-deploy from Git with preview URLs and CDN."),
+      generateTypingStep("Deploy Command", "Deploy with Git!", "git push origin main\n# Auto-deploys via CI/CD pipeline", "Modern hosting auto-deploys when you push to the main branch.", "easy"),
+    ],
+    "performance": [
+      generateQuizStep("Performance", "What is lazy loading?", [{ label: "A", text: "Loading resources only when needed (e.g., images below the fold)" }, { label: "B", text: "Making the site slower" }, { label: "C", text: "Loading everything at once" }], "A", "Lazy loading defers non-critical resources, improving initial page load time."),
+      generateTypingStep("Lazy Load Image", "Add lazy loading!", '<img src="photo.jpg" loading="lazy" alt="Photo">', "The loading='lazy' attribute defers loading until the image enters the viewport.", "easy"),
+    ],
+    // ===== Planning & Design =====
+    "web-planning": [
+      generateQuizStep("Website Goals", "What should you define first when planning a website?", [{ label: "A", text: "Colors and fonts" }, { label: "B", text: "Purpose, target audience, and key goals" }, { label: "C", text: "Technology stack" }], "B", "Start with WHO the site is for, WHAT it needs to do, and WHY it exists."),
+      generateQuizStep("Content Strategy", "What is a content strategy?", [{ label: "A", text: "Planning what content to create, for whom, and how to organize it" }, { label: "B", text: "Writing random blog posts" }, { label: "C", text: "Copying competitor content" }], "A", "Content strategy ensures the right content reaches the right audience at the right time."),
+    ],
+    "wireframing": [
+      generateQuizStep("Wireframe Purpose", "What is a wireframe?", [{ label: "A", text: "A low-fidelity visual guide showing layout and functionality" }, { label: "B", text: "A finished design" }, { label: "C", text: "A wire mesh for 3D models" }], "A", "Wireframes are simplified blueprints showing structure without colors, images, or detailed styling."),
+      generateQuizStep("Wireframe Tools", "Which tool is used for wireframing?", [{ label: "A", text: "Figma, Balsamiq, or Sketch" }, { label: "B", text: "Photoshop only" }, { label: "C", text: "Microsoft Word" }], "A", "Figma, Balsamiq, and Sketch are popular tools for creating wireframes and prototypes."),
+    ],
+    "site-maps": [
+      generateQuizStep("Site Map", "What does a site map show?", [{ label: "A", text: "The hierarchical structure of all pages on a website" }, { label: "B", text: "Geographic locations" }, { label: "C", text: "Database tables" }], "A", "Site maps show how pages are organized and connected, helping plan navigation."),
+    ],
+    "user-flows": [
+      generateQuizStep("User Flow", "What is a user flow?", [{ label: "A", text: "The path a user takes to complete a task on the website" }, { label: "B", text: "Network traffic" }, { label: "C", text: "CSS animation" }], "A", "User flows map the steps from entry point to goal completion (e.g., sign up → dashboard)."),
+    ],
   };
+  return content[id] || null;
+}
 
+function getWebCodeSnippet(id: string, title: string): { title: string; prompt: string; code: string; explanation: string; difficulty: "easy" | "medium" | "hard" } | null {
+  // Used as fallback for lessons not in getWebContent
+  const snippets: Record<string, { title: string; prompt: string; code: string; explanation: string; difficulty: "easy" | "medium" | "hard" }> = {
+    "html5-apis": { title: "Canvas API", prompt: "Draw on canvas!", code: 'const ctx = canvas.getContext("2d");\nctx.fillStyle = "red";\nctx.fillRect(10, 10, 100, 50);', explanation: "The Canvas API allows drawing 2D graphics with JavaScript.", difficulty: "medium" },
+    "svg-basics": { title: "SVG Circle", prompt: "Create an SVG!", code: '<svg width="100" height="100">\n  <circle cx="50" cy="50" r="40" fill="blue"/>\n</svg>', explanation: "SVG elements are defined in XML and scale without losing quality.", difficulty: "easy" },
+    "html-meta": { title: "Meta Tags", prompt: "Add meta tags!", code: '<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n<meta name="description" content="My page">', explanation: "Meta tags provide metadata about the HTML document for browsers and search engines.", difficulty: "easy" },
+    "html-responsive": { title: "Responsive Image", prompt: "Use srcset!", code: '<img srcset="small.jpg 480w, large.jpg 800w"\n  sizes="(max-width: 600px) 480px, 800px"\n  src="large.jpg" alt="Photo">', explanation: "srcset lets browsers choose the best image size for the device.", difficulty: "medium" },
+    "schema-markup": { title: "JSON-LD", prompt: "Add structured data!", code: '<script type="application/ld+json">\n{"@context":"https://schema.org","@type":"Article","name":"My Article"}\n</script>', explanation: "JSON-LD structured data helps search engines understand your content.", difficulty: "medium" },
+    "seo-technical": { title: "Robots.txt", prompt: "Create robots.txt!", code: "User-agent: *\nAllow: /\nSitemap: https://example.com/sitemap.xml", explanation: "robots.txt tells search engine crawlers which pages to access.", difficulty: "easy" },
+    "serverless-functions": { title: "Serverless Function", prompt: "Write a serverless function!", code: "export default async function handler(req, res) {\n  const data = await fetchData();\n  res.json(data);\n}", explanation: "Serverless functions run on-demand without managing servers.", difficulty: "medium" },
+    "microservices-web": { title: "Service Architecture", prompt: "Define a microservice!", code: "// User Service\napp.get('/api/users/:id', async (req, res) => {\n  const user = await db.users.find(req.params.id);\n  res.json(user);\n});", explanation: "Microservices split applications into independent, deployable services.", difficulty: "hard" },
+  };
   if (snippets[id]) return snippets[id];
-
-  // Generate based on prefix
   if (id.startsWith("html-")) return { title: `HTML: ${title}`, prompt: `Write HTML for ${title.toLowerCase()}!`, code: `<div class="example">\n  <p>${title}</p>\n</div>`, explanation: `This demonstrates ${title.toLowerCase()} in HTML.`, difficulty: "easy" };
   if (id.startsWith("css-")) return { title: `CSS: ${title}`, prompt: `Write CSS for ${title.toLowerCase()}!`, code: `.example {\n  /* ${title} */\n  display: block;\n}`, explanation: `This demonstrates ${title.toLowerCase()} in CSS.`, difficulty: "easy" };
   if (id.startsWith("js-") || id.startsWith("dom-")) return { title: `JS: ${title}`, prompt: `Write JavaScript for ${title.toLowerCase()}!`, code: `// ${title}\nconsole.log("${title}");`, explanation: `This demonstrates ${title.toLowerCase()} in JavaScript.`, difficulty: "easy" };
-
   return null;
 }
 
