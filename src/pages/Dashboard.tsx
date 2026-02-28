@@ -208,7 +208,14 @@ export default function Dashboard() {
           <Button 
             size="lg" 
             className={`text-lg h-14 ${isKidsMode ? 'bg-gradient-to-r from-primary to-accent text-white' : 'bg-primary hover:bg-primary/90'}`}
-            onClick={() => navigate('/module/java-foundations')}
+            onClick={() => {
+              const moduleOrder = ["java-foundations","systems-analysis","math-computing","cybersecurity","ai-data-science","business-systems","game-development","computer-systems","web-technologies"];
+              const nextModule = moduleOrder.find(m => {
+                const done = progress.filter(p => p.moduleId === m && p.completed).length;
+                return done > 0 && done < 50;
+              }) || moduleOrder.find(m => progress.filter(p => p.moduleId === m && p.completed).length === 0) || "java-foundations";
+              navigate(`/module/${nextModule}`);
+            }}
           >
             {isKidsMode ? '🚀' : ''} Continue
           </Button>
