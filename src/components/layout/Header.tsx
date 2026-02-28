@@ -8,7 +8,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 export const Header = forwardRef<HTMLDivElement>((_, ref) => {
   const { soundEnabled, setSoundEnabled, xp, streak, gameMode, playSound } = useGame();
-  const { isAdmin } = useAdmin();
+  const { isAdmin, loading: adminLoading } = useAdmin();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -96,8 +96,8 @@ export const Header = forwardRef<HTMLDivElement>((_, ref) => {
             )}
           </Button>
 
-          {/* Admin Dashboard */}
-          {!isLanding && isAdmin && (
+          {/* Admin Dashboard - shows on ALL pages when admin */}
+          {!adminLoading && isAdmin && (
             <Button
               variant="ghost"
               size="icon"
