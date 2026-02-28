@@ -644,6 +644,32 @@ const moduleLessons: Record<string, { id: string; title: string; description: st
     { id: "python-for-ds", title: "Python for Data Science", description: "NumPy, Pandas, Matplotlib", icon: "🐍", xpReward: 175 },
     { id: "r-programming", title: "R Programming Basics", description: "Statistical computing", icon: "📊", xpReward: 175 },
     { id: "ai-chatbot-creation", title: "AI Chatbot Creation", description: "Building conversational AI", icon: "💬", xpReward: 225 },
+
+    // Week 17: Building GPTs & Custom AI
+    { id: "gpt-fundamentals", title: "GPT Fundamentals", description: "How GPT models work", icon: "🧠", xpReward: 200 },
+    { id: "custom-gpt-builder", title: "Custom GPT Builder", description: "Creating custom GPTs in ChatGPT", icon: "🔧", xpReward: 225 },
+    { id: "fine-tuning-models", title: "Fine-Tuning Models", description: "Training on custom data", icon: "🎯", xpReward: 250 },
+    { id: "rag-systems", title: "RAG Systems", description: "Retrieval-Augmented Generation", icon: "📚", xpReward: 250 },
+    { id: "ai-api-integration", title: "AI API Integration", description: "OpenAI, Anthropic, Google APIs", icon: "🔌", xpReward: 225 },
+    { id: "langchain-intro", title: "LangChain Framework", description: "Building AI applications", icon: "🔗", xpReward: 250 },
+    { id: "vector-databases", title: "Vector Databases", description: "Pinecone, Weaviate, ChromaDB", icon: "📊", xpReward: 225 },
+    { id: "ai-agents", title: "AI Agents", description: "Autonomous AI systems", icon: "🤖", xpReward: 275 },
+
+    // Week 18: Data Analytics & Business Intelligence
+    { id: "data-analytics-intro", title: "Data Analytics Introduction", description: "Turning data into insights", icon: "📊", xpReward: 150 },
+    { id: "sql-for-analytics", title: "SQL for Analytics", description: "Advanced queries for analysis", icon: "🗄️", xpReward: 175 },
+    { id: "excel-analytics", title: "Excel for Analytics", description: "Pivot tables, VLOOKUP, macros", icon: "📋", xpReward: 175 },
+    { id: "tableau-powerbi", title: "Tableau & Power BI", description: "Visual analytics tools", icon: "📈", xpReward: 200 },
+    { id: "ab-testing", title: "A/B Testing", description: "Experiment design and analysis", icon: "🔬", xpReward: 200 },
+    { id: "predictive-analytics", title: "Predictive Analytics", description: "Forecasting with data", icon: "🔮", xpReward: 225 },
+
+    // Week 19: Advanced Robotics & Automation
+    { id: "robotics-hardware", title: "Robotics Hardware", description: "Arduino, Raspberry Pi, servos", icon: "🔧", xpReward: 200 },
+    { id: "robot-sensors-advanced", title: "Advanced Sensors", description: "LiDAR, IMU, ultrasonic", icon: "📡", xpReward: 225 },
+    { id: "robot-vision", title: "Robot Vision Systems", description: "Camera-based perception", icon: "👁️", xpReward: 250 },
+    { id: "robot-manipulation", title: "Robot Manipulation", description: "Grippers and arm control", icon: "🦾", xpReward: 250 },
+    { id: "drone-programming", title: "Drone Programming", description: "UAV flight control", icon: "🚁", xpReward: 250 },
+    { id: "industrial-automation", title: "Industrial Automation", description: "PLC, SCADA, Industry 4.0", icon: "🏭", xpReward: 225 },
   ],
 
   // ==================== BUSINESS INFORMATION SYSTEMS ====================
@@ -1107,6 +1133,21 @@ const moduleLessons: Record<string, { id: string; title: string; description: st
     { id: "file-upload", title: "File Upload Systems", description: "Handling uploads and storage", icon: "📤", xpReward: 175 },
     { id: "web-deployment-advanced", title: "Advanced Deployment", description: "CI/CD, Docker, cloud hosting", icon: "🚀", xpReward: 225 },
     { id: "web-app-security-advanced", title: "Advanced Web Security", description: "Rate limiting, WAF, DDoS", icon: "🛡️", xpReward: 225 },
+
+    // Mobile & Cross-Platform App Development
+    { id: "mobile-app-intro", title: "Mobile App Development", description: "Native vs cross-platform", icon: "📱", xpReward: 175 },
+    { id: "react-native", title: "React Native", description: "Build iOS & Android apps", icon: "⚛️", xpReward: 225 },
+    { id: "flutter-intro", title: "Flutter Introduction", description: "Dart-based cross-platform", icon: "🦋", xpReward: 200 },
+    { id: "capacitor-apps", title: "Capacitor & Ionic", description: "Web-to-native apps", icon: "⚡", xpReward: 200 },
+    { id: "app-store-publishing", title: "App Store Publishing", description: "Play Store & App Store submission", icon: "📤", xpReward: 175 },
+    { id: "app-monetization", title: "App Monetization", description: "In-app purchases, ads, subscriptions", icon: "💰", xpReward: 175 },
+
+    // Backend & Server-Side Development
+    { id: "nodejs-intro", title: "Node.js Introduction", description: "Server-side JavaScript", icon: "🟢", xpReward: 175 },
+    { id: "express-api", title: "Express.js APIs", description: "Building REST APIs with Express", icon: "🚀", xpReward: 200 },
+    { id: "python-web", title: "Python Web Development", description: "Django and Flask", icon: "🐍", xpReward: 200 },
+    { id: "microservices-web", title: "Microservices Architecture", description: "Service-based backend design", icon: "🔲", xpReward: 225 },
+    { id: "serverless-functions", title: "Serverless Functions", description: "AWS Lambda, Vercel, Supabase", icon: "⚡", xpReward: 200 },
   ],
 };
 
