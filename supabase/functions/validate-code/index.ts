@@ -12,6 +12,95 @@ interface ValidationResult {
   hints?: string[];
 }
 
+// Safe numeric expression evaluator - NO eval()
+function safeEvaluateNumeric(expr: string): string | null {
+  // Only allow digits, whitespace, and basic math operators
+  const sanitized = expr.trim();
+  if (!/^[\d\s\+\-\*\/\(\)\.]+$/.test(sanitized)) {
+    return null;
+  }
+  // Tokenize and compute using a simple recursive descent parser
+  try {
+    const result = parseExpression(sanitized, { pos: 0 });
+    if (result === null) return null;
+    return String(result.value);
+  } catch {
+    return null;
+  }
+}
+
+interface ParseState { pos: number; }
+interface ParseResult { value: number; }
+
+function skipWhitespace(s: string, state: ParseState) {
+  while (state.pos < s.length && s[state.pos] === ' ') state.pos++;
+}
+
+function parseExpression(s: string, state: ParseState): ParseResult | null {
+  let left = parseTerm(s, state);
+  if (!left) return null;
+  skipWhitespace(s, state);
+  while (state.pos < s.length && (s[state.pos] === '+' || s[state.pos] === '-')) {
+    const op = s[state.pos];
+    state.pos++;
+    const right = parseTerm(s, state);
+    if (!right) return null;
+    left = { value: op === '+' ? left.value + right.value : left.value - right.value };
+    skipWhitespace(s, state);
+  }
+  return left;
+}
+
+function parseTerm(s: string, state: ParseState): ParseResult | null {
+  let left = parseFactor(s, state);
+  if (!left) return null;
+  skipWhitespace(s, state);
+  while (state.pos < s.length && (s[state.pos] === '*' || s[state.pos] === '/')) {
+    const op = s[state.pos];
+    state.pos++;
+    const right = parseFactor(s, state);
+    if (!right) return null;
+    left = { value: op === '*' ? left.value * right.value : left.value / right.value };
+    skipWhitespace(s, state);
+  }
+  return left;
+}
+
+function parseFactor(s: string, state: ParseState): ParseResult | null {
+  skipWhitespace(s, state);
+  if (state.pos >= s.length) return null;
+  
+  // Handle parentheses
+  if (s[state.pos] === '(') {
+    state.pos++;
+    const result = parseExpression(s, state);
+    if (!result) return null;
+    skipWhitespace(s, state);
+    if (state.pos < s.length && s[state.pos] === ')') {
+      state.pos++;
+    }
+    return result;
+  }
+  
+  // Handle negative numbers
+  let negative = false;
+  if (s[state.pos] === '-') {
+    negative = true;
+    state.pos++;
+    skipWhitespace(s, state);
+  }
+  
+  // Parse number
+  const start = state.pos;
+  while (state.pos < s.length && (s[state.pos] >= '0' && s[state.pos] <= '9' || s[state.pos] === '.')) {
+    state.pos++;
+  }
+  if (start === state.pos) return null;
+  const num = parseFloat(s.substring(start, state.pos));
+  if (isNaN(num)) return null;
+  return { value: negative ? -num : num };
+}
+
 function validateJavaCode(code: string, expectedOutput: string): ValidationResult {
   const errors: string[] = [];
   const hints: string[] = [];
@@ -40,38 +129,13 @@ function validateJavaCode(code: string, expectedOutput: string): ValidationResul
   if (openParens !== closeParens) {
     errors.push(`Mismatched parentheses: ${openParens} opening, ${closeParens} closing`);
   }
-  
-  // Check for missing semicolons (simple heuristic)
-  const lines = code.split('\n');
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i].trim();
-    if (line && 
-        !line.endsWith('{') && 
-        !line.endsWith('}') && 
-        !line.endsWith(';') && 
-        !line.startsWith('//') &&
-        !line.startsWith('/*') &&
-        !line.startsWith('*') &&
-        !line.includes('if') &&
-        !line.includes('else') &&
-        !line.includes('for') &&
-        !line.includes('while') &&
-        !line.includes('class') &&
-        line.length > 2) {
-      // Could be missing semicolon
-    }
-  }
 
   if (errors.length > 0) {
     return { success: false, errors, hints };
   }
 
   // Simulate output detection
-  let simulatedOutput = "";
-  
-  // Extract println statements
   const printlnPattern = /System\.out\.println\s*\(\s*(.+?)\s*\)/g;
-  const printPattern = /System\.out\.print\s*\(\s*(.+?)\s*\)/g;
   
   let match;
   const outputs: string[] = [];
@@ -83,48 +147,48 @@ function validateJavaCode(code: string, expectedOutput: string): ValidationResul
     if (content.startsWith('"') && content.endsWith('"')) {
       outputs.push(content.slice(1, -1));
     } 
-    // Handle simple numeric expressions
-    else if (/^\d+\s*[\+\-\*\/]\s*\d+$/.test(content)) {
-      try {
-        outputs.push(String(eval(content)));
-      } catch {
+    // Handle safe numeric expressions only
+    else if (/^[\d\s\+\-\*\/\(\)\.]+$/.test(content)) {
+      const result = safeEvaluateNumeric(content);
+      if (result !== null) {
+        outputs.push(result);
+      } else {
         outputs.push(content);
       }
     }
-    // Handle variable references with values in code
+    // Handle variable references
     else {
-      // Try to find variable value
       const varMatch = code.match(new RegExp(`(int|String|double|float|long)\\s+${content.trim()}\\s*=\\s*(.+?);`));
       if (varMatch) {
         let value = varMatch[2].trim();
         if (value.startsWith('"') && value.endsWith('"')) {
           outputs.push(value.slice(1, -1));
         } else {
-          try {
-            outputs.push(String(eval(value)));
-          } catch {
+          const result = safeEvaluateNumeric(value);
+          if (result !== null) {
+            outputs.push(result);
+          } else {
             outputs.push(value);
           }
         }
       } else {
-        // Check for expressions
-        try {
-          // Very simple expression evaluation
-          const numericContent = content.replace(/[a-zA-Z_]+/g, (v) => {
-            const m = code.match(new RegExp(`(int|double|float|long)\\s+${v}\\s*=\\s*(\\d+)`));
-            return m ? m[2] : '0';
-          });
-          outputs.push(String(eval(numericContent)));
-        } catch {
+        // Try numeric substitution for variables
+        const numericContent = content.replace(/[a-zA-Z_]+/g, (v) => {
+          const m = code.match(new RegExp(`(int|double|float|long)\\s+${v}\\s*=\\s*(\\d+)`));
+          return m ? m[2] : '0';
+        });
+        const result = safeEvaluateNumeric(numericContent);
+        if (result !== null) {
+          outputs.push(result);
+        } else {
           outputs.push(`[${content}]`);
         }
       }
     }
   }
   
-  simulatedOutput = outputs.join('\n');
+  const simulatedOutput = outputs.join('\n');
   
-  // Check if output matches expected
   const normalizedExpected = expectedOutput.trim().toLowerCase();
   const normalizedOutput = simulatedOutput.trim().toLowerCase();
   
@@ -154,7 +218,18 @@ serve(async (req) => {
   try {
     const { code, language = 'java', expectedOutput = '', testCases = [] } = await req.json();
     
-    console.log("Validating code:", { language, codeLength: code.length, expectedOutput });
+    // Input validation
+    if (typeof code !== 'string' || code.length > 50000) {
+      return new Response(JSON.stringify({ 
+        success: false, 
+        errors: ["Invalid or too large code input"] 
+      }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    
+    console.log("Validating code:", { language, codeLength: code.length });
 
     let result: ValidationResult;
 
@@ -174,7 +249,7 @@ serve(async (req) => {
     console.error("Code validation error:", error);
     return new Response(JSON.stringify({ 
       success: false, 
-      errors: [error instanceof Error ? error.message : "Validation failed"] 
+      errors: ["Validation failed"] 
     }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
