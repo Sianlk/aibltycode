@@ -1,4 +1,5 @@
 // Comprehensive lesson data for all modules - Three full courses
+import { generateLessonContent } from "./lessonGenerator";
 
 export interface LessonStep {
   type: "typing" | "quiz" | "placement" | "debug";
@@ -1087,12 +1088,33 @@ export function getLessonsByModule(moduleId: string): LessonData[] {
   return Object.values(allLessons).filter(lesson => lesson.moduleId === moduleId);
 }
 
-// Get lesson by ID
+// Get lesson by ID - falls back to auto-generated content if no static data exists
 export function getLessonById(lessonId: string): LessonData | undefined {
-  return allLessons[lessonId];
+  if (allLessons[lessonId]) return allLessons[lessonId];
+  
+  // Try to generate content from module page metadata
+  const meta = getLessonMetadata(lessonId);
+  if (meta) {
+    return generateLessonContent(lessonId, meta.title, meta.description, meta.moduleId, meta.xpReward);
+  }
+  
+  return undefined;
 }
 
 // Get drilling lessons only
 export function getDrillingLessons(): LessonData[] {
   return Object.values(allLessons).filter(lesson => lesson.category === "Code Drilling");
+}
+
+// Lesson metadata registry for auto-generation fallback
+const lessonMetadataRegistry: Record<string, { title: string; description: string; moduleId: string; xpReward: number }> = {};
+
+export function registerLessonMetadata(lessons: { id: string; title: string; description: string; xpReward: number }[], moduleId: string) {
+  lessons.forEach(l => {
+    lessonMetadataRegistry[l.id] = { title: l.title, description: l.description, moduleId, xpReward: l.xpReward };
+  });
+}
+
+export function getLessonMetadata(lessonId: string) {
+  return lessonMetadataRegistry[lessonId];
 }

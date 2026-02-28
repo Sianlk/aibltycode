@@ -32,7 +32,8 @@ export function useSubscription() {
         .from("user_roles")
         .select("role")
         .eq("user_id", user.id)
-        .single();
+        .eq("role", "admin")
+        .maybeSingle();
 
       if (roleData?.role === "admin") {
         setState({

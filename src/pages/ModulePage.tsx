@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useGame } from "@/contexts/GameContext";
 import { useProgress } from "@/hooks/useProgress";
+import { registerLessonMetadata } from "@/data/lessons";
 import { ArrowLeft, PlayCircle, CheckCircle, Lock, Star } from "lucide-react";
 
 // Comprehensive lessons covering all book topics
@@ -1162,6 +1163,11 @@ const moduleInfo: Record<string, { title: string; icon: string }> = {
   "computer-systems": { title: "Computer Systems & Networking", icon: "🖥️" },
   "web-technologies": { title: "Web Technologies", icon: "🌐" },
 };
+
+// Register all lesson metadata at module load time for auto-generation fallback
+Object.entries(moduleLessons).forEach(([moduleId, lessons]) => {
+  registerLessonMetadata(lessons, moduleId);
+});
 
 const ModulePage = forwardRef<HTMLDivElement>((_, ref) => {
   const { moduleId } = useParams<{ moduleId: string }>();
