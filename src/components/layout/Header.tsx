@@ -1,12 +1,14 @@
 import { forwardRef } from "react";
 import { motion } from "framer-motion";
-import { Settings, Volume2, VolumeX, User, Trophy, Flame } from "lucide-react";
+import { Settings, Volume2, VolumeX, User, Trophy, Flame, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useGame } from "@/contexts/GameContext";
+import { useAdmin } from "@/hooks/useAdmin";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export const Header = forwardRef<HTMLDivElement>((_, ref) => {
   const { soundEnabled, setSoundEnabled, xp, streak, gameMode, playSound } = useGame();
+  const { isAdmin } = useAdmin();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -93,6 +95,19 @@ export const Header = forwardRef<HTMLDivElement>((_, ref) => {
               <VolumeX className="w-5 h-5" />
             )}
           </Button>
+
+          {/* Admin Dashboard */}
+          {!isLanding && isAdmin && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => navigate("/admin")}
+              className="text-primary hover:text-primary/80"
+              title="Admin Dashboard"
+            >
+              <Shield className="w-5 h-5" />
+            </Button>
+          )}
 
           {/* Settings */}
           <Button
