@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { UserManagement } from "@/components/admin/UserManagement";
 import { useAdmin } from "@/hooks/useAdmin";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -141,10 +142,14 @@ export default function AdminDashboard() {
           </div>
 
           <Tabs defaultValue="overview" className="space-y-8">
-            <TabsList className="grid w-full max-w-lg grid-cols-4 h-12">
+            <TabsList className="grid w-full max-w-2xl grid-cols-5 h-12">
               <TabsTrigger value="overview" className="gap-2">
                 <Activity className="h-4 w-4" />
                 <span className="hidden sm:inline">Overview</span>
+              </TabsTrigger>
+              <TabsTrigger value="manage" className="gap-2">
+                <Shield className="h-4 w-4" />
+                <span className="hidden sm:inline">Manage</span>
               </TabsTrigger>
               <TabsTrigger value="ai" className="gap-2">
                 <Sparkles className="h-4 w-4" />
@@ -278,6 +283,10 @@ export default function AdminDashboard() {
               </Card>
             </TabsContent>
 
+            <TabsContent value="manage">
+              <UserManagement />
+            </TabsContent>
+
             <TabsContent value="users">
               <Card>
                 <CardHeader>
@@ -295,7 +304,7 @@ export default function AdminDashboard() {
                         <div key={user.id} className="flex items-center justify-between p-3 rounded-lg bg-muted/50">
                           <div className="flex items-center gap-3">
                             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                              <Users className="h-5 w-5 text-white" />
+                              <Users className="h-5 w-5 text-primary-foreground" />
                             </div>
                             <div>
                               <p className="font-medium">{user.display_name || 'Anonymous'}</p>

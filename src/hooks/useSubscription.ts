@@ -27,6 +27,42 @@ export function useSubscription() {
     }
 
     try {
+      // Check if user is admin — admins get full access automatically
+      const { data: roleData } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", user.id)
+        .single();
+
+      if (roleData?.role === "admin") {
+        setState({
+          subscribed: true,
+          inTrial: false,
+          subscriptionEnd: null,
+          trialEnd: null,
+          loading: false,
+        });
+        return;
+      }
+
+      // Check if user has been granted free access (grandfathered)
+      const { data: subData } = await supabase
+        .from("subscriptions")
+        .select("is_grandfathered, status")
+        .eq("user_id", user.id)
+        .single();
+
+      if (subData?.is_grandfathered) {
+        setState({
+          subscribed: true,
+          inTrial: false,
+          subscriptionEnd: null,
+          trialEnd: null,
+          loading: false,
+        });
+        return;
+      }
+
       const { data, error } = await supabase.functions.invoke("check-subscription");
       
       if (error) throw error;
@@ -47,7 +83,6 @@ export function useSubscription() {
   useEffect(() => {
     checkSubscription();
     
-    // Check every minute
     const interval = setInterval(checkSubscription, 60000);
     return () => clearInterval(interval);
   }, [checkSubscription]);
