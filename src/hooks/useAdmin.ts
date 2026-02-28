@@ -20,7 +20,8 @@ export function useAdmin() {
           .from("user_roles")
           .select("role")
           .eq("user_id", user.id)
-          .single();
+          .eq("role", "admin")
+          .maybeSingle();
 
         if (!error && data?.role === "admin") {
           setIsAdmin(true);
