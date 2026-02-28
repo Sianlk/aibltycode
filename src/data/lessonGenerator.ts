@@ -316,6 +316,21 @@ function generateSystemsSteps(id: string, title: string, desc: string): LessonSt
 
 function getSystemsContent(id: string): LessonStep[] | null {
   const content: Record<string, LessonStep[]> = {
+    "what-is-system": [
+      generateQuizStep("System Definition", "What is a system?", [{ label: "A", text: "A set of interrelated components working together toward a goal" }, { label: "B", text: "A single computer program" }, { label: "C", text: "Only hardware" }], "A", "A system is a collection of interrelated components that work together to achieve a common purpose."),
+      generateQuizStep("System Boundary", "What is a system boundary?", [{ label: "A", text: "The line separating the system from its environment" }, { label: "B", text: "A firewall" }, { label: "C", text: "A backup system" }], "A", "The boundary defines what is inside the system and what is in the external environment."),
+      generateTypingStep("System Components", "List system components!", "Input, Process, Output, Feedback", "Every system takes inputs, processes them, produces outputs, and uses feedback for control.", "easy"),
+    ],
+    "stakeholders": [
+      generateQuizStep("Stakeholder Types", "Who is a stakeholder?", [{ label: "A", text: "Anyone affected by or who can affect the system" }, { label: "B", text: "Only the project manager" }, { label: "C", text: "Only the end users" }], "A", "Stakeholders include users, managers, customers, developers, and anyone impacted by the system."),
+      generateQuizStep("Power-Interest Matrix", "What does the power-interest matrix show?", [{ label: "A", text: "How to prioritize stakeholders based on power and interest" }, { label: "B", text: "Project costs" }, { label: "C", text: "Technical architecture" }], "A", "High power, high interest stakeholders need close management; low power, low interest need monitoring."),
+      generateTypingStep("Stakeholder Categories", "Type the matrix quadrants!", "Manage Closely, Keep Satisfied, Keep Informed, Monitor", "The four quadrants guide how to engage each stakeholder group.", "medium"),
+    ],
+    "requirements": [
+      generateQuizStep("Functional vs Non-Functional", "What is a functional requirement?", [{ label: "A", text: "What the system must DO" }, { label: "B", text: "How fast the system runs" }, { label: "C", text: "The system's color scheme" }], "A", "Functional requirements describe specific behaviors or functions: 'The system shall allow users to log in.'"),
+      generateQuizStep("Non-Functional Requirements", "Which is a non-functional requirement?", [{ label: "A", text: "The system shall respond within 2 seconds" }, { label: "B", text: "Users can create accounts" }, { label: "C", text: "Users can upload files" }], "A", "Non-functional requirements describe quality attributes: performance, security, usability, reliability."),
+      generateTypingStep("Requirement Format", "Write a requirement!", "The system shall allow users to reset their password via email.", "Requirements use 'shall' for mandatory and 'should' for desirable features.", "medium"),
+    ],
     "use-cases": [
       generateQuizStep("Use Case Basics", "What is a use case?", [{ label: "A", text: "A description of system-user interaction" }, { label: "B", text: "A type of database" }, { label: "C", text: "A programming language" }], "A", "Use cases describe how actors interact with a system to achieve goals."),
       generateTypingStep("Actor Definition", "Define an actor!", "Actor: Customer", "Actors are external entities that interact with the system.", "easy"),
@@ -323,11 +338,20 @@ function getSystemsContent(id: string): LessonStep[] | null {
       generateTypingStep("Use Case Name", "Write a use case name!", "UC: Place Order", "Use case names should be verb-noun format describing the goal.", "easy"),
       generateQuizStep("Include Relationship", "What does <<include>> mean?", [{ label: "A", text: "Optional behavior" }, { label: "B", text: "Required sub-behavior" }, { label: "C", text: "Error handling" }], "B", "<<include>> means the base use case always includes the sub-behavior."),
     ],
+    "user-stories": [
+      generateQuizStep("User Story Format", "What is the user story format?", [{ label: "A", text: "As a [role], I want [feature] so that [benefit]" }, { label: "B", text: "If [condition] then [action]" }, { label: "C", text: "Given [state] when [action] then [result]" }], "A", "User stories capture requirements from the user's perspective in a simple template."),
+      generateTypingStep("Write a User Story", "Write a user story!", "As a student, I want to track my progress so that I can see my improvement.", "User stories focus on the WHO, WHAT, and WHY of a feature.", "medium"),
+      generateQuizStep("Story vs Use Case", "How do user stories differ from use cases?", [{ label: "A", text: "Stories are brief and conversational; use cases are detailed" }, { label: "B", text: "They are identical" }, { label: "C", text: "Stories are more technical" }], "A", "User stories are lightweight placeholders for conversation; use cases provide full detail."),
+    ],
     "dfd-intro": [
       generateQuizStep("DFD Purpose", "What does a Data Flow Diagram show?", [{ label: "A", text: "How data moves through a system" }, { label: "B", text: "The physical network layout" }, { label: "C", text: "The project timeline" }], "A", "DFDs show how data flows between processes, stores, and external entities."),
       generateTypingStep("DFD Process", "Name a DFD process!", "Process: Validate Order", "Processes transform input data into output data.", "easy"),
       generateQuizStep("DFD Symbols", "What shape represents a process in a DFD?", [{ label: "A", text: "Rectangle" }, { label: "B", text: "Circle or rounded rectangle" }, { label: "C", text: "Triangle" }], "B", "Processes are shown as circles (Yourdon) or rounded rectangles (Gane-Sarson)."),
       generateQuizStep("DFD Levels", "What is a Context Diagram?", [{ label: "A", text: "The most detailed DFD" }, { label: "B", text: "Level 0 showing the whole system as one process" }, { label: "C", text: "A network diagram" }], "B", "Context diagrams show the entire system as a single process with external entities."),
+    ],
+    "dfd-levels": [
+      generateQuizStep("Context Diagram", "What does a context diagram show?", [{ label: "A", text: "The entire system as a single process with external data flows" }, { label: "B", text: "All internal processes in detail" }, { label: "C", text: "Database tables" }], "A", "The context diagram (Level 0) shows the system boundary and external interactions."),
+      generateQuizStep("Level 1 DFD", "What does a Level 1 DFD show?", [{ label: "A", text: "The main processes that make up the system" }, { label: "B", text: "Only the external entities" }, { label: "C", text: "The programming code" }], "A", "Level 1 decomposes the context diagram into its major sub-processes."),
     ],
     "erd-intro": [
       generateQuizStep("ERD Purpose", "What does an ERD show?", [{ label: "A", text: "Data entities and their relationships" }, { label: "B", text: "Network topology" }, { label: "C", text: "Program flow" }], "A", "Entity-Relationship Diagrams model the data structure of a system."),
@@ -338,7 +362,7 @@ function getSystemsContent(id: string): LessonStep[] | null {
     "agile-intro": [
       generateQuizStep("Agile Values", "Which is an Agile Manifesto value?", [{ label: "A", text: "Comprehensive documentation over working software" }, { label: "B", text: "Individuals and interactions over processes and tools" }, { label: "C", text: "Following a plan over responding to change" }], "B", "The Agile Manifesto values people and interactions over rigid processes."),
       generateQuizStep("Agile Principles", "How often should working software be delivered?", [{ label: "A", text: "Once at the end" }, { label: "B", text: "Every few weeks to months" }, { label: "C", text: "Only when requested" }], "B", "Agile promotes frequent delivery of working software, typically every 2-4 weeks."),
-      generateTypingStep("User Story", "Write a user story!", 'As a customer, I want to view my orders so that I can track deliveries.', "User stories follow the format: As a [role], I want [feature] so that [benefit].", "medium"),
+      generateTypingStep("User Story", "Write a user story!", "As a customer, I want to view my orders so that I can track deliveries.", "User stories follow the format: As a [role], I want [feature] so that [benefit].", "medium"),
       generateQuizStep("Agile vs Waterfall", "How does Agile differ from Waterfall?", [{ label: "A", text: "Agile is iterative, Waterfall is sequential" }, { label: "B", text: "They are the same" }, { label: "C", text: "Waterfall is newer" }], "A", "Agile uses iterations/sprints while Waterfall follows a linear sequence of phases."),
     ],
     "scrum-framework": [
@@ -354,6 +378,41 @@ function getSystemsContent(id: string): LessonStep[] | null {
       generateQuizStep("1NF", "What is First Normal Form (1NF)?", [{ label: "A", text: "Each cell contains a single atomic value" }, { label: "B", text: "No tables exist" }, { label: "C", text: "All data in one table" }], "A", "1NF requires each column to contain only atomic (indivisible) values."),
       generateQuizStep("2NF", "What does 2NF require beyond 1NF?", [{ label: "A", text: "No partial dependencies on composite keys" }, { label: "B", text: "No tables" }, { label: "C", text: "Only one column" }], "A", "2NF removes partial dependencies — non-key attributes must depend on the whole key."),
       generateQuizStep("3NF", "What does 3NF eliminate?", [{ label: "A", text: "Transitive dependencies" }, { label: "B", text: "All data" }, { label: "C", text: "Primary keys" }], "A", "3NF removes transitive dependencies — non-key attributes must depend only on the key."),
+    ],
+    "class-diagrams": [
+      generateQuizStep("Class Diagram", "What does a UML class diagram show?", [{ label: "A", text: "Classes with attributes, methods, and relationships" }, { label: "B", text: "Network topology" }, { label: "C", text: "Project timeline" }], "A", "Class diagrams show the static structure of a system: classes, their members, and relationships."),
+      generateTypingStep("Class Notation", "Write a class!", "Class: Student\n- name: String\n- age: int\n+ enroll(): void", "Classes have a name, attributes (with types), and methods (with return types).", "medium"),
+      generateQuizStep("Visibility", "What does + mean in UML?", [{ label: "A", text: "Public visibility" }, { label: "B", text: "Private" }, { label: "C", text: "Protected" }], "A", "+ is public, - is private, # is protected, ~ is package."),
+    ],
+    "sequence-diagrams": [
+      generateQuizStep("Sequence Purpose", "What do sequence diagrams show?", [{ label: "A", text: "Object interactions in time order" }, { label: "B", text: "Database tables" }, { label: "C", text: "File structure" }], "A", "Sequence diagrams show how objects communicate over time using messages."),
+      generateQuizStep("Lifeline", "What is a lifeline in a sequence diagram?", [{ label: "A", text: "A vertical line representing an object's existence over time" }, { label: "B", text: "A data flow" }, { label: "C", text: "A class attribute" }], "A", "Lifelines show when an object exists and is active during the interaction."),
+    ],
+    "testing-strategies": [
+      generateQuizStep("Testing Levels", "What are the main testing levels?", [{ label: "A", text: "Unit, integration, system, acceptance" }, { label: "B", text: "Only manual testing" }, { label: "C", text: "Debug and deploy" }], "A", "Testing progresses from unit (individual components) to acceptance (user validation)."),
+      generateQuizStep("UAT", "What is User Acceptance Testing?", [{ label: "A", text: "End users verify the system meets their requirements" }, { label: "B", text: "Developers test their own code" }, { label: "C", text: "Automated security scanning" }], "A", "UAT is the final testing phase where real users verify the system works as expected."),
+    ],
+    "gantt-charts": [
+      generateQuizStep("Gantt Chart", "What does a Gantt chart show?", [{ label: "A", text: "Task schedule with start/end dates as horizontal bars" }, { label: "B", text: "Pie chart of budget" }, { label: "C", text: "Network diagram" }], "A", "Gantt charts visualize project tasks on a timeline, showing dependencies and progress."),
+      generateQuizStep("Dependencies", "What is a task dependency?", [{ label: "A", text: "When one task must complete before another can start" }, { label: "B", text: "Two tasks running simultaneously" }, { label: "C", text: "A cancelled task" }], "A", "Finish-to-start is the most common dependency: Task B can't start until Task A finishes."),
+    ],
+    "critical-path": [
+      generateQuizStep("Critical Path", "What is the critical path?", [{ label: "A", text: "The longest sequence of dependent tasks determining project duration" }, { label: "B", text: "The shortest task" }, { label: "C", text: "The cheapest task" }], "A", "The critical path determines the minimum project duration — any delay extends the whole project."),
+      generateQuizStep("Float/Slack", "What is float in project management?", [{ label: "A", text: "Time a task can be delayed without affecting the project end date" }, { label: "B", text: "Extra budget" }, { label: "C", text: "Unused staff" }], "A", "Tasks on the critical path have zero float — no room for delay."),
+    ],
+    "risk-management": [
+      generateQuizStep("Risk Definition", "What is a project risk?", [{ label: "A", text: "An uncertain event that could impact project objectives" }, { label: "B", text: "A guaranteed failure" }, { label: "C", text: "A completed task" }], "A", "Risks are potential future events with probability and impact on project success."),
+      generateQuizStep("Risk Response", "What are the four risk response strategies?", [{ label: "A", text: "Avoid, mitigate, transfer, accept" }, { label: "B", text: "Ignore, delay, cancel, restart" }, { label: "C", text: "Plan, do, check, act" }], "A", "Avoid eliminates risk, mitigate reduces it, transfer shifts it, accept acknowledges it."),
+    ],
+    "sdlc-overview": [
+      generateQuizStep("SDLC Purpose", "What is the SDLC?", [{ label: "A", text: "A structured framework for developing software systems" }, { label: "B", text: "A programming language" }, { label: "C", text: "A testing tool" }], "A", "The SDLC defines the phases and activities for building quality software systematically."),
+      generateQuizStep("SDLC Phases", "What are typical SDLC phases?", [{ label: "A", text: "Planning, analysis, design, implementation, testing, deployment, maintenance" }, { label: "B", text: "Only coding" }, { label: "C", text: "Only testing" }], "A", "Each SDLC phase has specific deliverables that feed into the next phase."),
+    ],
+    "v-model": [
+      generateQuizStep("V-Model Structure", "What is the V-Model?", [{ label: "A", text: "Each development phase has a corresponding testing phase" }, { label: "B", text: "A circular model" }, { label: "C", text: "No testing phase" }], "A", "The V-Model pairs each dev phase (left side) with a test phase (right side): requirements↔acceptance, design↔integration, code↔unit."),
+    ],
+    "spiral-model": [
+      generateQuizStep("Spiral Model", "What drives the spiral model?", [{ label: "A", text: "Risk analysis at each iteration" }, { label: "B", text: "Speed of delivery" }, { label: "C", text: "Customer complaints" }], "A", "The spiral model is risk-driven — each loop involves planning, risk analysis, engineering, and evaluation."),
     ],
   };
   return content[id] || null;
@@ -408,6 +467,51 @@ function getMathContent(id: string): LessonStep[] | null {
       generateQuizStep("Big-O Purpose", "What does Big-O notation describe?", [{ label: "A", text: "The worst-case growth rate of an algorithm" }, { label: "B", text: "The exact execution time" }, { label: "C", text: "Memory used" }], "A", "Big-O describes how an algorithm's time/space scales with input size."),
       generateQuizStep("O(1) Meaning", "What does O(1) mean?", [{ label: "A", text: "Linear time" }, { label: "B", text: "Constant time — doesn't grow with input" }, { label: "C", text: "Quadratic time" }], "B", "O(1) operations take the same time regardless of input size."),
       generateQuizStep("O(n) Example", "Which operation is O(n)?", [{ label: "A", text: "Array index lookup" }, { label: "B", text: "Searching unsorted array" }, { label: "C", text: "HashMap get" }], "B", "Searching an unsorted array requires checking each element — linear time."),
+    ],
+    "twos-complement": [
+      generateQuizStep("Two's Complement", "How do you find the two's complement?", [{ label: "A", text: "Invert all bits, then add 1" }, { label: "B", text: "Just flip the first bit" }, { label: "C", text: "Add 2 to the number" }], "A", "Two's complement: flip all bits (one's complement) then add 1."),
+      generateQuizStep("Negative Numbers", "What is -5 in 8-bit two's complement?", [{ label: "A", text: "11111011" }, { label: "B", text: "10000101" }, { label: "C", text: "00000101" }], "A", "5 = 00000101 → flip = 11111010 → add 1 = 11111011."),
+      generateTypingStep("Two's Complement", "Calculate -3 in 8-bit!", "11111101", "3 = 00000011 → flip = 11111100 → add 1 = 11111101.", "hard"),
+    ],
+    "demorgans-laws": [
+      generateQuizStep("De Morgan's First Law", "What is NOT (A AND B)?", [{ label: "A", text: "(NOT A) OR (NOT B)" }, { label: "B", text: "(NOT A) AND (NOT B)" }, { label: "C", text: "A OR B" }], "A", "De Morgan's: NOT (A AND B) = (NOT A) OR (NOT B). Break the bar, change the sign."),
+      generateQuizStep("De Morgan's Second Law", "What is NOT (A OR B)?", [{ label: "A", text: "(NOT A) OR (NOT B)" }, { label: "B", text: "(NOT A) AND (NOT B)" }, { label: "C", text: "A AND B" }], "B", "NOT (A OR B) = (NOT A) AND (NOT B). Break the bar, change the sign."),
+    ],
+    "sets-basics": [
+      generateQuizStep("Set Definition", "What is a set?", [{ label: "A", text: "An unordered collection of unique elements" }, { label: "B", text: "An ordered list" }, { label: "C", text: "A type of array" }], "A", "Sets contain unique elements with no duplicates and no defined order."),
+      generateTypingStep("Set Notation", "Write set notation!", "A = {1, 2, 3, 4, 5}", "Sets use curly braces. Elements are listed separated by commas.", "easy"),
+    ],
+    "set-operations": [
+      generateQuizStep("Union", "What is A ∪ B?", [{ label: "A", text: "All elements in A or B or both" }, { label: "B", text: "Only elements in both" }, { label: "C", text: "Elements in A only" }], "A", "Union combines all elements from both sets, removing duplicates."),
+      generateQuizStep("Intersection", "What is A ∩ B?", [{ label: "A", text: "All elements in A or B" }, { label: "B", text: "Only elements in both A and B" }, { label: "C", text: "Elements in neither" }], "B", "Intersection returns only elements that appear in both sets."),
+    ],
+    "probability-basics": [
+      generateQuizStep("Probability Range", "What is the range of probability?", [{ label: "A", text: "0 to 1 (or 0% to 100%)" }, { label: "B", text: "-1 to 1" }, { label: "C", text: "0 to infinity" }], "A", "Probability is always between 0 (impossible) and 1 (certain)."),
+      generateQuizStep("Coin Flip", "What is P(heads) for a fair coin?", [{ label: "A", text: "0.5 or 1/2" }, { label: "B", text: "0.25" }, { label: "C", text: "1" }], "A", "A fair coin has equal probability: P(heads) = P(tails) = 1/2."),
+    ],
+    "permutations": [
+      generateQuizStep("Permutation Formula", "What is the formula for nPr?", [{ label: "A", text: "n! / (n-r)!" }, { label: "B", text: "n! / r!" }, { label: "C", text: "n × r" }], "A", "nPr = n! / (n-r)! counts ordered arrangements of r items from n."),
+      generateQuizStep("3P2", "How many ways to arrange 2 items from 3?", [{ label: "A", text: "6" }, { label: "B", text: "3" }, { label: "C", text: "9" }], "A", "3P2 = 3! / 1! = 6 ways: AB, AC, BA, BC, CA, CB."),
+    ],
+    "combinations": [
+      generateQuizStep("Combination Formula", "What is nCr?", [{ label: "A", text: "n! / (r! × (n-r)!)" }, { label: "B", text: "n! / (n-r)!" }, { label: "C", text: "n × r" }], "A", "nCr = n! / (r! × (n-r)!) counts unordered selections of r items from n."),
+      generateQuizStep("5C2", "How many ways to choose 2 from 5?", [{ label: "A", text: "10" }, { label: "B", text: "20" }, { label: "C", text: "25" }], "A", "5C2 = 5! / (2! × 3!) = 120 / 12 = 10."),
+    ],
+    "bfs": [
+      generateQuizStep("BFS", "How does BFS explore a graph?", [{ label: "A", text: "Level by level using a queue" }, { label: "B", text: "Going as deep as possible first" }, { label: "C", text: "Randomly" }], "A", "BFS uses a queue (FIFO) to visit all neighbors at current depth before going deeper."),
+      generateQuizStep("BFS Use", "What is BFS best for?", [{ label: "A", text: "Finding the shortest path in unweighted graphs" }, { label: "B", text: "Sorting data" }, { label: "C", text: "Compressing files" }], "A", "BFS guarantees the shortest path in unweighted graphs."),
+    ],
+    "dfs": [
+      generateQuizStep("DFS", "How does DFS explore a graph?", [{ label: "A", text: "Level by level" }, { label: "B", text: "Goes as deep as possible, then backtracks using a stack" }, { label: "C", text: "Alphabetically" }], "B", "DFS uses a stack (LIFO) to explore as deep as possible before backtracking."),
+    ],
+    "dijkstra": [
+      generateQuizStep("Dijkstra's Algorithm", "What does Dijkstra's algorithm find?", [{ label: "A", text: "Shortest path from source to all other nodes in weighted graphs" }, { label: "B", text: "The maximum flow" }, { label: "C", text: "All cycles in a graph" }], "A", "Dijkstra's greedily selects the closest unvisited node and updates distances."),
+      generateQuizStep("Dijkstra Limitation", "What is a limitation of Dijkstra's?", [{ label: "A", text: "Cannot handle negative edge weights" }, { label: "B", text: "Only works on trees" }, { label: "C", text: "Very slow for all graphs" }], "A", "Dijkstra's algorithm assumes non-negative weights. Use Bellman-Ford for negative weights."),
+    ],
+    "mean-median-mode": [
+      generateQuizStep("Mean", "How do you calculate the mean?", [{ label: "A", text: "Sum of all values divided by the count" }, { label: "B", text: "The middle value" }, { label: "C", text: "The most frequent value" }], "A", "Mean = sum of values / number of values."),
+      generateQuizStep("Median", "What is the median of {1, 3, 5, 7, 9}?", [{ label: "A", text: "3" }, { label: "B", text: "5" }, { label: "C", text: "7" }], "B", "Median is the middle value when sorted. For 5 values, it's the 3rd: 5."),
+      generateQuizStep("Mode", "What is the mode?", [{ label: "A", text: "The most frequently occurring value" }, { label: "B", text: "The average" }, { label: "C", text: "The range" }], "A", "Mode is the value that appears most often. A dataset can have multiple modes."),
     ],
     "logic-gates": [
       generateQuizStep("AND Gate", "When does an AND gate output 1?", [{ label: "A", text: "When any input is 1" }, { label: "B", text: "When all inputs are 1" }, { label: "C", text: "When all inputs are 0" }], "B", "AND gates output 1 only when ALL inputs are 1."),
@@ -522,6 +626,9 @@ function getAIContent(id: string): LessonStep[] | null {
 
 // ======================== BUSINESS SYSTEMS ========================
 function generateBusinessSteps(id: string, title: string, desc: string): LessonStep[] {
+  const topicContent = getBusinessContent(id);
+  if (topicContent) return topicContent;
+
   return [
     generateQuizStep(`${title} Overview`, `What is ${title.toLowerCase()}?`,
       [{ label: "A", text: "A hardware component" }, { label: "B", text: desc }, { label: "C", text: "A programming language" }],
@@ -539,6 +646,70 @@ function generateBusinessSteps(id: string, title: string, desc: string): LessonS
       [{ label: "A", text: "Returning to paper-based systems" }, { label: "B", text: "Cloud computing, automation, and digital transformation" }, { label: "C", text: "Removing all technology" }],
       "B", `Modern trends like cloud computing and digital transformation heavily influence ${title.toLowerCase()}.`, "medium"),
   ];
+}
+
+function getBusinessContent(id: string): LessonStep[] | null {
+  const content: Record<string, LessonStep[]> = {
+    "bis-intro": [
+      generateQuizStep("Business IS", "What is a Business Information System?", [{ label: "A", text: "Technology solutions supporting business operations and decisions" }, { label: "B", text: "A type of computer virus" }, { label: "C", text: "An accounting method" }], "A", "BIS combines technology, people, and processes to support business goals."),
+      generateQuizStep("IS Components", "What are the 5 components of an IS?", [{ label: "A", text: "Hardware, software, data, procedures, people" }, { label: "B", text: "CPU, RAM, disk, monitor, keyboard" }, { label: "C", text: "Input, process, output" }], "A", "Every IS consists of hardware, software, data, procedures, and people."),
+      generateTypingStep("IS Definition", "Type the definition!", "An information system collects, processes, stores, and distributes information.", "Information systems transform raw data into useful information for decision-making.", "easy"),
+    ],
+    "info-system-types": [
+      generateQuizStep("TPS", "What does a Transaction Processing System do?", [{ label: "A", text: "Records routine business transactions" }, { label: "B", text: "Makes strategic decisions" }, { label: "C", text: "Designs websites" }], "A", "TPS handles high-volume, routine transactions like sales, payroll, and inventory."),
+      generateQuizStep("MIS vs DSS", "How does MIS differ from DSS?", [{ label: "A", text: "MIS provides standard reports; DSS supports ad-hoc analysis" }, { label: "B", text: "They are identical" }, { label: "C", text: "DSS replaces MIS" }], "A", "MIS generates routine reports while DSS supports interactive, ad-hoc decision analysis."),
+      generateQuizStep("EIS Purpose", "Who uses Executive Information Systems?", [{ label: "A", text: "Junior staff only" }, { label: "B", text: "Senior management for strategic decisions" }, { label: "C", text: "Customers" }], "B", "EIS provides senior executives with dashboards and KPIs for strategic decision-making."),
+    ],
+    "erp-systems": [
+      generateQuizStep("ERP Definition", "What is ERP?", [{ label: "A", text: "An integrated system managing core business processes" }, { label: "B", text: "An email provider" }, { label: "C", text: "A social media platform" }], "A", "ERP integrates finance, HR, manufacturing, supply chain, and more into one system."),
+      generateQuizStep("ERP Benefits", "What is a key benefit of ERP?", [{ label: "A", text: "Single source of truth across departments" }, { label: "B", text: "Cheaper internet" }, { label: "C", text: "Faster email" }], "A", "ERP eliminates data silos by providing one integrated database for all departments."),
+      generateTypingStep("ERP Modules", "List common ERP modules!", "Finance, HR, Manufacturing, Supply Chain, CRM", "ERP systems typically include modules for each major business function.", "easy"),
+      generateQuizStep("ERP Vendors", "Which are major ERP vendors?", [{ label: "A", text: "SAP, Oracle, Microsoft Dynamics" }, { label: "B", text: "Instagram, Twitter" }, { label: "C", text: "Windows, macOS" }], "A", "SAP, Oracle, and Microsoft Dynamics are the top enterprise ERP providers."),
+    ],
+    "e-commerce": [
+      generateQuizStep("E-Commerce Models", "What does B2C mean?", [{ label: "A", text: "Business-to-Consumer" }, { label: "B", text: "Bytes-to-Code" }, { label: "C", text: "Back-to-Cloud" }], "A", "B2C is when businesses sell directly to individual consumers, like Amazon or Shopify stores."),
+      generateQuizStep("B2B vs B2C", "How does B2B differ from B2C?", [{ label: "A", text: "B2B sells to other businesses; B2C sells to individuals" }, { label: "B", text: "B2B is always cheaper" }, { label: "C", text: "They are the same" }], "A", "B2B involves business-to-business transactions, often with larger order values and longer sales cycles."),
+      generateTypingStep("E-Commerce Model", "Type the e-commerce models!", "B2B, B2C, C2C, C2B", "The four main models: Business-to-Business, Business-to-Consumer, Consumer-to-Consumer, Consumer-to-Business.", "easy"),
+    ],
+    "cloud-computing": [
+      generateQuizStep("Cloud Definition", "What is cloud computing?", [{ label: "A", text: "On-demand delivery of computing resources over the internet" }, { label: "B", text: "Storing files on a USB drive" }, { label: "C", text: "A type of weather system" }], "A", "Cloud computing provides on-demand access to servers, storage, databases, and applications via the internet."),
+      generateQuizStep("Cloud Models", "What are IaaS, PaaS, SaaS?", [{ label: "A", text: "Infrastructure, Platform, Software as a Service" }, { label: "B", text: "Internet, Phone, System as a Service" }, { label: "C", text: "Types of programming languages" }], "A", "IaaS provides virtual machines, PaaS provides development platforms, SaaS provides ready-to-use applications."),
+      generateTypingStep("Cloud Providers", "Name the big 3 cloud providers!", "AWS, Microsoft Azure, Google Cloud Platform", "These three providers dominate the cloud market with 60%+ market share.", "easy"),
+    ],
+    "cloud-models": [
+      generateQuizStep("IaaS Examples", "Which is an IaaS example?", [{ label: "A", text: "AWS EC2 — virtual machines you configure" }, { label: "B", text: "Gmail" }, { label: "C", text: "Slack" }], "A", "IaaS provides raw computing infrastructure — you manage OS, middleware, and applications."),
+      generateQuizStep("SaaS Examples", "Which is a SaaS application?", [{ label: "A", text: "Google Docs — ready-to-use software" }, { label: "B", text: "A physical server" }, { label: "C", text: "Linux kernel" }], "A", "SaaS delivers complete applications over the internet — no installation needed."),
+    ],
+    "data-management": [
+      generateQuizStep("Data vs Information", "How does data differ from information?", [{ label: "A", text: "Data is raw facts; information is processed, meaningful data" }, { label: "B", text: "They are identical" }, { label: "C", text: "Information comes before data" }], "A", "Data becomes information when it is organized, processed, and given context."),
+      generateQuizStep("Data Quality", "What makes data high quality?", [{ label: "A", text: "Accurate, complete, consistent, timely" }, { label: "B", text: "Large file size" }, { label: "C", text: "Stored on expensive hardware" }], "A", "Data quality is measured by accuracy, completeness, consistency, and timeliness."),
+    ],
+    "project-management": [
+      generateQuizStep("Triple Constraint", "What is the project management triple constraint?", [{ label: "A", text: "Scope, time, cost (and quality)" }, { label: "B", text: "Speed, size, strength" }, { label: "C", text: "Code, test, deploy" }], "A", "The triple constraint balances scope, time, and cost — changing one affects the others."),
+      generateQuizStep("Project Lifecycle", "What are the PM phases?", [{ label: "A", text: "Initiation, planning, execution, monitoring, closing" }, { label: "B", text: "Just coding and testing" }, { label: "C", text: "Design and deployment only" }], "A", "Projects follow a lifecycle from initiation through planning, execution, monitoring, to closure."),
+    ],
+    "blockchain": [
+      generateQuizStep("Blockchain Basics", "What is a blockchain?", [{ label: "A", text: "A distributed, immutable ledger of transactions" }, { label: "B", text: "A type of database backup" }, { label: "C", text: "An encryption algorithm" }], "A", "Blockchain is a chain of blocks, each containing transactions, linked by cryptographic hashes."),
+      generateQuizStep("Decentralization", "Why is blockchain decentralized?", [{ label: "A", text: "No single authority controls it — copies exist on many nodes" }, { label: "B", text: "It only runs on one server" }, { label: "C", text: "It requires internet" }], "A", "Decentralization means no single point of failure and no single point of control."),
+    ],
+    "is-strategy": [
+      generateQuizStep("Strategic Alignment", "What is IS strategic alignment?", [{ label: "A", text: "Ensuring IT investments support business goals" }, { label: "B", text: "Buying the latest hardware" }, { label: "C", text: "Hiring more developers" }], "A", "Strategic alignment ensures technology decisions directly support business objectives."),
+      generateQuizStep("Competitive Advantage", "How can IS provide competitive advantage?", [{ label: "A", text: "Through innovation, efficiency, and better customer service" }, { label: "B", text: "By spending more money" }, { label: "C", text: "Only through cost cutting" }], "A", "IS creates competitive advantage through process efficiency, innovation, and enhanced customer experience."),
+    ],
+    "crm-basics": [
+      generateQuizStep("CRM Purpose", "What is the purpose of CRM?", [{ label: "A", text: "Managing interactions and relationships with customers" }, { label: "B", text: "Writing code" }, { label: "C", text: "Network administration" }], "A", "CRM systems track customer interactions across sales, marketing, and service touchpoints."),
+      generateQuizStep("CRM Benefits", "What benefit does CRM provide?", [{ label: "A", text: "360-degree view of customers, improved retention" }, { label: "B", text: "Faster internet" }, { label: "C", text: "Free software" }], "A", "CRM gives a complete customer view, improving personalization and retention rates."),
+    ],
+    "digital-transformation": [
+      generateQuizStep("Digital Transformation", "What is digital transformation?", [{ label: "A", text: "Fundamentally changing business operations using digital technology" }, { label: "B", text: "Buying a new computer" }, { label: "C", text: "Creating a website" }], "A", "Digital transformation reimagines how a business operates and delivers value using technology."),
+      generateQuizStep("DX Pillars", "What are the pillars of digital transformation?", [{ label: "A", text: "Customer experience, operational processes, business models" }, { label: "B", text: "Hardware, software, data" }, { label: "C", text: "Sales, marketing, support" }], "A", "DX transforms customer experience, internal operations, and business models simultaneously."),
+    ],
+    "big-data": [
+      generateQuizStep("5 Vs of Big Data", "What are the 5 Vs of Big Data?", [{ label: "A", text: "Volume, Velocity, Variety, Veracity, Value" }, { label: "B", text: "Variables, Values, Vectors, Views, Versions" }, { label: "C", text: "Virtual, Visual, Vocal, Vital, Valid" }], "A", "The 5 Vs define big data: Volume (size), Velocity (speed), Variety (types), Veracity (accuracy), Value (usefulness)."),
+      generateTypingStep("Big Data Tools", "Name big data technologies!", "Hadoop, Spark, Kafka, MongoDB", "These technologies process and store massive datasets that traditional databases can't handle.", "medium"),
+    ],
+  };
+  return content[id] || null;
 }
 
 // ======================== GAME DEVELOPMENT ========================
