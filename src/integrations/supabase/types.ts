@@ -684,6 +684,24 @@ export type Database = {
         }
         Relationships: []
       }
+      parental_pins: {
+        Row: {
+          created_at: string | null
+          hashed_pin: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          hashed_pin: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          hashed_pin?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       parental_unlock_log: {
         Row: {
           attempted_at: string
@@ -719,7 +737,6 @@ export type Database = {
           avatar_url: string | null
           created_at: string | null
           display_name: string | null
-          hashed_parental_pin: string | null
           id: string
           last_activity_date: string | null
           mode: string | null
@@ -733,7 +750,6 @@ export type Database = {
           avatar_url?: string | null
           created_at?: string | null
           display_name?: string | null
-          hashed_parental_pin?: string | null
           id: string
           last_activity_date?: string | null
           mode?: string | null
@@ -747,7 +763,6 @@ export type Database = {
           avatar_url?: string | null
           created_at?: string | null
           display_name?: string | null
-          hashed_parental_pin?: string | null
           id?: string
           last_activity_date?: string | null
           mode?: string | null
