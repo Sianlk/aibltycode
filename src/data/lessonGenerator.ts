@@ -66,11 +66,36 @@ function generateJavaSteps(id: string, title: string, desc: string): LessonStep[
     "A", `${title} is important because it enables ${desc.toLowerCase()}, making your code more robust and professional.`, "medium"
   ));
 
+  // Additional drilling: repeat the code pattern
+  if (codeSnippets.length > 0) {
+    const mainSnippet = codeSnippets[0];
+    steps.push(generateTypingStep(
+      `Drill: ${mainSnippet.title}`, `Type it again from memory!`, mainSnippet.code,
+      `Repetition builds muscle memory. You should now be able to type ${title.toLowerCase()} syntax without thinking.`, mainSnippet.difficulty
+    ));
+  }
+
   steps.push(generateQuizStep(
     `${title} Best Practices`, `What is a best practice when using ${title.toLowerCase()}?`,
     [{ label: "A", text: "Ignore error handling" }, { label: "B", text: "Follow Java naming conventions and document your code" }, { label: "C", text: "Never test your code" }],
     "B", `Following conventions and documenting code ensures ${title.toLowerCase()} is used correctly and maintainably.`, "medium"
   ));
+
+  // Application quiz
+  steps.push(generateQuizStep(
+    `Apply ${title}`, `A colleague asks you to implement ${title.toLowerCase()}. What is your first step?`,
+    [{ label: "A", text: "Start coding immediately without planning" }, { label: "B", text: "Understand the requirement, plan the approach, then write clean code" }, { label: "C", text: "Copy code from the internet without understanding" }],
+    "B", `Professional developers plan their approach before coding. Understanding ${title.toLowerCase()} deeply means you can implement it correctly the first time.`, "hard"
+  ));
+
+  // Final speed drill
+  if (codeSnippets.length > 0) {
+    steps.push(generateTypingStep(
+      `Speed Drill: ${title}`, `Type it one more time — aim for speed!`,
+      codeSnippets[codeSnippets.length > 1 ? 1 : 0].code,
+      `By now this should feel natural. ${title} syntax is becoming second nature!`, "medium"
+    ));
+  }
 
   return steps;
 }
@@ -285,33 +310,33 @@ function getJavaCodeSnippet(id: string, title: string): { title: string; prompt:
 
 // ======================== SYSTEMS ANALYSIS ========================
 function generateSystemsSteps(id: string, title: string, desc: string): LessonStep[] {
-  const steps: LessonStep[] = [];
-
-  // Topic-specific content
   const topicContent = getSystemsContent(id);
   if (topicContent) return topicContent;
 
-  steps.push(generateQuizStep(`Understanding ${title}`, `What does ${title.toLowerCase()} involve?`,
-    [{ label: "A", text: desc }, { label: "B", text: "Writing machine code" }, { label: "C", text: "Hardware installation" }],
-    "A", `${title} is about ${desc.toLowerCase()}, a key concept in systems analysis.`, "easy"));
-
-  steps.push(generateTypingStep(`${title} Terminology`, `Type a key term for ${title.toLowerCase()}!`,
-    `// ${title}: ${desc}`,
-    `Understanding terminology is crucial for ${title.toLowerCase()}.`, "easy"));
-
-  steps.push(generateQuizStep(`${title} in Practice`, `When would you use ${title.toLowerCase()}?`,
-    [{ label: "A", text: "Only during coding" }, { label: "B", text: "During system design and planning" }, { label: "C", text: "Never in real projects" }],
-    "B", `${title} is applied during system design and planning to ensure quality outcomes.`, "medium"));
-
-  steps.push(generateQuizStep(`${title} Benefits`, `What is a key benefit of ${title.toLowerCase()}?`,
-    [{ label: "A", text: "Faster hardware performance" }, { label: "B", text: "Better system understanding and documentation" }, { label: "C", text: "Automatic code generation" }],
-    "B", `${title} helps teams understand and document systems effectively.`, "medium"));
-
-  steps.push(generateQuizStep(`${title} Stakeholders`, `Who benefits most from ${title.toLowerCase()}?`,
-    [{ label: "A", text: "Only programmers" }, { label: "B", text: "Only managers" }, { label: "C", text: "All project stakeholders" }],
-    "C", `${title} benefits all stakeholders by improving communication and understanding.`, "easy"));
-
-  return steps;
+  // Enhanced fallback with 7 intensive steps
+  return [
+    generateQuizStep(`Understanding ${title}`, `What does ${title.toLowerCase()} involve?`,
+      [{ label: "A", text: desc }, { label: "B", text: "Writing machine code" }, { label: "C", text: "Hardware installation" }],
+      "A", `${title} is about ${desc.toLowerCase()}, a key concept in systems analysis.`, "easy"),
+    generateTypingStep(`${title} Definition`, `Type the definition of ${title.toLowerCase()}!`,
+      `${title}: ${desc}`,
+      `Being able to define ${title.toLowerCase()} from memory is essential for exams and interviews.`, "easy"),
+    generateQuizStep(`${title} in SDLC`, `Which SDLC phase does ${title.toLowerCase()} primarily belong to?`,
+      [{ label: "A", text: "Only during coding" }, { label: "B", text: "During analysis and design phases" }, { label: "C", text: "Only after deployment" }],
+      "B", `${title} is applied during analysis and design to ensure the system meets requirements.`, "medium"),
+    generateTypingStep(`${title} in Practice`, `Type how you would apply ${title.toLowerCase()} in a project!`,
+      `Step 1: Identify requirements\nStep 2: Apply ${title}\nStep 3: Document and validate`,
+      `Following a structured approach ensures ${title.toLowerCase()} is applied effectively.`, "medium"),
+    generateQuizStep(`${title} Stakeholders`, `Who benefits most from ${title.toLowerCase()}?`,
+      [{ label: "A", text: "Only programmers" }, { label: "B", text: "Only managers" }, { label: "C", text: "All project stakeholders including users, developers, and management" }],
+      "C", `${title} benefits all stakeholders by improving communication and system quality.`, "medium"),
+    generateQuizStep(`${title} vs Alternatives`, `What happens if you skip ${title.toLowerCase()} in a project?`,
+      [{ label: "A", text: "Nothing, it's optional" }, { label: "B", text: "Increased risk of project failure, rework, and missed requirements" }, { label: "C", text: "The project goes faster" }],
+      "B", `Skipping ${title.toLowerCase()} leads to costly rework and missed requirements.`, "hard"),
+    generateTypingStep(`${title} Summary`, `Type the key takeaway for ${title.toLowerCase()}!`,
+      `${title} ensures quality outcomes through structured ${desc.toLowerCase()}.`,
+      `You should now be able to explain ${title.toLowerCase()} confidently in any context.`, "easy"),
+  ];
 }
 
 function getSystemsContent(id: string): LessonStep[] | null {
@@ -423,79 +448,66 @@ function generateMathSteps(id: string, title: string, desc: string): LessonStep[
   const topicContent = getMathContent(id);
   if (topicContent) return topicContent;
 
+  // Enhanced fallback with practical exercises
   return [
-    generateQuizStep(`${title} Basics`, `What is ${title.toLowerCase()}?`,
-      [{ label: "A", text: "A programming language" }, { label: "B", text: desc }, { label: "C", text: "A type of computer hardware" }],
-      "B", `${title}: ${desc}. This is fundamental to computing mathematics.`, "easy"),
-    generateTypingStep(`${title} Practice`, `Practice ${title.toLowerCase()}!`,
-      `// ${title}: ${desc}`,
-      `Understanding ${title.toLowerCase()} is essential for computing.`, "easy"),
-    generateQuizStep(`${title} Application`, `Where is ${title.toLowerCase()} used in computing?`,
-      [{ label: "A", text: "Only in pure mathematics" }, { label: "B", text: "Algorithm design and analysis" }, { label: "C", text: "Nowhere in computing" }],
-      "B", `${title} is essential in algorithm design, data structures, and computational theory.`, "medium"),
-    generateQuizStep(`${title} Problem Solving`, `How does ${title.toLowerCase()} help solve problems?`,
-      [{ label: "A", text: "By guessing answers" }, { label: "B", text: "It doesn't help" }, { label: "C", text: "Provides systematic mathematical approaches" }],
-      "C", `Mathematical concepts like ${title.toLowerCase()} provide rigorous problem-solving frameworks.`, "medium"),
+    generateQuizStep(`${title} Concept`, `What is ${title.toLowerCase()}?`,
+      [{ label: "A", text: desc }, { label: "B", text: "A type of computer virus" }, { label: "C", text: "A hardware component" }],
+      "A", `${title}: ${desc}. This mathematical concept is essential for computing.`, "easy"),
+    generateTypingStep(`${title} Formula`, `Type the key formula for ${title.toLowerCase()}!`,
+      `// Formula: ${title}\n// ${desc}`,
+      `Memorizing formulas through typing builds automatic recall.`, "easy"),
+    generateQuizStep(`${title} Application`, `How is ${title.toLowerCase()} used in computing?`,
+      [{ label: "A", text: "Never used in practice" }, { label: "B", text: "In algorithms, data structures, and problem-solving" }, { label: "C", text: "Only in pure mathematics" }],
+      "B", `${title} underpins many algorithms and data structures in computer science.`, "medium"),
+    generateQuizStep(`Solve: ${title}`, `Which approach would you use to solve a problem involving ${title.toLowerCase()}?`,
+      [{ label: "A", text: "Guess randomly" }, { label: "B", text: "Identify the pattern, apply the formula, verify the result" }, { label: "C", text: "Skip the problem" }],
+      "B", `Mathematical problem-solving follows: understand → plan → execute → verify.`, "medium"),
+    generateTypingStep(`${title} Practice`, `Type a practical example!`,
+      `// Example: ${title}\n// Input: data\n// Process: apply ${title.toLowerCase()}\n// Output: result`,
+      `Writing out the process helps cement the concept.`, "medium"),
+    generateQuizStep(`${title} Complexity`, `What is the typical complexity when implementing ${title.toLowerCase()} in code?`,
+      [{ label: "A", text: "Always O(1)" }, { label: "B", text: "Depends on the specific algorithm and data size" }, { label: "C", text: "Always O(n!)" }],
+      "B", `Algorithm complexity depends on the approach. Understanding Big-O helps choose efficient solutions.`, "hard"),
+    generateQuizStep(`${title} Mastery Check`, `Can you explain ${title.toLowerCase()} to a colleague?`,
+      [{ label: "A", text: "No, it's too abstract" }, { label: "B", text: "Yes: it involves " + desc.toLowerCase() }, { label: "C", text: "I need to look it up" }],
+      "B", `If you can explain it simply, you truly understand it. ${title}: ${desc}.`, "easy"),
   ];
 }
 
 function getMathContent(id: string): LessonStep[] | null {
   const content: Record<string, LessonStep[]> = {
-    "binary-basics": [
-      generateQuizStep("Binary Counting", "What is 5 in binary?", [{ label: "A", text: "101" }, { label: "B", text: "110" }, { label: "C", text: "100" }], "A", "5 in binary is 101 (4+0+1)."),
-      generateTypingStep("Binary Number", "Type a binary number!", "101", "101 in binary = 5 in decimal (1×4 + 0×2 + 1×1).", "easy"),
-      generateQuizStep("Binary to Decimal", "What is 1100 in decimal?", [{ label: "A", text: "10" }, { label: "B", text: "12" }, { label: "C", text: "14" }], "B", "1100 = 1×8 + 1×4 + 0×2 + 0×1 = 12."),
-      generateQuizStep("Decimal to Binary", "What is 10 in binary?", [{ label: "A", text: "1010" }, { label: "B", text: "1001" }, { label: "C", text: "1100" }], "A", "10 in binary is 1010 (8+0+2+0)."),
+    "binary-intro": [
+      generateQuizStep("Binary System", "What base does binary use?", [{ label: "A", text: "Base 10" }, { label: "B", text: "Base 2" }, { label: "C", text: "Base 16" }], "B", "Binary (base 2) uses only 0 and 1 — the language of computers."),
+      generateTypingStep("Binary Number", "Type a binary number!", "1010 = 10 in decimal", "1010: (1×8) + (0×4) + (1×2) + (0×1) = 10.", "easy"),
+      generateQuizStep("Place Values", "What are binary place values from right?", [{ label: "A", text: "1, 2, 4, 8, 16, 32..." }, { label: "B", text: "1, 3, 5, 7..." }, { label: "C", text: "0, 1, 2, 3..." }], "A", "Each position doubles: 1, 2, 4, 8, 16, 32, 64, 128."),
+      generateTypingStep("Convert to Binary", "Convert 13 to binary!", "13 = 1101", "13 = 8+4+0+1 = 1101 in binary.", "medium"),
+    ],
+    "hex-numbers": [
+      generateQuizStep("Hexadecimal", "What base does hex use?", [{ label: "A", text: "Base 8" }, { label: "B", text: "Base 16" }, { label: "C", text: "Base 6" }], "B", "Hexadecimal (base 16) uses 0-9 and A-F. Each hex digit = 4 binary bits."),
+      generateTypingStep("Hex Values", "Type hex digits!", "0123456789ABCDEF", "A=10, B=11, C=12, D=13, E=14, F=15.", "easy"),
+      generateQuizStep("Hex Color", "What does #FF0000 represent?", [{ label: "A", text: "Pure red" }, { label: "B", text: "Pure blue" }, { label: "C", text: "Pure green" }], "A", "FF=255 red, 00=0 green, 00=0 blue = pure red."),
+      generateTypingStep("Hex to Binary", "Convert hex to binary!", "A = 1010, F = 1111", "Each hex digit converts to exactly 4 binary bits.", "medium"),
     ],
     "binary-arithmetic": [
-      generateQuizStep("Binary Addition", "What is 1011 + 0101?", [{ label: "A", text: "10000" }, { label: "B", text: "1110" }, { label: "C", text: "1111" }], "A", "1011 (11) + 0101 (5) = 10000 (16)."),
-      generateTypingStep("Add Binary", "Type the result!", "10000", "1011 + 0101 = 10000. Remember: 1+1 = 10 in binary (carry the 1).", "medium"),
-      generateQuizStep("Carry Rule", "In binary, what is 1 + 1?", [{ label: "A", text: "2" }, { label: "B", text: "10" }, { label: "C", text: "11" }], "B", "In binary, 1 + 1 = 10 (write 0, carry 1)."),
+      generateQuizStep("Binary Addition", "What is 1011 + 0101?", [{ label: "A", text: "10000" }, { label: "B", text: "1110" }, { label: "C", text: "1100" }], "A", "1011 (11) + 0101 (5) = 10000 (16). Carry: 1+1=10."),
+      generateTypingStep("Binary Add", "Add binary numbers!", "  1011\n+ 0101\n------\n 10000", "Binary addition: 0+0=0, 0+1=1, 1+1=10 (carry 1).", "medium"),
+      generateQuizStep("Overflow", "What is overflow in binary?", [{ label: "A", text: "When the result exceeds the available bits" }, { label: "B", text: "When memory is full" }, { label: "C", text: "When the CPU overheats" }], "A", "Overflow occurs when the result needs more bits than available."),
     ],
-    "hex-system": [
-      generateQuizStep("Hex Digits", "What digits does hexadecimal use?", [{ label: "A", text: "0-9 and A-F" }, { label: "B", text: "0-9 only" }, { label: "C", text: "0-7" }], "A", "Hex uses 0-9 and A-F, where A=10, B=11, C=12, D=13, E=14, F=15."),
-      generateTypingStep("Hex Value", "Type a hex number!", "0xFF", "0xFF = 255 in decimal (15×16 + 15×1).", "easy"),
-      generateQuizStep("Hex to Decimal", "What is 0x1A in decimal?", [{ label: "A", text: "26" }, { label: "B", text: "16" }, { label: "C", text: "10" }], "A", "0x1A = 1×16 + 10×1 = 26."),
+    "big-o": [
+      generateQuizStep("Big-O Purpose", "What does Big-O notation describe?", [{ label: "A", text: "How an algorithm's time/space scales with input size" }, { label: "B", text: "The exact runtime in seconds" }, { label: "C", text: "The number of lines of code" }], "A", "Big-O describes the upper bound of growth rate as input increases."),
+      generateQuizStep("O(1) vs O(n)", "What is O(1)?", [{ label: "A", text: "Constant time — same speed regardless of input" }, { label: "B", text: "Linear time" }, { label: "C", text: "The slowest possible" }], "A", "O(1) means the operation takes constant time. Array access by index is O(1)."),
+      generateTypingStep("Complexity Order", "Type complexity order!", "O(1) < O(log n) < O(n) < O(n log n) < O(n^2) < O(2^n)", "From fastest to slowest. Always aim for the lowest complexity.", "medium"),
+      generateQuizStep("Loop Complexity", "What is the Big-O of a simple for loop?", [{ label: "A", text: "O(1)" }, { label: "B", text: "O(n)" }, { label: "C", text: "O(n²)" }], "B", "A single loop iterating n times is O(n). Nested loops: O(n²)."),
     ],
-    "truth-tables": [
-      generateQuizStep("AND Truth Table", "What is TRUE AND FALSE?", [{ label: "A", text: "TRUE" }, { label: "B", text: "FALSE" }, { label: "C", text: "UNDEFINED" }], "B", "AND requires both inputs to be TRUE. TRUE AND FALSE = FALSE."),
-      generateQuizStep("OR Truth Table", "What is FALSE OR TRUE?", [{ label: "A", text: "FALSE" }, { label: "B", text: "TRUE" }, { label: "C", text: "UNDEFINED" }], "B", "OR requires at least one TRUE input. FALSE OR TRUE = TRUE."),
-      generateQuizStep("NOT Operation", "What is NOT TRUE?", [{ label: "A", text: "TRUE" }, { label: "B", text: "FALSE" }, { label: "C", text: "NULL" }], "B", "NOT inverts the value. NOT TRUE = FALSE."),
-      generateTypingStep("Boolean Expression", "Type a boolean expression!", "A AND (B OR C)", "Parentheses determine order of operations in boolean expressions.", "medium"),
+    "sorting-algorithms": [
+      generateQuizStep("Bubble Sort", "How does bubble sort work?", [{ label: "A", text: "Repeatedly swaps adjacent elements if in wrong order" }, { label: "B", text: "Divides array in half" }, { label: "C", text: "Randomly shuffles elements" }], "A", "Bubble sort compares adjacent pairs and swaps them. Complexity: O(n²)."),
+      generateQuizStep("Merge Sort", "What is merge sort's time complexity?", [{ label: "A", text: "O(n²)" }, { label: "B", text: "O(n log n)" }, { label: "C", text: "O(n)" }], "B", "Merge sort divides, sorts halves, and merges. Always O(n log n)."),
+      generateTypingStep("Sort Comparison", "Type sort complexities!", "Bubble: O(n^2)\nMerge: O(n log n)\nQuick: O(n log n) avg", "Quick sort is fastest on average but O(n²) worst case.", "medium"),
     ],
-    "big-o-intro": [
-      generateQuizStep("Big-O Purpose", "What does Big-O notation describe?", [{ label: "A", text: "The worst-case growth rate of an algorithm" }, { label: "B", text: "The exact execution time" }, { label: "C", text: "Memory used" }], "A", "Big-O describes how an algorithm's time/space scales with input size."),
-      generateQuizStep("O(1) Meaning", "What does O(1) mean?", [{ label: "A", text: "Linear time" }, { label: "B", text: "Constant time — doesn't grow with input" }, { label: "C", text: "Quadratic time" }], "B", "O(1) operations take the same time regardless of input size."),
-      generateQuizStep("O(n) Example", "Which operation is O(n)?", [{ label: "A", text: "Array index lookup" }, { label: "B", text: "Searching unsorted array" }, { label: "C", text: "HashMap get" }], "B", "Searching an unsorted array requires checking each element — linear time."),
-    ],
-    "twos-complement": [
-      generateQuizStep("Two's Complement", "How do you find the two's complement?", [{ label: "A", text: "Invert all bits, then add 1" }, { label: "B", text: "Just flip the first bit" }, { label: "C", text: "Add 2 to the number" }], "A", "Two's complement: flip all bits (one's complement) then add 1."),
-      generateQuizStep("Negative Numbers", "What is -5 in 8-bit two's complement?", [{ label: "A", text: "11111011" }, { label: "B", text: "10000101" }, { label: "C", text: "00000101" }], "A", "5 = 00000101 → flip = 11111010 → add 1 = 11111011."),
-      generateTypingStep("Two's Complement", "Calculate -3 in 8-bit!", "11111101", "3 = 00000011 → flip = 11111100 → add 1 = 11111101.", "hard"),
-    ],
-    "demorgans-laws": [
-      generateQuizStep("De Morgan's First Law", "What is NOT (A AND B)?", [{ label: "A", text: "(NOT A) OR (NOT B)" }, { label: "B", text: "(NOT A) AND (NOT B)" }, { label: "C", text: "A OR B" }], "A", "De Morgan's: NOT (A AND B) = (NOT A) OR (NOT B). Break the bar, change the sign."),
-      generateQuizStep("De Morgan's Second Law", "What is NOT (A OR B)?", [{ label: "A", text: "(NOT A) OR (NOT B)" }, { label: "B", text: "(NOT A) AND (NOT B)" }, { label: "C", text: "A AND B" }], "B", "NOT (A OR B) = (NOT A) AND (NOT B). Break the bar, change the sign."),
-    ],
-    "sets-basics": [
-      generateQuizStep("Set Definition", "What is a set?", [{ label: "A", text: "An unordered collection of unique elements" }, { label: "B", text: "An ordered list" }, { label: "C", text: "A type of array" }], "A", "Sets contain unique elements with no duplicates and no defined order."),
-      generateTypingStep("Set Notation", "Write set notation!", "A = {1, 2, 3, 4, 5}", "Sets use curly braces. Elements are listed separated by commas.", "easy"),
-    ],
-    "set-operations": [
-      generateQuizStep("Union", "What is A ∪ B?", [{ label: "A", text: "All elements in A or B or both" }, { label: "B", text: "Only elements in both" }, { label: "C", text: "Elements in A only" }], "A", "Union combines all elements from both sets, removing duplicates."),
-      generateQuizStep("Intersection", "What is A ∩ B?", [{ label: "A", text: "All elements in A or B" }, { label: "B", text: "Only elements in both A and B" }, { label: "C", text: "Elements in neither" }], "B", "Intersection returns only elements that appear in both sets."),
-    ],
-    "probability-basics": [
-      generateQuizStep("Probability Range", "What is the range of probability?", [{ label: "A", text: "0 to 1 (or 0% to 100%)" }, { label: "B", text: "-1 to 1" }, { label: "C", text: "0 to infinity" }], "A", "Probability is always between 0 (impossible) and 1 (certain)."),
-      generateQuizStep("Coin Flip", "What is P(heads) for a fair coin?", [{ label: "A", text: "0.5 or 1/2" }, { label: "B", text: "0.25" }, { label: "C", text: "1" }], "A", "A fair coin has equal probability: P(heads) = P(tails) = 1/2."),
-    ],
-    "permutations": [
-      generateQuizStep("Permutation Formula", "What is the formula for nPr?", [{ label: "A", text: "n! / (n-r)!" }, { label: "B", text: "n! / r!" }, { label: "C", text: "n × r" }], "A", "nPr = n! / (n-r)! counts ordered arrangements of r items from n."),
-      generateQuizStep("3P2", "How many ways to arrange 2 items from 3?", [{ label: "A", text: "6" }, { label: "B", text: "3" }, { label: "C", text: "9" }], "A", "3P2 = 3! / 1! = 6 ways: AB, AC, BA, BC, CA, CB."),
-    ],
-    "combinations": [
-      generateQuizStep("Combination Formula", "What is nCr?", [{ label: "A", text: "n! / (r! × (n-r)!)" }, { label: "B", text: "n! / (n-r)!" }, { label: "C", text: "n × r" }], "A", "nCr = n! / (r! × (n-r)!) counts unordered selections of r items from n."),
-      generateQuizStep("5C2", "How many ways to choose 2 from 5?", [{ label: "A", text: "10" }, { label: "B", text: "20" }, { label: "C", text: "25" }], "A", "5C2 = 5! / (2! × 3!) = 120 / 12 = 10."),
+    "searching-algorithms": [
+      generateQuizStep("Linear Search", "How does linear search work?", [{ label: "A", text: "Check each element one by one until found" }, { label: "B", text: "Jump to the middle" }, { label: "C", text: "Sort first, then search" }], "A", "Linear search checks every element sequentially. O(n) time."),
+      generateQuizStep("Binary Search", "What does binary search require?", [{ label: "A", text: "A sorted array" }, { label: "B", text: "An unsorted array" }, { label: "C", text: "A linked list" }], "A", "Binary search needs sorted data. It halves the search space each step. O(log n)."),
+      generateTypingStep("Binary Search Code", "Write binary search steps!", "1. Find middle element\n2. If target = middle, found!\n3. If target < middle, search left half\n4. If target > middle, search right half", "Binary search is dramatically faster than linear for large datasets.", "medium"),
     ],
     "bfs": [
       generateQuizStep("BFS", "How does BFS explore a graph?", [{ label: "A", text: "Level by level using a queue" }, { label: "B", text: "Going as deep as possible first" }, { label: "C", text: "Randomly" }], "A", "BFS uses a queue (FIFO) to visit all neighbors at current depth before going deeper."),
@@ -517,6 +529,15 @@ function getMathContent(id: string): LessonStep[] | null {
       generateQuizStep("AND Gate", "When does an AND gate output 1?", [{ label: "A", text: "When any input is 1" }, { label: "B", text: "When all inputs are 1" }, { label: "C", text: "When all inputs are 0" }], "B", "AND gates output 1 only when ALL inputs are 1."),
       generateQuizStep("OR Gate", "When does an OR gate output 1?", [{ label: "A", text: "When at least one input is 1" }, { label: "B", text: "When all inputs are 1" }, { label: "C", text: "When all inputs are 0" }], "A", "OR gates output 1 when ANY input is 1."),
       generateQuizStep("NOT Gate", "What does a NOT gate do?", [{ label: "A", text: "Adds inputs" }, { label: "B", text: "Inverts the input" }, { label: "C", text: "Multiplies inputs" }], "B", "NOT gates invert: 0 becomes 1, and 1 becomes 0."),
+      generateTypingStep("Truth Table", "Type AND truth table!", "0 AND 0 = 0\n0 AND 1 = 0\n1 AND 0 = 0\n1 AND 1 = 1", "AND only outputs 1 when both inputs are 1.", "easy"),
+    ],
+    "boolean-algebra": [
+      generateQuizStep("Boolean Laws", "What does De Morgan's Law state?", [{ label: "A", text: "NOT(A AND B) = NOT A OR NOT B" }, { label: "B", text: "A AND B = A OR B" }, { label: "C", text: "NOT A = A" }], "A", "De Morgan's: break the bar, change the sign. NOT(A·B) = A'+B'."),
+      generateTypingStep("Boolean Expression", "Simplify a boolean expression!", "NOT(A AND B) = NOT A OR NOT B", "De Morgan's Law is essential for simplifying logic circuits.", "medium"),
+    ],
+    "sets-theory": [
+      generateQuizStep("Set Operations", "What is A ∪ B?", [{ label: "A", text: "Union: all elements in A or B or both" }, { label: "B", text: "Intersection: only elements in both" }, { label: "C", text: "Difference: only in A" }], "A", "Union combines all elements. Intersection keeps only shared elements."),
+      generateTypingStep("Set Notation", "Type set operations!", "A ∪ B = Union\nA ∩ B = Intersection\nA - B = Difference", "Understanding sets is crucial for databases (SQL) and logic.", "easy"),
     ],
   };
   return content[id] || null;
@@ -527,22 +548,32 @@ function generateCyberSteps(id: string, title: string, desc: string): LessonStep
   const topicContent = getCyberContent(id);
   if (topicContent) return topicContent;
 
+  // Enhanced fallback with 8 intensive security drilling steps
   return [
     generateQuizStep(`${title} Overview`, `What is ${title.toLowerCase()}?`,
       [{ label: "A", text: "A type of software development" }, { label: "B", text: desc }, { label: "C", text: "A networking protocol" }],
       "B", `${title}: ${desc}. This is a critical cybersecurity concept.`, "easy"),
-    generateTypingStep(`${title} Command`, `Type a security concept!`,
-      `// Security: ${title}`,
-      `Understanding ${title.toLowerCase()} is essential for cybersecurity professionals.`, "easy"),
-    generateQuizStep(`${title} Importance`, `Why is ${title.toLowerCase()} important?`,
-      [{ label: "A", text: "It makes systems faster" }, { label: "B", text: "It protects systems and data from threats" }, { label: "C", text: "It is not important" }],
-      "B", `${title} is crucial for protecting information systems against various security threats.`, "medium"),
-    generateQuizStep(`${title} Implementation`, `How is ${title.toLowerCase()} typically implemented?`,
-      [{ label: "A", text: "By ignoring security risks" }, { label: "B", text: "Only through hardware upgrades" }, { label: "C", text: "Through security controls, policies, and procedures" }],
-      "C", `Proper implementation of ${title.toLowerCase()} involves layered security controls and clear policies.`, "medium"),
-    generateQuizStep(`${title} Best Practices`, `What is a best practice for ${title.toLowerCase()}?`,
-      [{ label: "A", text: "Set it and forget it" }, { label: "B", text: "Regular assessment, monitoring, and updates" }, { label: "C", text: "Share passwords freely" }],
-      "B", `Security best practices include continuous monitoring, regular updates, and proper documentation.`, "medium"),
+    generateTypingStep(`${title} Definition`, `Type the definition!`,
+      `${title}: ${desc}`,
+      `Being able to define security concepts precisely is essential for certifications.`, "easy"),
+    generateQuizStep(`${title} Threat Model`, `What type of threat does ${title.toLowerCase()} protect against?`,
+      [{ label: "A", text: "No threats — it's purely theoretical" }, { label: "B", text: "Unauthorized access, data breaches, and system compromise" }, { label: "C", text: "Weather-related damage only" }],
+      "B", `${title} protects against real-world cyber threats that can cause serious damage.`, "medium"),
+    generateTypingStep(`${title} Command`, `Type a security command or tool for ${title.toLowerCase()}!`,
+      `# Security: ${title}\nnmap -sV target_ip\nwireshark`,
+      `Knowing the tools is as important as knowing the theory.`, "medium"),
+    generateQuizStep(`${title} CIA Triad`, `How does ${title.toLowerCase()} relate to the CIA triad?`,
+      [{ label: "A", text: "It only affects availability" }, { label: "B", text: "It supports confidentiality, integrity, and/or availability" }, { label: "C", text: "It has no relation to CIA" }],
+      "B", `Every security control maps to one or more CIA pillars.`, "medium"),
+    generateQuizStep(`${title} Implementation`, `How should ${title.toLowerCase()} be implemented in an organization?`,
+      [{ label: "A", text: "By one person working alone" }, { label: "B", text: "Through defense-in-depth with policies, controls, and monitoring" }, { label: "C", text: "Only with expensive hardware" }],
+      "B", `Defense-in-depth uses multiple layers: policies, technical controls, and continuous monitoring.`, "hard"),
+    generateTypingStep(`${title} Checklist`, `Type a security implementation checklist!`,
+      `1. Assess current state\n2. Identify gaps\n3. Implement controls\n4. Test and validate\n5. Monitor and review`,
+      `Following a structured approach ensures comprehensive security coverage.`, "medium"),
+    generateQuizStep(`${title} Incident Response`, `If ${title.toLowerCase()} fails, what is the first step?`,
+      [{ label: "A", text: "Ignore it" }, { label: "B", text: "Contain the incident, then investigate and remediate" }, { label: "C", text: "Delete all logs" }],
+      "B", `Incident response: Contain → Investigate → Remediate → Learn. Never delete evidence!`, "hard"),
   ];
 }
 
@@ -552,20 +583,40 @@ function getCyberContent(id: string): LessonStep[] | null {
       generateQuizStep("CIA Triad", "What does CIA stand for in cybersecurity?", [{ label: "A", text: "Central Intelligence Agency" }, { label: "B", text: "Confidentiality, Integrity, Availability" }, { label: "C", text: "Computer Information Access" }], "B", "The CIA Triad is the foundation of information security."),
       generateQuizStep("Confidentiality", "What ensures confidentiality?", [{ label: "A", text: "Encryption and access controls" }, { label: "B", text: "Backups" }, { label: "C", text: "Load balancing" }], "A", "Encryption and access controls prevent unauthorized data access."),
       generateQuizStep("Integrity", "What protects data integrity?", [{ label: "A", text: "Hash functions and checksums" }, { label: "B", text: "Faster internet" }, { label: "C", text: "More storage" }], "A", "Hash functions verify that data hasn't been tampered with."),
+      generateTypingStep("CIA Memory", "Type the CIA triad!", "Confidentiality, Integrity, Availability", "These three pillars are the foundation of ALL security decisions.", "easy"),
+      generateTypingStep("CIA Drill", "Type CIA controls!", "Confidentiality: Encryption\nIntegrity: Hashing\nAvailability: Redundancy", "Each pillar has specific controls. Memorize these associations!", "medium"),
     ],
     "phishing": [
       generateQuizStep("Phishing Attack", "What is phishing?", [{ label: "A", text: "A social engineering attack using fake emails/websites" }, { label: "B", text: "A type of firewall" }, { label: "C", text: "A programming language" }], "A", "Phishing tricks users into revealing sensitive information through fake communications."),
       generateQuizStep("Spear Phishing", "How does spear phishing differ from phishing?", [{ label: "A", text: "It targets specific individuals" }, { label: "B", text: "It uses phone calls" }, { label: "C", text: "It's less dangerous" }], "A", "Spear phishing is targeted at specific individuals using personalized information."),
       generateQuizStep("Prevention", "How to prevent phishing?", [{ label: "A", text: "Click all links to test them" }, { label: "B", text: "Verify sender, check URLs, use MFA" }, { label: "C", text: "Disable email" }], "B", "Always verify senders, hover over links, and use multi-factor authentication."),
+      generateTypingStep("Phishing Indicators", "Type phishing red flags!", "1. Urgent language\n2. Misspelled domain\n3. Generic greeting\n4. Suspicious attachment", "Recognizing these patterns protects against social engineering attacks.", "easy"),
     ],
     "encryption-basics": [
       generateQuizStep("Symmetric Encryption", "What is symmetric encryption?", [{ label: "A", text: "Same key for encryption and decryption" }, { label: "B", text: "Different keys for each" }, { label: "C", text: "No key needed" }], "A", "Symmetric encryption uses one shared key for both encrypting and decrypting."),
       generateQuizStep("Asymmetric Encryption", "What does asymmetric encryption use?", [{ label: "A", text: "One key" }, { label: "B", text: "A public key and a private key" }, { label: "C", text: "No encryption" }], "B", "Asymmetric encryption uses a key pair: public for encrypting, private for decrypting."),
       generateTypingStep("AES Example", "Type an encryption standard!", "AES-256", "AES-256 is a strong symmetric encryption standard used worldwide.", "easy"),
+      generateTypingStep("Encryption Types", "Type both types!", "Symmetric: AES, DES, 3DES\nAsymmetric: RSA, ECC, DSA", "Know which algorithms belong to which type!", "medium"),
     ],
     "network-security-basics": [
       generateQuizStep("Firewall Purpose", "What does a firewall do?", [{ label: "A", text: "Speeds up internet" }, { label: "B", text: "Filters network traffic based on rules" }, { label: "C", text: "Stores passwords" }], "B", "Firewalls monitor and control incoming/outgoing traffic based on security rules."),
       generateQuizStep("IDS vs IPS", "What's the difference between IDS and IPS?", [{ label: "A", text: "IDS detects, IPS prevents" }, { label: "B", text: "They are the same" }, { label: "C", text: "IPS detects, IDS prevents" }], "A", "IDS (Intrusion Detection) alerts you; IPS (Intrusion Prevention) actively blocks threats."),
+      generateTypingStep("Firewall Rule", "Type a firewall rule!", "ALLOW TCP 443 INBOUND\nDENY ALL INBOUND DEFAULT", "Firewall rules specify which traffic to allow or block.", "medium"),
+    ],
+    "password-security": [
+      generateQuizStep("Password Strength", "What makes a strong password?", [{ label: "A", text: "12+ chars with uppercase, lowercase, numbers, symbols" }, { label: "B", text: "Your name and birthday" }, { label: "C", text: "The word 'password'" }], "A", "Strong passwords are long, complex, and unique to each account."),
+      generateTypingStep("Password Policy", "Type a password policy!", "Min 12 chars, uppercase, lowercase, number, symbol, no reuse of last 5", "Password policies enforce security standards across organizations.", "medium"),
+      generateQuizStep("MFA", "What does MFA add to authentication?", [{ label: "A", text: "A second factor: something you have, are, or know" }, { label: "B", text: "A longer password" }, { label: "C", text: "More complexity only" }], "A", "MFA requires multiple proof types: knowledge, possession, inherence."),
+    ],
+    "malware-types": [
+      generateQuizStep("Malware Types", "What is ransomware?", [{ label: "A", text: "Encrypts victim's files and demands payment for decryption" }, { label: "B", text: "Speeds up your computer" }, { label: "C", text: "A type of antivirus" }], "A", "Ransomware encrypts data and extorts victims for decryption keys."),
+      generateQuizStep("Trojan Horse", "How does a Trojan work?", [{ label: "A", text: "Disguises itself as legitimate software" }, { label: "B", text: "Self-replicates across networks" }, { label: "C", text: "Only affects mobile phones" }], "A", "Trojans appear harmless but carry hidden malicious payloads."),
+      generateTypingStep("Malware Types", "Type all malware categories!", "Virus, Worm, Trojan, Ransomware, Spyware, Adware, Rootkit", "Knowing malware types helps identify and respond to threats.", "medium"),
+    ],
+    "social-engineering": [
+      generateQuizStep("Social Engineering", "What is social engineering?", [{ label: "A", text: "Manipulating people into revealing confidential information" }, { label: "B", text: "Building social media apps" }, { label: "C", text: "Network engineering" }], "A", "Social engineering exploits human psychology rather than technical vulnerabilities."),
+      generateTypingStep("SE Techniques", "Type social engineering techniques!", "Phishing, Pretexting, Baiting, Tailgating, Quid Pro Quo", "These are the most common social engineering attack vectors.", "medium"),
+      generateQuizStep("Prevention", "Best defense against social engineering?", [{ label: "A", text: "Better firewalls" }, { label: "B", text: "Security awareness training for all employees" }, { label: "C", text: "Stronger encryption" }], "B", "People are the weakest link — training is the best defense against social engineering."),
     ],
   };
   return content[id] || null;
@@ -576,22 +627,32 @@ function generateAISteps(id: string, title: string, desc: string): LessonStep[] 
   const topicContent = getAIContent(id);
   if (topicContent) return topicContent;
 
+  // Enhanced fallback with 8 practical AI/DS drilling steps
   return [
     generateQuizStep(`${title} Fundamentals`, `What does ${title.toLowerCase()} involve?`,
       [{ label: "A", text: "Manual data entry" }, { label: "B", text: desc }, { label: "C", text: "Hardware assembly" }],
       "B", `${title}: ${desc}. This is a key concept in AI and data science.`, "easy"),
-    generateTypingStep(`${title} Code`, `Write code for ${title.toLowerCase()}!`,
-      `# ${title}\nprint("${desc}")`,
-      `Python is the primary language for ${title.toLowerCase()}.`, "easy"),
-    generateQuizStep(`${title} Applications`, `Where is ${title.toLowerCase()} applied?`,
-      [{ label: "A", text: "Only in academic research" }, { label: "B", text: "Data analysis, prediction, and automation" }, { label: "C", text: "Nowhere practical" }],
-      "B", `${title} has wide applications in industry, research, healthcare, finance, and more.`, "medium"),
-    generateQuizStep(`${title} Techniques`, `What technique is related to ${title.toLowerCase()}?`,
-      [{ label: "A", text: "Manual spreadsheet editing" }, { label: "B", text: "Print statements only" }, { label: "C", text: "Statistical modeling and pattern recognition" }],
-      "C", `${title} leverages statistical methods and algorithms to extract insights from data.`, "medium"),
+    generateTypingStep(`${title} Python Code`, `Write Python code for ${title.toLowerCase()}!`,
+      `import pandas as pd\nimport numpy as np\n\n# ${title}\nprint("${title}")`,
+      `Python with pandas and numpy is the foundation for ${title.toLowerCase()}.`, "easy"),
+    generateQuizStep(`${title} Pipeline`, `Where does ${title.toLowerCase()} fit in the data science pipeline?`,
+      [{ label: "A", text: "Only at the end" }, { label: "B", text: "Data collection → cleaning → analysis → modeling → evaluation" }, { label: "C", text: "It replaces the pipeline" }],
+      "B", `The data science pipeline is iterative: collect, clean, analyze, model, evaluate, deploy.`, "medium"),
+    generateTypingStep(`${title} Implementation`, `Type a practical implementation!`,
+      `# ${title}\ndata = pd.read_csv("data.csv")\nresult = data.describe()\nprint(result)`,
+      `Hands-on implementation builds the instinct for data analysis workflows.`, "medium"),
+    generateQuizStep(`${title} Metrics`, `How do you evaluate the success of ${title.toLowerCase()}?`,
+      [{ label: "A", text: "By guessing" }, { label: "B", text: "Using metrics: accuracy, precision, recall, F1-score, RMSE" }, { label: "C", text: "By running it once" }],
+      "B", `Evaluation metrics quantify model performance objectively.`, "medium"),
     generateQuizStep(`${title} Ethics`, `What ethical consideration applies to ${title.toLowerCase()}?`,
-      [{ label: "A", text: "No ethics needed" }, { label: "B", text: "Fairness, transparency, and accountability" }, { label: "C", text: "Only profit matters" }],
+      [{ label: "A", text: "No ethics needed" }, { label: "B", text: "Fairness, transparency, privacy, and accountability" }, { label: "C", text: "Only profit matters" }],
       "B", `Ethical AI requires fairness, transparency, and accountability in all applications.`, "medium"),
+    generateTypingStep(`${title} Visualization`, `Type code to visualize results!`,
+      `import matplotlib.pyplot as plt\nplt.plot(data)\nplt.title("${title}")\nplt.show()`,
+      `Visualization makes data insights accessible and actionable.`, "medium"),
+    generateQuizStep(`${title} Real-World`, `Name a real-world application of ${title.toLowerCase()}:`,
+      [{ label: "A", text: "It has no real applications" }, { label: "B", text: "Healthcare diagnosis, fraud detection, recommendation systems" }, { label: "C", text: "Only academic research" }],
+      "B", `${title} powers real applications across healthcare, finance, retail, and more.`, "hard"),
   ];
 }
 
@@ -601,24 +662,43 @@ function getAIContent(id: string): LessonStep[] | null {
       generateQuizStep("Linear Regression", "What does linear regression predict?", [{ label: "A", text: "Categories" }, { label: "B", text: "Continuous numerical values" }, { label: "C", text: "Images" }], "B", "Linear regression predicts continuous values by finding the best-fit line."),
       generateTypingStep("Regression Code", "Write regression in Python!", "model = LinearRegression()\nmodel.fit(X_train, y_train)", "fit() trains the model on your training data.", "medium"),
       generateQuizStep("R² Score", "What does R² = 0.85 mean?", [{ label: "A", text: "85% of variance is explained by the model" }, { label: "B", text: "85% accuracy" }, { label: "C", text: "85 data points" }], "A", "R² measures how much variance in the target is explained by the features."),
+      generateTypingStep("Predict", "Make predictions!", "predictions = model.predict(X_test)\nprint(predictions)", "After training, use predict() to generate outputs for new data.", "easy"),
     ],
     "neural-networks": [
       generateQuizStep("Neural Network", "What is a neural network inspired by?", [{ label: "A", text: "Computer circuits" }, { label: "B", text: "The human brain" }, { label: "C", text: "The internet" }], "B", "Neural networks are inspired by biological neurons in the human brain."),
       generateQuizStep("Layers", "What are the three types of layers?", [{ label: "A", text: "Input, hidden, output" }, { label: "B", text: "Top, middle, bottom" }, { label: "C", text: "Fast, medium, slow" }], "A", "Neural networks have input layers, one or more hidden layers, and an output layer."),
       generateTypingStep("Create Network", "Define a simple neural network!", "model = Sequential([\n  Dense(64, activation='relu'),\n  Dense(1)\n])", "Sequential models stack layers linearly.", "medium"),
+      generateTypingStep("Train Network", "Train the network!", "model.compile(optimizer='adam', loss='mse')\nmodel.fit(X_train, y_train, epochs=10)", "compile() sets the optimizer and loss, fit() trains the model.", "medium"),
     ],
     "decision-trees": [
       generateQuizStep("Decision Tree", "How does a decision tree make predictions?", [{ label: "A", text: "By splitting data on feature thresholds" }, { label: "B", text: "By random guessing" }, { label: "C", text: "By memorizing all data" }], "A", "Decision trees split data at each node based on the feature that best separates the classes."),
       generateQuizStep("Overfitting", "What causes overfitting in decision trees?", [{ label: "A", text: "Too few nodes" }, { label: "B", text: "Tree is too deep/complex" }, { label: "C", text: "Too much data" }], "B", "Deep trees memorize training data instead of learning general patterns."),
+      generateTypingStep("Decision Tree Code", "Create a decision tree!", "from sklearn.tree import DecisionTreeClassifier\nclf = DecisionTreeClassifier(max_depth=5)\nclf.fit(X_train, y_train)", "max_depth limits tree complexity to prevent overfitting.", "medium"),
     ],
     "kmeans": [
       generateQuizStep("K-Means", "What does K-Means do?", [{ label: "A", text: "Groups data into K clusters" }, { label: "B", text: "Predicts labels" }, { label: "C", text: "Removes outliers" }], "A", "K-Means partitions data into K clusters based on distance to centroids."),
       generateTypingStep("K-Means Code", "Create K-Means clusters!", "kmeans = KMeans(n_clusters=3)\nkmeans.fit(data)", "n_clusters specifies how many groups to create.", "medium"),
+      generateTypingStep("K-Means Predict", "Assign clusters!", "labels = kmeans.predict(new_data)\ncenters = kmeans.cluster_centers_", "predict() assigns new data to the nearest cluster center.", "medium"),
     ],
     "prompt-engineering": [
       generateQuizStep("Prompt Engineering", "What is prompt engineering?", [{ label: "A", text: "Building hardware" }, { label: "B", text: "Crafting effective inputs for AI models" }, { label: "C", text: "Writing unit tests" }], "B", "Prompt engineering is the art of writing effective prompts to get better AI outputs."),
       generateTypingStep("System Prompt", "Write a system prompt!", 'You are a helpful coding tutor. Explain concepts simply.', "System prompts set the AI's behavior and personality.", "easy"),
       generateQuizStep("Few-Shot", "What is few-shot prompting?", [{ label: "A", text: "Giving examples in the prompt" }, { label: "B", text: "Using less data" }, { label: "C", text: "Running fewer iterations" }], "A", "Few-shot prompting includes examples to guide the AI's response format."),
+      generateTypingStep("Few-Shot Example", "Type a few-shot prompt!", 'Input: happy -> Output: positive\nInput: sad -> Output: negative\nInput: excited -> Output:', "Providing examples teaches the model the expected pattern.", "medium"),
+    ],
+    "data-cleaning": [
+      generateQuizStep("Data Cleaning", "Why is data cleaning important?", [{ label: "A", text: "Garbage in = garbage out" }, { label: "B", text: "It makes data larger" }, { label: "C", text: "It's optional" }], "A", "Dirty data leads to inaccurate models. Cleaning is 80% of a data scientist's work."),
+      generateTypingStep("Handle Missing Data", "Clean missing values!", "df.dropna()\ndf.fillna(df.mean())\ndf.isnull().sum()", "dropna() removes missing rows, fillna() replaces them.", "medium"),
+      generateTypingStep("Remove Duplicates", "Remove duplicate rows!", "df = df.drop_duplicates()\nprint(f'Rows: {len(df)}')", "Duplicate data skews analysis. Always check for and remove duplicates.", "easy"),
+    ],
+    "pandas-basics": [
+      generateTypingStep("Create DataFrame", "Create a pandas DataFrame!", "import pandas as pd\ndf = pd.DataFrame({'name': ['Alice', 'Bob'], 'age': [25, 30]})", "DataFrames are the core data structure in pandas.", "easy"),
+      generateTypingStep("Select Columns", "Select and filter data!", "names = df['name']\nadults = df[df['age'] >= 18]", "Use [] for column selection and boolean indexing for filtering.", "medium"),
+      generateQuizStep("GroupBy", "What does groupby() do?", [{ label: "A", text: "Groups data by a column and applies aggregate functions" }, { label: "B", text: "Sorts the data" }, { label: "C", text: "Deletes groups" }], "A", "groupby() splits data into groups for aggregation: df.groupby('category').mean()"),
+    ],
+    "numpy-basics": [
+      generateTypingStep("NumPy Array", "Create a NumPy array!", "import numpy as np\narr = np.array([1, 2, 3, 4, 5])\nprint(arr.mean(), arr.std())", "NumPy provides fast numerical operations on arrays.", "easy"),
+      generateQuizStep("NumPy vs Lists", "Why use NumPy over Python lists?", [{ label: "A", text: "Faster mathematical operations and broadcasting" }, { label: "B", text: "More readable" }, { label: "C", text: "They are the same" }], "A", "NumPy is 10-100x faster than lists for numerical operations due to C implementation."),
     ],
   };
   return content[id] || null;
@@ -629,22 +709,29 @@ function generateBusinessSteps(id: string, title: string, desc: string): LessonS
   const topicContent = getBusinessContent(id);
   if (topicContent) return topicContent;
 
+  // Enhanced fallback with 7 practical business drilling steps
   return [
     generateQuizStep(`${title} Overview`, `What is ${title.toLowerCase()}?`,
       [{ label: "A", text: "A hardware component" }, { label: "B", text: desc }, { label: "C", text: "A programming language" }],
       "B", `${title}: ${desc}. This is important for modern business information systems.`, "easy"),
-    generateTypingStep(`${title} Concept`, `Type a key concept!`,
-      `// ${title}: ${desc}`,
-      `${title} is a fundamental business systems concept.`, "easy"),
+    generateTypingStep(`${title} Definition`, `Type the definition!`,
+      `${title}: ${desc}`,
+      `Accurate definitions are essential for business communications and exams.`, "easy"),
     generateQuizStep(`${title} Business Value`, `How does ${title.toLowerCase()} add business value?`,
       [{ label: "A", text: "Only increases costs" }, { label: "B", text: "Improves efficiency, decision-making, and competitive advantage" }, { label: "C", text: "Has no business impact" }],
       "B", `${title} drives business value through improved efficiency and informed decision-making.`, "medium"),
+    generateTypingStep(`${title} Use Case`, `Type a real-world use case!`,
+      `Use Case: ${title}\nBusiness: Retail company\nBenefit: Improved ${desc.toLowerCase()}\nROI: Measurable improvement in efficiency`,
+      `Connecting theory to practice makes concepts stick.`, "medium"),
     generateQuizStep(`${title} Implementation`, `What is key to implementing ${title.toLowerCase()}?`,
       [{ label: "A", text: "Just install software" }, { label: "B", text: "Strategic planning, stakeholder buy-in, and change management" }, { label: "C", text: "Ignore user requirements" }],
       "B", `Successful implementation requires careful planning, stakeholder engagement, and proper change management.`, "medium"),
+    generateQuizStep(`${title} Risks`, `What risk is associated with ${title.toLowerCase()}?`,
+      [{ label: "A", text: "No risks exist" }, { label: "B", text: "Poor adoption, data migration issues, and resistance to change" }, { label: "C", text: "Only financial risk" }],
+      "B", `Common risks include poor user adoption, data quality issues, and organizational resistance.`, "hard"),
     generateQuizStep(`${title} Trends`, `What current trend relates to ${title.toLowerCase()}?`,
-      [{ label: "A", text: "Returning to paper-based systems" }, { label: "B", text: "Cloud computing, automation, and digital transformation" }, { label: "C", text: "Removing all technology" }],
-      "B", `Modern trends like cloud computing and digital transformation heavily influence ${title.toLowerCase()}.`, "medium"),
+      [{ label: "A", text: "Returning to paper-based systems" }, { label: "B", text: "Cloud computing, AI automation, and digital transformation" }, { label: "C", text: "Removing all technology" }],
+      "B", `Modern trends like cloud computing and AI heavily influence ${title.toLowerCase()}.`, "medium"),
   ];
 }
 
@@ -659,46 +746,17 @@ function getBusinessContent(id: string): LessonStep[] | null {
       generateQuizStep("TPS", "What does a Transaction Processing System do?", [{ label: "A", text: "Records routine business transactions" }, { label: "B", text: "Makes strategic decisions" }, { label: "C", text: "Designs websites" }], "A", "TPS handles high-volume, routine transactions like sales, payroll, and inventory."),
       generateQuizStep("MIS vs DSS", "How does MIS differ from DSS?", [{ label: "A", text: "MIS provides standard reports; DSS supports ad-hoc analysis" }, { label: "B", text: "They are identical" }, { label: "C", text: "DSS replaces MIS" }], "A", "MIS generates routine reports while DSS supports interactive, ad-hoc decision analysis."),
       generateQuizStep("EIS Purpose", "Who uses Executive Information Systems?", [{ label: "A", text: "Junior staff only" }, { label: "B", text: "Senior management for strategic decisions" }, { label: "C", text: "Customers" }], "B", "EIS provides senior executives with dashboards and KPIs for strategic decision-making."),
+      generateTypingStep("IS Hierarchy", "Type the IS hierarchy!", "TPS -> MIS -> DSS -> EIS", "From operational (TPS) to strategic (EIS) — each level serves different management needs.", "easy"),
     ],
     "erp-systems": [
       generateQuizStep("ERP Definition", "What is ERP?", [{ label: "A", text: "An integrated system managing core business processes" }, { label: "B", text: "An email provider" }, { label: "C", text: "A social media platform" }], "A", "ERP integrates finance, HR, manufacturing, supply chain, and more into one system."),
-      generateQuizStep("ERP Benefits", "What is a key benefit of ERP?", [{ label: "A", text: "Single source of truth across departments" }, { label: "B", text: "Cheaper internet" }, { label: "C", text: "Faster email" }], "A", "ERP eliminates data silos by providing one integrated database for all departments."),
-      generateTypingStep("ERP Modules", "List common ERP modules!", "Finance, HR, Manufacturing, Supply Chain, CRM", "ERP systems typically include modules for each major business function.", "easy"),
-      generateQuizStep("ERP Vendors", "Which are major ERP vendors?", [{ label: "A", text: "SAP, Oracle, Microsoft Dynamics" }, { label: "B", text: "Instagram, Twitter" }, { label: "C", text: "Windows, macOS" }], "A", "SAP, Oracle, and Microsoft Dynamics are the top enterprise ERP providers."),
-    ],
-    "e-commerce": [
-      generateQuizStep("E-Commerce Models", "What does B2C mean?", [{ label: "A", text: "Business-to-Consumer" }, { label: "B", text: "Bytes-to-Code" }, { label: "C", text: "Back-to-Cloud" }], "A", "B2C is when businesses sell directly to individual consumers, like Amazon or Shopify stores."),
-      generateQuizStep("B2B vs B2C", "How does B2B differ from B2C?", [{ label: "A", text: "B2B sells to other businesses; B2C sells to individuals" }, { label: "B", text: "B2B is always cheaper" }, { label: "C", text: "They are the same" }], "A", "B2B involves business-to-business transactions, often with larger order values and longer sales cycles."),
-      generateTypingStep("E-Commerce Model", "Type the e-commerce models!", "B2B, B2C, C2C, C2B", "The four main models: Business-to-Business, Business-to-Consumer, Consumer-to-Consumer, Consumer-to-Business.", "easy"),
-    ],
-    "cloud-computing": [
-      generateQuizStep("Cloud Definition", "What is cloud computing?", [{ label: "A", text: "On-demand delivery of computing resources over the internet" }, { label: "B", text: "Storing files on a USB drive" }, { label: "C", text: "A type of weather system" }], "A", "Cloud computing provides on-demand access to servers, storage, databases, and applications via the internet."),
-      generateQuizStep("Cloud Models", "What are IaaS, PaaS, SaaS?", [{ label: "A", text: "Infrastructure, Platform, Software as a Service" }, { label: "B", text: "Internet, Phone, System as a Service" }, { label: "C", text: "Types of programming languages" }], "A", "IaaS provides virtual machines, PaaS provides development platforms, SaaS provides ready-to-use applications."),
-      generateTypingStep("Cloud Providers", "Name the big 3 cloud providers!", "AWS, Microsoft Azure, Google Cloud Platform", "These three providers dominate the cloud market with 60%+ market share.", "easy"),
-    ],
-    "cloud-models": [
-      generateQuizStep("IaaS Examples", "Which is an IaaS example?", [{ label: "A", text: "AWS EC2 — virtual machines you configure" }, { label: "B", text: "Gmail" }, { label: "C", text: "Slack" }], "A", "IaaS provides raw computing infrastructure — you manage OS, middleware, and applications."),
-      generateQuizStep("SaaS Examples", "Which is a SaaS application?", [{ label: "A", text: "Google Docs — ready-to-use software" }, { label: "B", text: "A physical server" }, { label: "C", text: "Linux kernel" }], "A", "SaaS delivers complete applications over the internet — no installation needed."),
-    ],
-    "data-management": [
-      generateQuizStep("Data vs Information", "How does data differ from information?", [{ label: "A", text: "Data is raw facts; information is processed, meaningful data" }, { label: "B", text: "They are identical" }, { label: "C", text: "Information comes before data" }], "A", "Data becomes information when it is organized, processed, and given context."),
-      generateQuizStep("Data Quality", "What makes data high quality?", [{ label: "A", text: "Accurate, complete, consistent, timely" }, { label: "B", text: "Large file size" }, { label: "C", text: "Stored on expensive hardware" }], "A", "Data quality is measured by accuracy, completeness, consistency, and timeliness."),
-    ],
-    "project-management": [
-      generateQuizStep("Triple Constraint", "What is the project management triple constraint?", [{ label: "A", text: "Scope, time, cost (and quality)" }, { label: "B", text: "Speed, size, strength" }, { label: "C", text: "Code, test, deploy" }], "A", "The triple constraint balances scope, time, and cost — changing one affects the others."),
-      generateQuizStep("Project Lifecycle", "What are the PM phases?", [{ label: "A", text: "Initiation, planning, execution, monitoring, closing" }, { label: "B", text: "Just coding and testing" }, { label: "C", text: "Design and deployment only" }], "A", "Projects follow a lifecycle from initiation through planning, execution, monitoring, to closure."),
-    ],
-    "blockchain": [
-      generateQuizStep("Blockchain Basics", "What is a blockchain?", [{ label: "A", text: "A distributed, immutable ledger of transactions" }, { label: "B", text: "A type of database backup" }, { label: "C", text: "An encryption algorithm" }], "A", "Blockchain is a chain of blocks, each containing transactions, linked by cryptographic hashes."),
-      generateQuizStep("Decentralization", "Why is blockchain decentralized?", [{ label: "A", text: "No single authority controls it — copies exist on many nodes" }, { label: "B", text: "It only runs on one server" }, { label: "C", text: "It requires internet" }], "A", "Decentralization means no single point of failure and no single point of control."),
-    ],
-    "is-strategy": [
-      generateQuizStep("Strategic Alignment", "What is IS strategic alignment?", [{ label: "A", text: "Ensuring IT investments support business goals" }, { label: "B", text: "Buying the latest hardware" }, { label: "C", text: "Hiring more developers" }], "A", "Strategic alignment ensures technology decisions directly support business objectives."),
-      generateQuizStep("Competitive Advantage", "How can IS provide competitive advantage?", [{ label: "A", text: "Through innovation, efficiency, and better customer service" }, { label: "B", text: "By spending more money" }, { label: "C", text: "Only through cost cutting" }], "A", "IS creates competitive advantage through process efficiency, innovation, and enhanced customer experience."),
+      generateQuizStep("ERP Benefits", "What is a key ERP benefit?", [{ label: "A", text: "Single source of truth across the organization" }, { label: "B", text: "Free software" }, { label: "C", text: "No training needed" }], "A", "ERP eliminates data silos by providing one integrated database for all departments."),
+      generateTypingStep("ERP Vendors", "Type major ERP vendors!", "SAP, Oracle, Microsoft Dynamics, Salesforce", "These are the leading ERP platforms used by enterprises worldwide.", "easy"),
     ],
     "crm-basics": [
       generateQuizStep("CRM Purpose", "What is the purpose of CRM?", [{ label: "A", text: "Managing interactions and relationships with customers" }, { label: "B", text: "Writing code" }, { label: "C", text: "Network administration" }], "A", "CRM systems track customer interactions across sales, marketing, and service touchpoints."),
       generateQuizStep("CRM Benefits", "What benefit does CRM provide?", [{ label: "A", text: "360-degree view of customers, improved retention" }, { label: "B", text: "Faster internet" }, { label: "C", text: "Free software" }], "A", "CRM gives a complete customer view, improving personalization and retention rates."),
+      generateTypingStep("CRM Tools", "Type CRM platforms!", "Salesforce, HubSpot, Zoho CRM, Microsoft Dynamics", "These platforms help businesses manage customer relationships effectively.", "easy"),
     ],
     "digital-transformation": [
       generateQuizStep("Digital Transformation", "What is digital transformation?", [{ label: "A", text: "Fundamentally changing business operations using digital technology" }, { label: "B", text: "Buying a new computer" }, { label: "C", text: "Creating a website" }], "A", "Digital transformation reimagines how a business operates and delivers value using technology."),
@@ -707,6 +765,23 @@ function getBusinessContent(id: string): LessonStep[] | null {
     "big-data": [
       generateQuizStep("5 Vs of Big Data", "What are the 5 Vs of Big Data?", [{ label: "A", text: "Volume, Velocity, Variety, Veracity, Value" }, { label: "B", text: "Variables, Values, Vectors, Views, Versions" }, { label: "C", text: "Virtual, Visual, Vocal, Vital, Valid" }], "A", "The 5 Vs define big data: Volume (size), Velocity (speed), Variety (types), Veracity (accuracy), Value (usefulness)."),
       generateTypingStep("Big Data Tools", "Name big data technologies!", "Hadoop, Spark, Kafka, MongoDB", "These technologies process and store massive datasets that traditional databases can't handle.", "medium"),
+      generateTypingStep("5 Vs Drill", "Type the 5 Vs!", "Volume, Velocity, Variety, Veracity, Value", "Memorize these — they come up in every data science interview!", "easy"),
+    ],
+    "seo-fundamentals": [
+      generateQuizStep("SEO Purpose", "What is SEO?", [{ label: "A", text: "Optimizing websites to rank higher in search engine results" }, { label: "B", text: "Paying for ads" }, { label: "C", text: "Social media marketing" }], "A", "SEO improves organic (unpaid) visibility in search engines like Google."),
+      generateTypingStep("Meta Tags", "Write SEO meta tags!", '<meta name="description" content="Learn coding with interactive games">\n<title>CodeQuest - Learn Programming</title>', "Title and meta description are critical for search engine rankings.", "medium"),
+      generateQuizStep("On-Page SEO", "Which is an on-page SEO factor?", [{ label: "A", text: "Title tags, headings, content quality, internal links" }, { label: "B", text: "Social media followers" }, { label: "C", text: "Server location" }], "A", "On-page SEO includes content, HTML tags, images, and internal linking."),
+      generateTypingStep("SEO Checklist", "Type an SEO audit checklist!", "1. Title tag < 60 chars\n2. Meta description < 160 chars\n3. One H1 per page\n4. Alt text on images\n5. Mobile responsive", "Following this checklist ensures basic SEO compliance.", "medium"),
+    ],
+    "digital-marketing": [
+      generateQuizStep("Digital Marketing Channels", "Which is a digital marketing channel?", [{ label: "A", text: "SEO, PPC, social media, email, content marketing" }, { label: "B", text: "Newspaper only" }, { label: "C", text: "Radio only" }], "A", "Digital marketing uses online channels to reach and engage target audiences."),
+      generateTypingStep("Marketing Funnel", "Type the marketing funnel stages!", "Awareness -> Interest -> Consideration -> Conversion -> Retention", "The funnel guides prospects from discovery to loyal customer.", "medium"),
+      generateQuizStep("KPIs", "What KPI measures email marketing success?", [{ label: "A", text: "Open rate, click-through rate, conversion rate" }, { label: "B", text: "Number of emails sent" }, { label: "C", text: "Email server uptime" }], "A", "Open rate, CTR, and conversion rate measure email campaign effectiveness."),
+    ],
+    "keyword-research": [
+      generateQuizStep("Keyword Research", "What is keyword research?", [{ label: "A", text: "Finding terms people search for to target with content" }, { label: "B", text: "Choosing programming keywords" }, { label: "C", text: "Database indexing" }], "A", "Keyword research identifies search terms to create content that matches user intent."),
+      generateTypingStep("Keyword Types", "Type keyword types!", "Short-tail: broad, high volume (e.g., 'shoes')\nLong-tail: specific, lower volume (e.g., 'best running shoes for flat feet')", "Long-tail keywords are easier to rank for and convert better.", "medium"),
+      generateQuizStep("Search Intent", "What are the four types of search intent?", [{ label: "A", text: "Informational, navigational, transactional, commercial" }, { label: "B", text: "Fast, slow, medium, none" }, { label: "C", text: "Text, image, video, audio" }], "A", "Understanding intent helps create content that matches what users actually want."),
     ],
   };
   return content[id] || null;
@@ -717,19 +792,29 @@ function generateGameDevSteps(id: string, title: string, desc: string): LessonSt
   const topicContent = getGameDevContent(id);
   if (topicContent) return topicContent;
 
+  // Enhanced fallback with 7 practical game dev drilling steps
   return [
     generateQuizStep(`${title} Basics`, `What does ${title.toLowerCase()} involve?`,
       [{ label: "A", text: "Database management" }, { label: "B", text: desc }, { label: "C", text: "Network administration" }],
       "B", `${title}: ${desc}. This is a core game development concept.`, "easy"),
-    generateTypingStep(`${title} Code`, `Write game dev code!`,
-      `// ${title}\n// ${desc}`,
-      `This concept is used in game engines like Unity and Unreal.`, "easy"),
+    generateTypingStep(`${title} Code`, `Write game dev code for ${title.toLowerCase()}!`,
+      `// ${title}\nfunction update(deltaTime) {\n  // ${desc}\n}`,
+      `Game code runs in a loop — update() is called every frame.`, "easy"),
     generateQuizStep(`${title} in Engines`, `How is ${title.toLowerCase()} used in game engines?`,
       [{ label: "A", text: "It's never used in games" }, { label: "B", text: "It's a fundamental building block of game systems" }, { label: "C", text: "Only in 2D games" }],
       "B", `${title} is fundamental to how modern game engines create interactive experiences.`, "medium"),
-    generateQuizStep(`${title} Design`, `What design principle relates to ${title.toLowerCase()}?`,
-      [{ label: "A", text: "Making games slower" }, { label: "B", text: "Performance optimization and player experience" }, { label: "C", text: "Ignoring frame rate" }],
-      "B", `Good game design balances ${title.toLowerCase()} with performance and player experience.`, "medium"),
+    generateTypingStep(`${title} Implementation`, `Type a practical implementation!`,
+      `class ${title.replace(/\s+/g, '')} {\n  constructor() {\n    this.active = true;\n  }\n  update(dt) {\n    // ${desc}\n  }\n}`,
+      `Object-oriented patterns are the backbone of game architecture.`, "medium"),
+    generateQuizStep(`${title} Performance`, `What performance consideration relates to ${title.toLowerCase()}?`,
+      [{ label: "A", text: "Performance doesn't matter in games" }, { label: "B", text: "Must run at 60fps — optimize for frame budget of 16.67ms" }, { label: "C", text: "Only matters on console" }],
+      "B", `Games must maintain 60fps. Every system must fit within the 16.67ms frame budget.`, "hard"),
+    generateQuizStep(`${title} Design Pattern`, `Which design pattern is commonly used for ${title.toLowerCase()}?`,
+      [{ label: "A", text: "No patterns are used" }, { label: "B", text: "Component, Observer, State, or Command pattern" }, { label: "C", text: "Singleton only" }],
+      "B", `Game development relies heavily on design patterns for clean, maintainable architecture.`, "medium"),
+    generateTypingStep(`${title} Debug`, `Type debug code for ${title.toLowerCase()}!`,
+      `// Debug ${title}\nconsole.log("${title} state:", this.active);\nconsole.log("FPS:", 1/deltaTime);`,
+      `Debugging is essential — always log state and performance metrics during development.`, "easy"),
   ];
 }
 
@@ -739,10 +824,28 @@ function getGameDevContent(id: string): LessonStep[] | null {
       generateQuizStep("Game Loop", "What is the game loop?", [{ label: "A", text: "The continuous cycle of input, update, render" }, { label: "B", text: "A type of for loop" }, { label: "C", text: "A loading screen" }], "A", "The game loop continuously processes input, updates game state, and renders frames."),
       generateTypingStep("Game Loop Code", "Write a basic game loop!", "while (running) {\n  processInput();\n  update(deltaTime);\n  render();\n}", "The game loop runs every frame — typically 60 times per second.", "medium"),
       generateQuizStep("Delta Time", "Why use delta time?", [{ label: "A", text: "To make movement frame-rate independent" }, { label: "B", text: "To count frames" }, { label: "C", text: "To slow down the game" }], "A", "Delta time ensures consistent movement speed regardless of frame rate."),
+      generateTypingStep("Delta Time Code", "Use delta time in movement!", "position.x += velocity.x * deltaTime;\nposition.y += velocity.y * deltaTime;", "Multiplying by deltaTime makes movement smooth on any hardware.", "medium"),
     ],
     "collision-detection": [
       generateQuizStep("AABB Collision", "What is AABB collision detection?", [{ label: "A", text: "Axis-Aligned Bounding Box — rectangle overlap check" }, { label: "B", text: "A sound effect" }, { label: "C", text: "A rendering technique" }], "A", "AABB checks if two rectangles overlap by comparing their edges."),
-      generateTypingStep("Collision Check", "Write a collision check!", "if (a.x < b.x + b.w && a.x + a.w > b.x) {\n  // collision!\n}", "AABB checks both X and Y axis overlap.", "medium"),
+      generateTypingStep("Collision Check", "Write a collision check!", "if (a.x < b.x + b.w && a.x + a.w > b.x &&\n    a.y < b.y + b.h && a.y + a.h > b.y) {\n  // collision!\n}", "AABB checks both X and Y axis overlap.", "medium"),
+      generateTypingStep("Collision Drill", "Type collision check again!", "if (a.x < b.x + b.w && a.x + a.w > b.x &&\n    a.y < b.y + b.h && a.y + a.h > b.y) {\n  handleCollision(a, b);\n}", "Repetition builds muscle memory for this common pattern!", "medium"),
+    ],
+    "sprite-animation": [
+      generateQuizStep("Sprite Sheet", "What is a sprite sheet?", [{ label: "A", text: "A single image containing multiple animation frames" }, { label: "B", text: "A spreadsheet for game data" }, { label: "C", text: "A 3D model" }], "A", "Sprite sheets combine all animation frames into one image for efficient rendering."),
+      generateTypingStep("Animation Code", "Animate a sprite!", "frameTimer += deltaTime;\nif (frameTimer >= frameRate) {\n  currentFrame = (currentFrame + 1) % totalFrames;\n  frameTimer = 0;\n}", "Frame-based animation cycles through sprite sheet regions.", "medium"),
+    ],
+    "physics-basics": [
+      generateQuizStep("Game Physics", "What is gravity in game physics?", [{ label: "A", text: "A constant downward acceleration applied each frame" }, { label: "B", text: "A visual effect" }, { label: "C", text: "A sound effect" }], "A", "Gravity is typically velocity.y += gravity * deltaTime each frame."),
+      generateTypingStep("Apply Gravity", "Code gravity!", "velocity.y += gravity * deltaTime;\nposition.y += velocity.y * deltaTime;\nif (position.y >= ground) {\n  position.y = ground;\n  velocity.y = 0;\n}", "Check ground collision to prevent falling through the floor.", "medium"),
+    ],
+    "input-handling": [
+      generateTypingStep("Keyboard Input", "Handle keyboard input!", "document.addEventListener('keydown', (e) => {\n  if (e.key === 'ArrowLeft') moveLeft();\n  if (e.key === 'ArrowRight') moveRight();\n  if (e.key === ' ') jump();\n});", "Event-based input handling responds to player actions.", "easy"),
+      generateQuizStep("Input Polling vs Events", "What is input polling?", [{ label: "A", text: "Checking input state every frame in the game loop" }, { label: "B", text: "Waiting for events" }, { label: "C", text: "Ignoring input" }], "A", "Polling checks key states each frame for responsive controls; events handle discrete actions."),
+    ],
+    "state-machines": [
+      generateQuizStep("Game States", "What is a finite state machine in games?", [{ label: "A", text: "A pattern where entities have defined states with transitions" }, { label: "B", text: "A random behavior system" }, { label: "C", text: "A rendering pipeline" }], "A", "FSMs manage game states: Menu → Playing → Paused → GameOver."),
+      generateTypingStep("State Machine", "Code a state machine!", "switch (gameState) {\n  case 'menu': showMenu(); break;\n  case 'playing': update(); render(); break;\n  case 'paused': showPause(); break;\n  case 'gameover': showResults(); break;\n}", "State machines keep game logic organized and predictable.", "medium"),
     ],
   };
   return content[id] || null;
@@ -753,19 +856,29 @@ function generateComputerSystemsSteps(id: string, title: string, desc: string): 
   const topicContent = getComputerSystemsContent(id);
   if (topicContent) return topicContent;
 
+  // Enhanced fallback with 7 intensive hardware/systems drilling steps
   return [
     generateQuizStep(`${title} Fundamentals`, `What is ${title.toLowerCase()}?`,
       [{ label: "A", text: "A type of software application" }, { label: "B", text: desc }, { label: "C", text: "A programming methodology" }],
       "B", `${title}: ${desc}. Understanding this is essential for computer systems knowledge.`, "easy"),
-    generateTypingStep(`${title} Note`, `Type a key fact!`,
-      `// ${title}: ${desc}`,
-      `This is a fundamental computer systems concept.`, "easy"),
+    generateTypingStep(`${title} Key Fact`, `Type the key fact about ${title.toLowerCase()}!`,
+      `${title}: ${desc}`,
+      `Being able to state this from memory demonstrates understanding.`, "easy"),
     generateQuizStep(`${title} Components`, `What component relates to ${title.toLowerCase()}?`,
-      [{ label: "A", text: "Only web browsers" }, { label: "B", text: "Hardware and system architecture" }, { label: "C", text: "Social media platforms" }],
+      [{ label: "A", text: "Only web browsers" }, { label: "B", text: "Hardware components and system architecture" }, { label: "C", text: "Social media platforms" }],
       "B", `${title} is closely related to hardware components and system architecture.`, "medium"),
+    generateTypingStep(`${title} Technical Detail`, `Type a technical specification!`,
+      `Component: ${title}\nFunction: ${desc}\nLayer: Hardware/System`,
+      `Technical specifications help you communicate precisely about systems.`, "medium"),
     generateQuizStep(`${title} in Practice`, `How is ${title.toLowerCase()} applied in real systems?`,
       [{ label: "A", text: "Only in theory" }, { label: "B", text: "In system design, troubleshooting, and optimization" }, { label: "C", text: "Never in practice" }],
       "B", `Understanding ${title.toLowerCase()} helps with system design, diagnostics, and performance optimization.`, "medium"),
+    generateQuizStep(`${title} Troubleshooting`, `A system with ${title.toLowerCase()} issues shows symptoms. What do you do?`,
+      [{ label: "A", text: "Replace everything" }, { label: "B", text: "Isolate the problem, test systematically, apply the fix" }, { label: "C", text: "Ignore it" }],
+      "B", `Systematic troubleshooting: isolate → test → fix → verify. This approach works for all systems.`, "hard"),
+    generateTypingStep(`${title} Summary`, `Type the one-line summary!`,
+      `${title} is essential for ${desc.toLowerCase()}.`,
+      `You should now be able to explain this to anyone!`, "easy"),
   ];
 }
 
@@ -775,35 +888,53 @@ function getComputerSystemsContent(id: string): LessonStep[] | null {
       generateQuizStep("CPU Components", "What are the main CPU components?", [{ label: "A", text: "ALU, Control Unit, Registers" }, { label: "B", text: "Monitor, keyboard, mouse" }, { label: "C", text: "RAM, ROM, Cache" }], "A", "The CPU contains the ALU (arithmetic), Control Unit (coordination), and Registers (fast storage)."),
       generateQuizStep("ALU Function", "What does the ALU do?", [{ label: "A", text: "Stores data permanently" }, { label: "B", text: "Performs arithmetic and logical operations" }, { label: "C", text: "Displays graphics" }], "B", "The Arithmetic Logic Unit performs calculations and comparisons."),
       generateTypingStep("CPU Registers", "Name CPU registers!", "ACC, PC, MAR, MDR, CIR", "Key registers: Accumulator, Program Counter, Memory Address/Data Registers.", "medium"),
+      generateTypingStep("Register Functions", "Type register functions!", "ACC: stores calculation results\nPC: holds next instruction address\nMAR: holds memory address to access\nMDR: holds data being transferred", "Each register has a specific role in the fetch-decode-execute cycle.", "medium"),
     ],
     "instruction-cycle": [
       generateQuizStep("FDE Cycle", "What are the stages of the instruction cycle?", [{ label: "A", text: "Fetch, Decode, Execute" }, { label: "B", text: "Read, Write, Delete" }, { label: "C", text: "Input, Process, Output" }], "A", "The CPU continuously fetches instructions, decodes them, and executes them."),
       generateQuizStep("Fetch Stage", "What happens during fetch?", [{ label: "A", text: "The instruction is read from memory into the CPU" }, { label: "B", text: "The result is displayed" }, { label: "C", text: "Data is saved to disk" }], "A", "During fetch, the instruction at the address in the Program Counter is loaded."),
+      generateTypingStep("FDE Steps", "Type the FDE cycle steps!", "FETCH: PC -> MAR -> Memory -> MDR -> CIR, PC+1\nDECODE: CIR decoded by Control Unit\nEXECUTE: ALU performs operation", "Understanding FDE at register level is essential for computer science.", "hard"),
     ],
     "lmc-intro": [
       generateQuizStep("LMC Model", "What is the Little Man Computer?", [{ label: "A", text: "A simplified model of how a CPU works" }, { label: "B", text: "A small laptop" }, { label: "C", text: "A mobile app" }], "A", "The LMC is an educational model that simulates basic CPU operations."),
       generateQuizStep("LMC Mailboxes", "How many mailboxes does the LMC have?", [{ label: "A", text: "10" }, { label: "B", text: "100 (00-99)" }, { label: "C", text: "1000" }], "B", "The LMC has 100 mailboxes (memory locations) numbered 00 to 99."),
       generateTypingStep("LMC Add", "Write LMC instructions!", "INP\nSTA 99\nINP\nADD 99\nOUT\nHLT", "This LMC program adds two inputs together and outputs the result.", "medium"),
+      generateTypingStep("LMC Drill", "Type it again from memory!", "INP\nSTA 99\nINP\nADD 99\nOUT\nHLT", "Repetition makes LMC programming automatic. You should know this pattern!", "medium"),
     ],
     "lmc-instructions": [
       generateQuizStep("LMC Instructions", "What does STA do in LMC?", [{ label: "A", text: "Stores the accumulator value in a mailbox" }, { label: "B", text: "Starts the program" }, { label: "C", text: "Stops execution" }], "A", "STA (Store) copies the accumulator's value to the specified mailbox."),
       generateQuizStep("LDA Instruction", "What does LDA do?", [{ label: "A", text: "Loads a value from a mailbox into the accumulator" }, { label: "B", text: "Loads a program" }, { label: "C", text: "Loops the program" }], "A", "LDA (Load) copies a mailbox's value into the accumulator."),
       generateTypingStep("LMC Program", "Write a subtraction program!", "INP\nSTA 99\nINP\nSUB 99\nOUT\nHLT", "This program subtracts the first input from the second.", "medium"),
+      generateTypingStep("LMC Instructions", "Type all LMC instructions!", "INP: Input\nOUT: Output\nSTA: Store\nLDA: Load\nADD: Add\nSUB: Subtract\nBRA: Branch Always\nBRZ: Branch if Zero\nBRP: Branch if Positive\nHLT: Halt", "Memorize all 10 LMC instructions — they're the building blocks!", "hard"),
     ],
     "osi-model": [
       generateQuizStep("OSI Layers", "How many layers does the OSI model have?", [{ label: "A", text: "4" }, { label: "B", text: "7" }, { label: "C", text: "5" }], "B", "The OSI model has 7 layers: Physical, Data Link, Network, Transport, Session, Presentation, Application."),
       generateTypingStep("OSI Mnemonic", "Type the OSI layers mnemonic!", "Please Do Not Throw Sausage Pizza Away", "This mnemonic helps remember: Physical, Data Link, Network, Transport, Session, Presentation, Application.", "easy"),
       generateQuizStep("Layer 3", "What does the Network layer handle?", [{ label: "A", text: "Physical cabling" }, { label: "B", text: "Routing and IP addressing" }, { label: "C", text: "Application protocols" }], "B", "Layer 3 (Network) handles logical addressing and routing between networks."),
+      generateTypingStep("OSI Layers Drill", "Type all 7 layers!", "7. Application\n6. Presentation\n5. Session\n4. Transport\n3. Network\n2. Data Link\n1. Physical", "Know these backwards and forwards!", "medium"),
+      generateQuizStep("Layer 4", "What does the Transport layer provide?", [{ label: "A", text: "Physical connectivity" }, { label: "B", text: "End-to-end communication, flow control (TCP/UDP)" }, { label: "C", text: "Email delivery" }], "B", "Transport layer provides reliable (TCP) or fast (UDP) end-to-end delivery."),
     ],
     "subnetting-intro": [
       generateQuizStep("Subnetting Purpose", "Why do we subnet networks?", [{ label: "A", text: "To divide large networks into smaller, manageable segments" }, { label: "B", text: "To make the internet faster" }, { label: "C", text: "To remove firewalls" }], "A", "Subnetting divides networks for better management, security, and efficiency."),
       generateQuizStep("Subnet Mask", "What does a subnet mask determine?", [{ label: "A", text: "Which part is network and which is host" }, { label: "B", text: "The internet speed" }, { label: "C", text: "The computer's name" }], "A", "Subnet masks separate the network portion from the host portion of an IP address."),
       generateTypingStep("CIDR Notation", "Write CIDR notation!", "192.168.1.0/24", "/24 means 24 bits for network = 256 addresses (254 usable hosts).", "medium"),
+      generateTypingStep("Subnet Masks", "Type common subnet masks!", "/8  = 255.0.0.0\n/16 = 255.255.0.0\n/24 = 255.255.255.0\n/28 = 255.255.255.240", "These are the most common subnet masks you'll encounter.", "medium"),
     ],
     "ipv4-intro": [
       generateQuizStep("IPv4 Format", "How many bits is an IPv4 address?", [{ label: "A", text: "16 bits" }, { label: "B", text: "32 bits" }, { label: "C", text: "64 bits" }], "B", "IPv4 addresses are 32 bits long, written as four octets (e.g., 192.168.1.1)."),
       generateTypingStep("IP Address", "Type an IP address!", "192.168.1.1", "Each octet ranges from 0-255, separated by dots.", "easy"),
       generateQuizStep("Private IP Range", "Which is a private IP range?", [{ label: "A", text: "192.168.0.0 - 192.168.255.255" }, { label: "B", text: "8.8.8.0 - 8.8.8.255" }, { label: "C", text: "1.0.0.0 - 1.255.255.255" }], "A", "192.168.x.x is a Class C private range (RFC 1918)."),
+      generateTypingStep("Private IP Ranges", "Type all private ranges!", "Class A: 10.0.0.0/8\nClass B: 172.16.0.0/12\nClass C: 192.168.0.0/16", "Private addresses are not routable on the public internet.", "medium"),
+    ],
+    "memory-types": [
+      generateQuizStep("RAM vs ROM", "What is the main difference between RAM and ROM?", [{ label: "A", text: "RAM is volatile (loses data when off), ROM is non-volatile" }, { label: "B", text: "They are the same" }, { label: "C", text: "ROM is faster" }], "A", "RAM stores temporary data while running. ROM stores permanent instructions."),
+      generateTypingStep("Memory Hierarchy", "Type the memory hierarchy!", "Registers (fastest)\nCache (L1, L2, L3)\nRAM\nSSD/HDD\nCloud/Tape (slowest)", "Speed decreases and capacity increases as you go down the hierarchy.", "medium"),
+      generateQuizStep("Cache Purpose", "What is CPU cache for?", [{ label: "A", text: "Storing frequently accessed data close to the CPU for speed" }, { label: "B", text: "Long-term storage" }, { label: "C", text: "Display output" }], "A", "Cache stores recently used data to avoid slow main memory accesses."),
+    ],
+    "binary-representation": [
+      generateQuizStep("Character Encoding", "What is ASCII?", [{ label: "A", text: "7-bit character encoding for English characters" }, { label: "B", text: "A programming language" }, { label: "C", text: "A network protocol" }], "A", "ASCII uses 7 bits to represent 128 characters including letters, digits, and symbols."),
+      generateTypingStep("ASCII Values", "Type ASCII values!", "A = 65, B = 66, a = 97, 0 = 48", "Uppercase A starts at 65, lowercase a at 97, digit 0 at 48.", "easy"),
+      generateQuizStep("Unicode", "Why was Unicode created?", [{ label: "A", text: "To represent all world languages and symbols" }, { label: "B", text: "To replace ASCII completely" }, { label: "C", text: "For faster processing" }], "A", "Unicode supports 143,000+ characters from every writing system worldwide."),
     ],
   };
   return content[id] || null;
@@ -814,7 +945,7 @@ function generateWebSteps(id: string, title: string, desc: string): LessonStep[]
   const topicContent = getWebContent(id);
   if (topicContent) return topicContent;
 
-  // Fallback with code snippet
+  // Enhanced fallback with code snippets and drilling
   const steps: LessonStep[] = [];
   steps.push(generateQuizStep(`${title} Introduction`, `What is ${title.toLowerCase()}?`,
     [{ label: "A", text: "A database system" }, { label: "B", text: desc }, { label: "C", text: "An operating system" }],
@@ -824,12 +955,28 @@ function generateWebSteps(id: string, title: string, desc: string): LessonStep[]
   if (webSnippet) {
     steps.push(generateTypingStep(webSnippet.title, webSnippet.prompt, webSnippet.code, webSnippet.explanation, webSnippet.difficulty));
   }
+
   steps.push(generateQuizStep(`${title} Usage`, `When would you use ${title.toLowerCase()}?`,
     [{ label: "A", text: "Never" }, { label: "B", text: "When building modern web applications" }, { label: "C", text: "Only for desktop apps" }],
     "B", `${title} is commonly used when building modern, responsive web applications.`, "medium"));
+
+  steps.push(generateTypingStep(`${title} Practice`, `Type code for ${title.toLowerCase()}!`,
+    `// ${title}\n// ${desc}\nconsole.log("Implementing ${title.toLowerCase()}");`,
+    `Writing code builds muscle memory for web development patterns.`, "easy"));
+
   steps.push(generateQuizStep(`${title} Best Practices`, `What is important when implementing ${title.toLowerCase()}?`,
-    [{ label: "A", text: "Ignoring browser compatibility" }, { label: "B", text: "Following web standards and accessibility guidelines" }, { label: "C", text: "Using deprecated features" }],
-    "B", `Following web standards ensures your implementation of ${title.toLowerCase()} works across all browsers and devices.`, "medium"));
+    [{ label: "A", text: "Ignoring browser compatibility" }, { label: "B", text: "Following web standards, accessibility, and performance guidelines" }, { label: "C", text: "Using deprecated features" }],
+    "B", `Following web standards ensures your implementation works across all browsers and devices.`, "medium"));
+
+  // Repeat the code snippet for drilling
+  if (webSnippet) {
+    steps.push(generateTypingStep(`Drill: ${webSnippet.title}`, `Type it again for muscle memory!`, webSnippet.code, `Repetition makes this pattern automatic!`, webSnippet.difficulty));
+  }
+
+  steps.push(generateQuizStep(`${title} in Production`, `What must you consider when deploying ${title.toLowerCase()} to production?`,
+    [{ label: "A", text: "Nothing special" }, { label: "B", text: "Performance, security, accessibility, and SEO" }, { label: "C", text: "Only visual design" }],
+    "B", `Production-ready web code must be performant, secure, accessible, and SEO-optimized.`, "hard"));
+
   return steps;
 }
 
@@ -849,16 +996,19 @@ function getWebContent(id: string): LessonStep[] | null {
       generateQuizStep("HTTP Methods", "Which HTTP method retrieves data?", [{ label: "A", text: "POST" }, { label: "B", text: "GET" }, { label: "C", text: "DELETE" }], "B", "GET requests retrieve data without modifying it. POST sends data to create/update resources."),
       generateQuizStep("Status Codes", "What does HTTP 404 mean?", [{ label: "A", text: "Server error" }, { label: "B", text: "Not Found" }, { label: "C", text: "Success" }], "B", "404 = Not Found. 200 = OK. 301 = Redirect. 500 = Server Error."),
       generateTypingStep("HTTP Request", "Type an HTTP method!", "GET /api/users HTTP/1.1", "HTTP requests specify method, path, and protocol version.", "medium"),
+      generateTypingStep("Status Codes", "Type common status codes!", "200: OK\n301: Redirect\n404: Not Found\n500: Server Error", "Memorize these — you'll use them daily in web development!", "easy"),
     ],
     // ===== HTML Essentials =====
     "html-intro": [
       generateQuizStep("HTML Purpose", "What does HTML stand for?", [{ label: "A", text: "HyperText Markup Language" }, { label: "B", text: "High Tech Modern Language" }, { label: "C", text: "Home Tool Markup Language" }], "A", "HTML is the standard markup language for creating web pages."),
       generateQuizStep("HTML Elements", "What are HTML elements made of?", [{ label: "A", text: "Opening tag, content, closing tag" }, { label: "B", text: "Only text" }, { label: "C", text: "Only images" }], "A", "Most HTML elements have an opening tag, content, and closing tag: <p>content</p>"),
       generateTypingStep("Paragraph", "Create a paragraph!", "<p>Hello, World!</p>", "The <p> tag defines a paragraph of text.", "easy"),
+      generateTypingStep("Heading", "Create a heading!", "<h1>Welcome to My Website</h1>", "h1 is the most important heading. Use only one per page for SEO.", "easy"),
     ],
     "html-structure": [
       generateQuizStep("DOCTYPE", "What does <!DOCTYPE html> declare?", [{ label: "A", text: "That the document is HTML5" }, { label: "B", text: "A comment" }, { label: "C", text: "A variable" }], "A", "DOCTYPE tells the browser this is an HTML5 document."),
       generateTypingStep("HTML Document", "Create an HTML structure!", "<!DOCTYPE html>\n<html>\n<head><title>Page</title></head>\n<body></body>\n</html>", "Every HTML document starts with DOCTYPE and has head and body sections.", "easy"),
+      generateTypingStep("HTML Boilerplate Drill", "Type it again from memory!", "<!DOCTYPE html>\n<html>\n<head><title>Page</title></head>\n<body></body>\n</html>", "This should be automatic — you'll type this thousands of times!", "easy"),
     ],
     "html-text": [
       generateQuizStep("Heading Hierarchy", "Which heading is the largest?", [{ label: "A", text: "<h6>" }, { label: "B", text: "<h1>" }, { label: "C", text: "<h3>" }], "B", "h1 is the largest heading, h6 is the smallest. Use only one h1 per page."),
@@ -870,32 +1020,36 @@ function getWebContent(id: string): LessonStep[] | null {
     ],
     "html-images": [
       generateQuizStep("Alt Attribute", "Why is the alt attribute important on images?", [{ label: "A", text: "It makes images bigger" }, { label: "B", text: "Screen readers use it for accessibility" }, { label: "C", text: "It's optional decoration" }], "B", "Alt text provides description for screen readers and displays when images fail to load."),
-      generateTypingStep("Image Element", "Add an image!", '<img src="photo.jpg" alt="A photo">', "Always include alt text for accessibility.", "easy"),
+      generateTypingStep("Image Element", "Add an image!", '<img src="photo.jpg" alt="A sunset over the ocean">', "Always include descriptive alt text for accessibility and SEO.", "easy"),
     ],
     "html-lists": [
-      generateTypingStep("Unordered List", "Create a list!", "<ul>\n  <li>Item 1</li>\n  <li>Item 2</li>\n</ul>", "<ul> creates bullet points, <ol> creates numbered lists.", "easy"),
-      generateQuizStep("List Types", "Which creates a numbered list?", [{ label: "A", text: "<ul>" }, { label: "B", text: "<ol>" }, { label: "C", text: "<dl>" }], "B", "<ol> creates ordered (numbered) lists. <ul> creates unordered (bullet) lists."),
+      generateTypingStep("Unordered List", "Create a list!", "<ul>\n  <li>Item 1</li>\n  <li>Item 2</li>\n  <li>Item 3</li>\n</ul>", "ul creates bullet lists. ol creates numbered lists.", "easy"),
+      generateQuizStep("List Types", "What's the difference between <ul> and <ol>?", [{ label: "A", text: "ul = unordered (bullets), ol = ordered (numbers)" }, { label: "B", text: "They are identical" }, { label: "C", text: "ul is newer" }], "A", "Use ul for unordered bullet lists, ol for ordered numbered lists."),
     ],
     "html-tables": [
-      generateTypingStep("HTML Table", "Create a table!", "<table>\n  <tr><th>Name</th><th>Age</th></tr>\n  <tr><td>Alice</td><td>25</td></tr>\n</table>", "<tr> = table row, <th> = header cell, <td> = data cell.", "medium"),
-      generateQuizStep("Table Elements", "What does <th> create?", [{ label: "A", text: "A table header cell (bold, centered)" }, { label: "B", text: "A table row" }, { label: "C", text: "A table footer" }], "A", "<th> creates header cells, which are bold and centered by default."),
+      generateTypingStep("HTML Table", "Create a table!", "<table>\n  <tr><th>Name</th><th>Age</th></tr>\n  <tr><td>Alice</td><td>25</td></tr>\n</table>", "Tables use tr for rows, th for headers, td for data cells.", "medium"),
+      generateQuizStep("Table Semantics", "When should you use tables?", [{ label: "A", text: "For page layout" }, { label: "B", text: "For tabular data only" }, { label: "C", text: "For navigation" }], "B", "Tables should only be used for tabular data, never for page layout."),
     ],
-    // ===== CSS =====
+    "html-forms": [
+      generateTypingStep("HTML Form", "Create a login form!", '<form action="/login" method="POST">\n  <input type="email" name="email" required>\n  <input type="password" name="pass" required>\n  <button type="submit">Login</button>\n</form>', "Forms collect user input. method='POST' sends data securely.", "medium"),
+      generateQuizStep("Input Types", "Which input type creates a password field?", [{ label: "A", text: 'type="text"' }, { label: "B", text: 'type="password"' }, { label: "C", text: 'type="hidden"' }], "B", "type='password' masks the input characters for security."),
+    ],
+    "html-semantic": [
+      generateTypingStep("Semantic HTML", "Use semantic elements!", "<header>Logo & Nav</header>\n<main>\n  <article>Content</article>\n</main>\n<footer>Copyright</footer>", "Semantic elements describe meaning: header, nav, main, article, section, footer.", "medium"),
+      generateQuizStep("Why Semantic?", "Why use semantic HTML?", [{ label: "A", text: "Better accessibility, SEO, and maintainability" }, { label: "B", text: "Faster loading" }, { label: "C", text: "More colors" }], "A", "Semantic HTML helps screen readers, search engines, and developers understand content structure."),
+    ],
+    // ===== CSS Basics =====
     "css-intro": [
-      generateQuizStep("CSS Purpose", "What does CSS stand for?", [{ label: "A", text: "Cascading Style Sheets" }, { label: "B", text: "Computer Style System" }, { label: "C", text: "Creative Style Syntax" }], "A", "CSS controls the visual presentation of HTML elements."),
-      generateTypingStep("Basic CSS", "Write a CSS rule!", "p {\n  color: blue;\n  font-size: 16px;\n}", "CSS rules have a selector, property, and value.", "easy"),
+      generateQuizStep("CSS Purpose", "What does CSS stand for?", [{ label: "A", text: "Cascading Style Sheets" }, { label: "B", text: "Computer Style System" }, { label: "C", text: "Creative Style Script" }], "A", "CSS controls the visual presentation of HTML elements."),
+      generateTypingStep("CSS Rule", "Write a CSS rule!", "h1 {\n  color: blue;\n  font-size: 2rem;\n}", "CSS rules have a selector, curly braces, and property-value pairs.", "easy"),
     ],
     "css-selectors": [
-      generateTypingStep("CSS Class Selector", "Style a class!", ".highlight {\n  color: blue;\n  font-weight: bold;\n}", "Class selectors target elements with a specific class attribute.", "easy"),
-      generateQuizStep("Specificity", "Which selector has highest specificity?", [{ label: "A", text: "Element (p)" }, { label: "B", text: "Class (.btn)" }, { label: "C", text: "ID (#header)" }], "C", "Specificity order: ID > Class > Element. Inline styles override all."),
+      generateTypingStep("CSS Selectors", "Write different selectors!", ".class { }\n#id { }\nelement { }\n.parent .child { }", "Class (.), ID (#), element, and descendant selectors are the most common.", "easy"),
+      generateQuizStep("Specificity", "Which selector has highest specificity?", [{ label: "A", text: "#id" }, { label: "B", text: ".class" }, { label: "C", text: "element" }], "A", "Specificity: inline > #id > .class > element. Higher specificity wins."),
     ],
     "css-colors": [
-      generateTypingStep("CSS Colors", "Set colors!", "body {\n  color: #333;\n  background-color: rgb(240, 240, 245);\n}", "Colors can be hex (#333), rgb(), hsl(), or named values.", "easy"),
-      generateQuizStep("Color Formats", "Which is a valid CSS color format?", [{ label: "A", text: "hsl(200, 80%, 50%)" }, { label: "B", text: "color(200)" }, { label: "C", text: "rgb(300, 100, 50)" }], "A", "HSL uses hue (0-360), saturation (0-100%), lightness (0-100%)."),
-    ],
-    "css-text": [
-      generateTypingStep("Text Styling", "Style text!", ".title {\n  font-family: Arial, sans-serif;\n  font-size: 24px;\n  text-align: center;\n}", "font-family sets the typeface, font-size controls size.", "easy"),
-      generateQuizStep("Font Properties", "What does font-weight: bold do?", [{ label: "A", text: "Makes text italic" }, { label: "B", text: "Makes text thicker/bolder" }, { label: "C", text: "Changes text color" }], "B", "font-weight controls thickness: normal (400), bold (700), or numeric values."),
+      generateTypingStep("Color Values", "Set colors in different formats!", "color: red;\ncolor: #ff0000;\ncolor: rgb(255, 0, 0);\ncolor: hsl(0, 100%, 50%);", "CSS supports named colors, hex, RGB, and HSL formats.", "easy"),
+      generateQuizStep("HSL Format", "What does HSL stand for?", [{ label: "A", text: "Hue, Saturation, Lightness" }, { label: "B", text: "Height, Size, Length" }, { label: "C", text: "Hot, Simple, Light" }], "A", "HSL is intuitive: Hue (0-360°), Saturation (0-100%), Lightness (0-100%)."),
     ],
     "css-box-model": [
       generateTypingStep("Box Model", "Apply box model properties!", ".card {\n  margin: 20px;\n  padding: 16px;\n  border: 1px solid #ccc;\n}", "The box model: content → padding → border → margin.", "medium"),
@@ -910,6 +1064,7 @@ function getWebContent(id: string): LessonStep[] | null {
       generateTypingStep("Flexbox Container", "Create a flex layout!", ".container {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}", "Flexbox provides powerful one-dimensional layout capabilities.", "medium"),
       generateQuizStep("Flex Direction", "What does flex-direction: column do?", [{ label: "A", text: "Stacks items vertically" }, { label: "B", text: "Stacks items horizontally" }, { label: "C", text: "Hides items" }], "A", "flex-direction: column stacks flex items top-to-bottom instead of left-to-right."),
       generateQuizStep("Justify vs Align", "What does justify-content control in a row?", [{ label: "A", text: "Vertical alignment" }, { label: "B", text: "Horizontal distribution" }, { label: "C", text: "Font size" }], "B", "justify-content distributes items along the main axis (horizontal in row)."),
+      generateTypingStep("Flexbox Drill", "Type flexbox from memory!", ".container {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  gap: 1rem;\n}", "Flexbox with gap is the most common layout pattern in modern CSS.", "medium"),
     ],
     "css-grid": [
       generateTypingStep("CSS Grid Layout", "Create a grid!", ".grid {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  gap: 1rem;\n}", "CSS Grid enables two-dimensional layouts with rows and columns.", "medium"),
@@ -947,6 +1102,7 @@ function getWebContent(id: string): LessonStep[] | null {
     "js-variables": [
       generateTypingStep("JavaScript Variables", "Declare variables!", 'const name = "JavaScript";\nlet count = 0;', "Use const for values that don't change, let for variables that do.", "easy"),
       generateQuizStep("const vs let", "What happens if you reassign a const?", [{ label: "A", text: "It works fine" }, { label: "B", text: "TypeError: Assignment to constant variable" }, { label: "C", text: "The value becomes undefined" }], "B", "const prevents reassignment. Use let when the value needs to change."),
+      generateTypingStep("Variables Drill", "Type variables again!", 'const PI = 3.14159;\nlet score = 0;\nlet name = "Player";', "const for constants, let for variables that change.", "easy"),
     ],
     "js-operators": [
       generateQuizStep("Strict Equality", "What does === check?", [{ label: "A", text: "Value only" }, { label: "B", text: "Value AND type" }, { label: "C", text: "Type only" }], "B", "=== checks both value and type. == only checks value (with coercion). Always prefer ===."),
@@ -1027,125 +1183,14 @@ function getWebContent(id: string): LessonStep[] | null {
     "react-hooks": [
       generateTypingStep("useState Hook", "Manage component state!", "const [count, setCount] = useState(0);\n\nreturn (\n  <button onClick={() => setCount(count + 1)}>\n    Count: {count}\n  </button>\n);", "useState returns [currentValue, setterFunction]. Call setter to re-render.", "medium"),
       generateQuizStep("useEffect Purpose", "What does useEffect do?", [{ label: "A", text: "Runs side effects after render (API calls, subscriptions, DOM updates)" }, { label: "B", text: "Creates new components" }, { label: "C", text: "Styles elements" }], "A", "useEffect handles side effects. The dependency array controls when it re-runs."),
-      generateTypingStep("useEffect", "Fetch data on mount!", "useEffect(() => {\n  fetch('/api/data')\n    .then(r => r.json())\n    .then(setData);\n}, []);", "Empty dependency array [] means run once on mount.", "medium"),
-      generateQuizStep("Rules of Hooks", "Where can you call hooks?", [{ label: "A", text: "Only at the top level of function components" }, { label: "B", text: "Inside loops and conditions" }, { label: "C", text: "In regular functions" }], "A", "Hooks must be called at the top level — never inside loops, conditions, or nested functions."),
+      generateTypingStep("useEffect Drill", "Write useEffect!", "useEffect(() => {\n  fetchData();\n  return () => cleanup();\n}, [dependency]);", "The cleanup function runs when the component unmounts or before re-running.", "medium"),
     ],
-    "react-state": [
-      generateQuizStep("State Management", "When should you use global state?", [{ label: "A", text: "When multiple distant components need the same data" }, { label: "B", text: "For every piece of data" }, { label: "C", text: "Never" }], "A", "Use global state (Context, Redux) when data is needed by many components at different levels."),
-      generateTypingStep("Context API", "Create a context!", "const ThemeContext = createContext('light');\n\nfunction App() {\n  return (\n    <ThemeContext.Provider value=\"dark\">\n      <Page />\n    </ThemeContext.Provider>\n  );\n}", "Context avoids prop drilling by making data available to the entire tree.", "medium"),
-      generateQuizStep("Prop Drilling", "What is prop drilling?", [{ label: "A", text: "Passing props through many intermediate components" }, { label: "B", text: "Drilling holes in hardware" }, { label: "C", text: "A testing technique" }], "A", "Prop drilling passes data through components that don't use it. Context/Redux solves this."),
-    ],
-    "nextjs-intro": [
-      generateQuizStep("Next.js Purpose", "What does Next.js add to React?", [{ label: "A", text: "Server-side rendering, routing, API routes, and full-stack capabilities" }, { label: "B", text: "Only styling" }, { label: "C", text: "Database management" }], "A", "Next.js extends React with SSR, SSG, file-based routing, and API routes."),
-      generateQuizStep("SSR vs SSG", "What is the difference between SSR and SSG?", [{ label: "A", text: "SSR renders per request; SSG pre-builds at build time" }, { label: "B", text: "They are identical" }, { label: "C", text: "SSG is slower" }], "A", "SSR = fresh HTML per request. SSG = HTML generated at build time (faster, cacheable)."),
-      generateTypingStep("Next.js Page", "Create a Next.js page!", "export default function Home() {\n  return <h1>Welcome to Next.js!</h1>;\n}", "Files in the pages/ directory automatically become routes.", "easy"),
-    ],
-    "tailwind-css": [
-      generateQuizStep("Tailwind Approach", "What is Tailwind CSS?", [{ label: "A", text: "A utility-first CSS framework with pre-built classes" }, { label: "B", text: "A JavaScript framework" }, { label: "C", text: "A backend tool" }], "A", "Tailwind provides utility classes like p-4, text-blue-500, flex instead of custom CSS."),
-      generateTypingStep("Tailwind Classes", "Style with Tailwind!", '<button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">\n  Click Me\n</button>', "Tailwind classes apply styles directly — no separate CSS file needed.", "easy"),
-      generateQuizStep("Responsive Tailwind", "How does Tailwind handle responsive design?", [{ label: "A", text: "Prefix classes with breakpoint: sm:, md:, lg:" }, { label: "B", text: "Media queries only" }, { label: "C", text: "It doesn't support responsive" }], "A", "Tailwind uses mobile-first breakpoints: sm:text-lg md:text-xl lg:text-2xl."),
-    ],
-    // ===== PWA & Mobile =====
-    "pwa-intro": [
-      generateQuizStep("PWA Definition", "What is a Progressive Web App?", [{ label: "A", text: "A web app that can be installed and work offline like a native app" }, { label: "B", text: "A mobile-only app" }, { label: "C", text: "A desktop application" }], "A", "PWAs combine web and native app features: offline support, push notifications, installability."),
-      generateQuizStep("PWA Requirements", "What are the three core PWA requirements?", [{ label: "A", text: "HTTPS, service worker, web app manifest" }, { label: "B", text: "React, Node, MongoDB" }, { label: "C", text: "HTML, CSS, JS only" }], "A", "PWAs need HTTPS (security), a service worker (offline/caching), and a manifest (install info)."),
-    ],
-    "service-workers": [
-      generateQuizStep("Service Worker", "What is a service worker?", [{ label: "A", text: "A script that runs in the background, intercepting network requests" }, { label: "B", text: "A web server" }, { label: "C", text: "A CSS preprocessor" }], "A", "Service workers act as a proxy between the app and network, enabling offline support and caching."),
-      generateTypingStep("Register SW", "Register a service worker!", "if ('serviceWorker' in navigator) {\n  navigator.serviceWorker.register('/sw.js');\n}", "Check for support first, then register the service worker file.", "medium"),
-    ],
-    "web-app-manifest": [
-      generateTypingStep("Manifest File", "Create a manifest!", '{\n  "name": "My App",\n  "short_name": "App",\n  "start_url": "/",\n  "display": "standalone"\n}', "The manifest defines app name, icons, colors, and display mode.", "easy"),
-      generateQuizStep("Display Modes", "What does display: standalone do?", [{ label: "A", text: "Opens the app without browser UI (like a native app)" }, { label: "B", text: "Shows in a small window" }, { label: "C", text: "Opens in a new tab" }], "A", "standalone removes the browser address bar, making the PWA feel native."),
-    ],
-    // ===== API Development =====
-    "rest-api": [
-      generateQuizStep("REST Principles", "What does REST stand for?", [{ label: "A", text: "Representational State Transfer" }, { label: "B", text: "Remote Execution Service Technology" }, { label: "C", text: "Rapid Endpoint Service Tool" }], "A", "REST is an architectural style using standard HTTP methods on resource URLs."),
-      generateQuizStep("REST Methods", "Which HTTP method updates an existing resource?", [{ label: "A", text: "POST" }, { label: "B", text: "PUT" }, { label: "C", text: "GET" }], "B", "PUT updates/replaces a resource. POST creates new resources. PATCH partially updates."),
-      generateTypingStep("RESTful URL", "Design a REST endpoint!", "GET /api/users/:id\nPOST /api/users\nDELETE /api/users/:id", "REST URLs represent resources. HTTP methods define the action.", "medium"),
-    ],
-    "graphql-intro": [
-      generateQuizStep("GraphQL Purpose", "How does GraphQL differ from REST?", [{ label: "A", text: "Clients specify exactly what data they want in a single query" }, { label: "B", text: "It's identical to REST" }, { label: "C", text: "It only supports GET" }], "A", "GraphQL lets clients request exactly the data they need — no over-fetching or under-fetching."),
-      generateTypingStep("GraphQL Query", "Write a GraphQL query!", "query {\n  user(id: 1) {\n    name\n    email\n    posts { title }\n  }\n}", "GraphQL queries specify the exact shape of data you want returned.", "medium"),
-    ],
-    "api-authentication": [
-      generateQuizStep("JWT", "What is a JWT?", [{ label: "A", text: "JSON Web Token — a self-contained token for authentication" }, { label: "B", text: "Java Web Tool" }, { label: "C", text: "JavaScript Widget Template" }], "A", "JWTs contain encoded user data and a signature, eliminating server-side session storage."),
-      generateQuizStep("OAuth Flow", "What does OAuth 2.0 provide?", [{ label: "A", text: "Delegated authorization — access without sharing passwords" }, { label: "B", text: "Data encryption" }, { label: "C", text: "Database access" }], "A", "OAuth lets users grant third-party access to their data without sharing credentials."),
-    ],
-    "websockets": [
-      generateQuizStep("WebSocket Purpose", "How do WebSockets differ from HTTP?", [{ label: "A", text: "Full-duplex persistent connection for real-time communication" }, { label: "B", text: "Faster page loading" }, { label: "C", text: "Better styling" }], "A", "WebSockets maintain an open connection for bidirectional real-time data exchange."),
-      generateTypingStep("WebSocket Connection", "Create a WebSocket!", 'const ws = new WebSocket("wss://example.com/chat");\nws.onmessage = (e) => console.log(e.data);', "WebSockets use ws:// or wss:// protocol for persistent connections.", "medium"),
-    ],
-    // ===== Accessibility & Security =====
-    "web-accessibility": [
-      generateQuizStep("WCAG", "What does WCAG stand for?", [{ label: "A", text: "Web Content Accessibility Guidelines" }, { label: "B", text: "Web Code Analysis Guide" }, { label: "C", text: "Website Creation And Governance" }], "A", "WCAG defines how to make web content accessible to people with disabilities."),
-      generateQuizStep("POUR Principles", "What are the 4 WCAG principles?", [{ label: "A", text: "Perceivable, Operable, Understandable, Robust" }, { label: "B", text: "Pretty, Original, Unique, Responsive" }, { label: "C", text: "Public, Open, Universal, Reliable" }], "A", "POUR: content must be perceivable, operable, understandable, and robust."),
-    ],
-    "web-security": [
-      generateQuizStep("XSS", "What is Cross-Site Scripting (XSS)?", [{ label: "A", text: "Injecting malicious scripts into web pages viewed by other users" }, { label: "B", text: "A CSS technique" }, { label: "C", text: "A server configuration" }], "A", "XSS occurs when attackers inject scripts into trusted websites. Sanitize all user input!"),
-      generateQuizStep("CSRF", "What is CSRF?", [{ label: "A", text: "Tricking a user's browser into making unauthorized requests" }, { label: "B", text: "A database attack" }, { label: "C", text: "A network protocol" }], "A", "CSRF exploits the trust a site has in the user's browser. Use CSRF tokens to prevent it."),
-      generateTypingStep("HTTPS", "Set security headers!", "Content-Security-Policy: default-src 'self';\nX-Frame-Options: DENY;", "Security headers protect against common attacks like XSS and clickjacking.", "medium"),
-    ],
-    // ===== SEO =====
-    "seo-fundamentals": [
-      generateQuizStep("SEO Purpose", "What is SEO?", [{ label: "A", text: "Optimizing websites to rank higher in search engine results" }, { label: "B", text: "A programming language" }, { label: "C", text: "A hosting service" }], "A", "SEO improves visibility in Google, Bing, etc. through content, technical, and link strategies."),
-      generateTypingStep("Meta Tags", "Add SEO meta tags!", '<meta name="description" content="Learn web development">\n<title>Web Dev Guide | Learn HTML CSS JS</title>', "Title tags and meta descriptions are crucial for search engine results.", "easy"),
-    ],
-    "core-web-vitals": [
-      generateQuizStep("Core Web Vitals", "What are the 3 Core Web Vitals?", [{ label: "A", text: "LCP (loading), FID/INP (interactivity), CLS (visual stability)" }, { label: "B", text: "HTML, CSS, JS" }, { label: "C", text: "Speed, size, security" }], "A", "LCP measures loading, FID/INP measures interactivity, CLS measures visual stability."),
-      generateQuizStep("Good LCP", "What is a good LCP score?", [{ label: "A", text: "Under 2.5 seconds" }, { label: "B", text: "Under 10 seconds" }, { label: "C", text: "Under 30 seconds" }], "A", "LCP under 2.5s is good. 2.5-4s needs improvement. Over 4s is poor."),
-    ],
-    // ===== Backend & Full-Stack =====
-    "nodejs-intro": [
-      generateQuizStep("Node.js Purpose", "What is Node.js?", [{ label: "A", text: "A JavaScript runtime for running JS outside the browser (server-side)" }, { label: "B", text: "A web browser" }, { label: "C", text: "A CSS framework" }], "A", "Node.js uses Chrome's V8 engine to run JavaScript on servers, enabling full-stack JS development."),
-      generateTypingStep("Node Server", "Create a simple server!", 'const http = require("http");\nhttp.createServer((req, res) => {\n  res.end("Hello World!");\n}).listen(3000);', "Node.js can create HTTP servers natively.", "medium"),
-      generateQuizStep("npm", "What is npm?", [{ label: "A", text: "Node Package Manager — the world's largest software registry" }, { label: "B", text: "A programming language" }, { label: "C", text: "A browser extension" }], "A", "npm hosts millions of packages and manages project dependencies."),
-    ],
-    "express-api": [
-      generateTypingStep("Express Route", "Create an API route!", 'app.get("/api/users", (req, res) => {\n  res.json({ users: [] });\n});', "Express routes handle HTTP requests with method + path + handler.", "medium"),
-      generateQuizStep("Middleware", "What is Express middleware?", [{ label: "A", text: "Functions that run between request and response" }, { label: "B", text: "CSS plugins" }, { label: "C", text: "Database connectors" }], "A", "Middleware functions have access to req, res, and next() to process requests in a pipeline."),
-    ],
-    "fullstack-architecture": [
-      generateQuizStep("Full-Stack", "What does full-stack development cover?", [{ label: "A", text: "Frontend (UI), backend (server/API), and database" }, { label: "B", text: "Only CSS styling" }, { label: "C", text: "Only mobile apps" }], "A", "Full-stack developers work across the entire application: client, server, and database."),
-      generateQuizStep("Architecture Patterns", "What is MVC?", [{ label: "A", text: "Model-View-Controller — separates data, display, and logic" }, { label: "B", text: "Most Valuable Code" }, { label: "C", text: "Multi-Version Control" }], "A", "MVC separates concerns: Model (data), View (UI), Controller (logic/routing)."),
-    ],
-    "database-integration": [
-      generateQuizStep("SQL vs NoSQL", "When would you choose SQL over NoSQL?", [{ label: "A", text: "When data has strong relationships and needs ACID compliance" }, { label: "B", text: "When data is unstructured" }, { label: "C", text: "Always" }], "A", "SQL databases excel with relational data, complex queries, and transactional integrity."),
-      generateTypingStep("SQL Query", "Write a SQL query!", "SELECT name, email FROM users\nWHERE active = true\nORDER BY created_at DESC;", "SQL queries SELECT columns FROM tables with optional WHERE, ORDER BY clauses.", "medium"),
-    ],
-    "auth-implementation": [
-      generateQuizStep("Auth Methods", "What is session-based authentication?", [{ label: "A", text: "Server stores session data, client gets a session cookie" }, { label: "B", text: "No authentication needed" }, { label: "C", text: "Client stores everything" }], "A", "Session auth: server creates session → sends cookie → client includes cookie in requests."),
-      generateQuizStep("JWT vs Sessions", "When to use JWT over sessions?", [{ label: "A", text: "Stateless APIs, microservices, mobile apps" }, { label: "B", text: "Always use JWT" }, { label: "C", text: "Never use JWT" }], "A", "JWT is stateless (no server storage needed), ideal for distributed systems and APIs."),
-    ],
-    // ===== Mobile =====
-    "mobile-app-intro": [
-      generateQuizStep("Native vs Cross-Platform", "What is cross-platform development?", [{ label: "A", text: "Writing one codebase that runs on both iOS and Android" }, { label: "B", text: "Building separate apps for each platform" }, { label: "C", text: "Web-only development" }], "A", "Cross-platform frameworks like React Native and Flutter share code across platforms."),
-      generateQuizStep("Approaches", "Which is NOT a cross-platform approach?", [{ label: "A", text: "React Native" }, { label: "B", text: "Swift" }, { label: "C", text: "Flutter" }], "B", "Swift is Apple's native iOS language. React Native and Flutter are cross-platform."),
-    ],
-    "react-native": [
-      generateQuizStep("React Native", "How does React Native differ from React?", [{ label: "A", text: "It renders native mobile components instead of DOM elements" }, { label: "B", text: "It uses a different language" }, { label: "C", text: "It only works on Android" }], "A", "React Native uses <View>, <Text>, <TouchableOpacity> instead of <div>, <p>, <button>."),
-      generateTypingStep("RN Component", "Create a React Native component!", 'import { View, Text } from "react-native";\n\nfunction App() {\n  return <View><Text>Hello!</Text></View>;\n}', "React Native uses native components instead of HTML elements.", "medium"),
-    ],
-    "flutter-intro": [
-      generateQuizStep("Flutter", "What language does Flutter use?", [{ label: "A", text: "Dart" }, { label: "B", text: "JavaScript" }, { label: "C", text: "Python" }], "A", "Flutter uses Dart, Google's language optimized for UI development."),
-      generateTypingStep("Flutter Widget", "Create a Flutter widget!", "class MyApp extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return Text('Hello Flutter!');\n  }\n}", "Everything in Flutter is a widget — the building blocks of the UI.", "medium"),
-    ],
-    "capacitor-apps": [
-      generateQuizStep("Capacitor", "What does Capacitor do?", [{ label: "A", text: "Wraps web apps in a native container for iOS/Android" }, { label: "B", text: "Compiles Dart code" }, { label: "C", text: "Creates databases" }], "A", "Capacitor bridges web apps to native platforms, accessing native APIs from JavaScript."),
-      generateTypingStep("Capacitor Plugin", "Use a Capacitor plugin!", 'import { Camera } from "@capacitor/camera";\nconst photo = await Camera.getPhoto({\n  resultType: "uri"\n});', "Capacitor plugins provide native functionality with a JavaScript API.", "medium"),
-    ],
-    // ===== Version Control & Deployment =====
-    "version-control": [
-      generateQuizStep("Git Purpose", "What is Git?", [{ label: "A", text: "A distributed version control system for tracking code changes" }, { label: "B", text: "A programming language" }, { label: "C", text: "A web hosting service" }], "A", "Git tracks every change to your codebase, enabling collaboration and history."),
-      generateTypingStep("Git Commands", "Use basic Git commands!", "git add .\ngit commit -m \"Add new feature\"\ngit push origin main", "add stages changes, commit saves them, push uploads to remote.", "easy"),
-    ],
-    "deployment": [
-      generateQuizStep("Deployment Options", "What is Vercel/Netlify used for?", [{ label: "A", text: "Hosting and deploying frontend applications with CI/CD" }, { label: "B", text: "Email services" }, { label: "C", text: "Database hosting only" }], "A", "Platforms like Vercel and Netlify auto-deploy from Git with preview URLs and CDN."),
-      generateTypingStep("Deploy Command", "Deploy with Git!", "git push origin main\n# Auto-deploys via CI/CD pipeline", "Modern hosting auto-deploys when you push to the main branch.", "easy"),
-    ],
-    "performance": [
-      generateQuizStep("Performance", "What is lazy loading?", [{ label: "A", text: "Loading resources only when needed (e.g., images below the fold)" }, { label: "B", text: "Making the site slower" }, { label: "C", text: "Loading everything at once" }], "A", "Lazy loading defers non-critical resources, improving initial page load time."),
-      generateTypingStep("Lazy Load Image", "Add lazy loading!", '<img src="photo.jpg" loading="lazy" alt="Photo">', "The loading='lazy' attribute defers loading until the image enters the viewport.", "easy"),
+    // ===== SEO & Performance =====
+    "seo-basics": [
+      generateQuizStep("SEO Purpose", "What is SEO?", [{ label: "A", text: "Optimizing websites to rank higher in search engine results" }, { label: "B", text: "Paying for ads" }, { label: "C", text: "Social media marketing" }], "A", "SEO improves organic (unpaid) visibility in search engines like Google."),
+      generateTypingStep("Title Tag", "Write an SEO title!", '<title>Learn JavaScript - Free Interactive Tutorials | CodeQuest</title>', "Title tags should be under 60 characters with the primary keyword first.", "medium"),
+      generateTypingStep("Meta Description", "Write a meta description!", '<meta name="description" content="Master JavaScript with 100+ interactive coding challenges. Free tutorials for beginners to advanced developers.">', "Meta descriptions should be under 160 characters and compelling.", "medium"),
+      generateQuizStep("SEO Factors", "Which is NOT a Google ranking factor?", [{ label: "A", text: "Page speed" }, { label: "B", text: "Content quality" }, { label: "C", text: "Font color" }], "C", "Key ranking factors: content quality, backlinks, page speed, mobile-friendliness, user experience."),
     ],
     // ===== Planning & Design =====
     "web-planning": [
@@ -1167,7 +1212,6 @@ function getWebContent(id: string): LessonStep[] | null {
 }
 
 function getWebCodeSnippet(id: string, title: string): { title: string; prompt: string; code: string; explanation: string; difficulty: "easy" | "medium" | "hard" } | null {
-  // Used as fallback for lessons not in getWebContent
   const snippets: Record<string, { title: string; prompt: string; code: string; explanation: string; difficulty: "easy" | "medium" | "hard" }> = {
     "html5-apis": { title: "Canvas API", prompt: "Draw on canvas!", code: 'const ctx = canvas.getContext("2d");\nctx.fillStyle = "red";\nctx.fillRect(10, 10, 100, 50);', explanation: "The Canvas API allows drawing 2D graphics with JavaScript.", difficulty: "medium" },
     "svg-basics": { title: "SVG Circle", prompt: "Create an SVG!", code: '<svg width="100" height="100">\n  <circle cx="50" cy="50" r="40" fill="blue"/>\n</svg>', explanation: "SVG elements are defined in XML and scale without losing quality.", difficulty: "easy" },
@@ -1177,6 +1221,10 @@ function getWebCodeSnippet(id: string, title: string): { title: string; prompt: 
     "seo-technical": { title: "Robots.txt", prompt: "Create robots.txt!", code: "User-agent: *\nAllow: /\nSitemap: https://example.com/sitemap.xml", explanation: "robots.txt tells search engine crawlers which pages to access.", difficulty: "easy" },
     "serverless-functions": { title: "Serverless Function", prompt: "Write a serverless function!", code: "export default async function handler(req, res) {\n  const data = await fetchData();\n  res.json(data);\n}", explanation: "Serverless functions run on-demand without managing servers.", difficulty: "medium" },
     "microservices-web": { title: "Service Architecture", prompt: "Define a microservice!", code: "// User Service\napp.get('/api/users/:id', async (req, res) => {\n  const user = await db.users.find(req.params.id);\n  res.json(user);\n});", explanation: "Microservices split applications into independent, deployable services.", difficulty: "hard" },
+    "pwa-basics": { title: "Service Worker", prompt: "Register a service worker!", code: "if ('serviceWorker' in navigator) {\n  navigator.serviceWorker.register('/sw.js');\n}", explanation: "Service workers enable offline functionality and push notifications.", difficulty: "medium" },
+    "web-accessibility": { title: "ARIA Labels", prompt: "Add accessibility attributes!", code: '<button aria-label="Close dialog" aria-expanded="false">\n  <span aria-hidden="true">&times;</span>\n</button>', explanation: "ARIA attributes improve accessibility for screen reader users.", difficulty: "medium" },
+    "web-performance": { title: "Lazy Loading", prompt: "Lazy load images!", code: '<img src="photo.jpg" loading="lazy" alt="Photo">\n<script type="module" src="app.js"></script>', explanation: "Lazy loading defers resource loading until needed, improving initial page speed.", difficulty: "easy" },
+    "api-design": { title: "REST API", prompt: "Design a REST endpoint!", code: "// REST API Design\nGET    /api/users      - List users\nPOST   /api/users      - Create user\nGET    /api/users/:id   - Get user\nPUT    /api/users/:id   - Update user\nDELETE /api/users/:id   - Delete user", explanation: "REST APIs use HTTP methods and meaningful URLs for CRUD operations.", difficulty: "medium" },
   };
   if (snippets[id]) return snippets[id];
   if (id.startsWith("html-")) return { title: `HTML: ${title}`, prompt: `Write HTML for ${title.toLowerCase()}!`, code: `<div class="example">\n  <p>${title}</p>\n</div>`, explanation: `This demonstrates ${title.toLowerCase()} in HTML.`, difficulty: "easy" };
@@ -1191,11 +1239,17 @@ function generateGenericSteps(title: string, desc: string): LessonStep[] {
     generateQuizStep(`Understanding ${title}`, `What is ${title.toLowerCase()}?`,
       [{ label: "A", text: "An unrelated concept" }, { label: "B", text: desc }, { label: "C", text: "Not applicable to computing" }],
       "B", `${title}: ${desc}.`, "easy"),
-    generateTypingStep(`${title} Practice`, `Type a key concept!`,
-      `// ${title}: ${desc}`,
-      `Understanding ${title.toLowerCase()} is important.`, "easy"),
+    generateTypingStep(`${title} Definition`, `Type the key definition!`,
+      `${title}: ${desc}`,
+      `Typing definitions from memory builds recall.`, "easy"),
     generateQuizStep(`${title} Application`, `How is ${title.toLowerCase()} applied?`,
       [{ label: "A", text: "Only in textbooks" }, { label: "B", text: "In real-world computing scenarios" }, { label: "C", text: "It has no practical use" }],
       "B", `${title} has many practical applications in computing and technology.`, "medium"),
+    generateTypingStep(`${title} Practice`, `Type it again for memory!`,
+      `${title}: ${desc}`,
+      `Repetition builds automatic recall of key concepts.`, "easy"),
+    generateQuizStep(`${title} Mastery`, `Can you explain ${title.toLowerCase()} to someone else?`,
+      [{ label: "A", text: "No, it's too complex" }, { label: "B", text: "Yes: " + desc.toLowerCase() }, { label: "C", text: "I need to look it up" }],
+      "B", `If you can explain it simply, you truly understand it.`, "medium"),
   ];
 }
