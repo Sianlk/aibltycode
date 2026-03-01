@@ -71,7 +71,7 @@ export function useCodeEditor() {
   const loadChallenges = useCallback(async () => {
     const { data, error } = await supabase
       .from('code_challenges')
-      .select('*')
+      .select('id, title, description, starter_code, expected_output, test_cases, difficulty, category, hints, xp_reward, created_at')
       .order('difficulty', { ascending: true });
 
     if (!error && data) {
