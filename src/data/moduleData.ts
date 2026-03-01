@@ -360,6 +360,9 @@ export const moduleLessons: Record<string, { id: string; title: string; descript
     { id: "endpoint-security", title: "Endpoint Security", description: "EDR, antivirus, host hardening", icon: "🖥️", xpReward: 175 },
     { id: "zero-trust", title: "Zero Trust Architecture", description: "Never trust, always verify", icon: "🚫", xpReward: 200 },
     { id: "cloud-sec-advanced", title: "Advanced Cloud Security", description: "AWS/Azure/GCP security controls", icon: "☁️", xpReward: 200 },
+    { id: "mobile-security", title: "Mobile Security", description: "iOS/Android app security, MDM", icon: "📱", xpReward: 175 },
+    { id: "red-team-blue-team", title: "Red Team vs Blue Team", description: "Offensive and defensive exercises", icon: "🔴", xpReward: 200 },
+    { id: "security-automation", title: "Security Automation", description: "SOAR, scripting, automated response", icon: "⚙️", xpReward: 200 },
   ],
 
   // ==================== AI & DATA SCIENCE ====================
