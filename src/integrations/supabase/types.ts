@@ -723,7 +723,6 @@ export type Database = {
           id: string
           last_activity_date: string | null
           mode: string | null
-          parental_pin: string | null
           sound_enabled: boolean | null
           streak_days: number | null
           updated_at: string | null
@@ -738,7 +737,6 @@ export type Database = {
           id: string
           last_activity_date?: string | null
           mode?: string | null
-          parental_pin?: string | null
           sound_enabled?: boolean | null
           streak_days?: number | null
           updated_at?: string | null
@@ -753,7 +751,6 @@ export type Database = {
           id?: string
           last_activity_date?: string | null
           mode?: string | null
-          parental_pin?: string | null
           sound_enabled?: boolean | null
           streak_days?: number | null
           updated_at?: string | null
