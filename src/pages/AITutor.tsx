@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { TutorChat } from '@/components/tutor/TutorChat';
 import { Header } from '@/components/layout/Header';
 
 export default function AITutor() {
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="h-screen flex flex-col bg-background overflow-hidden">
       <Header />
-      <main className="flex-1">
-        <TutorChat className="h-[calc(100vh-64px)]" />
+      <main className="flex-1 overflow-hidden">
+        <TutorChat className="h-full" />
       </main>
     </div>
   );
