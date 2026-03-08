@@ -496,6 +496,7 @@ function generateMathSteps(id: string, title: string, desc: string): LessonStep[
 }
 
 function getMathContent(id: string): LessonStep[] | null {
+  if (mathExpandedContent[id]) return mathExpandedContent[id];
   const content: Record<string, LessonStep[]> = {
     "binary-intro": [
       generateQuizStep("Binary System", "What base does binary use?", [{ label: "A", text: "Base 10" }, { label: "B", text: "Base 2" }, { label: "C", text: "Base 16" }], "B", "Binary (base 2) uses only 0 and 1 — the language of computers."),
