@@ -733,11 +733,70 @@ function getAIContent(id: string): LessonStep[] | null {
       generateQuizStep("LangChain", "What is LangChain?", [{ label: "A", text: "A framework for building applications powered by language models" }, { label: "B", text: "A blockchain protocol" }, { label: "C", text: "A programming language" }], "A", "LangChain connects LLMs to tools, databases, and APIs to build powerful AI applications."),
       generateTypingStep("LangChain Components", "Type LangChain building blocks!", "Chains: Sequence of LLM calls\nAgents: LLM decides which tools to use\nMemory: Conversation history\nRetrievers: Document search\nTools: External APIs", "LangChain abstracts complex AI workflows into composable components.", "medium"),
     ],
+    // === ROBOTICS ===
+    "robotics-intro": [
+      generateQuizStep("What is Robotics?", "Robotics combines which fields?", [{ label: "A", text: "Mechanical engineering, electrical engineering, and computer science" }, { label: "B", text: "Art and music" }, { label: "C", text: "Only software development" }], "A", "Robotics is interdisciplinary: mechanics (body), electronics (sensors/actuators), and software (intelligence)."),
+      generateQuizStep("Robot Types", "What are the main types of robots?", [{ label: "A", text: "Industrial, service, mobile, humanoid, collaborative" }, { label: "B", text: "Only factory robots" }, { label: "C", text: "Only drones" }], "A", "Robots range from factory arms to self-driving cars to surgical systems to social robots."),
+      generateTypingStep("Robot Components", "Type the core robot components!", "Sensors: Camera, LiDAR, IMU, Ultrasonic\nActuators: Motors, Servos, Pneumatics\nController: Microcontroller (Arduino/RPi)\nPower: Battery, external supply", "Every robot needs sensing (perception), actuation (movement), control (brain), and power.", "medium"),
+    ],
+    "robot-kinematics": [
+      generateQuizStep("Forward Kinematics", "What is forward kinematics?", [{ label: "A", text: "Given joint angles, calculate the end-effector position" }, { label: "B", text: "Moving the robot forward" }, { label: "C", text: "Speed calculation" }], "A", "Forward kinematics: joint angles → tip position. Inverse kinematics: tip position → joint angles."),
+      generateQuizStep("DOF", "What does DOF (Degrees of Freedom) mean?", [{ label: "A", text: "Number of independent movements a robot can make" }, { label: "B", text: "Speed of the robot" }, { label: "C", text: "Battery capacity" }], "A", "6 DOF = full 3D positioning: 3 translations (X,Y,Z) + 3 rotations (roll, pitch, yaw)."),
+      generateTypingStep("DOF Drill", "Type degrees of freedom!", "1 DOF: Rotate or slide\n2 DOF: XY plane movement\n3 DOF: 3D position\n6 DOF: Full 3D position + orientation", "Industrial arms typically have 6 DOF for full workspace coverage.", "medium"),
+    ],
+    "sensors-actuators": [
+      generateQuizStep("Sensor Types", "Which sensor measures distance using sound?", [{ label: "A", text: "Camera" }, { label: "B", text: "Ultrasonic sensor" }, { label: "C", text: "IMU" }], "B", "Ultrasonic sensors emit sound waves and measure the echo time to calculate distance. Range: ~2cm to ~4m."),
+      generateQuizStep("LiDAR", "What does LiDAR stand for?", [{ label: "A", text: "Light Detection and Ranging" }, { label: "B", text: "Linear Digital Radar" }, { label: "C", text: "Laser Input Device" }], "A", "LiDAR uses laser pulses to create 3D maps. Used in self-driving cars, drones, and surveying."),
+      generateTypingStep("Sensor Comparison", "Type sensor specs!", "Ultrasonic: 2-400cm, cheap, low res\nInfrared: 2-150cm, analog output\nLiDAR: 0.1-100m, 360° scan, expensive\nCamera: RGB/depth, ML-capable, complex", "Choose sensors based on range, cost, precision, and processing requirements.", "hard"),
+      generateQuizStep("Servo vs Stepper", "How do servo motors differ from stepper motors?", [{ label: "A", text: "Servos use feedback for precise angles; steppers move in fixed increments" }, { label: "B", text: "They are identical" }, { label: "C", text: "Steppers are faster" }], "A", "Servos: closed-loop, precise positioning. Steppers: open-loop, exact angular steps (1.8° typical)."),
+    ],
+    "robot-programming": [
+      generateQuizStep("ROS", "What is ROS in robotics?", [{ label: "A", text: "Robot Operating System — a framework for robot software" }, { label: "B", text: "A real operating system like Windows" }, { label: "C", text: "A game engine" }], "A", "ROS provides tools, libraries, and conventions for writing complex robot software with pub/sub messaging."),
+      generateTypingStep("ROS Concepts", "Type ROS key concepts!", "Nodes: Independent processes\nTopics: Named channels for data\nPublishers: Send messages\nSubscribers: Receive messages\nServices: Request/response", "ROS uses a pub/sub architecture. Nodes communicate via topics.", "medium"),
+      generateTypingStep("Arduino Code", "Write Arduino robot code!", "void setup() {\n  pinMode(motorPin, OUTPUT);\n  Serial.begin(9600);\n}\nvoid loop() {\n  int dist = readUltrasonic();\n  if (dist < 20) stop();\n  else forward();\n}", "Arduino is the most popular microcontroller for beginner robotics.", "medium"),
+    ],
+    "autonomous-systems": [
+      generateQuizStep("Self-Driving Levels", "What are the levels of autonomous driving?", [{ label: "A", text: "Level 0 (no automation) to Level 5 (full autonomy)" }, { label: "B", text: "Only 2 levels" }, { label: "C", text: "Level 1 to Level 3" }], "A", "SAE levels: 0=none, 1=driver assist, 2=partial, 3=conditional, 4=high, 5=full autonomy."),
+      generateQuizStep("SLAM", "What does SLAM stand for?", [{ label: "A", text: "Simultaneous Localization and Mapping" }, { label: "B", text: "System Level Access Module" }, { label: "C", text: "Sensor Light Analysis Method" }], "A", "SLAM lets robots map unknown environments while tracking their own position. Used in autonomous vehicles and vacuum robots."),
+      generateTypingStep("Autonomous Stack", "Type the autonomous vehicle stack!", "Perception: LiDAR + Camera + Radar\nLocalization: GPS + SLAM + IMU\nPlanning: Path planning + Decision making\nControl: Steering + Throttle + Braking", "Each layer builds on the previous one. Perception → Understanding → Planning → Action.", "hard"),
+    ],
+    "robotics-hardware": [
+      generateQuizStep("Arduino vs Raspberry Pi", "When use Arduino vs Raspberry Pi?", [{ label: "A", text: "Arduino for real-time I/O control; RPi for computation and vision" }, { label: "B", text: "They are identical" }, { label: "C", text: "Arduino is always better" }], "A", "Arduino: real-time sensor/motor control, low power. RPi: Linux, camera, ML, networking."),
+      generateTypingStep("Arduino Pinout", "Type Arduino pin types!", "Digital: HIGH/LOW (0/5V)\nAnalog: 0-1023 (10-bit ADC)\nPWM: ~3,~5,~6,~9,~10,~11\nSerial: TX(1), RX(0)\nI2C: SDA(A4), SCL(A5)", "Know your pins! PWM (~) pins can simulate analog output for motor speed control.", "hard"),
+      generateTypingStep("H-Bridge Motor", "Type H-bridge motor control!", "// L298N H-Bridge\ndigitalWrite(IN1, HIGH);\ndigitalWrite(IN2, LOW);\nanalogWrite(ENA, 200); // speed 0-255", "H-bridges allow bidirectional motor control. Swap IN1/IN2 to reverse direction.", "medium"),
+    ],
+    "drone-programming": [
+      generateQuizStep("Drone Components", "What are the key components of a quadcopter?", [{ label: "A", text: "Frame, motors, ESCs, flight controller, battery, propellers" }, { label: "B", text: "Only a camera" }, { label: "C", text: "Only GPS" }], "A", "Quadcopters need 4 motors with ESCs, a flight controller (PX4/ArduPilot), battery, and propellers."),
+      generateQuizStep("PID Control", "What is PID control in drones?", [{ label: "A", text: "Proportional-Integral-Derivative feedback loop for stable flight" }, { label: "B", text: "A programming language" }, { label: "C", text: "A battery type" }], "A", "PID continuously corrects errors: P = current error, I = accumulated error, D = rate of change."),
+      generateTypingStep("PID Formula", "Type the PID equation!", "output = Kp * error + Ki * integral + Kd * derivative\nerror = setpoint - measured\nintegral += error * dt\nderivative = (error - prevError) / dt", "Tuning Kp, Ki, Kd determines how the drone responds to disturbances.", "hard"),
+    ],
+    "industrial-automation": [
+      generateQuizStep("PLC", "What is a PLC?", [{ label: "A", text: "Programmable Logic Controller — industrial computer for automation" }, { label: "B", text: "Personal Laptop Computer" }, { label: "C", text: "Protocol Link Cable" }], "A", "PLCs control manufacturing processes: assembly lines, packaging, chemical processing. Rugged and reliable."),
+      generateQuizStep("SCADA", "What does SCADA do?", [{ label: "A", text: "Supervisory Control and Data Acquisition — monitors industrial systems" }, { label: "B", text: "Scans documents" }, { label: "C", text: "Social media analysis" }], "A", "SCADA provides centralized monitoring of remote equipment: water treatment, power grids, factories."),
+      generateTypingStep("Industry 4.0", "Type Industry 4.0 technologies!", "IoT: Connected sensors and machines\nDigital Twin: Virtual replica of systems\nAI/ML: Predictive maintenance\nCloud: Centralized data and analytics\nCobots: Collaborative robots", "Industry 4.0 = smart manufacturing powered by interconnected digital technologies.", "medium"),
+    ],
+    "iot-ai": [
+      generateQuizStep("Edge AI", "What is Edge AI?", [{ label: "A", text: "Running AI models directly on IoT devices instead of the cloud" }, { label: "B", text: "AI at the edge of a table" }, { label: "C", text: "Only cloud-based AI" }], "A", "Edge AI reduces latency, saves bandwidth, and enables offline inference. Examples: Jetson Nano, Coral TPU."),
+      generateTypingStep("Edge Devices", "Type edge AI hardware!", "NVIDIA Jetson Nano: GPU-accelerated ML\nGoogle Coral: TPU for inference\nArduino Nano 33 BLE: TinyML\nRaspberry Pi + Camera: Vision AI", "Edge devices bring ML to the point of data generation.", "medium"),
+    ],
+    // === MLOps ===
+    "mlops-intro": [
+      generateQuizStep("MLOps", "What is MLOps?", [{ label: "A", text: "DevOps practices applied to machine learning systems" }, { label: "B", text: "A programming language" }, { label: "C", text: "A database" }], "A", "MLOps combines ML, DevOps, and data engineering to deploy and maintain ML systems in production."),
+      generateTypingStep("MLOps Pipeline", "Type the MLOps lifecycle!", "1. Data collection & versioning\n2. Feature engineering\n3. Model training & experimentation\n4. Model validation & testing\n5. Deployment (API/container)\n6. Monitoring & retraining", "Continuous training + continuous deployment = reliable ML in production.", "medium"),
+    ],
+    "model-monitoring": [
+      generateQuizStep("Model Drift", "What is model drift?", [{ label: "A", text: "When model performance degrades because real-world data changes" }, { label: "B", text: "Moving models between servers" }, { label: "C", text: "Model getting bigger" }], "A", "Data drift = input distribution changes. Concept drift = relationship between features and target changes."),
+      generateTypingStep("Monitoring Metrics", "Type monitoring setup!", "Monitor:\n- Prediction distribution\n- Feature distributions\n- Latency and throughput\n- Error rate\n- Business KPIs\n\nAlert when drift > threshold", "Set up automated alerts to catch degradation before it impacts users.", "medium"),
+    ],
+    "ai-agents": [
+      generateQuizStep("AI Agents", "What is an AI agent?", [{ label: "A", text: "An autonomous system that perceives, reasons, and acts to achieve goals" }, { label: "B", text: "A chatbot only" }, { label: "C", text: "A search engine" }], "A", "AI agents perceive their environment through sensors, reason using models, and take actions to achieve defined goals."),
+      generateTypingStep("Agent Architecture", "Type an agent loop!", "while (true) {\n  observation = perceive(environment);\n  plan = reason(observation, goal);\n  action = decide(plan);\n  result = act(action);\n  memory.store(observation, action, result);\n}", "The sense-plan-act loop is the foundation of all autonomous agents.", "hard"),
+      generateQuizStep("ReAct Pattern", "What is the ReAct pattern for LLM agents?", [{ label: "A", text: "Reasoning + Acting: the LLM thinks step-by-step and uses tools" }, { label: "B", text: "A JavaScript framework" }, { label: "C", text: "A database pattern" }], "A", "ReAct interleaves reasoning (chain-of-thought) with actions (tool calls) for grounded problem-solving."),
+    ],
   };
   return content[id] || null;
 }
 
-// ======================== BUSINESS SYSTEMS ========================
 function generateBusinessSteps(id: string, title: string, desc: string): LessonStep[] {
   const topicContent = getBusinessContent(id);
   if (topicContent) return topicContent;
