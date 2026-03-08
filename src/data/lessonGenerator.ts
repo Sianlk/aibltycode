@@ -1205,6 +1205,13 @@ function generateComputerSystemsSteps(id: string, title: string, desc: string): 
 
 function getComputerSystemsContent(id: string): LessonStep[] | null {
   if (computerSystemsDeepContent[id]) return computerSystemsDeepContent[id];
+  if (computerSystemsDeepContent2[id]) return computerSystemsDeepContent2[id];
+  if (kubernetesDeepContent[id]) return kubernetesDeepContent[id];
+  if (terraformDeepContent[id]) return terraformDeepContent[id];
+  if (awsDeepContent[id]) return awsDeepContent[id];
+  if (dockerDeepContent[id]) return dockerDeepContent[id];
+  if (cicdDeepContent[id]) return cicdDeepContent[id];
+  if (ansibleContent[id]) return ansibleContent[id];
   const content: Record<string, LessonStep[]> = {
     "cpu-fundamentals": [
       generateQuizStep("CPU Components", "What are the main CPU components?", [{ label: "A", text: "ALU, Control Unit, Registers" }, { label: "B", text: "Monitor, keyboard, mouse" }, { label: "C", text: "RAM, ROM, Cache" }], "A", "The CPU contains the ALU (arithmetic), Control Unit (coordination), and Registers (fast storage)."),
