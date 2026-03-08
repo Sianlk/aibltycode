@@ -804,6 +804,7 @@ function generateAISteps(id: string, title: string, desc: string): LessonStep[] 
 
 function getAIContent(id: string): LessonStep[] | null {
   if (aiDeepContent[id]) return aiDeepContent[id];
+  if (pythonDeepContent[id]) return pythonDeepContent[id];
   const content: Record<string, LessonStep[]> = {
     "linear-regression": [
       generateQuizStep("Linear Regression", "What does linear regression predict?", [{ label: "A", text: "Categories" }, { label: "B", text: "Continuous numerical values" }, { label: "C", text: "Images" }], "B", "Linear regression predicts continuous values by finding the best-fit line."),
@@ -968,6 +969,7 @@ function generateBusinessSteps(id: string, title: string, desc: string): LessonS
 
 function getBusinessContent(id: string): LessonStep[] | null {
   if (businessDeepContent[id]) return businessDeepContent[id];
+  if (businessDeepContent2[id]) return businessDeepContent2[id];
   const content: Record<string, LessonStep[]> = {
     "bis-intro": [
       generateQuizStep("Business IS", "What is a Business Information System?", [{ label: "A", text: "Technology solutions supporting business operations and decisions" }, { label: "B", text: "A type of computer virus" }, { label: "C", text: "An accounting method" }], "A", "BIS combines technology, people, and processes to support business goals."),
@@ -1137,6 +1139,7 @@ function generateGameDevSteps(id: string, title: string, desc: string): LessonSt
 function getGameDevContent(id: string): LessonStep[] | null {
   if (gameDevExpandedContent[id]) return gameDevExpandedContent[id];
   if (gameDevDeepContent[id]) return gameDevDeepContent[id];
+  if (gameDevDeepContent2[id]) return gameDevDeepContent2[id];
   const content: Record<string, LessonStep[]> = {
     "game-loop": [
       generateQuizStep("Game Loop", "What is the game loop?", [{ label: "A", text: "The continuous cycle of input, update, render" }, { label: "B", text: "A type of for loop" }, { label: "C", text: "A loading screen" }], "A", "The game loop continuously processes input, updates game state, and renders frames."),
@@ -1202,6 +1205,13 @@ function generateComputerSystemsSteps(id: string, title: string, desc: string): 
 
 function getComputerSystemsContent(id: string): LessonStep[] | null {
   if (computerSystemsDeepContent[id]) return computerSystemsDeepContent[id];
+  if (computerSystemsDeepContent2[id]) return computerSystemsDeepContent2[id];
+  if (kubernetesDeepContent[id]) return kubernetesDeepContent[id];
+  if (terraformDeepContent[id]) return terraformDeepContent[id];
+  if (awsDeepContent[id]) return awsDeepContent[id];
+  if (dockerDeepContent[id]) return dockerDeepContent[id];
+  if (cicdDeepContent[id]) return cicdDeepContent[id];
+  if (ansibleContent[id]) return ansibleContent[id];
   const content: Record<string, LessonStep[]> = {
     "cpu-fundamentals": [
       generateQuizStep("CPU Components", "What are the main CPU components?", [{ label: "A", text: "ALU, Control Unit, Registers" }, { label: "B", text: "Monitor, keyboard, mouse" }, { label: "C", text: "RAM, ROM, Cache" }], "A", "The CPU contains the ALU (arithmetic), Control Unit (coordination), and Registers (fast storage)."),
@@ -1302,6 +1312,7 @@ function generateWebSteps(id: string, title: string, desc: string): LessonStep[]
 function getWebContent(id: string): LessonStep[] | null {
   if (webExpandedContent[id]) return webExpandedContent[id];
   if (webDeepContent[id]) return webDeepContent[id];
+  if (webDeepContent2[id]) return webDeepContent2[id];
   const content: Record<string, LessonStep[]> = {
     // ===== Introduction =====
     "web-intro": [

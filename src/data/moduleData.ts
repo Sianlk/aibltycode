@@ -704,6 +704,10 @@ export const moduleLessons: Record<string, { id: string; title: string; descript
     { id: "sql-fundamentals", title: "SQL Fundamentals", description: "CRUD, JOINs, aggregation, normalization", icon: "🗄️", xpReward: 175 },
     { id: "networking-fundamentals", title: "Networking Fundamentals", description: "OSI model, TCP/UDP, handshake", icon: "🌐", xpReward: 150 },
     { id: "operating-systems", title: "Operating Systems Overview", description: "OS types, processes, threads", icon: "🖥️", xpReward: 150 },
+    { id: "terraform-intro", title: "Terraform & IaC", description: "Infrastructure as Code with HCL", icon: "🏗️", xpReward: 200 },
+    { id: "ansible-intro", title: "Ansible Automation", description: "Agentless config management", icon: "⚙️", xpReward: 175 },
+    { id: "aws-core-services", title: "AWS Core Services", description: "EC2, S3, Lambda, IAM, VPC", icon: "☁️", xpReward: 200 },
+    { id: "cloud-certifications", title: "Cloud Certifications", description: "AWS CCP, SAA, Azure, GCP paths", icon: "🎓", xpReward: 175 },
   ],
 
   // ==================== WEB TECHNOLOGIES ====================
