@@ -708,6 +708,31 @@ function getAIContent(id: string): LessonStep[] | null {
       generateTypingStep("NumPy Array", "Create a NumPy array!", "import numpy as np\narr = np.array([1, 2, 3, 4, 5])\nprint(arr.mean(), arr.std())", "NumPy provides fast numerical operations on arrays.", "easy"),
       generateQuizStep("NumPy vs Lists", "Why use NumPy over Python lists?", [{ label: "A", text: "Faster mathematical operations and broadcasting" }, { label: "B", text: "More readable" }, { label: "C", text: "They are the same" }], "A", "NumPy is 10-100x faster than lists for numerical operations due to C implementation."),
     ],
+    "excel-analytics": [
+      generateQuizStep("Excel for Analytics", "Why is Excel essential for data analytics?", [{ label: "A", text: "It combines formulas, charts, pivot tables, and macros in one tool" }, { label: "B", text: "It's the only option" }, { label: "C", text: "It only does basic math" }], "A", "Excel is the most widely used analytics tool in business. It handles calculation, visualization, and automation."),
+      generateTypingStep("INDEX-MATCH", "Type a powerful lookup formula!", '=INDEX(C:C, MATCH("Alice", A:A, 0))', "INDEX-MATCH is more flexible than VLOOKUP — it can look in any direction.", "medium"),
+      generateQuizStep("Pivot Tables for Analytics", "What can PivotTables summarize?", [{ label: "A", text: "SUM, COUNT, AVERAGE, MIN, MAX of any field, grouped by any category" }, { label: "B", text: "Only totals" }, { label: "C", text: "Only text data" }], "A", "PivotTables can calculate any aggregate across any dimension — drag and drop to explore data."),
+      generateTypingStep("Conditional Formulas", "Type conditional aggregation!", '=SUMIFS(Sales, Region, "North", Year, 2025)', "SUMIFS allows multiple criteria. COUNTIFS and AVERAGEIFS work similarly.", "hard"),
+    ],
+    "transformers": [
+      generateQuizStep("Transformer Architecture", "What is the key innovation in Transformers?", [{ label: "A", text: "Self-attention mechanism that weighs importance of each input token" }, { label: "B", text: "Using more RAM" }, { label: "C", text: "Faster CPUs" }], "A", "Self-attention lets the model focus on relevant parts of the input regardless of distance."),
+      generateQuizStep("BERT vs GPT", "How do BERT and GPT differ?", [{ label: "A", text: "BERT is bidirectional (understands context); GPT is autoregressive (generates text)" }, { label: "B", text: "They are identical" }, { label: "C", text: "BERT is newer" }], "A", "BERT reads in both directions (fill-in-the-blank). GPT predicts the next token (text generation)."),
+      generateTypingStep("Transformer Components", "Type transformer components!", "Input Embedding → Positional Encoding → Multi-Head Attention → Feed Forward → Output", "These layers stack to create deep understanding of language patterns.", "hard"),
+    ],
+    "llms": [
+      generateQuizStep("LLM Training", "How are Large Language Models trained?", [{ label: "A", text: "On massive text corpora using next-token prediction" }, { label: "B", text: "By hand-coding rules" }, { label: "C", text: "Using small datasets only" }], "A", "LLMs learn language patterns by predicting the next word in billions of text sequences."),
+      generateTypingStep("LLM Parameters", "Type LLM size comparisons!", "GPT-3: 175 billion parameters\nLLaMA 2: 7B-70B parameters\nGemini: Multimodal, multiple sizes", "More parameters generally means better performance but higher compute costs.", "medium"),
+      generateQuizStep("Fine-Tuning", "What is fine-tuning an LLM?", [{ label: "A", text: "Training a pre-trained model on domain-specific data" }, { label: "B", text: "Making it run faster" }, { label: "C", text: "Reducing its size" }], "A", "Fine-tuning adapts a general model to your specific use case with much less data than training from scratch."),
+    ],
+    "rag-systems": [
+      generateQuizStep("RAG Purpose", "What does RAG (Retrieval-Augmented Generation) do?", [{ label: "A", text: "Combines retrieval of relevant documents with LLM generation for accurate answers" }, { label: "B", text: "Generates random text" }, { label: "C", text: "Only stores data" }], "A", "RAG retrieves relevant context from a knowledge base, then feeds it to the LLM for grounded, factual responses."),
+      generateTypingStep("RAG Pipeline", "Type the RAG pipeline!", "1. User query\n2. Embed query → vector\n3. Search vector database\n4. Retrieve top-K documents\n5. Inject into LLM prompt\n6. Generate grounded answer", "RAG reduces hallucinations by grounding LLM responses in real data.", "hard"),
+      generateQuizStep("Vector Database", "What stores embeddings in a RAG system?", [{ label: "A", text: "Vector database (Pinecone, Weaviate, ChromaDB)" }, { label: "B", text: "Regular SQL database" }, { label: "C", text: "Text files" }], "A", "Vector databases store numerical embeddings and enable fast similarity search."),
+    ],
+    "langchain-intro": [
+      generateQuizStep("LangChain", "What is LangChain?", [{ label: "A", text: "A framework for building applications powered by language models" }, { label: "B", text: "A blockchain protocol" }, { label: "C", text: "A programming language" }], "A", "LangChain connects LLMs to tools, databases, and APIs to build powerful AI applications."),
+      generateTypingStep("LangChain Components", "Type LangChain building blocks!", "Chains: Sequence of LLM calls\nAgents: LLM decides which tools to use\nMemory: Conversation history\nRetrievers: Document search\nTools: External APIs", "LangChain abstracts complex AI workflows into composable components.", "medium"),
+    ],
   };
   return content[id] || null;
 }
