@@ -1592,10 +1592,6 @@ function getWebContent(id: string): LessonStep[] | null {
       generateQuizStep("Tailwind", "What makes Tailwind CSS different?", [{ label: "A", text: "Utility-first: compose designs with small, single-purpose classes" }, { label: "B", text: "Component-first with pre-built designs" }, { label: "C", text: "No classes needed" }], "A", "Tailwind: class='flex items-center gap-4 p-6 bg-blue-500'. No custom CSS needed."),
       generateTypingStep("Tailwind Card", "Build a card!", '<div class="max-w-sm rounded-lg shadow-lg p-6 bg-white">\n  <h2 class="text-xl font-bold mb-2">Title</h2>\n  <p class="text-gray-600">Content here.</p>\n</div>', "Tailwind classes are composable — combine them for any design.", "medium"),
     ],
-    "typescript-intro": [
-      generateTypingStep("TypeScript Basics", "Type TypeScript code!", "let name: string = 'Alice';\nlet age: number = 25;\nlet active: boolean = true;\nlet scores: number[] = [90, 85, 95];", "Type annotations go after the variable name with a colon.", "medium"),
-      generateQuizStep("TS Benefits", "Why use TypeScript?", [{ label: "A", text: "Static type checking catches bugs at compile time" }, { label: "B", text: "It runs faster" }, { label: "C", text: "It replaces HTML" }], "A", "TypeScript = JavaScript + types. Catches errors before runtime."),
-    ],
     "web-deployment-advanced": [
       generateQuizStep("CI/CD", "What is CI/CD?", [{ label: "A", text: "Continuous Integration/Deployment — automating build, test, deploy" }, { label: "B", text: "A language" }, { label: "C", text: "A database" }], "A", "CI: build and test on every commit. CD: deploy passing builds automatically."),
       generateTypingStep("Dockerfile", "Write a Dockerfile!", "FROM node:20-alpine\nWORKDIR /app\nCOPY package*.json ./\nRUN npm ci\nCOPY . .\nRUN npm run build\nEXPOSE 3000\nCMD [\"npm\", \"start\"]", "Dockerfiles define how to build container images.", "hard"),
