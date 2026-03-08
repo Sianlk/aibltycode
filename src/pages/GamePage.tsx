@@ -67,6 +67,8 @@ const gameComponents: Record<string, React.ComponentType> = {
   "html-css": HTMLCSSPlayground,
   "number-systems": NumberSystemsGame,
   "pc-builder": PCBuilderGame,
+  "draw-io": DrawIOGame,
+  "plantuml": PlantUMLGame,
 };
 
 const gameInfo: Record<string, { title: string; emoji: string; color: string }> = {
