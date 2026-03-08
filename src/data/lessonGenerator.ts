@@ -1139,6 +1139,7 @@ function generateGameDevSteps(id: string, title: string, desc: string): LessonSt
 function getGameDevContent(id: string): LessonStep[] | null {
   if (gameDevExpandedContent[id]) return gameDevExpandedContent[id];
   if (gameDevDeepContent[id]) return gameDevDeepContent[id];
+  if (gameDevDeepContent2[id]) return gameDevDeepContent2[id];
   const content: Record<string, LessonStep[]> = {
     "game-loop": [
       generateQuizStep("Game Loop", "What is the game loop?", [{ label: "A", text: "The continuous cycle of input, update, render" }, { label: "B", text: "A type of for loop" }, { label: "C", text: "A loading screen" }], "A", "The game loop continuously processes input, updates game state, and renders frames."),
