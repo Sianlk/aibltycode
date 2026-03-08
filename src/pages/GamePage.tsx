@@ -31,6 +31,8 @@ import NetworkProtocolGame from "@/components/games/NetworkProtocolGame";
 import HTMLCSSPlayground from "@/components/games/HTMLCSSPlayground";
 import NumberSystemsGame from "@/components/games/NumberSystemsGame";
 import PCBuilderGame from "@/components/games/PCBuilderGame";
+import DrawIOGame from "@/components/games/DrawIOGame";
+import PlantUMLGame from "@/components/games/PlantUMLGame";
 import { ArrowLeft, Trophy, Star, Zap } from "lucide-react";
 import { useAchievements } from "@/contexts/AchievementContext";
 import { useEffect } from "react";
