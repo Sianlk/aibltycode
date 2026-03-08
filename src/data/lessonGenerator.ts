@@ -1234,22 +1234,107 @@ function getWebCodeSnippet(id: string, title: string): { title: string; prompt: 
 }
 
 // ======================== GENERIC FALLBACK ========================
+// This fallback ensures EVERY lesson, even those without hand-written content,
+// teaches from absolute zero with the 7-step autonomic mastery scaffold.
 function generateGenericSteps(title: string, desc: string): LessonStep[] {
-  return [
-    generateQuizStep(`Understanding ${title}`, `What is ${title.toLowerCase()}?`,
-      [{ label: "A", text: "An unrelated concept" }, { label: "B", text: desc }, { label: "C", text: "Not applicable to computing" }],
-      "B", `${title}: ${desc}.`, "easy"),
-    generateTypingStep(`${title} Definition`, `Type the key definition!`,
-      `${title}: ${desc}`,
-      `Typing definitions from memory builds recall.`, "easy"),
-    generateQuizStep(`${title} Application`, `How is ${title.toLowerCase()} applied?`,
-      [{ label: "A", text: "Only in textbooks" }, { label: "B", text: "In real-world computing scenarios" }, { label: "C", text: "It has no practical use" }],
-      "B", `${title} has many practical applications in computing and technology.`, "medium"),
-    generateTypingStep(`${title} Practice`, `Type it again for memory!`,
-      `${title}: ${desc}`,
-      `Repetition builds automatic recall of key concepts.`, "easy"),
-    generateQuizStep(`${title} Mastery`, `Can you explain ${title.toLowerCase()} to someone else?`,
-      [{ label: "A", text: "No, it's too complex" }, { label: "B", text: "Yes: " + desc.toLowerCase() }, { label: "C", text: "I need to look it up" }],
-      "B", `If you can explain it simply, you truly understand it.`, "medium"),
+  // Step 1: Context — why does this matter?
+  const steps: LessonStep[] = [
+    generateQuizStep(
+      `Why learn ${title}?`,
+      `Imagine you want to build an app, a website, or solve a real problem. Which of these would help?`,
+      [
+        { label: "A", text: `Understanding ${title.toLowerCase()} — ${desc.toLowerCase()}` },
+        { label: "B", text: "Memorising random facts without context" },
+        { label: "C", text: "Skipping fundamentals and hoping for the best" },
+      ],
+      "A",
+      `${title} is a building block used by professionals every day. By the end of this lesson you will know exactly what it is and how to use it — starting from zero.`,
+      "easy"
+    ),
   ];
+
+  // Step 2: Micro-lesson — plain-English explanation
+  steps.push(generateQuizStep(
+    `What is ${title}?`,
+    `In simple terms, ${title.toLowerCase()} means: "${desc}". Which statement is correct?`,
+    [
+      { label: "A", text: desc },
+      { label: "B", text: `The opposite of ${desc.toLowerCase()}` },
+      { label: "C", text: "Something only experts need to know" },
+    ],
+    "A",
+    `Correct! ${title} means: ${desc}. Everyone starts here — even professional developers learned this exact concept once.`,
+    "easy"
+  ));
+
+  // Step 3: Real-world analogy
+  steps.push(generateQuizStep(
+    `${title} in the real world`,
+    `Think of ${title.toLowerCase()} like a recipe step — without it, the final product won't work. Where would you encounter this?`,
+    [
+      { label: "A", text: "Building websites, apps, games, or data systems" },
+      { label: "B", text: "Only in academic textbooks" },
+      { label: "C", text: "Nowhere — it's outdated" },
+    ],
+    "A",
+    `${title} is used in real products every day — from mobile apps to cybersecurity systems to AI tools.`,
+    "easy"
+  ));
+
+  // Step 4: Type it — muscle memory drill #1
+  steps.push(generateTypingStep(
+    `Type the key concept`,
+    `Type this definition exactly to build muscle memory:`,
+    `${title}: ${desc}`,
+    `Typing from memory is how professional coders build speed. You're already building that same skill.`,
+    "easy"
+  ));
+
+  // Step 5: Application quiz
+  steps.push(generateQuizStep(
+    `Apply ${title}`,
+    `A team asks you to help build a feature that uses ${title.toLowerCase()}. What's the FIRST thing you do?`,
+    [
+      { label: "A", text: "Panic and give up" },
+      { label: "B", text: `Recall the definition: "${desc.substring(0, 60)}..." and plan your approach` },
+      { label: "C", text: "Randomly try things until something works" },
+    ],
+    "B",
+    `Professionals always start by recalling what they know, then plan. You now know ${title.toLowerCase()} well enough to do this.`,
+    "medium"
+  ));
+
+  // Step 6: Repetition drill #2
+  steps.push(generateTypingStep(
+    `Speed drill: ${title}`,
+    `Type it again — faster this time!`,
+    `${title}: ${desc}`,
+    `Second repetition locks the concept into long-term memory. This is exactly how coding fluency is built.`,
+    "medium"
+  ));
+
+  // Step 7: Mastery check
+  steps.push(generateQuizStep(
+    `${title} mastery check`,
+    `Could you explain ${title.toLowerCase()} to a friend who knows nothing about coding?`,
+    [
+      { label: "A", text: `Yes — it means: ${desc.toLowerCase().substring(0, 80)}` },
+      { label: "B", text: "No, I still don't understand" },
+      { label: "C", text: "I'd need to Google it first" },
+    ],
+    "A",
+    `If you can explain it simply, you truly own this knowledge. ${title} is now part of your skill set. Well done!`,
+    "medium"
+  ));
+
+  // Step 8: Final speed drill
+  steps.push(generateTypingStep(
+    `Final drill: ${title}`,
+    `One last time from memory — this cements it permanently:`,
+    `${title}: ${desc}`,
+    `Three repetitions is the minimum for long-term retention. You've completed the full autonomic mastery cycle for ${title.toLowerCase()}.`,
+    "medium"
+  ));
+
+  return steps;
 }
