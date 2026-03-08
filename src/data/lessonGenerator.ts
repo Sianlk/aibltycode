@@ -1312,6 +1312,7 @@ function generateWebSteps(id: string, title: string, desc: string): LessonStep[]
 function getWebContent(id: string): LessonStep[] | null {
   if (webExpandedContent[id]) return webExpandedContent[id];
   if (webDeepContent[id]) return webDeepContent[id];
+  if (webDeepContent2[id]) return webDeepContent2[id];
   const content: Record<string, LessonStep[]> = {
     // ===== Introduction =====
     "web-intro": [
