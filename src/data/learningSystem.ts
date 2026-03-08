@@ -83,8 +83,8 @@ export const zones: Zone[] = [
     icon: '🏙️',
     color: 'success',
     gradient: 'from-success/20 via-success/10 to-success/5',
-    games: ['erd-builder', 'sql-query', 'graph-visualizer', 'excel-master'],
-    skills: ['normalization', 'foreign-keys', 'sql-select', 'sql-joins', 'functions', 'pivot-tables', 'graphs']
+    games: ['erd-builder', 'sql-query', 'graph-visualizer', 'excel-master', 'draw-io', 'plantuml'],
+    skills: ['normalization', 'foreign-keys', 'sql-select', 'sql-joins', 'functions', 'pivot-tables', 'graphs', 'uml-notation', 'plantuml-syntax']
   },
   {
     id: 'security-sector',
