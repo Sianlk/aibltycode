@@ -954,6 +954,7 @@ function generateBusinessSteps(id: string, title: string, desc: string): LessonS
 }
 
 function getBusinessContent(id: string): LessonStep[] | null {
+  if (businessDeepContent[id]) return businessDeepContent[id];
   const content: Record<string, LessonStep[]> = {
     "bis-intro": [
       generateQuizStep("Business IS", "What is a Business Information System?", [{ label: "A", text: "Technology solutions supporting business operations and decisions" }, { label: "B", text: "A type of computer virus" }, { label: "C", text: "An accounting method" }], "A", "BIS combines technology, people, and processes to support business goals."),
