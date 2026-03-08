@@ -101,6 +101,8 @@ const gameInfo: Record<string, { title: string; emoji: string; color: string }> 
   "html-css": { title: "HTML & CSS", emoji: "🎨", color: "warning" },
   "number-systems": { title: "Number Systems", emoji: "🔢", color: "secondary" },
   "pc-builder": { title: "PC Builder Lab", emoji: "🖥️", color: "primary" },
+  "draw-io": { title: "Diagram Master (Draw.io)", emoji: "📐", color: "accent" },
+  "plantuml": { title: "PlantUML Master", emoji: "📝", color: "secondary" },
 };
 
 export default function GamePage() {
