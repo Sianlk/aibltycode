@@ -546,6 +546,13 @@ export const moduleLessons: Record<string, { id: string; title: string; descript
     { id: "cloud-services-bis", title: "Cloud Services for Business", description: "AWS, Azure, GCP essentials", icon: "☁️", xpReward: 175 },
     { id: "api-economy", title: "The API Economy", description: "API-driven business models", icon: "🔌", xpReward: 175 },
     { id: "cyber-risk-business", title: "Cyber Risk for Business", description: "Business impact of security breaches", icon: "🛡️", xpReward: 150 },
+    { id: "whmcs-hosting", title: "WHMCS & Hosting Automation", description: "Billing, provisioning, support for hosting", icon: "🖥️", xpReward: 175 },
+    { id: "vps-hosting", title: "VPS & Hosting Types", description: "Shared, VPS, dedicated, cloud hosting", icon: "🌐", xpReward: 150 },
+    { id: "hosting-fundamentals", title: "Hosting Fundamentals", description: "DNS, cPanel, SSL, server management", icon: "🔧", xpReward: 150 },
+    { id: "digital-marketing-strategy", title: "Digital Marketing Strategy", description: "Multi-channel marketing and KPIs", icon: "📣", xpReward: 175 },
+    { id: "social-media-marketing", title: "Social Media Marketing", description: "Platform strategies and engagement", icon: "📱", xpReward: 150 },
+    { id: "saas-business-model", title: "SaaS Business Model", description: "Subscription metrics and growth", icon: "📈", xpReward: 175 },
+    { id: "excel-formulas-deep", title: "Advanced Excel Formulas", description: "XLOOKUP, dynamic arrays, VBA macros", icon: "📊", xpReward: 200 },
   ],
 
   // ==================== GAME DEVELOPMENT ====================
@@ -689,6 +696,14 @@ export const moduleLessons: Record<string, { id: string; title: string; descript
     { id: "kubernetes-intro", title: "Kubernetes Introduction", description: "Container orchestration", icon: "☸️", xpReward: 225 },
     { id: "disaster-recovery", title: "Disaster Recovery", description: "Backup and recovery strategies", icon: "🛡️", xpReward: 175 },
     { id: "performance-monitoring", title: "Performance Monitoring", description: "SNMP, Nagios, Prometheus", icon: "📊", xpReward: 175 },
+    { id: "visual-studio-code", title: "Visual Studio Code", description: "Essential shortcuts and extensions", icon: "💻", xpReward: 125 },
+    { id: "ide-comparison", title: "IDEs & Code Editors", description: "IntelliJ, Eclipse, VS Code, PyCharm", icon: "🔧", xpReward: 100 },
+    { id: "python-intro", title: "Python Introduction", description: "Syntax, functions, and data types", icon: "🐍", xpReward: 150 },
+    { id: "python-data-structures", title: "Python Data Structures", description: "Lists, dicts, loops, comprehensions", icon: "📊", xpReward: 150 },
+    { id: "github-workflow", title: "Git & GitHub Workflow", description: "Branching, PRs, Actions, CI/CD", icon: "🐙", xpReward: 175 },
+    { id: "sql-fundamentals", title: "SQL Fundamentals", description: "CRUD, JOINs, aggregation, normalization", icon: "🗄️", xpReward: 175 },
+    { id: "networking-fundamentals", title: "Networking Fundamentals", description: "OSI model, TCP/UDP, handshake", icon: "🌐", xpReward: 150 },
+    { id: "operating-systems", title: "Operating Systems Overview", description: "OS types, processes, threads", icon: "🖥️", xpReward: 150 },
   ],
 
   // ==================== WEB TECHNOLOGIES ====================

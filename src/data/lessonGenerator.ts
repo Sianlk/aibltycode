@@ -1,5 +1,15 @@
 // Auto-generates lesson content for lessons that don't have static data
 import type { LessonData, LessonStep } from "./lessons";
+import {
+  javaAdvancedContent,
+  systemsExpandedContent,
+  mathExpandedContent,
+  cyberExpandedContent,
+  businessExpandedContent,
+  gameDevExpandedContent,
+  computerSystemsExpandedContent,
+  webExpandedContent,
+} from "./lessonContentExpanded2";
 
 function generateQuizStep(title: string, question: string, options: { label: string; text: string }[], correct: string, explanation: string, difficulty: "easy" | "medium" | "hard" = "medium"): LessonStep {
   return { type: "quiz", title, difficulty, question, options, correctAnswer: correct, explanation };
@@ -47,6 +57,8 @@ function generateStepsForTopic(id: string, title: string, desc: string, moduleId
 
 // ======================== JAVA ========================
 function generateJavaSteps(id: string, title: string, desc: string): LessonStep[] {
+  // Check expanded content first
+  if (javaAdvancedContent[id]) return javaAdvancedContent[id];
   const steps: LessonStep[] = [];
   
   // Step 1: Context — why this matters (assumes ZERO knowledge)
@@ -348,6 +360,7 @@ function generateSystemsSteps(id: string, title: string, desc: string): LessonSt
 }
 
 function getSystemsContent(id: string): LessonStep[] | null {
+  if (systemsExpandedContent[id]) return systemsExpandedContent[id];
   const content: Record<string, LessonStep[]> = {
     "what-is-system": [
       generateQuizStep("System Definition", "What is a system?", [{ label: "A", text: "A set of interrelated components working together toward a goal" }, { label: "B", text: "A single computer program" }, { label: "C", text: "Only hardware" }], "A", "A system is a collection of interrelated components that work together to achieve a common purpose."),
@@ -483,6 +496,7 @@ function generateMathSteps(id: string, title: string, desc: string): LessonStep[
 }
 
 function getMathContent(id: string): LessonStep[] | null {
+  if (mathExpandedContent[id]) return mathExpandedContent[id];
   const content: Record<string, LessonStep[]> = {
     "binary-intro": [
       generateQuizStep("Binary System", "What base does binary use?", [{ label: "A", text: "Base 10" }, { label: "B", text: "Base 2" }, { label: "C", text: "Base 16" }], "B", "Binary (base 2) uses only 0 and 1 — the language of computers."),
@@ -683,6 +697,7 @@ function generateCyberSteps(id: string, title: string, desc: string): LessonStep
 }
 
 function getCyberContent(id: string): LessonStep[] | null {
+  if (cyberExpandedContent[id]) return cyberExpandedContent[id];
   const content: Record<string, LessonStep[]> = {
     "cia-triad": [
       generateQuizStep("CIA Triad", "What does CIA stand for in cybersecurity?", [{ label: "A", text: "Central Intelligence Agency" }, { label: "B", text: "Confidentiality, Integrity, Availability" }, { label: "C", text: "Computer Information Access" }], "B", "The CIA Triad is the foundation of information security."),
@@ -895,7 +910,7 @@ function getAIContent(id: string): LessonStep[] | null {
 }
 
 function generateBusinessSteps(id: string, title: string, desc: string): LessonStep[] {
-  const topicContent = getBusinessContent(id);
+  const topicContent = getBusinessContent(id) || businessExpandedContent[id];
   if (topicContent) return topicContent;
 
   // Enhanced fallback with 7 practical business drilling steps
@@ -1092,6 +1107,7 @@ function generateGameDevSteps(id: string, title: string, desc: string): LessonSt
 }
 
 function getGameDevContent(id: string): LessonStep[] | null {
+  if (gameDevExpandedContent[id]) return gameDevExpandedContent[id];
   const content: Record<string, LessonStep[]> = {
     "game-loop": [
       generateQuizStep("Game Loop", "What is the game loop?", [{ label: "A", text: "The continuous cycle of input, update, render" }, { label: "B", text: "A type of for loop" }, { label: "C", text: "A loading screen" }], "A", "The game loop continuously processes input, updates game state, and renders frames."),
@@ -1126,7 +1142,7 @@ function getGameDevContent(id: string): LessonStep[] | null {
 
 // ======================== COMPUTER SYSTEMS ========================
 function generateComputerSystemsSteps(id: string, title: string, desc: string): LessonStep[] {
-  const topicContent = getComputerSystemsContent(id);
+  const topicContent = getComputerSystemsContent(id) || computerSystemsExpandedContent[id];
   if (topicContent) return topicContent;
 
   // Enhanced fallback with 7 intensive hardware/systems drilling steps
@@ -1254,6 +1270,7 @@ function generateWebSteps(id: string, title: string, desc: string): LessonStep[]
 }
 
 function getWebContent(id: string): LessonStep[] | null {
+  if (webExpandedContent[id]) return webExpandedContent[id];
   const content: Record<string, LessonStep[]> = {
     // ===== Introduction =====
     "web-intro": [
@@ -1591,10 +1608,6 @@ function getWebContent(id: string): LessonStep[] | null {
     "tailwind-css": [
       generateQuizStep("Tailwind", "What makes Tailwind CSS different?", [{ label: "A", text: "Utility-first: compose designs with small, single-purpose classes" }, { label: "B", text: "Component-first with pre-built designs" }, { label: "C", text: "No classes needed" }], "A", "Tailwind: class='flex items-center gap-4 p-6 bg-blue-500'. No custom CSS needed."),
       generateTypingStep("Tailwind Card", "Build a card!", '<div class="max-w-sm rounded-lg shadow-lg p-6 bg-white">\n  <h2 class="text-xl font-bold mb-2">Title</h2>\n  <p class="text-gray-600">Content here.</p>\n</div>', "Tailwind classes are composable — combine them for any design.", "medium"),
-    ],
-    "typescript-intro": [
-      generateTypingStep("TypeScript Basics", "Type TypeScript code!", "let name: string = 'Alice';\nlet age: number = 25;\nlet active: boolean = true;\nlet scores: number[] = [90, 85, 95];", "Type annotations go after the variable name with a colon.", "medium"),
-      generateQuizStep("TS Benefits", "Why use TypeScript?", [{ label: "A", text: "Static type checking catches bugs at compile time" }, { label: "B", text: "It runs faster" }, { label: "C", text: "It replaces HTML" }], "A", "TypeScript = JavaScript + types. Catches errors before runtime."),
     ],
     "web-deployment-advanced": [
       generateQuizStep("CI/CD", "What is CI/CD?", [{ label: "A", text: "Continuous Integration/Deployment — automating build, test, deploy" }, { label: "B", text: "A language" }, { label: "C", text: "A database" }], "A", "CI: build and test on every commit. CD: deploy passing builds automatically."),
