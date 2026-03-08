@@ -1258,14 +1258,7 @@ function getWebContent(id: string): LessonStep[] | null {
       generateTypingStep("HTML Table", "Create a table!", "<table>\n  <tr><th>Name</th><th>Age</th></tr>\n  <tr><td>Alice</td><td>25</td></tr>\n</table>", "Tables use tr for rows, th for headers, td for data cells.", "medium"),
       generateQuizStep("Table Semantics", "When should you use tables?", [{ label: "A", text: "For page layout" }, { label: "B", text: "For tabular data only" }, { label: "C", text: "For navigation" }], "B", "Tables should only be used for tabular data, never for page layout."),
     ],
-    "html-forms": [
-      generateTypingStep("HTML Form", "Create a login form!", '<form action="/login" method="POST">\n  <input type="email" name="email" required>\n  <input type="password" name="pass" required>\n  <button type="submit">Login</button>\n</form>', "Forms collect user input. method='POST' sends data securely.", "medium"),
-      generateQuizStep("Input Types", "Which input type creates a password field?", [{ label: "A", text: 'type="text"' }, { label: "B", text: 'type="password"' }, { label: "C", text: 'type="hidden"' }], "B", "type='password' masks the input characters for security."),
-    ],
-    "html-semantic": [
-      generateTypingStep("Semantic HTML", "Use semantic elements!", "<header>Logo & Nav</header>\n<main>\n  <article>Content</article>\n</main>\n<footer>Copyright</footer>", "Semantic elements describe meaning: header, nav, main, article, section, footer.", "medium"),
-      generateQuizStep("Why Semantic?", "Why use semantic HTML?", [{ label: "A", text: "Better accessibility, SEO, and maintainability" }, { label: "B", text: "Faster loading" }, { label: "C", text: "More colors" }], "A", "Semantic HTML helps screen readers, search engines, and developers understand content structure."),
-    ],
+    // html-forms and html-semantic defined in expanded section below
     // ===== CSS Basics =====
     "css-intro": [
       generateQuizStep("CSS Purpose", "What does CSS stand for?", [{ label: "A", text: "Cascading Style Sheets" }, { label: "B", text: "Computer Style System" }, { label: "C", text: "Creative Style Script" }], "A", "CSS controls the visual presentation of HTML elements."),
