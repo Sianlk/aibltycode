@@ -1011,11 +1011,69 @@ function getBusinessContent(id: string): LessonStep[] | null {
       generateQuizStep("Email Marketing", "What makes email marketing effective?", [{ label: "A", text: "Personalized, segmented campaigns with clear CTAs" }, { label: "B", text: "Sending to everyone with no targeting" }, { label: "C", text: "Sending once a year" }], "A", "Segmented, personalized emails have 14% higher open rates and 10% higher conversions."),
       generateTypingStep("Email Metrics", "Type email marketing KPIs!", "Open Rate: % who opened (aim: 20-25%)\nCTR: % who clicked (aim: 2-5%)\nConversion Rate: % who completed action\nBounce Rate: % undeliverable\nUnsubscribe: % who opted out", "Track these metrics to optimize your email campaigns.", "medium"),
     ],
+    // ===== AWS & Cloud =====
+    "cloud-services-bis": [
+      generateQuizStep("AWS Overview", "What is AWS?", [{ label: "A", text: "Amazon Web Services — the largest cloud computing platform" }, { label: "B", text: "A programming language" }, { label: "C", text: "A web browser" }], "A", "AWS provides 200+ cloud services: compute (EC2), storage (S3), database (RDS), and more."),
+      generateTypingStep("AWS Core Services", "Type AWS core services!", "EC2: Virtual servers (Elastic Compute Cloud)\nS3: Object storage (Simple Storage Service)\nRDS: Managed databases\nLambda: Serverless functions\nCloudFront: CDN\nIAM: Identity & Access Management", "These six services form the backbone of most AWS architectures.", "medium"),
+      generateQuizStep("Cloud Models", "What are the three cloud deployment models?", [{ label: "A", text: "Public, private, and hybrid cloud" }, { label: "B", text: "Fast, medium, slow" }, { label: "C", text: "Free, paid, enterprise" }], "A", "Public = shared infrastructure, Private = dedicated, Hybrid = both combined."),
+      generateTypingStep("AWS Regions", "Type AWS global infrastructure!", "Regions: us-east-1, eu-west-2, ap-southeast-1\nAvailability Zones: 2+ per region\nEdge Locations: 400+ for CDN\nLocal Zones: Ultra-low latency", "Choose regions close to users. Use multiple AZs for high availability.", "medium"),
+      generateQuizStep("S3 Storage Classes", "Which S3 class is cheapest for rarely accessed data?", [{ label: "A", text: "S3 Glacier Deep Archive" }, { label: "B", text: "S3 Standard" }, { label: "C", text: "S3 Intelligent-Tiering" }], "A", "Glacier Deep Archive is cheapest ($0.00099/GB/month) but retrieval takes 12+ hours."),
+    ],
+    "saas-cloud": [
+      generateQuizStep("SaaS Model", "What is SaaS?", [{ label: "A", text: "Software delivered via the internet on a subscription basis" }, { label: "B", text: "Software installed on a CD" }, { label: "C", text: "A programming language" }], "A", "SaaS: accessed via browser — no installation needed. Examples: Google Workspace, Salesforce, Slack."),
+      generateQuizStep("Cloud Models", "What are the three main cloud service models?", [{ label: "A", text: "IaaS, PaaS, SaaS" }, { label: "B", text: "Small, Medium, Large" }, { label: "C", text: "Free, Premium, Enterprise" }], "A", "IaaS (infrastructure), PaaS (platform), SaaS (software) — each provides a different level of abstraction."),
+      generateTypingStep("Cloud Mnemonic", "Type cloud service models!", "IaaS: Infrastructure (AWS EC2, Azure VMs)\nPaaS: Platform (Heroku, Google App Engine)\nSaaS: Software (Gmail, Salesforce, Slack)", "Remember: Pizza analogy — IaaS is ingredients, PaaS is kitchen, SaaS is delivery.", "medium"),
+    ],
+    // ===== ERP & SAP =====
+    "erp-systems": [
+      generateQuizStep("ERP Definition", "What is ERP?", [{ label: "A", text: "Enterprise Resource Planning — integrates all core business processes" }, { label: "B", text: "An email provider" }, { label: "C", text: "A social media platform" }], "A", "ERP integrates finance, HR, manufacturing, supply chain, CRM, and more into one system."),
+      generateQuizStep("ERP Modules", "What are typical ERP modules?", [{ label: "A", text: "Finance, HR, Supply Chain, Manufacturing, CRM, Inventory" }, { label: "B", text: "Only accounting" }, { label: "C", text: "Email and calendar" }], "A", "ERP modules cover all business functions, sharing one central database."),
+      generateTypingStep("ERP Vendors", "Type major ERP platforms!", "SAP S/4HANA: Market leader, enterprise-grade\nOracle ERP Cloud: Strong in finance/supply chain\nMicrosoft Dynamics 365: SMB-friendly, Azure integrated\nSalesforce: CRM-first, expanding to ERP\nWorkday: HR and finance specialist", "SAP holds ~22% market share. Oracle and Microsoft are the main competitors.", "medium"),
+      generateQuizStep("SAP HANA", "What is SAP HANA?", [{ label: "A", text: "An in-memory database and application platform by SAP" }, { label: "B", text: "A programming language" }, { label: "C", text: "A web browser" }], "A", "SAP HANA processes data in-memory (RAM) instead of disk, enabling real-time analytics on transactional data."),
+      generateTypingStep("SAP Modules", "Type key SAP modules!", "FI: Financial Accounting\nCO: Controlling\nSD: Sales & Distribution\nMM: Materials Management\nPP: Production Planning\nHR: Human Resources", "SAP modules are known by their two-letter abbreviations.", "medium"),
+      generateQuizStep("ERP Implementation", "What is the biggest risk in ERP implementation?", [{ label: "A", text: "Cost overruns, scope creep, and user resistance to change" }, { label: "B", text: "The software is too fast" }, { label: "C", text: "No training needed" }], "A", "70% of ERP projects experience cost/time overruns. Change management is critical."),
+    ],
+    // ===== Hosting & Infrastructure =====
+    "ecommerce-platforms": [
+      generateQuizStep("E-Commerce Platforms", "What are the leading e-commerce platforms?", [{ label: "A", text: "Shopify, WooCommerce, Magento, BigCommerce" }, { label: "B", text: "Microsoft Word" }, { label: "C", text: "Photoshop" }], "A", "Shopify dominates hosted solutions; WooCommerce (WordPress plugin) leads self-hosted."),
+      generateTypingStep("Platform Comparison", "Type platform differences!", "Shopify: Hosted, easy, monthly fee ($29+)\nWooCommerce: Self-hosted, WordPress, free plugin\nMagento: Enterprise, complex, scalable\nBigCommerce: Hosted, built-in features", "Choose based on budget, technical skill, and scalability needs.", "medium"),
+    ],
+    "payment-systems": [
+      generateQuizStep("Payment Gateways", "What is a payment gateway?", [{ label: "A", text: "A service that processes credit card payments securely" }, { label: "B", text: "A physical gate at a bank" }, { label: "C", text: "An email service" }], "A", "Payment gateways encrypt card data, communicate with banks, and authorize transactions."),
+      generateTypingStep("Payment Providers", "Type major payment providers!", "Stripe: Developer-friendly API, 2.9% + 30¢\nPayPal: Consumer trust, easy integration\nSquare: POS + online payments\nAdyen: Enterprise, global coverage\nBraintree: PayPal-owned, supports PayPal/Venmo", "Stripe and PayPal handle 60%+ of online payments in the US/UK.", "medium"),
+    ],
+    // ===== IT Infrastructure =====
+    "it-governance": [
+      generateQuizStep("COBIT Framework", "What is COBIT?", [{ label: "A", text: "A governance framework for enterprise IT management" }, { label: "B", text: "A programming language" }, { label: "C", text: "A database" }], "A", "COBIT (Control Objectives for Information Technologies) aligns IT with business goals."),
+      generateTypingStep("Governance Frameworks", "Type IT governance frameworks!", "COBIT: IT governance and management\nITIL: IT service management\nISO 27001: Information security\nPRINCE2: Project management\nTOGAF: Enterprise architecture", "Each framework addresses a different aspect of IT management.", "medium"),
+    ],
+    "itil-framework": [
+      generateQuizStep("ITIL Purpose", "What does ITIL provide?", [{ label: "A", text: "Best practices for IT service management (ITSM)" }, { label: "B", text: "Programming tutorials" }, { label: "C", text: "Hardware specifications" }], "A", "ITIL defines processes for delivering and supporting IT services effectively."),
+      generateTypingStep("ITIL Practices", "Type ITIL 4 management practices!", "Service Desk: Single point of contact\nIncident Management: Restore service fast\nProblem Management: Find root causes\nChange Enablement: Control changes\nService Level Management: Agree SLAs", "ITIL 4 shifted from 'processes' to 'practices' for flexibility.", "medium"),
+      generateQuizStep("SLA", "What is an SLA?", [{ label: "A", text: "Service Level Agreement — defines expected service standards" }, { label: "B", text: "A software license" }, { label: "C", text: "A server location" }], "A", "SLAs specify uptime (e.g., 99.9%), response times, and penalties for violations."),
+    ],
+    // ===== Conversion & Analytics =====
+    "conversion-optimization": [
+      generateQuizStep("CRO Definition", "What is Conversion Rate Optimization?", [{ label: "A", text: "Systematically improving the % of visitors who take a desired action" }, { label: "B", text: "Increasing website traffic" }, { label: "C", text: "Changing website colors" }], "A", "CRO uses data and testing to increase conversions without increasing traffic."),
+      generateTypingStep("A/B Testing", "Type A/B testing process!", "1. Identify a hypothesis\n2. Create variant (B)\n3. Split traffic 50/50\n4. Run for statistical significance\n5. Analyze: did B beat A?\n6. Implement winner", "A/B testing is the gold standard for CRO. Never end tests early.", "medium"),
+      generateQuizStep("Key Metrics", "Which metric matters most for CRO?", [{ label: "A", text: "Conversion rate, bounce rate, time on page, exit rate" }, { label: "B", text: "Number of pages" }, { label: "C", text: "Server uptime" }], "A", "Conversion rate is primary. Bounce rate indicates engagement. Heatmaps show behavior."),
+    ],
+    "analytics-tools-bis": [
+      generateQuizStep("Google Analytics", "What does Google Analytics 4 (GA4) track?", [{ label: "A", text: "User events, conversions, behavior flow across devices" }, { label: "B", text: "Server hardware" }, { label: "C", text: "Email content" }], "A", "GA4 is event-based (not session-based). It tracks user journeys across web and app."),
+      generateTypingStep("Analytics Setup", "Type GA4 key metrics!", "Users: Unique visitors\nSessions: Visit instances\nEngagement Rate: % active sessions (>10s)\nConversion Rate: % completing goals\nBounce Rate: % single-page visits", "GA4 replaced Universal Analytics. Engagement rate replaces bounce rate as primary.", "medium"),
+    ],
+    // ===== Product & Strategy =====
+    "product-management": [
+      generateQuizStep("Product Management", "What does a Product Manager do?", [{ label: "A", text: "Defines what to build, for whom, and why — owns the product roadmap" }, { label: "B", text: "Writes all the code" }, { label: "C", text: "Only designs the UI" }], "A", "PMs sit at the intersection of business, technology, and user experience."),
+      generateTypingStep("Product Frameworks", "Type product management frameworks!", "MVP: Minimum Viable Product\nMoSCoW: Must/Should/Could/Won't\nRICE: Reach, Impact, Confidence, Effort\nKano: Must-have, Performance, Delight\nJobs-to-be-Done: User goals", "RICE scoring helps prioritize features objectively.", "medium"),
+    ],
+    "roi-analysis": [
+      generateQuizStep("ROI Formula", "How do you calculate ROI?", [{ label: "A", text: "ROI = (Net Profit / Cost of Investment) × 100" }, { label: "B", text: "ROI = Revenue × Cost" }, { label: "C", text: "ROI = Profit + Cost" }], "A", "ROI measures the return relative to the investment cost. Higher % = better return."),
+      generateTypingStep("ROI Calculation", "Type an ROI example!", "Investment: £50,000\nNet Benefit: £75,000\nROI = (75000 - 50000) / 50000 × 100\nROI = 50%", "A 50% ROI means you earned £1.50 for every £1 invested.", "medium"),
+    ],
   };
   return content[id] || null;
 }
-
-// ======================== GAME DEVELOPMENT ========================
 function generateGameDevSteps(id: string, title: string, desc: string): LessonStep[] {
   const topicContent = getGameDevContent(id);
   if (topicContent) return topicContent;
