@@ -49,51 +49,56 @@ function generateStepsForTopic(id: string, title: string, desc: string, moduleId
 function generateJavaSteps(id: string, title: string, desc: string): LessonStep[] {
   const steps: LessonStep[] = [];
   
+  // Step 1: Context — why this matters (assumes ZERO knowledge)
   steps.push(generateQuizStep(
-    `What is ${title}?`, `Which best describes ${title.toLowerCase()} in Java?`,
-    [{ label: "A", text: desc }, { label: "B", text: "A type of variable declaration" }, { label: "C", text: "A compiler error message" }],
-    "A", `${title} refers to: ${desc}. This is a fundamental Java concept.`, "easy"
+    `Why learn ${title}?`,
+    `You're learning to code from scratch. ${title} is a concept you'll use when building apps, games, and websites. Which best describes it?`,
+    [{ label: "A", text: desc }, { label: "B", text: "A type of computer hardware" }, { label: "C", text: "Something you can skip" }],
+    "A", `${title}: ${desc}. Don't worry if this is new — we'll break it down step by step until it feels automatic.`, "easy"
   ));
 
+  // Step 2 & 3: Code typing drills
   const codeSnippets = getJavaCodeSnippet(id, title);
   codeSnippets.forEach(snippet => {
     steps.push(generateTypingStep(snippet.title, snippet.prompt, snippet.code, snippet.explanation, snippet.difficulty));
   });
 
+  // Step 4: Understanding check
   steps.push(generateQuizStep(
-    `${title} Knowledge Check`, `Why is ${title.toLowerCase()} important in Java programming?`,
-    [{ label: "A", text: `It helps with ${desc.toLowerCase()}` }, { label: "B", text: "It is only used in Python" }, { label: "C", text: "It makes code run slower" }],
-    "A", `${title} is important because it enables ${desc.toLowerCase()}, making your code more robust and professional.`, "medium"
+    `${title} explained simply`, `In your own words, ${title.toLowerCase()} is used for:`,
+    [{ label: "A", text: `${desc}` }, { label: "B", text: "Deleting files from your computer" }, { label: "C", text: "Making the screen change colour" }],
+    "A", `Exactly! ${title} is about ${desc.toLowerCase()}. You'll use this pattern hundreds of times in real projects.`, "easy"
   ));
 
-  // Additional drilling: repeat the code pattern
+  // Step 5: Repetition drill — type the main pattern again
   if (codeSnippets.length > 0) {
     const mainSnippet = codeSnippets[0];
     steps.push(generateTypingStep(
-      `Drill: ${mainSnippet.title}`, `Type it again from memory!`, mainSnippet.code,
-      `Repetition builds muscle memory. You should now be able to type ${title.toLowerCase()} syntax without thinking.`, mainSnippet.difficulty
+      `Drill: ${mainSnippet.title}`, `Type it again from memory — this builds the muscle memory that makes coding feel natural.`, mainSnippet.code,
+      `Each repetition makes this pattern more automatic. Professional developers type patterns like this without thinking.`, mainSnippet.difficulty
     ));
   }
 
+  // Step 6: Best practice quiz
   steps.push(generateQuizStep(
-    `${title} Best Practices`, `What is a best practice when using ${title.toLowerCase()}?`,
-    [{ label: "A", text: "Ignore error handling" }, { label: "B", text: "Follow Java naming conventions and document your code" }, { label: "C", text: "Never test your code" }],
-    "B", `Following conventions and documenting code ensures ${title.toLowerCase()} is used correctly and maintainably.`, "medium"
+    `${title} best practice`, `When using ${title.toLowerCase()} in a real project, you should:`,
+    [{ label: "A", text: "Write clear code and test it" }, { label: "B", text: "Never test anything" }, { label: "C", text: "Copy code without understanding it" }],
+    "A", `Clean, tested code is what separates beginners from professionals. You're building that habit now.`, "medium"
   ));
 
-  // Application quiz
+  // Step 7: Application scenario
   steps.push(generateQuizStep(
-    `Apply ${title}`, `A colleague asks you to implement ${title.toLowerCase()}. What is your first step?`,
-    [{ label: "A", text: "Start coding immediately without planning" }, { label: "B", text: "Understand the requirement, plan the approach, then write clean code" }, { label: "C", text: "Copy code from the internet without understanding" }],
-    "B", `Professional developers plan their approach before coding. Understanding ${title.toLowerCase()} deeply means you can implement it correctly the first time.`, "hard"
+    `Real-world ${title}`, `You're building a mobile app and need to use ${title.toLowerCase()}. What's your approach?`,
+    [{ label: "A", text: "Skip it — it's not important" }, { label: "B", text: "Recall the pattern you drilled, plan, then code" }, { label: "C", text: "Ask someone else to do it" }],
+    "B", `You now know the pattern. In a real project, you'd recall this exact syntax and apply it. That's professional fluency.`, "hard"
   ));
 
-  // Final speed drill
+  // Step 8: Final speed drill
   if (codeSnippets.length > 0) {
     steps.push(generateTypingStep(
-      `Speed Drill: ${title}`, `Type it one more time — aim for speed!`,
+      `Speed drill: ${title}`, `Last time — type as fast as you can!`,
       codeSnippets[codeSnippets.length > 1 ? 1 : 0].code,
-      `By now this should feel natural. ${title} syntax is becoming second nature!`, "medium"
+      `Three repetitions locks this into long-term memory. ${title} syntax is now becoming second nature!`, "medium"
     ));
   }
 
@@ -1234,22 +1239,107 @@ function getWebCodeSnippet(id: string, title: string): { title: string; prompt: 
 }
 
 // ======================== GENERIC FALLBACK ========================
+// This fallback ensures EVERY lesson, even those without hand-written content,
+// teaches from absolute zero with the 7-step autonomic mastery scaffold.
 function generateGenericSteps(title: string, desc: string): LessonStep[] {
-  return [
-    generateQuizStep(`Understanding ${title}`, `What is ${title.toLowerCase()}?`,
-      [{ label: "A", text: "An unrelated concept" }, { label: "B", text: desc }, { label: "C", text: "Not applicable to computing" }],
-      "B", `${title}: ${desc}.`, "easy"),
-    generateTypingStep(`${title} Definition`, `Type the key definition!`,
-      `${title}: ${desc}`,
-      `Typing definitions from memory builds recall.`, "easy"),
-    generateQuizStep(`${title} Application`, `How is ${title.toLowerCase()} applied?`,
-      [{ label: "A", text: "Only in textbooks" }, { label: "B", text: "In real-world computing scenarios" }, { label: "C", text: "It has no practical use" }],
-      "B", `${title} has many practical applications in computing and technology.`, "medium"),
-    generateTypingStep(`${title} Practice`, `Type it again for memory!`,
-      `${title}: ${desc}`,
-      `Repetition builds automatic recall of key concepts.`, "easy"),
-    generateQuizStep(`${title} Mastery`, `Can you explain ${title.toLowerCase()} to someone else?`,
-      [{ label: "A", text: "No, it's too complex" }, { label: "B", text: "Yes: " + desc.toLowerCase() }, { label: "C", text: "I need to look it up" }],
-      "B", `If you can explain it simply, you truly understand it.`, "medium"),
+  // Step 1: Context — why does this matter?
+  const steps: LessonStep[] = [
+    generateQuizStep(
+      `Why learn ${title}?`,
+      `Imagine you want to build an app, a website, or solve a real problem. Which of these would help?`,
+      [
+        { label: "A", text: `Understanding ${title.toLowerCase()} — ${desc.toLowerCase()}` },
+        { label: "B", text: "Memorising random facts without context" },
+        { label: "C", text: "Skipping fundamentals and hoping for the best" },
+      ],
+      "A",
+      `${title} is a building block used by professionals every day. By the end of this lesson you will know exactly what it is and how to use it — starting from zero.`,
+      "easy"
+    ),
   ];
+
+  // Step 2: Micro-lesson — plain-English explanation
+  steps.push(generateQuizStep(
+    `What is ${title}?`,
+    `In simple terms, ${title.toLowerCase()} means: "${desc}". Which statement is correct?`,
+    [
+      { label: "A", text: desc },
+      { label: "B", text: `The opposite of ${desc.toLowerCase()}` },
+      { label: "C", text: "Something only experts need to know" },
+    ],
+    "A",
+    `Correct! ${title} means: ${desc}. Everyone starts here — even professional developers learned this exact concept once.`,
+    "easy"
+  ));
+
+  // Step 3: Real-world analogy
+  steps.push(generateQuizStep(
+    `${title} in the real world`,
+    `Think of ${title.toLowerCase()} like a recipe step — without it, the final product won't work. Where would you encounter this?`,
+    [
+      { label: "A", text: "Building websites, apps, games, or data systems" },
+      { label: "B", text: "Only in academic textbooks" },
+      { label: "C", text: "Nowhere — it's outdated" },
+    ],
+    "A",
+    `${title} is used in real products every day — from mobile apps to cybersecurity systems to AI tools.`,
+    "easy"
+  ));
+
+  // Step 4: Type it — muscle memory drill #1
+  steps.push(generateTypingStep(
+    `Type the key concept`,
+    `Type this definition exactly to build muscle memory:`,
+    `${title}: ${desc}`,
+    `Typing from memory is how professional coders build speed. You're already building that same skill.`,
+    "easy"
+  ));
+
+  // Step 5: Application quiz
+  steps.push(generateQuizStep(
+    `Apply ${title}`,
+    `A team asks you to help build a feature that uses ${title.toLowerCase()}. What's the FIRST thing you do?`,
+    [
+      { label: "A", text: "Panic and give up" },
+      { label: "B", text: `Recall the definition: "${desc.substring(0, 60)}..." and plan your approach` },
+      { label: "C", text: "Randomly try things until something works" },
+    ],
+    "B",
+    `Professionals always start by recalling what they know, then plan. You now know ${title.toLowerCase()} well enough to do this.`,
+    "medium"
+  ));
+
+  // Step 6: Repetition drill #2
+  steps.push(generateTypingStep(
+    `Speed drill: ${title}`,
+    `Type it again — faster this time!`,
+    `${title}: ${desc}`,
+    `Second repetition locks the concept into long-term memory. This is exactly how coding fluency is built.`,
+    "medium"
+  ));
+
+  // Step 7: Mastery check
+  steps.push(generateQuizStep(
+    `${title} mastery check`,
+    `Could you explain ${title.toLowerCase()} to a friend who knows nothing about coding?`,
+    [
+      { label: "A", text: `Yes — it means: ${desc.toLowerCase().substring(0, 80)}` },
+      { label: "B", text: "No, I still don't understand" },
+      { label: "C", text: "I'd need to Google it first" },
+    ],
+    "A",
+    `If you can explain it simply, you truly own this knowledge. ${title} is now part of your skill set. Well done!`,
+    "medium"
+  ));
+
+  // Step 8: Final speed drill
+  steps.push(generateTypingStep(
+    `Final drill: ${title}`,
+    `One last time from memory — this cements it permanently:`,
+    `${title}: ${desc}`,
+    `Three repetitions is the minimum for long-term retention. You've completed the full autonomic mastery cycle for ${title.toLowerCase()}.`,
+    "medium"
+  ));
+
+  return steps;
 }
