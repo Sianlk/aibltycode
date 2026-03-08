@@ -18,259 +18,40 @@ interface BugChallenge {
   difficulty: "easy" | "medium" | "hard";
 }
 
+// Mnemonic: B.U.G.S = Boundary errors, Uninitialized vars, Grammar mistakes, Scope issues
+
 const challenges: BugChallenge[] = [
-  // Loop Bugs
-  {
-    id: "infinite-loop",
-    title: "Infinite Loop",
-    buggyCode: `for (int i = 0; i < 10; i--) {
-  System.out.println(i);
-}`,
-    fixedCode: `for (int i = 0; i < 10; i++) {
-  System.out.println(i);
-}`,
-    bugLine: 1,
-    explanation: "i-- decrements instead of increments, so i will never reach 10. Use i++ to increment.",
-    hint: "Check the update part of the for loop - which direction is i going?",
-    category: "loops",
-    difficulty: "easy"
-  },
-  {
-    id: "off-by-one",
-    title: "Off-by-One Error",
-    buggyCode: `String[] names = {"A", "B", "C"};
-for (int i = 0; i <= names.length; i++) {
-  System.out.println(names[i]);
-}`,
-    fixedCode: `String[] names = {"A", "B", "C"};
-for (int i = 0; i < names.length; i++) {
-  System.out.println(names[i]);
-}`,
-    bugLine: 2,
-    explanation: "Using <= with array.length causes ArrayIndexOutOfBoundsException. Arrays are 0-indexed, so use < not <=.",
-    hint: "If array has 3 items, valid indexes are 0, 1, 2. What's names.length?",
-    category: "loops",
-    difficulty: "easy"
-  },
-  {
-    id: "while-never-ends",
-    title: "While Never Terminates",
-    buggyCode: `int count = 0;
-while (count < 5) {
-  System.out.println(count);
-}`,
-    fixedCode: `int count = 0;
-while (count < 5) {
-  System.out.println(count);
-  count++;
-}`,
-    bugLine: 3,
-    explanation: "Missing count++ inside the loop means count stays 0 forever. Always update loop variables!",
-    hint: "What changes count? Will it ever reach 5?",
-    category: "loops",
-    difficulty: "easy"
-  },
+  // === LOOP BUGS ===
+  { id: "infinite-loop", title: "Infinite Loop", buggyCode: `for (int i = 0; i < 10; i--) {\n  System.out.println(i);\n}`, fixedCode: `for (int i = 0; i < 10; i++) {\n  System.out.println(i);\n}`, bugLine: 1, explanation: "i-- decrements instead of increments, so i will never reach 10. Use i++ to increment.", hint: "Check the update part of the for loop - which direction is i going?", category: "loops", difficulty: "easy" },
+  { id: "off-by-one", title: "Off-by-One Error", buggyCode: `String[] names = {"A", "B", "C"};\nfor (int i = 0; i <= names.length; i++) {\n  System.out.println(names[i]);\n}`, fixedCode: `String[] names = {"A", "B", "C"};\nfor (int i = 0; i < names.length; i++) {\n  System.out.println(names[i]);\n}`, bugLine: 2, explanation: "Using <= with array.length causes ArrayIndexOutOfBoundsException. Arrays are 0-indexed, so use < not <=.", hint: "If array has 3 items, valid indexes are 0, 1, 2. What's names.length?", category: "loops", difficulty: "easy" },
+  { id: "while-never-ends", title: "While Never Terminates", buggyCode: `int count = 0;\nwhile (count < 5) {\n  System.out.println(count);\n}`, fixedCode: `int count = 0;\nwhile (count < 5) {\n  System.out.println(count);\n  count++;\n}`, bugLine: 3, explanation: "Missing count++ inside the loop means count stays 0 forever. Always update loop variables!", hint: "What changes count? Will it ever reach 5?", category: "loops", difficulty: "easy" },
+  { id: "wrong-loop-var", title: "Wrong Loop Variable", buggyCode: `for (int i = 0; i < 5; i++) {\n  for (int j = 0; j < 3; i++) {\n    System.out.println(i + "," + j);\n  }\n}`, fixedCode: `for (int i = 0; i < 5; i++) {\n  for (int j = 0; j < 3; j++) {\n    System.out.println(i + "," + j);\n  }\n}`, bugLine: 2, explanation: "Inner loop increments i instead of j! j never changes, creating an infinite inner loop.", hint: "Which variable should the inner loop update?", category: "loops", difficulty: "medium" },
 
-  // Conditional Bugs
-  {
-    id: "assignment-vs-equals",
-    title: "Assignment vs Comparison",
-    buggyCode: `int x = 5;
-if (x = 10) {
-  System.out.println("Ten!");
-}`,
-    fixedCode: `int x = 5;
-if (x == 10) {
-  System.out.println("Ten!");
-}`,
-    bugLine: 2,
-    explanation: "Single = is assignment, == is comparison. 'x = 10' assigns 10 to x, doesn't compare.",
-    hint: "= assigns a value, == checks if equal",
-    category: "conditionals",
-    difficulty: "easy"
-  },
-  {
-    id: "missing-break",
-    title: "Missing Break Statement",
-    buggyCode: `switch (day) {
-  case "MON":
-    System.out.println("Monday");
-  case "TUE":
-    System.out.println("Tuesday");
-    break;
-}`,
-    fixedCode: `switch (day) {
-  case "MON":
-    System.out.println("Monday");
-    break;
-  case "TUE":
-    System.out.println("Tuesday");
-    break;
-}`,
-    bugLine: 3,
-    explanation: "Without break, code 'falls through' to next case. Monday would print both 'Monday' AND 'Tuesday'!",
-    hint: "What stops execution in a switch case?",
-    category: "conditionals",
-    difficulty: "medium"
-  },
-  {
-    id: "string-equals",
-    title: "String Comparison Error",
-    buggyCode: `String name = "Alice";
-if (name == "Alice") {
-  System.out.println("Found!");
-}`,
-    fixedCode: `String name = "Alice";
-if (name.equals("Alice")) {
-  System.out.println("Found!");
-}`,
-    bugLine: 2,
-    explanation: "== compares object references, not content. Use .equals() to compare String values.",
-    hint: "How do you properly compare String contents in Java?",
-    category: "conditionals",
-    difficulty: "medium"
-  },
+  // === CONDITIONAL BUGS ===
+  { id: "assignment-vs-equals", title: "Assignment vs Comparison", buggyCode: `int x = 5;\nif (x = 10) {\n  System.out.println("Ten!");\n}`, fixedCode: `int x = 5;\nif (x == 10) {\n  System.out.println("Ten!");\n}`, bugLine: 2, explanation: "Single = is assignment, == is comparison. 'x = 10' assigns 10 to x, doesn't compare.", hint: "= assigns a value, == checks if equal", category: "conditionals", difficulty: "easy" },
+  { id: "missing-break", title: "Missing Break Statement", buggyCode: `switch (day) {\n  case "MON":\n    System.out.println("Monday");\n  case "TUE":\n    System.out.println("Tuesday");\n    break;\n}`, fixedCode: `switch (day) {\n  case "MON":\n    System.out.println("Monday");\n    break;\n  case "TUE":\n    System.out.println("Tuesday");\n    break;\n}`, bugLine: 3, explanation: "Without break, code 'falls through' to next case. Monday would print both 'Monday' AND 'Tuesday'!", hint: "What stops execution in a switch case?", category: "conditionals", difficulty: "medium" },
+  { id: "string-equals", title: "String Comparison Error", buggyCode: `String name = "Alice";\nif (name == "Alice") {\n  System.out.println("Found!");\n}`, fixedCode: `String name = "Alice";\nif (name.equals("Alice")) {\n  System.out.println("Found!");\n}`, bugLine: 2, explanation: "== compares object references, not content. Use .equals() to compare String values.", hint: "How do you properly compare String contents in Java?", category: "conditionals", difficulty: "medium" },
+  { id: "logic-operator", title: "Wrong Logic Operator", buggyCode: `if (age > 18 & age < 65) {\n  System.out.println("Working age");\n}`, fixedCode: `if (age > 18 && age < 65) {\n  System.out.println("Working age");\n}`, bugLine: 1, explanation: "& is bitwise AND (evaluates both sides). && is logical AND (short-circuits). Use && for conditions!", hint: "Single & vs double && — which is for boolean logic?", category: "conditionals", difficulty: "medium" },
 
-  // Method Bugs
-  {
-    id: "missing-return",
-    title: "Missing Return Statement",
-    buggyCode: `public int add(int a, int b) {
-  int sum = a + b;
-}`,
-    fixedCode: `public int add(int a, int b) {
-  int sum = a + b;
-  return sum;
-}`,
-    bugLine: 2,
-    explanation: "Method declares 'int' return type but never returns anything. Add 'return sum;' at the end.",
-    hint: "What should a method with 'int' return type give back?",
-    category: "methods",
-    difficulty: "easy"
-  },
-  {
-    id: "static-non-static",
-    title: "Static Context Error",
-    buggyCode: `public class App {
-  int value = 10;
-  public static void main(String[] args) {
-    System.out.println(value);
-  }
-}`,
-    fixedCode: `public class App {
-  static int value = 10;
-  public static void main(String[] args) {
-    System.out.println(value);
-  }
-}`,
-    bugLine: 2,
-    explanation: "Static methods can't access non-static variables directly. Make 'value' static or create an instance.",
-    hint: "Static belongs to class, non-static belongs to objects",
-    category: "methods",
-    difficulty: "medium"
-  },
+  // === METHOD BUGS ===
+  { id: "missing-return", title: "Missing Return Statement", buggyCode: `public int add(int a, int b) {\n  int sum = a + b;\n}`, fixedCode: `public int add(int a, int b) {\n  int sum = a + b;\n  return sum;\n}`, bugLine: 2, explanation: "Method declares 'int' return type but never returns anything. Add 'return sum;' at the end.", hint: "What should a method with 'int' return type give back?", category: "methods", difficulty: "easy" },
+  { id: "static-non-static", title: "Static Context Error", buggyCode: `public class App {\n  int value = 10;\n  public static void main(String[] args) {\n    System.out.println(value);\n  }\n}`, fixedCode: `public class App {\n  static int value = 10;\n  public static void main(String[] args) {\n    System.out.println(value);\n  }\n}`, bugLine: 2, explanation: "Static methods can't access non-static variables directly. Make 'value' static or create an instance.", hint: "Static belongs to class, non-static belongs to objects", category: "methods", difficulty: "medium" },
+  { id: "void-return", title: "Returning from Void", buggyCode: `public void greet() {\n  return "Hello!";\n}`, fixedCode: `public String greet() {\n  return "Hello!";\n}`, bugLine: 1, explanation: "void methods can't return values. Change return type to String if you need to return text.", hint: "Can a void method return a value?", category: "methods", difficulty: "easy" },
 
-  // OOP Bugs
-  {
-    id: "null-pointer",
-    title: "Null Pointer Exception",
-    buggyCode: `String text = null;
-int length = text.length();`,
-    fixedCode: `String text = null;
-if (text != null) {
-  int length = text.length();
-}`,
-    bugLine: 2,
-    explanation: "Calling methods on null throws NullPointerException. Always check for null first!",
-    hint: "What happens when you call a method on 'nothing'?",
-    category: "oop",
-    difficulty: "easy"
-  },
-  {
-    id: "constructor-void",
-    title: "Constructor Error",
-    buggyCode: `class Dog {
-  String name;
-  void Dog(String n) {
-    name = n;
-  }
-}`,
-    fixedCode: `class Dog {
-  String name;
-  Dog(String n) {
-    name = n;
-  }
-}`,
-    bugLine: 3,
-    explanation: "Constructors don't have return types! 'void Dog' makes it a regular method, not a constructor.",
-    hint: "What's different about constructor declarations?",
-    category: "oop",
-    difficulty: "medium"
-  },
-  {
-    id: "super-call",
-    title: "Missing Super Call",
-    buggyCode: `class Animal {
-  String name;
-  Animal(String n) { name = n; }
-}
-class Dog extends Animal {
-  Dog(String n) {
-    System.out.println("Dog created");
-  }
-}`,
-    fixedCode: `class Animal {
-  String name;
-  Animal(String n) { name = n; }
-}
-class Dog extends Animal {
-  Dog(String n) {
-    super(n);
-    System.out.println("Dog created");
-  }
-}`,
-    bugLine: 7,
-    explanation: "When parent has a parameterized constructor, child must call super() first.",
-    hint: "Parent needs parameters - who calls the parent constructor?",
-    category: "oop",
-    difficulty: "hard"
-  },
+  // === OOP BUGS ===
+  { id: "null-pointer", title: "Null Pointer Exception", buggyCode: `String text = null;\nint length = text.length();`, fixedCode: `String text = null;\nif (text != null) {\n  int length = text.length();\n}`, bugLine: 2, explanation: "Calling methods on null throws NullPointerException. Always check for null first!", hint: "What happens when you call a method on 'nothing'?", category: "oop", difficulty: "easy" },
+  { id: "constructor-void", title: "Constructor Error", buggyCode: `class Dog {\n  String name;\n  void Dog(String n) {\n    name = n;\n  }\n}`, fixedCode: `class Dog {\n  String name;\n  Dog(String n) {\n    name = n;\n  }\n}`, bugLine: 3, explanation: "Constructors don't have return types! 'void Dog' makes it a regular method, not a constructor.", hint: "What's different about constructor declarations?", category: "oop", difficulty: "medium" },
+  { id: "super-call", title: "Missing Super Call", buggyCode: `class Animal {\n  String name;\n  Animal(String n) { name = n; }\n}\nclass Dog extends Animal {\n  Dog(String n) {\n    System.out.println("Dog created");\n  }\n}`, fixedCode: `class Animal {\n  String name;\n  Animal(String n) { name = n; }\n}\nclass Dog extends Animal {\n  Dog(String n) {\n    super(n);\n    System.out.println("Dog created");\n  }\n}`, bugLine: 7, explanation: "When parent has a parameterized constructor, child must call super() first.", hint: "Parent needs parameters - who calls the parent constructor?", category: "oop", difficulty: "hard" },
+  { id: "private-access", title: "Private Access Error", buggyCode: `class Account {\n  private double balance = 100;\n}\nclass Main {\n  void test() {\n    Account a = new Account();\n    a.balance = 200;\n  }\n}`, fixedCode: `class Account {\n  private double balance = 100;\n  public void setBalance(double b) { balance = b; }\n}\nclass Main {\n  void test() {\n    Account a = new Account();\n    a.setBalance(200);\n  }\n}`, bugLine: 7, explanation: "Private fields can't be accessed outside the class. Use getters/setters for encapsulation!", hint: "What does 'private' mean for external access?", category: "oop", difficulty: "medium" },
+  { id: "missing-override", title: "Override Without @Override", buggyCode: `class Animal {\n  public void speak() { }\n}\nclass Dog extends Animal {\n  public void speek() {\n    System.out.println("Woof!");\n  }\n}`, fixedCode: `class Animal {\n  public void speak() { }\n}\nclass Dog extends Animal {\n  @Override\n  public void speak() {\n    System.out.println("Woof!");\n  }\n}`, bugLine: 5, explanation: "Typo 'speek' creates a NEW method instead of overriding. @Override annotation catches this at compile time!", hint: "Is the method name spelled exactly like the parent's?", category: "oop", difficulty: "hard" },
 
-  // Data Structure Bugs
-  {
-    id: "array-index",
-    title: "Array Index Out of Bounds",
-    buggyCode: `int[] nums = new int[3];
-nums[3] = 10;`,
-    fixedCode: `int[] nums = new int[3];
-nums[2] = 10;`,
-    bugLine: 2,
-    explanation: "Array of size 3 has indexes 0, 1, 2. Index 3 is out of bounds!",
-    hint: "Array indexes start at 0. What's the max index for size 3?",
-    category: "data",
-    difficulty: "easy"
-  },
-  {
-    id: "concurrent-modification",
-    title: "Concurrent Modification",
-    buggyCode: `List<String> list = new ArrayList<>();
-list.add("A"); list.add("B");
-for (String s : list) {
-  list.remove(s);
-}`,
-    fixedCode: `List<String> list = new ArrayList<>();
-list.add("A"); list.add("B");
-Iterator<String> it = list.iterator();
-while (it.hasNext()) {
-  it.next();
-  it.remove();
-}`,
-    bugLine: 4,
-    explanation: "Can't modify a list while iterating with for-each. Use Iterator.remove() instead.",
-    hint: "Removing during for-each breaks the iteration",
-    category: "data",
-    difficulty: "hard"
-  },
+  // === DATA STRUCTURE BUGS ===
+  { id: "array-index", title: "Array Index Out of Bounds", buggyCode: `int[] nums = new int[3];\nnums[3] = 10;`, fixedCode: `int[] nums = new int[3];\nnums[2] = 10;`, bugLine: 2, explanation: "Array of size 3 has indexes 0, 1, 2. Index 3 is out of bounds!", hint: "Array indexes start at 0. What's the max index for size 3?", category: "data", difficulty: "easy" },
+  { id: "concurrent-modification", title: "Concurrent Modification", buggyCode: `List<String> list = new ArrayList<>();\nlist.add("A"); list.add("B");\nfor (String s : list) {\n  list.remove(s);\n}`, fixedCode: `List<String> list = new ArrayList<>();\nlist.add("A"); list.add("B");\nIterator<String> it = list.iterator();\nwhile (it.hasNext()) {\n  it.next();\n  it.remove();\n}`, bugLine: 4, explanation: "Can't modify a list while iterating with for-each. Use Iterator.remove() instead.", hint: "Removing during for-each breaks the iteration", category: "data", difficulty: "hard" },
+
+  // === EXCEPTION BUGS ===
+  { id: "catch-order", title: "Wrong Catch Order", buggyCode: `try {\n  int x = 10 / 0;\n} catch (Exception e) {\n} catch (ArithmeticException e) {\n}`, fixedCode: `try {\n  int x = 10 / 0;\n} catch (ArithmeticException e) {\n} catch (Exception e) {\n}`, bugLine: 4, explanation: "Catch specific exceptions first! Exception catches everything, making ArithmeticException unreachable.", hint: "Put the most specific exception first", category: "exceptions", difficulty: "hard" },
+  { id: "unhandled-checked", title: "Unhandled Checked Exception", buggyCode: `public void readFile() {\n  FileReader fr = new FileReader("data.txt");\n}`, fixedCode: `public void readFile() throws IOException {\n  FileReader fr = new FileReader("data.txt");\n}`, bugLine: 1, explanation: "FileReader throws a checked exception (IOException). Must either try-catch or declare 'throws IOException'.", hint: "Checked exceptions must be handled or declared", category: "exceptions", difficulty: "medium" },
 ];
 
 const difficultyColors = {
