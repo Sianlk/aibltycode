@@ -360,6 +360,7 @@ function generateSystemsSteps(id: string, title: string, desc: string): LessonSt
 }
 
 function getSystemsContent(id: string): LessonStep[] | null {
+  if (systemsExpandedContent[id]) return systemsExpandedContent[id];
   const content: Record<string, LessonStep[]> = {
     "what-is-system": [
       generateQuizStep("System Definition", "What is a system?", [{ label: "A", text: "A set of interrelated components working together toward a goal" }, { label: "B", text: "A single computer program" }, { label: "C", text: "Only hardware" }], "A", "A system is a collection of interrelated components that work together to achieve a common purpose."),
