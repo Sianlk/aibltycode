@@ -790,6 +790,7 @@ function generateAISteps(id: string, title: string, desc: string): LessonStep[] 
 }
 
 function getAIContent(id: string): LessonStep[] | null {
+  if (aiDeepContent[id]) return aiDeepContent[id];
   const content: Record<string, LessonStep[]> = {
     "linear-regression": [
       generateQuizStep("Linear Regression", "What does linear regression predict?", [{ label: "A", text: "Categories" }, { label: "B", text: "Continuous numerical values" }, { label: "C", text: "Images" }], "B", "Linear regression predicts continuous values by finding the best-fit line."),
