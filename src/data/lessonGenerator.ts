@@ -1564,6 +1564,50 @@ function getWebContent(id: string): LessonStep[] | null {
       generateQuizStep("Container Queries", "What are CSS container queries?", [{ label: "A", text: "Style elements based on their container's size, not the viewport" }, { label: "B", text: "Docker containers" }, { label: "C", text: "HTML container elements" }], "A", "Container queries let components adapt based on their parent's size — perfect for reusable components."),
       generateTypingStep("Responsive Typography", "Create fluid typography!", "html {\n  font-size: clamp(14px, 2.5vw, 18px);\n}\nh1 {\n  font-size: clamp(1.5rem, 5vw, 3rem);\n}", "clamp(min, preferred, max) creates smoothly scaling text without media queries.", "medium"),
     ],
+    // ===== Version Control & Git/GitHub =====
+    "version-control": [
+      generateQuizStep("Git Purpose", "What is Git?", [{ label: "A", text: "A distributed version control system that tracks changes to code" }, { label: "B", text: "A programming language" }, { label: "C", text: "A web browser" }], "A", "Git tracks every change, enabling collaboration, branching, and rollback."),
+      generateTypingStep("Git Commands", "Type essential Git commands!", "git init\ngit add .\ngit commit -m \"message\"\ngit push origin main\ngit pull\ngit status", "These 6 commands cover 90% of daily Git usage.", "medium"),
+      generateQuizStep("Branching", "What is a Git branch?", [{ label: "A", text: "An independent line of development diverging from main" }, { label: "B", text: "A file extension" }, { label: "C", text: "A type of commit" }], "A", "Branches let you work on features without affecting the main codebase."),
+      generateTypingStep("Branch Commands", "Type branching workflow!", "git checkout -b feature-login\ngit add .\ngit commit -m \"Add login\"\ngit push origin feature-login\n# Open Pull Request on GitHub\ngit checkout main\ngit merge feature-login", "Always branch for new features. Never commit directly to main.", "medium"),
+    ],
+    "deployment": [
+      generateQuizStep("GitHub", "What is GitHub?", [{ label: "A", text: "A cloud platform for hosting Git repos with collaboration tools" }, { label: "B", text: "A text editor" }, { label: "C", text: "An OS" }], "A", "GitHub adds Pull Requests, Issues, Actions (CI/CD), and social coding on top of Git."),
+      generateTypingStep("Hosting Types", "Type hosting comparison!", "Shared: £3-10/mo, shared resources\nVPS: £10-50/mo, dedicated virtual server\nDedicated: £80-300/mo, full physical server\nCloud (AWS/GCP): Pay-per-use, auto-scale\nServerless: Pay-per-execution", "VPS is the sweet spot — dedicated resources at reasonable cost.", "medium"),
+      generateQuizStep("GitHub Actions", "What are GitHub Actions?", [{ label: "A", text: "CI/CD workflows that automate testing, building, and deployment" }, { label: "B", text: "UI animations" }, { label: "C", text: "Database queries" }], "A", "Actions run on every push/PR: lint, test, deploy automatically."),
+    ],
+    "nodejs-intro": [
+      generateQuizStep("Node.js", "What is Node.js?", [{ label: "A", text: "A JavaScript runtime that executes JS on the server" }, { label: "B", text: "A web browser" }, { label: "C", text: "A CSS framework" }], "A", "Node.js uses Chrome's V8 engine. Non-blocking and event-driven — perfect for APIs."),
+      generateTypingStep("npm Commands", "Type essential npm commands!", "npm init -y\nnpm install express\nnpm install -D nodemon\nnpm start\nnpm run build\nnpm update", "package.json is the heart of every Node.js project.", "medium"),
+    ],
+    "express-api": [
+      generateTypingStep("Express Server", "Build an Express API!", 'const express = require("express");\nconst app = express();\napp.use(express.json());\n\napp.get("/api/users", (req, res) => {\n  res.json([{ id: 1, name: "Alice" }]);\n});\n\napp.listen(3000);', "Express simplifies Node.js server creation with routing and middleware.", "medium"),
+      generateTypingStep("CRUD Routes", "Type all CRUD routes!", 'app.get("/api/items", getAll);\napp.get("/api/items/:id", getOne);\napp.post("/api/items", create);\napp.put("/api/items/:id", update);\napp.delete("/api/items/:id", del);', "CRUD maps to HTTP: GET=Read, POST=Create, PUT=Update, DELETE=Delete.", "medium"),
+    ],
+    "database-integration": [
+      generateTypingStep("SQL CRUD", "Type SQL CRUD operations!", "SELECT * FROM users WHERE age > 18;\nINSERT INTO users (name, email) VALUES ('Alice', 'a@b.com');\nUPDATE users SET name = 'Bob' WHERE id = 1;\nDELETE FROM users WHERE id = 1;", "These four SQL operations are the foundation of all database work.", "medium"),
+      generateQuizStep("JOIN Types", "What does an INNER JOIN return?", [{ label: "A", text: "Only rows with matching values in both tables" }, { label: "B", text: "All rows from both" }, { label: "C", text: "Only unmatched rows" }], "A", "INNER JOIN = intersection. LEFT JOIN keeps all left rows. FULL JOIN keeps everything."),
+    ],
+    "tailwind-css": [
+      generateQuizStep("Tailwind", "What makes Tailwind CSS different?", [{ label: "A", text: "Utility-first: compose designs with small, single-purpose classes" }, { label: "B", text: "Component-first with pre-built designs" }, { label: "C", text: "No classes needed" }], "A", "Tailwind: class='flex items-center gap-4 p-6 bg-blue-500'. No custom CSS needed."),
+      generateTypingStep("Tailwind Card", "Build a card!", '<div class="max-w-sm rounded-lg shadow-lg p-6 bg-white">\n  <h2 class="text-xl font-bold mb-2">Title</h2>\n  <p class="text-gray-600">Content here.</p>\n</div>', "Tailwind classes are composable — combine them for any design.", "medium"),
+    ],
+    "typescript-intro": [
+      generateTypingStep("TypeScript Basics", "Type TypeScript code!", "let name: string = 'Alice';\nlet age: number = 25;\nlet active: boolean = true;\nlet scores: number[] = [90, 85, 95];", "Type annotations go after the variable name with a colon.", "medium"),
+      generateQuizStep("TS Benefits", "Why use TypeScript?", [{ label: "A", text: "Static type checking catches bugs at compile time" }, { label: "B", text: "It runs faster" }, { label: "C", text: "It replaces HTML" }], "A", "TypeScript = JavaScript + types. Catches errors before runtime."),
+    ],
+    "web-deployment-advanced": [
+      generateQuizStep("CI/CD", "What is CI/CD?", [{ label: "A", text: "Continuous Integration/Deployment — automating build, test, deploy" }, { label: "B", text: "A language" }, { label: "C", text: "A database" }], "A", "CI: build and test on every commit. CD: deploy passing builds automatically."),
+      generateTypingStep("Dockerfile", "Write a Dockerfile!", "FROM node:20-alpine\nWORKDIR /app\nCOPY package*.json ./\nRUN npm ci\nCOPY . .\nRUN npm run build\nEXPOSE 3000\nCMD [\"npm\", \"start\"]", "Dockerfiles define how to build container images.", "hard"),
+    ],
+    "auth-implementation": [
+      generateQuizStep("Auth vs AuthZ", "Authentication vs Authorization?", [{ label: "A", text: "Authentication = WHO you are; Authorization = WHAT you can access" }, { label: "B", text: "Same thing" }, { label: "C", text: "AuthZ comes first" }], "A", "Login = authentication. Role/permission checks = authorization."),
+      generateTypingStep("JWT Structure", "Type JWT components!", "Header: { alg: 'HS256', typ: 'JWT' }\nPayload: { sub: 'user123', exp: 1699999999 }\nSignature: HMACSHA256(header + payload, secret)\nResult: xxxxx.yyyyy.zzzzz", "JWTs are self-contained tokens: header.payload.signature.", "hard"),
+    ],
+    "testing-debugging": [
+      generateTypingStep("Console Methods", "Type debugging methods!", "console.log('Basic output');\nconsole.error('Error');\nconsole.warn('Warning');\nconsole.table(arrayOfObjects);\nconsole.time('timer');\nconsole.timeEnd('timer');", "console.table() is incredibly useful for arrays and objects.", "easy"),
+      generateQuizStep("Breakpoints", "What is a breakpoint?", [{ label: "A", text: "A point where execution pauses so you can inspect state" }, { label: "B", text: "Where code breaks permanently" }, { label: "C", text: "A CSS property" }], "A", "Set breakpoints in DevTools Sources tab to pause and inspect variables."),
+    ],
   };
   return content[id] || null;
 }
