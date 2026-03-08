@@ -371,6 +371,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "challenge_completions_challenge_id_fkey"
+            columns: ["challenge_id"]
+            isOneToOne: false
+            referencedRelation: "safe_code_challenges"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "challenge_completions_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
@@ -1086,6 +1093,45 @@ export type Database = {
         }
         Relationships: []
       }
+      safe_code_challenges: {
+        Row: {
+          category: string | null
+          created_at: string | null
+          description: string | null
+          difficulty: number | null
+          hints: Json | null
+          id: string | null
+          starter_code: string | null
+          test_cases: Json | null
+          title: string | null
+          xp_reward: number | null
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string | null
+          description?: string | null
+          difficulty?: number | null
+          hints?: Json | null
+          id?: string | null
+          starter_code?: string | null
+          test_cases?: Json | null
+          title?: string | null
+          xp_reward?: number | null
+        }
+        Update: {
+          category?: string | null
+          created_at?: string | null
+          description?: string | null
+          difficulty?: number | null
+          hints?: Json | null
+          id?: string | null
+          starter_code?: string | null
+          test_cases?: Json | null
+          title?: string | null
+          xp_reward?: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       award_badge: { Args: { p_badge_id: string }; Returns: boolean }
@@ -1099,6 +1145,7 @@ export type Database = {
         }
         Returns: undefined
       }
+      get_safe_battle_round: { Args: { p_round_id: string }; Returns: Json }
       has_parental_pin: { Args: never; Returns: boolean }
       has_role: {
         Args: {
