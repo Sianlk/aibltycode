@@ -1,6 +1,6 @@
 // Expanded Lessons for Systems Analysis, Enhanced Maths, and Intensive Code Drilling
 
-import { LessonData } from "./lessons";
+import type { LessonData } from "./lessons";
 
 // ==========================================
 // EXPANDED SYSTEMS ANALYSIS MODULE
