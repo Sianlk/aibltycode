@@ -456,18 +456,30 @@ function generateMathSteps(id: string, title: string, desc: string): LessonStep[
   const topicContent = getMathContent(id);
   if (topicContent) return topicContent;
 
-  // Enhanced fallback with practical exercises
+  // Zero-knowledge fallback — teaches math from scratch
   return [
-    generateQuizStep(`${title} Concept`, `What is ${title.toLowerCase()}?`,
+    generateQuizStep(`Why learn ${title}?`, `You've never seen this before — that's fine! ${title} is a maths concept used in computing. Which describes it?`,
       [{ label: "A", text: desc }, { label: "B", text: "A type of computer virus" }, { label: "C", text: "A hardware component" }],
-      "A", `${title}: ${desc}. This mathematical concept is essential for computing.`, "easy"),
-    generateTypingStep(`${title} Formula`, `Type the key formula for ${title.toLowerCase()}!`,
-      `// Formula: ${title}\n// ${desc}`,
-      `Memorizing formulas through typing builds automatic recall.`, "easy"),
-    generateQuizStep(`${title} Application`, `How is ${title.toLowerCase()} used in computing?`,
-      [{ label: "A", text: "Never used in practice" }, { label: "B", text: "In algorithms, data structures, and problem-solving" }, { label: "C", text: "Only in pure mathematics" }],
-      "B", `${title} underpins many algorithms and data structures in computer science.`, "medium"),
-    generateQuizStep(`Solve: ${title}`, `Which approach would you use to solve a problem involving ${title.toLowerCase()}?`,
+      "A", `${title}: ${desc}. Every programmer uses maths — and we'll make it simple and memorable.`, "easy"),
+    generateTypingStep(`Define ${title}`, `Type this to start building your memory:`,
+      `${title}: ${desc}`,
+      `Typing definitions activates motor memory — a trick professional learners use.`, "easy"),
+    generateQuizStep(`${title} in coding`, `How does ${title.toLowerCase()} help when building apps or games?`,
+      [{ label: "A", text: "It doesn't — maths is separate from coding" }, { label: "B", text: "It powers algorithms, data analysis, and problem-solving" }, { label: "C", text: "Only mathematicians need it" }],
+      "B", `${title} underpins algorithms and logic. Every piece of software uses mathematical thinking.`, "medium"),
+    generateQuizStep(`Solve with ${title}`, `A problem requires ${title.toLowerCase()}. What's the professional approach?`,
+      [{ label: "A", text: "Give up immediately" }, { label: "B", text: "Break it into small steps, apply the concept, verify the result" }, { label: "C", text: "Guess randomly" }],
+      "B", `Professionals break problems into steps. You're learning to think like one right now.`, "medium"),
+    generateTypingStep(`${title} drill`, `Type it again — build that recall:`,
+      `${title}: ${desc}`,
+      `Repetition turns knowledge into instinct. This is how fluency works.`, "medium"),
+    generateQuizStep(`${title} mastery`, `Can you explain ${title.toLowerCase()} in one sentence?`,
+      [{ label: "A", text: `Yes: ${desc.substring(0, 80)}` }, { label: "B", text: "No — it's too complicated" }, { label: "C", text: "I've already forgotten" }],
+      "A", `You've got it! ${title} is now part of your computing toolkit.`, "medium"),
+    generateTypingStep(`Final drill: ${title}`, `Last time — aim for speed:`,
+      `${title}: ${desc}`,
+      `Three repetitions locks it in permanently. Well done!`, "easy"),
+  ];
       [{ label: "A", text: "Guess randomly" }, { label: "B", text: "Identify the pattern, apply the formula, verify the result" }, { label: "C", text: "Skip the problem" }],
       "B", `Mathematical problem-solving follows: understand → plan → execute → verify.`, "medium"),
     generateTypingStep(`${title} Practice`, `Type a practical example!`,
