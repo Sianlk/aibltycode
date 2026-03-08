@@ -1142,7 +1142,7 @@ function getGameDevContent(id: string): LessonStep[] | null {
 
 // ======================== COMPUTER SYSTEMS ========================
 function generateComputerSystemsSteps(id: string, title: string, desc: string): LessonStep[] {
-  const topicContent = getComputerSystemsContent(id);
+  const topicContent = getComputerSystemsContent(id) || computerSystemsExpandedContent[id];
   if (topicContent) return topicContent;
 
   // Enhanced fallback with 7 intensive hardware/systems drilling steps
