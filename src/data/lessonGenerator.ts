@@ -1,5 +1,15 @@
 // Auto-generates lesson content for lessons that don't have static data
 import type { LessonData, LessonStep } from "./lessons";
+import {
+  javaAdvancedContent,
+  systemsExpandedContent,
+  mathExpandedContent,
+  cyberExpandedContent,
+  businessExpandedContent,
+  gameDevExpandedContent,
+  computerSystemsExpandedContent,
+  webExpandedContent,
+} from "./lessonContentExpanded2";
 
 function generateQuizStep(title: string, question: string, options: { label: string; text: string }[], correct: string, explanation: string, difficulty: "easy" | "medium" | "hard" = "medium"): LessonStep {
   return { type: "quiz", title, difficulty, question, options, correctAnswer: correct, explanation };
