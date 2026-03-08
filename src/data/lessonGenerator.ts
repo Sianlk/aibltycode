@@ -1188,6 +1188,7 @@ function generateComputerSystemsSteps(id: string, title: string, desc: string): 
 }
 
 function getComputerSystemsContent(id: string): LessonStep[] | null {
+  if (computerSystemsDeepContent[id]) return computerSystemsDeepContent[id];
   const content: Record<string, LessonStep[]> = {
     "cpu-fundamentals": [
       generateQuizStep("CPU Components", "What are the main CPU components?", [{ label: "A", text: "ALU, Control Unit, Registers" }, { label: "B", text: "Monitor, keyboard, mouse" }, { label: "C", text: "RAM, ROM, Cache" }], "A", "The CPU contains the ALU (arithmetic), Control Unit (coordination), and Registers (fast storage)."),
