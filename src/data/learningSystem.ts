@@ -123,8 +123,8 @@ export const zones: Zone[] = [
     icon: '🎯',
     color: 'primary',
     gradient: 'from-primary/20 via-accent/10 to-success/5',
-    games: ['project-planner', 'use-case', 'game-dev'],
-    skills: ['gantt-charts', 'kanban', 'uml', 'requirements', 'agile', 'game-loops', 'physics']
+    games: ['project-planner', 'use-case', 'game-dev', 'draw-io', 'plantuml'],
+    skills: ['gantt-charts', 'kanban', 'uml', 'requirements', 'agile', 'game-loops', 'physics', 'diagrams', 'plantuml']
   }
 ];
 

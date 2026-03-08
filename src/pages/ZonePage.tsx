@@ -30,6 +30,8 @@ const gameIconMap: Record<string, { icon: "typing" | "ordering" | "speed"; emoji
   'project-planner': { icon: 'ordering', emoji: '📋' },
   'use-case': { icon: 'ordering', emoji: '👥' },
   'game-dev': { icon: 'speed', emoji: '🎮' },
+  'draw-io': { icon: 'ordering', emoji: '📐' },
+  'plantuml': { icon: 'typing', emoji: '📝' },
 };
 
 export default function ZonePage() {
