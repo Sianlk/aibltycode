@@ -57,6 +57,8 @@ function generateStepsForTopic(id: string, title: string, desc: string, moduleId
 
 // ======================== JAVA ========================
 function generateJavaSteps(id: string, title: string, desc: string): LessonStep[] {
+  // Check expanded content first
+  if (javaAdvancedContent[id]) return javaAdvancedContent[id];
   const steps: LessonStep[] = [];
   
   // Step 1: Context — why this matters (assumes ZERO knowledge)
