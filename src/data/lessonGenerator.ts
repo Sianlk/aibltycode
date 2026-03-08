@@ -697,6 +697,7 @@ function generateCyberSteps(id: string, title: string, desc: string): LessonStep
 }
 
 function getCyberContent(id: string): LessonStep[] | null {
+  if (cyberExpandedContent[id]) return cyberExpandedContent[id];
   const content: Record<string, LessonStep[]> = {
     "cia-triad": [
       generateQuizStep("CIA Triad", "What does CIA stand for in cybersecurity?", [{ label: "A", text: "Central Intelligence Agency" }, { label: "B", text: "Confidentiality, Integrity, Availability" }, { label: "C", text: "Computer Information Access" }], "B", "The CIA Triad is the foundation of information security."),
