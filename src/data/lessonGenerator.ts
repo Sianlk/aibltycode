@@ -10,6 +10,16 @@ import {
   computerSystemsExpandedContent,
   webExpandedContent,
 } from "./lessonContentExpanded2";
+import {
+  systemsDeepContent,
+  cyberDeepContent,
+  computerSystemsDeepContent,
+  webDeepContent,
+  businessDeepContent,
+  aiDeepContent,
+  mathDeepContent,
+  gameDevDeepContent,
+} from "./lessonContentExpanded3";
 
 function generateQuizStep(title: string, question: string, options: { label: string; text: string }[], correct: string, explanation: string, difficulty: "easy" | "medium" | "hard" = "medium"): LessonStep {
   return { type: "quiz", title, difficulty, question, options, correctAnswer: correct, explanation };
@@ -361,6 +371,7 @@ function generateSystemsSteps(id: string, title: string, desc: string): LessonSt
 
 function getSystemsContent(id: string): LessonStep[] | null {
   if (systemsExpandedContent[id]) return systemsExpandedContent[id];
+  if (systemsDeepContent[id]) return systemsDeepContent[id];
   const content: Record<string, LessonStep[]> = {
     "what-is-system": [
       generateQuizStep("System Definition", "What is a system?", [{ label: "A", text: "A set of interrelated components working together toward a goal" }, { label: "B", text: "A single computer program" }, { label: "C", text: "Only hardware" }], "A", "A system is a collection of interrelated components that work together to achieve a common purpose."),
@@ -497,6 +508,7 @@ function generateMathSteps(id: string, title: string, desc: string): LessonStep[
 
 function getMathContent(id: string): LessonStep[] | null {
   if (mathExpandedContent[id]) return mathExpandedContent[id];
+  if (mathDeepContent[id]) return mathDeepContent[id];
   const content: Record<string, LessonStep[]> = {
     "binary-intro": [
       generateQuizStep("Binary System", "What base does binary use?", [{ label: "A", text: "Base 10" }, { label: "B", text: "Base 2" }, { label: "C", text: "Base 16" }], "B", "Binary (base 2) uses only 0 and 1 — the language of computers."),
@@ -698,6 +710,7 @@ function generateCyberSteps(id: string, title: string, desc: string): LessonStep
 
 function getCyberContent(id: string): LessonStep[] | null {
   if (cyberExpandedContent[id]) return cyberExpandedContent[id];
+  if (cyberDeepContent[id]) return cyberDeepContent[id];
   const content: Record<string, LessonStep[]> = {
     "cia-triad": [
       generateQuizStep("CIA Triad", "What does CIA stand for in cybersecurity?", [{ label: "A", text: "Central Intelligence Agency" }, { label: "B", text: "Confidentiality, Integrity, Availability" }, { label: "C", text: "Computer Information Access" }], "B", "The CIA Triad is the foundation of information security."),
@@ -777,6 +790,7 @@ function generateAISteps(id: string, title: string, desc: string): LessonStep[] 
 }
 
 function getAIContent(id: string): LessonStep[] | null {
+  if (aiDeepContent[id]) return aiDeepContent[id];
   const content: Record<string, LessonStep[]> = {
     "linear-regression": [
       generateQuizStep("Linear Regression", "What does linear regression predict?", [{ label: "A", text: "Categories" }, { label: "B", text: "Continuous numerical values" }, { label: "C", text: "Images" }], "B", "Linear regression predicts continuous values by finding the best-fit line."),
@@ -940,6 +954,7 @@ function generateBusinessSteps(id: string, title: string, desc: string): LessonS
 }
 
 function getBusinessContent(id: string): LessonStep[] | null {
+  if (businessDeepContent[id]) return businessDeepContent[id];
   const content: Record<string, LessonStep[]> = {
     "bis-intro": [
       generateQuizStep("Business IS", "What is a Business Information System?", [{ label: "A", text: "Technology solutions supporting business operations and decisions" }, { label: "B", text: "A type of computer virus" }, { label: "C", text: "An accounting method" }], "A", "BIS combines technology, people, and processes to support business goals."),
@@ -1108,6 +1123,7 @@ function generateGameDevSteps(id: string, title: string, desc: string): LessonSt
 
 function getGameDevContent(id: string): LessonStep[] | null {
   if (gameDevExpandedContent[id]) return gameDevExpandedContent[id];
+  if (gameDevDeepContent[id]) return gameDevDeepContent[id];
   const content: Record<string, LessonStep[]> = {
     "game-loop": [
       generateQuizStep("Game Loop", "What is the game loop?", [{ label: "A", text: "The continuous cycle of input, update, render" }, { label: "B", text: "A type of for loop" }, { label: "C", text: "A loading screen" }], "A", "The game loop continuously processes input, updates game state, and renders frames."),
@@ -1172,6 +1188,7 @@ function generateComputerSystemsSteps(id: string, title: string, desc: string): 
 }
 
 function getComputerSystemsContent(id: string): LessonStep[] | null {
+  if (computerSystemsDeepContent[id]) return computerSystemsDeepContent[id];
   const content: Record<string, LessonStep[]> = {
     "cpu-fundamentals": [
       generateQuizStep("CPU Components", "What are the main CPU components?", [{ label: "A", text: "ALU, Control Unit, Registers" }, { label: "B", text: "Monitor, keyboard, mouse" }, { label: "C", text: "RAM, ROM, Cache" }], "A", "The CPU contains the ALU (arithmetic), Control Unit (coordination), and Registers (fast storage)."),
@@ -1271,6 +1288,7 @@ function generateWebSteps(id: string, title: string, desc: string): LessonStep[]
 
 function getWebContent(id: string): LessonStep[] | null {
   if (webExpandedContent[id]) return webExpandedContent[id];
+  if (webDeepContent[id]) return webDeepContent[id];
   const content: Record<string, LessonStep[]> = {
     // ===== Introduction =====
     "web-intro": [
