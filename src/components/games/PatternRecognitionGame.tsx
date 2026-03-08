@@ -15,6 +15,8 @@ const mnemonics = {
   switchCase: { symbol: "🎛️", mnemonic: "SWITCH = 'Select What I'll Take, Check Handle'", color: "hsl(var(--warning))" },
   method: { symbol: "📦", mnemonic: "METHOD = 'My Easy Tool, Helps Out Daily'", color: "hsl(var(--success))" },
   variable: { symbol: "📥", mnemonic: "VAR = 'Value And Remember'", color: "hsl(var(--info))" },
+  tryCatch: { symbol: "🛡️", mnemonic: "TRY = 'Test Risky code, You catch errors!'", color: "hsl(var(--destructive))" },
+  array: { symbol: "📊", mnemonic: "ARRAY = 'A Row of Related items, Accessed by index, Yields fast lookup'", color: "hsl(var(--primary))" },
 };
 
 // Pattern structure templates with visual guides
@@ -38,6 +40,26 @@ const structures = {
     pattern: ["switch (value) {", "    case 1:", "        // action", "        break;", "    default:", "        // fallback", "}"],
     visual: "🎯 Match value → 📋 Pick case → 🚪 Break out",
     memory: "s-V-c-B-d = switch(Value) case: break; default:",
+  },
+  method: {
+    pattern: ["public returnType name(params) {", "    // logic", "    return result;", "}"],
+    visual: "📥 Input → ⚙️ Process → 📤 Output",
+    memory: "R-N-P = ReturnType Name(Params)",
+  },
+  variable: {
+    pattern: ["type name = value;"],
+    visual: "📦 Box labeled 'name' containing 'value'",
+    memory: "T-N-V = Type Name = Value;",
+  },
+  tryCatch: {
+    pattern: ["try {", "    // risky code", "} catch (Exception e) {", "    // handle error", "}"],
+    visual: "🧪 Try → 💥 If error → 🛡️ Catch it",
+    memory: "t-R-c-E = try { Risky } catch(Error) { }",
+  },
+  array: {
+    pattern: ["type[] name = new type[size];", "name[0] = value;"],
+    visual: "📦📦📦 Boxes numbered 0, 1, 2...",
+    memory: "T-N-S = Type[] Name = new Type[Size]",
   },
 };
 
