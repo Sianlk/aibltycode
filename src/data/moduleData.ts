@@ -696,6 +696,14 @@ export const moduleLessons: Record<string, { id: string; title: string; descript
     { id: "kubernetes-intro", title: "Kubernetes Introduction", description: "Container orchestration", icon: "☸️", xpReward: 225 },
     { id: "disaster-recovery", title: "Disaster Recovery", description: "Backup and recovery strategies", icon: "🛡️", xpReward: 175 },
     { id: "performance-monitoring", title: "Performance Monitoring", description: "SNMP, Nagios, Prometheus", icon: "📊", xpReward: 175 },
+    { id: "visual-studio-code", title: "Visual Studio Code", description: "Essential shortcuts and extensions", icon: "💻", xpReward: 125 },
+    { id: "ide-comparison", title: "IDEs & Code Editors", description: "IntelliJ, Eclipse, VS Code, PyCharm", icon: "🔧", xpReward: 100 },
+    { id: "python-intro", title: "Python Introduction", description: "Syntax, functions, and data types", icon: "🐍", xpReward: 150 },
+    { id: "python-data-structures", title: "Python Data Structures", description: "Lists, dicts, loops, comprehensions", icon: "📊", xpReward: 150 },
+    { id: "github-workflow", title: "Git & GitHub Workflow", description: "Branching, PRs, Actions, CI/CD", icon: "🐙", xpReward: 175 },
+    { id: "sql-fundamentals", title: "SQL Fundamentals", description: "CRUD, JOINs, aggregation, normalization", icon: "🗄️", xpReward: 175 },
+    { id: "networking-fundamentals", title: "Networking Fundamentals", description: "OSI model, TCP/UDP, handshake", icon: "🌐", xpReward: 150 },
+    { id: "operating-systems", title: "Operating Systems Overview", description: "OS types, processes, threads", icon: "🖥️", xpReward: 150 },
   ],
 
   // ==================== WEB TECHNOLOGIES ====================
