@@ -83,8 +83,8 @@ export const zones: Zone[] = [
     icon: '🏙️',
     color: 'success',
     gradient: 'from-success/20 via-success/10 to-success/5',
-    games: ['erd-builder', 'sql-query', 'graph-visualizer', 'excel-master'],
-    skills: ['normalization', 'foreign-keys', 'sql-select', 'sql-joins', 'functions', 'pivot-tables', 'graphs']
+    games: ['erd-builder', 'sql-query', 'graph-visualizer', 'excel-master', 'draw-io', 'plantuml'],
+    skills: ['normalization', 'foreign-keys', 'sql-select', 'sql-joins', 'functions', 'pivot-tables', 'graphs', 'uml-notation', 'plantuml-syntax']
   },
   {
     id: 'security-sector',
@@ -123,8 +123,8 @@ export const zones: Zone[] = [
     icon: '🎯',
     color: 'primary',
     gradient: 'from-primary/20 via-accent/10 to-success/5',
-    games: ['project-planner', 'use-case', 'game-dev'],
-    skills: ['gantt-charts', 'kanban', 'uml', 'requirements', 'agile', 'game-loops', 'physics']
+    games: ['project-planner', 'use-case', 'game-dev', 'draw-io', 'plantuml'],
+    skills: ['gantt-charts', 'kanban', 'uml', 'requirements', 'agile', 'game-loops', 'physics', 'diagrams', 'plantuml']
   }
 ];
 

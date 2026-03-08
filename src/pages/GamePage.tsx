@@ -31,6 +31,8 @@ import NetworkProtocolGame from "@/components/games/NetworkProtocolGame";
 import HTMLCSSPlayground from "@/components/games/HTMLCSSPlayground";
 import NumberSystemsGame from "@/components/games/NumberSystemsGame";
 import PCBuilderGame from "@/components/games/PCBuilderGame";
+import DrawIOGame from "@/components/games/DrawIOGame";
+import PlantUMLGame from "@/components/games/PlantUMLGame";
 import { ArrowLeft, Trophy, Star, Zap } from "lucide-react";
 import { useAchievements } from "@/contexts/AchievementContext";
 import { useEffect } from "react";
@@ -65,6 +67,8 @@ const gameComponents: Record<string, React.ComponentType> = {
   "html-css": HTMLCSSPlayground,
   "number-systems": NumberSystemsGame,
   "pc-builder": PCBuilderGame,
+  "draw-io": DrawIOGame,
+  "plantuml": PlantUMLGame,
 };
 
 const gameInfo: Record<string, { title: string; emoji: string; color: string }> = {
@@ -97,6 +101,8 @@ const gameInfo: Record<string, { title: string; emoji: string; color: string }> 
   "html-css": { title: "HTML & CSS", emoji: "🎨", color: "warning" },
   "number-systems": { title: "Number Systems", emoji: "🔢", color: "secondary" },
   "pc-builder": { title: "PC Builder Lab", emoji: "🖥️", color: "primary" },
+  "draw-io": { title: "Diagram Master (Draw.io)", emoji: "📐", color: "accent" },
+  "plantuml": { title: "PlantUML Master", emoji: "📝", color: "secondary" },
 };
 
 export default function GamePage() {
