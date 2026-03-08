@@ -105,7 +105,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
   });
   const [isParentalLocked, setIsParentalLocked] = useState(true);
 
-  // Load saved state from localStorage
+  // Load saved state from localStorage, then sync mode from profile DB
   useEffect(() => {
     const savedMode = localStorage.getItem("aibltycode-mode") as GameMode;
     const savedSound = localStorage.getItem("aibltycode-sound");
@@ -122,6 +122,25 @@ export function GameProvider({ children }: { children: ReactNode }) {
         setAccessibilityState({ ...defaultAccessibility, ...JSON.parse(savedAccessibility) });
       } catch {}
     }
+
+    // Sync mode from database profile (overrides localStorage on login)
+    const syncModeFromProfile = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session?.user) {
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('mode, xp, streak_days')
+          .eq('id', session.user.id)
+          .single();
+        if (profile?.mode) {
+          setGameMode(profile.mode as GameMode);
+          localStorage.setItem("aibltycode-mode", profile.mode);
+        }
+        if (profile?.xp) setXp(profile.xp);
+        if (profile?.streak_days) setStreak(profile.streak_days);
+      }
+    };
+    syncModeFromProfile();
   }, []);
 
   // Apply accessibility classes to document
