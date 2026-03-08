@@ -480,18 +480,6 @@ function generateMathSteps(id: string, title: string, desc: string): LessonStep[
       `${title}: ${desc}`,
       `Three repetitions locks it in permanently. Well done!`, "easy"),
   ];
-      [{ label: "A", text: "Guess randomly" }, { label: "B", text: "Identify the pattern, apply the formula, verify the result" }, { label: "C", text: "Skip the problem" }],
-      "B", `Mathematical problem-solving follows: understand → plan → execute → verify.`, "medium"),
-    generateTypingStep(`${title} Practice`, `Type a practical example!`,
-      `// Example: ${title}\n// Input: data\n// Process: apply ${title.toLowerCase()}\n// Output: result`,
-      `Writing out the process helps cement the concept.`, "medium"),
-    generateQuizStep(`${title} Complexity`, `What is the typical complexity when implementing ${title.toLowerCase()} in code?`,
-      [{ label: "A", text: "Always O(1)" }, { label: "B", text: "Depends on the specific algorithm and data size" }, { label: "C", text: "Always O(n!)" }],
-      "B", `Algorithm complexity depends on the approach. Understanding Big-O helps choose efficient solutions.`, "hard"),
-    generateQuizStep(`${title} Mastery Check`, `Can you explain ${title.toLowerCase()} to a colleague?`,
-      [{ label: "A", text: "No, it's too abstract" }, { label: "B", text: "Yes: it involves " + desc.toLowerCase() }, { label: "C", text: "I need to look it up" }],
-      "B", `If you can explain it simply, you truly understand it. ${title}: ${desc}.`, "easy"),
-  ];
 }
 
 function getMathContent(id: string): LessonStep[] | null {
