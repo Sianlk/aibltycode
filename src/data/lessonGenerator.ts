@@ -910,7 +910,7 @@ function getAIContent(id: string): LessonStep[] | null {
 }
 
 function generateBusinessSteps(id: string, title: string, desc: string): LessonStep[] {
-  const topicContent = getBusinessContent(id);
+  const topicContent = getBusinessContent(id) || businessExpandedContent[id];
   if (topicContent) return topicContent;
 
   // Enhanced fallback with 7 practical business drilling steps
