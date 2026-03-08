@@ -1011,11 +1011,56 @@ function getBusinessContent(id: string): LessonStep[] | null {
       generateQuizStep("Email Marketing", "What makes email marketing effective?", [{ label: "A", text: "Personalized, segmented campaigns with clear CTAs" }, { label: "B", text: "Sending to everyone with no targeting" }, { label: "C", text: "Sending once a year" }], "A", "Segmented, personalized emails have 14% higher open rates and 10% higher conversions."),
       generateTypingStep("Email Metrics", "Type email marketing KPIs!", "Open Rate: % who opened (aim: 20-25%)\nCTR: % who clicked (aim: 2-5%)\nConversion Rate: % who completed action\nBounce Rate: % undeliverable\nUnsubscribe: % who opted out", "Track these metrics to optimize your email campaigns.", "medium"),
     ],
+    // ===== AWS & Cloud =====
+    "cloud-services-bis": [
+      generateQuizStep("AWS Overview", "What is AWS?", [{ label: "A", text: "Amazon Web Services — the largest cloud computing platform" }, { label: "B", text: "A programming language" }, { label: "C", text: "A web browser" }], "A", "AWS provides 200+ cloud services: compute (EC2), storage (S3), database (RDS), and more."),
+      generateTypingStep("AWS Core Services", "Type AWS core services!", "EC2: Virtual servers (Elastic Compute Cloud)\nS3: Object storage (Simple Storage Service)\nRDS: Managed databases\nLambda: Serverless functions\nCloudFront: CDN\nIAM: Identity & Access Management", "These six services form the backbone of most AWS architectures.", "medium"),
+      generateQuizStep("Cloud Models", "What are the three cloud deployment models?", [{ label: "A", text: "Public, private, and hybrid cloud" }, { label: "B", text: "Fast, medium, slow" }, { label: "C", text: "Free, paid, enterprise" }], "A", "Public = shared infrastructure, Private = dedicated, Hybrid = both combined."),
+      generateTypingStep("AWS Regions", "Type AWS global infrastructure!", "Regions: us-east-1, eu-west-2, ap-southeast-1\nAvailability Zones: 2+ per region\nEdge Locations: 400+ for CDN\nLocal Zones: Ultra-low latency", "Choose regions close to users. Use multiple AZs for high availability.", "medium"),
+      generateQuizStep("S3 Storage Classes", "Which S3 class is cheapest for rarely accessed data?", [{ label: "A", text: "S3 Glacier Deep Archive" }, { label: "B", text: "S3 Standard" }, { label: "C", text: "S3 Intelligent-Tiering" }], "A", "Glacier Deep Archive is cheapest ($0.00099/GB/month) but retrieval takes 12+ hours."),
+    ],
+    // ===== ERP Deep Dive (erp-systems already defined above) =====
+    // ===== Hosting & Infrastructure =====
+    "ecommerce-platforms": [
+      generateQuizStep("E-Commerce Platforms", "What are the leading e-commerce platforms?", [{ label: "A", text: "Shopify, WooCommerce, Magento, BigCommerce" }, { label: "B", text: "Microsoft Word" }, { label: "C", text: "Photoshop" }], "A", "Shopify dominates hosted solutions; WooCommerce (WordPress plugin) leads self-hosted."),
+      generateTypingStep("Platform Comparison", "Type platform differences!", "Shopify: Hosted, easy, monthly fee ($29+)\nWooCommerce: Self-hosted, WordPress, free plugin\nMagento: Enterprise, complex, scalable\nBigCommerce: Hosted, built-in features", "Choose based on budget, technical skill, and scalability needs.", "medium"),
+    ],
+    "payment-systems": [
+      generateQuizStep("Payment Gateways", "What is a payment gateway?", [{ label: "A", text: "A service that processes credit card payments securely" }, { label: "B", text: "A physical gate at a bank" }, { label: "C", text: "An email service" }], "A", "Payment gateways encrypt card data, communicate with banks, and authorize transactions."),
+      generateTypingStep("Payment Providers", "Type major payment providers!", "Stripe: Developer-friendly API, 2.9% + 30¢\nPayPal: Consumer trust, easy integration\nSquare: POS + online payments\nAdyen: Enterprise, global coverage\nBraintree: PayPal-owned, supports PayPal/Venmo", "Stripe and PayPal handle 60%+ of online payments in the US/UK.", "medium"),
+    ],
+    // ===== IT Infrastructure =====
+    "it-governance": [
+      generateQuizStep("COBIT Framework", "What is COBIT?", [{ label: "A", text: "A governance framework for enterprise IT management" }, { label: "B", text: "A programming language" }, { label: "C", text: "A database" }], "A", "COBIT (Control Objectives for Information Technologies) aligns IT with business goals."),
+      generateTypingStep("Governance Frameworks", "Type IT governance frameworks!", "COBIT: IT governance and management\nITIL: IT service management\nISO 27001: Information security\nPRINCE2: Project management\nTOGAF: Enterprise architecture", "Each framework addresses a different aspect of IT management.", "medium"),
+    ],
+    "itil-framework": [
+      generateQuizStep("ITIL Purpose", "What does ITIL provide?", [{ label: "A", text: "Best practices for IT service management (ITSM)" }, { label: "B", text: "Programming tutorials" }, { label: "C", text: "Hardware specifications" }], "A", "ITIL defines processes for delivering and supporting IT services effectively."),
+      generateTypingStep("ITIL Practices", "Type ITIL 4 management practices!", "Service Desk: Single point of contact\nIncident Management: Restore service fast\nProblem Management: Find root causes\nChange Enablement: Control changes\nService Level Management: Agree SLAs", "ITIL 4 shifted from 'processes' to 'practices' for flexibility.", "medium"),
+      generateQuizStep("SLA", "What is an SLA?", [{ label: "A", text: "Service Level Agreement — defines expected service standards" }, { label: "B", text: "A software license" }, { label: "C", text: "A server location" }], "A", "SLAs specify uptime (e.g., 99.9%), response times, and penalties for violations."),
+    ],
+    // ===== Conversion & Analytics =====
+    "conversion-optimization": [
+      generateQuizStep("CRO Definition", "What is Conversion Rate Optimization?", [{ label: "A", text: "Systematically improving the % of visitors who take a desired action" }, { label: "B", text: "Increasing website traffic" }, { label: "C", text: "Changing website colors" }], "A", "CRO uses data and testing to increase conversions without increasing traffic."),
+      generateTypingStep("A/B Testing", "Type A/B testing process!", "1. Identify a hypothesis\n2. Create variant (B)\n3. Split traffic 50/50\n4. Run for statistical significance\n5. Analyze: did B beat A?\n6. Implement winner", "A/B testing is the gold standard for CRO. Never end tests early.", "medium"),
+      generateQuizStep("Key Metrics", "Which metric matters most for CRO?", [{ label: "A", text: "Conversion rate, bounce rate, time on page, exit rate" }, { label: "B", text: "Number of pages" }, { label: "C", text: "Server uptime" }], "A", "Conversion rate is primary. Bounce rate indicates engagement. Heatmaps show behavior."),
+    ],
+    "analytics-tools-bis": [
+      generateQuizStep("Google Analytics", "What does Google Analytics 4 (GA4) track?", [{ label: "A", text: "User events, conversions, behavior flow across devices" }, { label: "B", text: "Server hardware" }, { label: "C", text: "Email content" }], "A", "GA4 is event-based (not session-based). It tracks user journeys across web and app."),
+      generateTypingStep("Analytics Setup", "Type GA4 key metrics!", "Users: Unique visitors\nSessions: Visit instances\nEngagement Rate: % active sessions (>10s)\nConversion Rate: % completing goals\nBounce Rate: % single-page visits", "GA4 replaced Universal Analytics. Engagement rate replaces bounce rate as primary.", "medium"),
+    ],
+    // ===== Product & Strategy =====
+    "product-management": [
+      generateQuizStep("Product Management", "What does a Product Manager do?", [{ label: "A", text: "Defines what to build, for whom, and why — owns the product roadmap" }, { label: "B", text: "Writes all the code" }, { label: "C", text: "Only designs the UI" }], "A", "PMs sit at the intersection of business, technology, and user experience."),
+      generateTypingStep("Product Frameworks", "Type product management frameworks!", "MVP: Minimum Viable Product\nMoSCoW: Must/Should/Could/Won't\nRICE: Reach, Impact, Confidence, Effort\nKano: Must-have, Performance, Delight\nJobs-to-be-Done: User goals", "RICE scoring helps prioritize features objectively.", "medium"),
+    ],
+    "roi-analysis": [
+      generateQuizStep("ROI Formula", "How do you calculate ROI?", [{ label: "A", text: "ROI = (Net Profit / Cost of Investment) × 100" }, { label: "B", text: "ROI = Revenue × Cost" }, { label: "C", text: "ROI = Profit + Cost" }], "A", "ROI measures the return relative to the investment cost. Higher % = better return."),
+      generateTypingStep("ROI Calculation", "Type an ROI example!", "Investment: £50,000\nNet Benefit: £75,000\nROI = (75000 - 50000) / 50000 × 100\nROI = 50%", "A 50% ROI means you earned £1.50 for every £1 invested.", "medium"),
+    ],
   };
   return content[id] || null;
 }
-
-// ======================== GAME DEVELOPMENT ========================
 function generateGameDevSteps(id: string, title: string, desc: string): LessonStep[] {
   const topicContent = getGameDevContent(id);
   if (topicContent) return topicContent;
@@ -1258,14 +1303,7 @@ function getWebContent(id: string): LessonStep[] | null {
       generateTypingStep("HTML Table", "Create a table!", "<table>\n  <tr><th>Name</th><th>Age</th></tr>\n  <tr><td>Alice</td><td>25</td></tr>\n</table>", "Tables use tr for rows, th for headers, td for data cells.", "medium"),
       generateQuizStep("Table Semantics", "When should you use tables?", [{ label: "A", text: "For page layout" }, { label: "B", text: "For tabular data only" }, { label: "C", text: "For navigation" }], "B", "Tables should only be used for tabular data, never for page layout."),
     ],
-    "html-forms": [
-      generateTypingStep("HTML Form", "Create a login form!", '<form action="/login" method="POST">\n  <input type="email" name="email" required>\n  <input type="password" name="pass" required>\n  <button type="submit">Login</button>\n</form>', "Forms collect user input. method='POST' sends data securely.", "medium"),
-      generateQuizStep("Input Types", "Which input type creates a password field?", [{ label: "A", text: 'type="text"' }, { label: "B", text: 'type="password"' }, { label: "C", text: 'type="hidden"' }], "B", "type='password' masks the input characters for security."),
-    ],
-    "html-semantic": [
-      generateTypingStep("Semantic HTML", "Use semantic elements!", "<header>Logo & Nav</header>\n<main>\n  <article>Content</article>\n</main>\n<footer>Copyright</footer>", "Semantic elements describe meaning: header, nav, main, article, section, footer.", "medium"),
-      generateQuizStep("Why Semantic?", "Why use semantic HTML?", [{ label: "A", text: "Better accessibility, SEO, and maintainability" }, { label: "B", text: "Faster loading" }, { label: "C", text: "More colors" }], "A", "Semantic HTML helps screen readers, search engines, and developers understand content structure."),
-    ],
+    // html-forms and html-semantic defined in expanded section below
     // ===== CSS Basics =====
     "css-intro": [
       generateQuizStep("CSS Purpose", "What does CSS stand for?", [{ label: "A", text: "Cascading Style Sheets" }, { label: "B", text: "Computer Style System" }, { label: "C", text: "Creative Style Script" }], "A", "CSS controls the visual presentation of HTML elements."),
@@ -1288,12 +1326,7 @@ function getWebContent(id: string): LessonStep[] | null {
       generateTypingStep("Display Property", "Set display types!", ".inline { display: inline; }\n.block { display: block; }\n.flex { display: flex; }", "Block takes full width. Inline flows with text. Flex enables flexible layouts.", "medium"),
     ],
     // ===== CSS Advanced =====
-    "css-flexbox": [
-      generateTypingStep("Flexbox Container", "Create a flex layout!", ".container {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}", "Flexbox provides powerful one-dimensional layout capabilities.", "medium"),
-      generateQuizStep("Flex Direction", "What does flex-direction: column do?", [{ label: "A", text: "Stacks items vertically" }, { label: "B", text: "Stacks items horizontally" }, { label: "C", text: "Hides items" }], "A", "flex-direction: column stacks flex items top-to-bottom instead of left-to-right."),
-      generateQuizStep("Justify vs Align", "What does justify-content control in a row?", [{ label: "A", text: "Vertical alignment" }, { label: "B", text: "Horizontal distribution" }, { label: "C", text: "Font size" }], "B", "justify-content distributes items along the main axis (horizontal in row)."),
-      generateTypingStep("Flexbox Drill", "Type flexbox from memory!", ".container {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  gap: 1rem;\n}", "Flexbox with gap is the most common layout pattern in modern CSS.", "medium"),
-    ],
+    // css-flexbox defined in expanded section below
     "css-grid": [
       generateTypingStep("CSS Grid Layout", "Create a grid!", ".grid {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  gap: 1rem;\n}", "CSS Grid enables two-dimensional layouts with rows and columns.", "medium"),
       generateQuizStep("Grid vs Flexbox", "When should you use Grid over Flexbox?", [{ label: "A", text: "For two-dimensional layouts (rows AND columns)" }, { label: "B", text: "For one-dimensional layouts" }, { label: "C", text: "Never" }], "A", "Grid excels at 2D layouts. Flexbox is better for 1D (row OR column)."),
@@ -1530,6 +1563,50 @@ function getWebContent(id: string): LessonStep[] | null {
       generateTypingStep("Mobile-First Media Queries", "Write mobile-first responsive CSS!", "/* Mobile base styles (default) */\n.grid { display: flex; flex-direction: column; }\n\n/* Tablet */\n@media (min-width: 768px) {\n  .grid { flex-direction: row; flex-wrap: wrap; }\n}\n\n/* Desktop */\n@media (min-width: 1024px) {\n  .grid { max-width: 1200px; margin: 0 auto; }\n}", "Mobile-first: start with mobile styles, add complexity for larger screens.", "medium"),
       generateQuizStep("Container Queries", "What are CSS container queries?", [{ label: "A", text: "Style elements based on their container's size, not the viewport" }, { label: "B", text: "Docker containers" }, { label: "C", text: "HTML container elements" }], "A", "Container queries let components adapt based on their parent's size — perfect for reusable components."),
       generateTypingStep("Responsive Typography", "Create fluid typography!", "html {\n  font-size: clamp(14px, 2.5vw, 18px);\n}\nh1 {\n  font-size: clamp(1.5rem, 5vw, 3rem);\n}", "clamp(min, preferred, max) creates smoothly scaling text without media queries.", "medium"),
+    ],
+    // ===== Version Control & Git/GitHub =====
+    "version-control": [
+      generateQuizStep("Git Purpose", "What is Git?", [{ label: "A", text: "A distributed version control system that tracks changes to code" }, { label: "B", text: "A programming language" }, { label: "C", text: "A web browser" }], "A", "Git tracks every change, enabling collaboration, branching, and rollback."),
+      generateTypingStep("Git Commands", "Type essential Git commands!", "git init\ngit add .\ngit commit -m \"message\"\ngit push origin main\ngit pull\ngit status", "These 6 commands cover 90% of daily Git usage.", "medium"),
+      generateQuizStep("Branching", "What is a Git branch?", [{ label: "A", text: "An independent line of development diverging from main" }, { label: "B", text: "A file extension" }, { label: "C", text: "A type of commit" }], "A", "Branches let you work on features without affecting the main codebase."),
+      generateTypingStep("Branch Commands", "Type branching workflow!", "git checkout -b feature-login\ngit add .\ngit commit -m \"Add login\"\ngit push origin feature-login\n# Open Pull Request on GitHub\ngit checkout main\ngit merge feature-login", "Always branch for new features. Never commit directly to main.", "medium"),
+    ],
+    "deployment": [
+      generateQuizStep("GitHub", "What is GitHub?", [{ label: "A", text: "A cloud platform for hosting Git repos with collaboration tools" }, { label: "B", text: "A text editor" }, { label: "C", text: "An OS" }], "A", "GitHub adds Pull Requests, Issues, Actions (CI/CD), and social coding on top of Git."),
+      generateTypingStep("Hosting Types", "Type hosting comparison!", "Shared: £3-10/mo, shared resources\nVPS: £10-50/mo, dedicated virtual server\nDedicated: £80-300/mo, full physical server\nCloud (AWS/GCP): Pay-per-use, auto-scale\nServerless: Pay-per-execution", "VPS is the sweet spot — dedicated resources at reasonable cost.", "medium"),
+      generateQuizStep("GitHub Actions", "What are GitHub Actions?", [{ label: "A", text: "CI/CD workflows that automate testing, building, and deployment" }, { label: "B", text: "UI animations" }, { label: "C", text: "Database queries" }], "A", "Actions run on every push/PR: lint, test, deploy automatically."),
+    ],
+    "nodejs-intro": [
+      generateQuizStep("Node.js", "What is Node.js?", [{ label: "A", text: "A JavaScript runtime that executes JS on the server" }, { label: "B", text: "A web browser" }, { label: "C", text: "A CSS framework" }], "A", "Node.js uses Chrome's V8 engine. Non-blocking and event-driven — perfect for APIs."),
+      generateTypingStep("npm Commands", "Type essential npm commands!", "npm init -y\nnpm install express\nnpm install -D nodemon\nnpm start\nnpm run build\nnpm update", "package.json is the heart of every Node.js project.", "medium"),
+    ],
+    "express-api": [
+      generateTypingStep("Express Server", "Build an Express API!", 'const express = require("express");\nconst app = express();\napp.use(express.json());\n\napp.get("/api/users", (req, res) => {\n  res.json([{ id: 1, name: "Alice" }]);\n});\n\napp.listen(3000);', "Express simplifies Node.js server creation with routing and middleware.", "medium"),
+      generateTypingStep("CRUD Routes", "Type all CRUD routes!", 'app.get("/api/items", getAll);\napp.get("/api/items/:id", getOne);\napp.post("/api/items", create);\napp.put("/api/items/:id", update);\napp.delete("/api/items/:id", del);', "CRUD maps to HTTP: GET=Read, POST=Create, PUT=Update, DELETE=Delete.", "medium"),
+    ],
+    "database-integration": [
+      generateTypingStep("SQL CRUD", "Type SQL CRUD operations!", "SELECT * FROM users WHERE age > 18;\nINSERT INTO users (name, email) VALUES ('Alice', 'a@b.com');\nUPDATE users SET name = 'Bob' WHERE id = 1;\nDELETE FROM users WHERE id = 1;", "These four SQL operations are the foundation of all database work.", "medium"),
+      generateQuizStep("JOIN Types", "What does an INNER JOIN return?", [{ label: "A", text: "Only rows with matching values in both tables" }, { label: "B", text: "All rows from both" }, { label: "C", text: "Only unmatched rows" }], "A", "INNER JOIN = intersection. LEFT JOIN keeps all left rows. FULL JOIN keeps everything."),
+    ],
+    "tailwind-css": [
+      generateQuizStep("Tailwind", "What makes Tailwind CSS different?", [{ label: "A", text: "Utility-first: compose designs with small, single-purpose classes" }, { label: "B", text: "Component-first with pre-built designs" }, { label: "C", text: "No classes needed" }], "A", "Tailwind: class='flex items-center gap-4 p-6 bg-blue-500'. No custom CSS needed."),
+      generateTypingStep("Tailwind Card", "Build a card!", '<div class="max-w-sm rounded-lg shadow-lg p-6 bg-white">\n  <h2 class="text-xl font-bold mb-2">Title</h2>\n  <p class="text-gray-600">Content here.</p>\n</div>', "Tailwind classes are composable — combine them for any design.", "medium"),
+    ],
+    "typescript-intro": [
+      generateTypingStep("TypeScript Basics", "Type TypeScript code!", "let name: string = 'Alice';\nlet age: number = 25;\nlet active: boolean = true;\nlet scores: number[] = [90, 85, 95];", "Type annotations go after the variable name with a colon.", "medium"),
+      generateQuizStep("TS Benefits", "Why use TypeScript?", [{ label: "A", text: "Static type checking catches bugs at compile time" }, { label: "B", text: "It runs faster" }, { label: "C", text: "It replaces HTML" }], "A", "TypeScript = JavaScript + types. Catches errors before runtime."),
+    ],
+    "web-deployment-advanced": [
+      generateQuizStep("CI/CD", "What is CI/CD?", [{ label: "A", text: "Continuous Integration/Deployment — automating build, test, deploy" }, { label: "B", text: "A language" }, { label: "C", text: "A database" }], "A", "CI: build and test on every commit. CD: deploy passing builds automatically."),
+      generateTypingStep("Dockerfile", "Write a Dockerfile!", "FROM node:20-alpine\nWORKDIR /app\nCOPY package*.json ./\nRUN npm ci\nCOPY . .\nRUN npm run build\nEXPOSE 3000\nCMD [\"npm\", \"start\"]", "Dockerfiles define how to build container images.", "hard"),
+    ],
+    "auth-implementation": [
+      generateQuizStep("Auth vs AuthZ", "Authentication vs Authorization?", [{ label: "A", text: "Authentication = WHO you are; Authorization = WHAT you can access" }, { label: "B", text: "Same thing" }, { label: "C", text: "AuthZ comes first" }], "A", "Login = authentication. Role/permission checks = authorization."),
+      generateTypingStep("JWT Structure", "Type JWT components!", "Header: { alg: 'HS256', typ: 'JWT' }\nPayload: { sub: 'user123', exp: 1699999999 }\nSignature: HMACSHA256(header + payload, secret)\nResult: xxxxx.yyyyy.zzzzz", "JWTs are self-contained tokens: header.payload.signature.", "hard"),
+    ],
+    "testing-debugging": [
+      generateTypingStep("Console Methods", "Type debugging methods!", "console.log('Basic output');\nconsole.error('Error');\nconsole.warn('Warning');\nconsole.table(arrayOfObjects);\nconsole.time('timer');\nconsole.timeEnd('timer');", "console.table() is incredibly useful for arrays and objects.", "easy"),
+      generateQuizStep("Breakpoints", "What is a breakpoint?", [{ label: "A", text: "A point where execution pauses so you can inspect state" }, { label: "B", text: "Where code breaks permanently" }, { label: "C", text: "A CSS property" }], "A", "Set breakpoints in DevTools Sources tab to pause and inspect variables."),
     ],
   };
   return content[id] || null;
