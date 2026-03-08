@@ -20,6 +20,19 @@ import {
   mathDeepContent,
   gameDevDeepContent,
 } from "./lessonContentExpanded3";
+import {
+  pythonDeepContent,
+  kubernetesDeepContent,
+  terraformDeepContent,
+  awsDeepContent,
+  dockerDeepContent,
+  cicdDeepContent,
+  ansibleContent,
+  gameDevDeepContent2,
+  computerSystemsDeepContent2,
+  webDeepContent2,
+  businessDeepContent2,
+} from "./lessonContentExpanded4";
 
 function generateQuizStep(title: string, question: string, options: { label: string; text: string }[], correct: string, explanation: string, difficulty: "easy" | "medium" | "hard" = "medium"): LessonStep {
   return { type: "quiz", title, difficulty, question, options, correctAnswer: correct, explanation };
