@@ -1019,20 +1019,7 @@ function getBusinessContent(id: string): LessonStep[] | null {
       generateTypingStep("AWS Regions", "Type AWS global infrastructure!", "Regions: us-east-1, eu-west-2, ap-southeast-1\nAvailability Zones: 2+ per region\nEdge Locations: 400+ for CDN\nLocal Zones: Ultra-low latency", "Choose regions close to users. Use multiple AZs for high availability.", "medium"),
       generateQuizStep("S3 Storage Classes", "Which S3 class is cheapest for rarely accessed data?", [{ label: "A", text: "S3 Glacier Deep Archive" }, { label: "B", text: "S3 Standard" }, { label: "C", text: "S3 Intelligent-Tiering" }], "A", "Glacier Deep Archive is cheapest ($0.00099/GB/month) but retrieval takes 12+ hours."),
     ],
-    "saas-cloud": [
-      generateQuizStep("SaaS Model", "What is SaaS?", [{ label: "A", text: "Software delivered via the internet on a subscription basis" }, { label: "B", text: "Software installed on a CD" }, { label: "C", text: "A programming language" }], "A", "SaaS: accessed via browser — no installation needed. Examples: Google Workspace, Salesforce, Slack."),
-      generateQuizStep("Cloud Models", "What are the three main cloud service models?", [{ label: "A", text: "IaaS, PaaS, SaaS" }, { label: "B", text: "Small, Medium, Large" }, { label: "C", text: "Free, Premium, Enterprise" }], "A", "IaaS (infrastructure), PaaS (platform), SaaS (software) — each provides a different level of abstraction."),
-      generateTypingStep("Cloud Mnemonic", "Type cloud service models!", "IaaS: Infrastructure (AWS EC2, Azure VMs)\nPaaS: Platform (Heroku, Google App Engine)\nSaaS: Software (Gmail, Salesforce, Slack)", "Remember: Pizza analogy — IaaS is ingredients, PaaS is kitchen, SaaS is delivery.", "medium"),
-    ],
-    // ===== ERP & SAP =====
-    "erp-systems": [
-      generateQuizStep("ERP Definition", "What is ERP?", [{ label: "A", text: "Enterprise Resource Planning — integrates all core business processes" }, { label: "B", text: "An email provider" }, { label: "C", text: "A social media platform" }], "A", "ERP integrates finance, HR, manufacturing, supply chain, CRM, and more into one system."),
-      generateQuizStep("ERP Modules", "What are typical ERP modules?", [{ label: "A", text: "Finance, HR, Supply Chain, Manufacturing, CRM, Inventory" }, { label: "B", text: "Only accounting" }, { label: "C", text: "Email and calendar" }], "A", "ERP modules cover all business functions, sharing one central database."),
-      generateTypingStep("ERP Vendors", "Type major ERP platforms!", "SAP S/4HANA: Market leader, enterprise-grade\nOracle ERP Cloud: Strong in finance/supply chain\nMicrosoft Dynamics 365: SMB-friendly, Azure integrated\nSalesforce: CRM-first, expanding to ERP\nWorkday: HR and finance specialist", "SAP holds ~22% market share. Oracle and Microsoft are the main competitors.", "medium"),
-      generateQuizStep("SAP HANA", "What is SAP HANA?", [{ label: "A", text: "An in-memory database and application platform by SAP" }, { label: "B", text: "A programming language" }, { label: "C", text: "A web browser" }], "A", "SAP HANA processes data in-memory (RAM) instead of disk, enabling real-time analytics on transactional data."),
-      generateTypingStep("SAP Modules", "Type key SAP modules!", "FI: Financial Accounting\nCO: Controlling\nSD: Sales & Distribution\nMM: Materials Management\nPP: Production Planning\nHR: Human Resources", "SAP modules are known by their two-letter abbreviations.", "medium"),
-      generateQuizStep("ERP Implementation", "What is the biggest risk in ERP implementation?", [{ label: "A", text: "Cost overruns, scope creep, and user resistance to change" }, { label: "B", text: "The software is too fast" }, { label: "C", text: "No training needed" }], "A", "70% of ERP projects experience cost/time overruns. Change management is critical."),
-    ],
+    // ===== ERP Deep Dive (erp-systems already defined above) =====
     // ===== Hosting & Infrastructure =====
     "ecommerce-platforms": [
       generateQuizStep("E-Commerce Platforms", "What are the leading e-commerce platforms?", [{ label: "A", text: "Shopify, WooCommerce, Magento, BigCommerce" }, { label: "B", text: "Microsoft Word" }, { label: "C", text: "Photoshop" }], "A", "Shopify dominates hosted solutions; WooCommerce (WordPress plugin) leads self-hosted."),
