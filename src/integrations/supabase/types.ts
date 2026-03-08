@@ -1088,7 +1088,17 @@ export type Database = {
       }
     }
     Functions: {
+      award_badge: { Args: { p_badge_id: string }; Returns: boolean }
       clear_parental_pin: { Args: never; Returns: boolean }
+      finalize_battle: {
+        Args: {
+          p_host_score: number
+          p_opponent_score: number
+          p_room_id: string
+          p_winner_id: string
+        }
+        Returns: undefined
+      }
       has_parental_pin: { Args: never; Returns: boolean }
       has_role: {
         Args: {
@@ -1099,6 +1109,19 @@ export type Database = {
       }
       is_admin_email: { Args: { email: string }; Returns: boolean }
       set_parental_pin: { Args: { pin_value: string }; Returns: boolean }
+      submit_battle_answer: {
+        Args: { p_answer: number; p_round_id: string; p_time_ms: number }
+        Returns: undefined
+      }
+      unlock_avatar_item: { Args: { p_item_id: string }; Returns: boolean }
+      update_leaderboard_stats: {
+        Args: {
+          p_games_delta?: number
+          p_lessons_delta?: number
+          p_xp_delta?: number
+        }
+        Returns: undefined
+      }
       verify_parental_pin: { Args: { pin_attempt: string }; Returns: boolean }
     }
     Enums: {
