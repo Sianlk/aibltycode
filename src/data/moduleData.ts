@@ -546,6 +546,13 @@ export const moduleLessons: Record<string, { id: string; title: string; descript
     { id: "cloud-services-bis", title: "Cloud Services for Business", description: "AWS, Azure, GCP essentials", icon: "☁️", xpReward: 175 },
     { id: "api-economy", title: "The API Economy", description: "API-driven business models", icon: "🔌", xpReward: 175 },
     { id: "cyber-risk-business", title: "Cyber Risk for Business", description: "Business impact of security breaches", icon: "🛡️", xpReward: 150 },
+    { id: "whmcs-hosting", title: "WHMCS & Hosting Automation", description: "Billing, provisioning, support for hosting", icon: "🖥️", xpReward: 175 },
+    { id: "vps-hosting", title: "VPS & Hosting Types", description: "Shared, VPS, dedicated, cloud hosting", icon: "🌐", xpReward: 150 },
+    { id: "hosting-fundamentals", title: "Hosting Fundamentals", description: "DNS, cPanel, SSL, server management", icon: "🔧", xpReward: 150 },
+    { id: "digital-marketing-strategy", title: "Digital Marketing Strategy", description: "Multi-channel marketing and KPIs", icon: "📣", xpReward: 175 },
+    { id: "social-media-marketing", title: "Social Media Marketing", description: "Platform strategies and engagement", icon: "📱", xpReward: 150 },
+    { id: "saas-business-model", title: "SaaS Business Model", description: "Subscription metrics and growth", icon: "📈", xpReward: 175 },
+    { id: "excel-formulas-deep", title: "Advanced Excel Formulas", description: "XLOOKUP, dynamic arrays, VBA macros", icon: "📊", xpReward: 200 },
   ],
 
   // ==================== GAME DEVELOPMENT ====================
