@@ -49,51 +49,56 @@ function generateStepsForTopic(id: string, title: string, desc: string, moduleId
 function generateJavaSteps(id: string, title: string, desc: string): LessonStep[] {
   const steps: LessonStep[] = [];
   
+  // Step 1: Context — why this matters (assumes ZERO knowledge)
   steps.push(generateQuizStep(
-    `What is ${title}?`, `Which best describes ${title.toLowerCase()} in Java?`,
-    [{ label: "A", text: desc }, { label: "B", text: "A type of variable declaration" }, { label: "C", text: "A compiler error message" }],
-    "A", `${title} refers to: ${desc}. This is a fundamental Java concept.`, "easy"
+    `Why learn ${title}?`,
+    `You're learning to code from scratch. ${title} is a concept you'll use when building apps, games, and websites. Which best describes it?`,
+    [{ label: "A", text: desc }, { label: "B", text: "A type of computer hardware" }, { label: "C", text: "Something you can skip" }],
+    "A", `${title}: ${desc}. Don't worry if this is new — we'll break it down step by step until it feels automatic.`, "easy"
   ));
 
+  // Step 2 & 3: Code typing drills
   const codeSnippets = getJavaCodeSnippet(id, title);
   codeSnippets.forEach(snippet => {
     steps.push(generateTypingStep(snippet.title, snippet.prompt, snippet.code, snippet.explanation, snippet.difficulty));
   });
 
+  // Step 4: Understanding check
   steps.push(generateQuizStep(
-    `${title} Knowledge Check`, `Why is ${title.toLowerCase()} important in Java programming?`,
-    [{ label: "A", text: `It helps with ${desc.toLowerCase()}` }, { label: "B", text: "It is only used in Python" }, { label: "C", text: "It makes code run slower" }],
-    "A", `${title} is important because it enables ${desc.toLowerCase()}, making your code more robust and professional.`, "medium"
+    `${title} explained simply`, `In your own words, ${title.toLowerCase()} is used for:`,
+    [{ label: "A", text: `${desc}` }, { label: "B", text: "Deleting files from your computer" }, { label: "C", text: "Making the screen change colour" }],
+    "A", `Exactly! ${title} is about ${desc.toLowerCase()}. You'll use this pattern hundreds of times in real projects.`, "easy"
   ));
 
-  // Additional drilling: repeat the code pattern
+  // Step 5: Repetition drill — type the main pattern again
   if (codeSnippets.length > 0) {
     const mainSnippet = codeSnippets[0];
     steps.push(generateTypingStep(
-      `Drill: ${mainSnippet.title}`, `Type it again from memory!`, mainSnippet.code,
-      `Repetition builds muscle memory. You should now be able to type ${title.toLowerCase()} syntax without thinking.`, mainSnippet.difficulty
+      `Drill: ${mainSnippet.title}`, `Type it again from memory — this builds the muscle memory that makes coding feel natural.`, mainSnippet.code,
+      `Each repetition makes this pattern more automatic. Professional developers type patterns like this without thinking.`, mainSnippet.difficulty
     ));
   }
 
+  // Step 6: Best practice quiz
   steps.push(generateQuizStep(
-    `${title} Best Practices`, `What is a best practice when using ${title.toLowerCase()}?`,
-    [{ label: "A", text: "Ignore error handling" }, { label: "B", text: "Follow Java naming conventions and document your code" }, { label: "C", text: "Never test your code" }],
-    "B", `Following conventions and documenting code ensures ${title.toLowerCase()} is used correctly and maintainably.`, "medium"
+    `${title} best practice`, `When using ${title.toLowerCase()} in a real project, you should:`,
+    [{ label: "A", text: "Write clear code and test it" }, { label: "B", text: "Never test anything" }, { label: "C", text: "Copy code without understanding it" }],
+    "A", `Clean, tested code is what separates beginners from professionals. You're building that habit now.`, "medium"
   ));
 
-  // Application quiz
+  // Step 7: Application scenario
   steps.push(generateQuizStep(
-    `Apply ${title}`, `A colleague asks you to implement ${title.toLowerCase()}. What is your first step?`,
-    [{ label: "A", text: "Start coding immediately without planning" }, { label: "B", text: "Understand the requirement, plan the approach, then write clean code" }, { label: "C", text: "Copy code from the internet without understanding" }],
-    "B", `Professional developers plan their approach before coding. Understanding ${title.toLowerCase()} deeply means you can implement it correctly the first time.`, "hard"
+    `Real-world ${title}`, `You're building a mobile app and need to use ${title.toLowerCase()}. What's your approach?`,
+    [{ label: "A", text: "Skip it — it's not important" }, { label: "B", text: "Recall the pattern you drilled, plan, then code" }, { label: "C", text: "Ask someone else to do it" }],
+    "B", `You now know the pattern. In a real project, you'd recall this exact syntax and apply it. That's professional fluency.`, "hard"
   ));
 
-  // Final speed drill
+  // Step 8: Final speed drill
   if (codeSnippets.length > 0) {
     steps.push(generateTypingStep(
-      `Speed Drill: ${title}`, `Type it one more time — aim for speed!`,
+      `Speed drill: ${title}`, `Last time — type as fast as you can!`,
       codeSnippets[codeSnippets.length > 1 ? 1 : 0].code,
-      `By now this should feel natural. ${title} syntax is becoming second nature!`, "medium"
+      `Three repetitions locks this into long-term memory. ${title} syntax is now becoming second nature!`, "medium"
     ));
   }
 
