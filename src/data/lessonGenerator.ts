@@ -10,6 +10,16 @@ import {
   computerSystemsExpandedContent,
   webExpandedContent,
 } from "./lessonContentExpanded2";
+import {
+  systemsDeepContent,
+  cyberDeepContent,
+  computerSystemsDeepContent,
+  webDeepContent,
+  businessDeepContent,
+  aiDeepContent,
+  mathDeepContent,
+  gameDevDeepContent,
+} from "./lessonContentExpanded3";
 
 function generateQuizStep(title: string, question: string, options: { label: string; text: string }[], correct: string, explanation: string, difficulty: "easy" | "medium" | "hard" = "medium"): LessonStep {
   return { type: "quiz", title, difficulty, question, options, correctAnswer: correct, explanation };
