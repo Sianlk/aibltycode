@@ -791,6 +791,45 @@ function getBusinessContent(id: string): LessonStep[] | null {
       generateTypingStep("Keyword Types", "Type keyword types!", "Short-tail: broad, high volume (e.g., 'shoes')\nLong-tail: specific, lower volume (e.g., 'best running shoes for flat feet')", "Long-tail keywords are easier to rank for and convert better.", "medium"),
       generateQuizStep("Search Intent", "What are the four types of search intent?", [{ label: "A", text: "Informational, navigational, transactional, commercial" }, { label: "B", text: "Fast, slow, medium, none" }, { label: "C", text: "Text, image, video, audio" }], "A", "Understanding intent helps create content that matches what users actually want."),
     ],
+    "excel-analytics": [
+      generateQuizStep("Excel for Analytics", "Why is Excel essential for data analytics?", [{ label: "A", text: "It combines formulas, charts, pivot tables, and macros in one tool" }, { label: "B", text: "It's the only option" }, { label: "C", text: "It only does basic math" }], "A", "Excel is the most widely used analytics tool: formulas for calculation, charts for visualization, pivot tables for summarization."),
+      generateTypingStep("VLOOKUP Formula", "Type a VLOOKUP formula!", '=VLOOKUP(A2, Products!A:C, 3, FALSE)', "VLOOKUP(value, table, column, exact_match). FALSE means exact match.", "medium"),
+      generateQuizStep("Pivot Tables", "What is the main purpose of a PivotTable?", [{ label: "A", text: "Summarizing and analyzing large datasets interactively" }, { label: "B", text: "Formatting cells" }, { label: "C", text: "Printing reports" }], "A", "PivotTables let you drag fields to instantly summarize thousands of rows by category."),
+      generateTypingStep("PivotTable Mnemonic", "Type the PivotTable areas!", "Rows: Categories (e.g., Region)\nColumns: Sub-categories (e.g., Product)\nValues: Metrics (SUM, COUNT, AVG)\nFilters: Top-level slicers", "Remember: R.C.V.F — Rows, Columns, Values, Filters.", "medium"),
+      generateQuizStep("Chart Selection", "Which chart shows trends over time?", [{ label: "A", text: "Line chart" }, { label: "B", text: "Pie chart" }, { label: "C", text: "Treemap" }], "A", "Line charts connect data points over time. Use pie for proportions, bar for comparisons."),
+      generateTypingStep("Chart Types", "Type when to use each chart!", "Line: Trends over time\nBar: Comparing categories\nPie: Parts of a whole (max 7)\nScatter: Correlation between 2 variables\nHistogram: Frequency distribution", "Choosing the right chart is critical for clear data communication.", "medium"),
+      generateQuizStep("Macros", "What is a Macro in Excel?", [{ label: "A", text: "A recorded or coded sequence of actions that can be replayed" }, { label: "B", text: "A large cell" }, { label: "C", text: "A formula" }], "A", "Macros automate repetitive tasks. Record with View > Macros or write VBA code directly."),
+      generateTypingStep("VBA Basics", "Type VBA code!", "Sub FormatReport()\n  Range(\"A1\").Font.Bold = True\n  Range(\"A1:D1\").Interior.Color = RGB(0, 120, 215)\nEnd Sub", "VBA Sub procedures contain macro code. Range() references cells.", "hard"),
+    ],
+    "tableau-powerbi": [
+      generateQuizStep("BI Tools", "What do Tableau and Power BI do?", [{ label: "A", text: "Create interactive visual dashboards from data" }, { label: "B", text: "Write code" }, { label: "C", text: "Send emails" }], "A", "BI tools connect to data sources and create interactive visualizations for business insights."),
+      generateQuizStep("Tableau vs Power BI", "What is a key difference?", [{ label: "A", text: "Tableau excels at visualization; Power BI integrates with Microsoft ecosystem" }, { label: "B", text: "They are identical" }, { label: "C", text: "Neither supports dashboards" }], "A", "Tableau is best for complex visualizations; Power BI integrates tightly with Excel, Azure, and Microsoft 365."),
+      generateTypingStep("Dashboard KPIs", "Type key dashboard metrics!", "Revenue: Total, growth rate, by segment\nCustomers: Acquisition, churn, lifetime value\nOperations: Efficiency, cost per unit\nMarketing: CAC, conversion rate, ROAS", "Good dashboards show KPIs at a glance with drill-down capability.", "medium"),
+    ],
+    "saas-cloud": [
+      generateQuizStep("SaaS Model", "What is SaaS?", [{ label: "A", text: "Software delivered via the internet on a subscription basis" }, { label: "B", text: "Software installed on a CD" }, { label: "C", text: "A programming language" }], "A", "SaaS (Software as a Service) is accessed via browser — no installation needed. Examples: Google Workspace, Salesforce, Slack."),
+      generateQuizStep("Cloud Models", "What are the three main cloud service models?", [{ label: "A", text: "IaaS, PaaS, SaaS" }, { label: "B", text: "Small, Medium, Large" }, { label: "C", text: "Free, Premium, Enterprise" }], "A", "IaaS (infrastructure), PaaS (platform), SaaS (software) — each provides a different level of abstraction."),
+      generateTypingStep("Cloud Mnemonic", "Type cloud service models!", "IaaS: Infrastructure (AWS EC2, Azure VMs)\nPaaS: Platform (Heroku, Google App Engine)\nSaaS: Software (Gmail, Salesforce, Slack)", "Remember: Pizza analogy — IaaS is ingredients, PaaS is kitchen, SaaS is delivery.", "medium"),
+    ],
+    "saas-metrics": [
+      generateQuizStep("MRR", "What is MRR?", [{ label: "A", text: "Monthly Recurring Revenue — predictable monthly income" }, { label: "B", text: "Most Recent Report" }, { label: "C", text: "Maximum Return Rate" }], "A", "MRR is the total predictable revenue from subscriptions each month."),
+      generateTypingStep("SaaS Metrics", "Type key SaaS metrics!", "MRR: Monthly Recurring Revenue\nARR: Annual Recurring Revenue\nCAC: Customer Acquisition Cost\nLTV: Lifetime Value\nChurn: % customers leaving", "LTV/CAC ratio should be > 3. Churn < 5% monthly is healthy.", "medium"),
+      generateQuizStep("Churn Rate", "What is churn rate?", [{ label: "A", text: "The percentage of customers who cancel their subscription" }, { label: "B", text: "Revenue growth" }, { label: "C", text: "New customer rate" }], "A", "Churn = customers lost / total customers. Reducing churn is usually more valuable than acquiring new customers."),
+    ],
+    "marketing-funnels": [
+      generateQuizStep("AIDA Model", "What does AIDA stand for?", [{ label: "A", text: "Attention, Interest, Desire, Action" }, { label: "B", text: "Analysis, Implementation, Design, Assessment" }, { label: "C", text: "Awareness, Insight, Data, Analytics" }], "A", "AIDA describes the customer journey: grab Attention, build Interest, create Desire, drive Action."),
+      generateTypingStep("Funnel Stages", "Type the marketing funnel!", "Top: Awareness (ads, content, SEO)\nMiddle: Consideration (email, webinars)\nBottom: Conversion (demos, trials, offers)\nPost: Retention (onboarding, support)", "Each stage requires different content and strategies.", "medium"),
+      generateQuizStep("Conversion Rate", "What is a conversion rate?", [{ label: "A", text: "Percentage of visitors who take a desired action" }, { label: "B", text: "Internet speed" }, { label: "C", text: "Number of pages viewed" }], "A", "Conversion rate = (conversions / visitors) × 100. Industry average for websites is 2-5%."),
+    ],
+    "google-ads": [
+      generateQuizStep("Google Ads", "How does Google Ads (PPC) pricing work?", [{ label: "A", text: "You pay each time someone clicks your ad" }, { label: "B", text: "Fixed monthly fee" }, { label: "C", text: "Free to advertise" }], "A", "PPC (Pay-Per-Click): you bid on keywords, pay only when someone clicks. Cost varies by competition."),
+      generateTypingStep("Ad Components", "Type Google Ad components!", "Headline 1 (30 chars)\nHeadline 2 (30 chars)\nDescription (90 chars)\nDisplay URL\nSitelink extensions", "Effective ads need compelling headlines and clear calls to action.", "medium"),
+      generateQuizStep("Quality Score", "What factors determine Google Ads Quality Score?", [{ label: "A", text: "Ad relevance, landing page experience, expected CTR" }, { label: "B", text: "Budget only" }, { label: "C", text: "Company size" }], "A", "Higher Quality Score = lower cost per click and better ad positions."),
+    ],
+    "email-marketing": [
+      generateQuizStep("Email Marketing", "What makes email marketing effective?", [{ label: "A", text: "Personalized, segmented campaigns with clear CTAs" }, { label: "B", text: "Sending to everyone with no targeting" }, { label: "C", text: "Sending once a year" }], "A", "Segmented, personalized emails have 14% higher open rates and 10% higher conversions."),
+      generateTypingStep("Email Metrics", "Type email marketing KPIs!", "Open Rate: % who opened (aim: 20-25%)\nCTR: % who clicked (aim: 2-5%)\nConversion Rate: % who completed action\nBounce Rate: % undeliverable\nUnsubscribe: % who opted out", "Track these metrics to optimize your email campaigns.", "medium"),
+    ],
   };
   return content[id] || null;
 }
