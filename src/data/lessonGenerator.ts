@@ -318,29 +318,32 @@ function generateSystemsSteps(id: string, title: string, desc: string): LessonSt
   const topicContent = getSystemsContent(id);
   if (topicContent) return topicContent;
 
-  // Enhanced fallback with 7 intensive steps
+  // Zero-knowledge fallback: teaches from absolute scratch
   return [
-    generateQuizStep(`Understanding ${title}`, `What does ${title.toLowerCase()} involve?`,
-      [{ label: "A", text: desc }, { label: "B", text: "Writing machine code" }, { label: "C", text: "Hardware installation" }],
-      "A", `${title} is about ${desc.toLowerCase()}, a key concept in systems analysis.`, "easy"),
-    generateTypingStep(`${title} Definition`, `Type the definition of ${title.toLowerCase()}!`,
+    generateQuizStep(`Why learn ${title}?`, `You're learning about building real systems from scratch. ${title} is essential because:`,
+      [{ label: "A", text: desc }, { label: "B", text: "It's only used in old technology" }, { label: "C", text: "It has no practical use" }],
+      "A", `${title}: ${desc}. This is used by analysts and developers worldwide to build real business systems. You'll learn it step by step.`, "easy"),
+    generateTypingStep(`Define ${title}`, `Type this definition to start building your memory:`,
       `${title}: ${desc}`,
-      `Being able to define ${title.toLowerCase()} from memory is essential for exams and interviews.`, "easy"),
-    generateQuizStep(`${title} in SDLC`, `Which SDLC phase does ${title.toLowerCase()} primarily belong to?`,
-      [{ label: "A", text: "Only during coding" }, { label: "B", text: "During analysis and design phases" }, { label: "C", text: "Only after deployment" }],
-      "B", `${title} is applied during analysis and design to ensure the system meets requirements.`, "medium"),
-    generateTypingStep(`${title} in Practice`, `Type how you would apply ${title.toLowerCase()} in a project!`,
-      `Step 1: Identify requirements\nStep 2: Apply ${title}\nStep 3: Document and validate`,
-      `Following a structured approach ensures ${title.toLowerCase()} is applied effectively.`, "medium"),
-    generateQuizStep(`${title} Stakeholders`, `Who benefits most from ${title.toLowerCase()}?`,
-      [{ label: "A", text: "Only programmers" }, { label: "B", text: "Only managers" }, { label: "C", text: "All project stakeholders including users, developers, and management" }],
-      "C", `${title} benefits all stakeholders by improving communication and system quality.`, "medium"),
-    generateQuizStep(`${title} vs Alternatives`, `What happens if you skip ${title.toLowerCase()} in a project?`,
-      [{ label: "A", text: "Nothing, it's optional" }, { label: "B", text: "Increased risk of project failure, rework, and missed requirements" }, { label: "C", text: "The project goes faster" }],
-      "B", `Skipping ${title.toLowerCase()} leads to costly rework and missed requirements.`, "hard"),
-    generateTypingStep(`${title} Summary`, `Type the key takeaway for ${title.toLowerCase()}!`,
-      `${title} ensures quality outcomes through structured ${desc.toLowerCase()}.`,
-      `You should now be able to explain ${title.toLowerCase()} confidently in any context.`, "easy"),
+      `Typing it helps your brain store it. You're building the same skills professionals use every day.`, "easy"),
+    generateQuizStep(`${title} in real life`, `Imagine you're hired to build an app. Where does ${title.toLowerCase()} fit?`,
+      [{ label: "A", text: "You'd never use it" }, { label: "B", text: "During planning and design — before writing any code" }, { label: "C", text: "Only after the app crashes" }],
+      "B", `${title} happens during planning. Professional teams always plan before coding — this prevents expensive mistakes.`, "medium"),
+    generateTypingStep(`${title} step-by-step`, `Type the steps a professional would follow:`,
+      `Step 1: Understand what's needed\nStep 2: Apply ${title}\nStep 3: Document your decisions\nStep 4: Get feedback and refine`,
+      `This is exactly how it works in real companies. You now know the professional workflow.`, "medium"),
+    generateQuizStep(`Who uses ${title}?`, `${title.toLowerCase()} benefits:`,
+      [{ label: "A", text: "Only senior managers" }, { label: "B", text: "Everyone on the project — developers, users, and managers" }, { label: "C", text: "Nobody — it's outdated" }],
+      "B", `All stakeholders benefit. Good ${title.toLowerCase()} means better communication and fewer costly mistakes.`, "medium"),
+    generateTypingStep(`${title} drill`, `Type it again — faster this time:`,
+      `${title}: ${desc}`,
+      `Second repetition locks this into long-term memory. Professional fluency is built through repetition.`, "medium"),
+    generateQuizStep(`${title} mastery`, `Could you explain ${title.toLowerCase()} to a teammate who's never heard of it?`,
+      [{ label: "A", text: `Yes: ${desc.substring(0, 70)}` }, { label: "B", text: "No, I'd need to look it up" }, { label: "C", text: "It's too complex to explain simply" }],
+      "A", `If you can explain it simply, you truly own it. Well done — ${title} is now part of your professional toolkit.`, "medium"),
+    generateTypingStep(`Final drill: ${title}`, `One last time from memory:`,
+      `${title} ensures quality through structured ${desc.toLowerCase()}.`,
+      `Three repetitions is the minimum for permanent retention. You've completed the mastery cycle!`, "easy"),
   ];
 }
 
