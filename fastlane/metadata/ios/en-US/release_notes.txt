@@ -1,1 +1,5 @@
-Initial release. AI-Powered Beauty Technology SDK
+• AIBLTY Code v1.0.0 — Initial release
+• Full AI-powered feature suite
+• MFA & biometric sign-in
+• Real-time push notifications
+• Performance improvements
