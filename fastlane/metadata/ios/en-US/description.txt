@@ -1,1 +1,18 @@
-aibltycode is the developer SDK powering next-generation beauty applications. Ship AI-driven beauty features in minutes with pre-built components, real-time inference pipelines, and enterprise-grade APIs.
+AIBLTY Code — Write Less. Build More.
+
+AIBLTY Code is a production-grade AI-powered platform built for reliability, security, and scale.
+
+KEY FEATURES:
+• Secure authentication with MFA and biometrics
+• AI-powered recommendations and automation
+• Real-time WebSocket notifications
+• Stripe-powered subscription management
+• Full GDPR compliance with data export/deletion
+• Offline-capable Progressive Web App
+• End-to-end encrypted communications
+
+SECURITY & PRIVACY:
+Your data is encrypted at rest and in transit. We comply with GDPR, CCPA, and HIPAA guidelines. Full audit logs are maintained for all critical operations.
+
+SUPPORT: https://aibltycode.dev/support
+PRIVACY: https://aibltycode.dev/privacy
