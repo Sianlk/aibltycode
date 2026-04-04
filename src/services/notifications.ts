@@ -1,128 +1,51 @@
-// Push Notifications Service — AIBLTY Code
-// Handles Expo push notifications with permission management
-
-import * as ExpoNotifications from 'expo-notifications';
-import * as Device from 'expo-device';
+// Push Notifications — AIBLTY Code
+import * as N from 'expo-notifications';
 import { Platform } from 'react-native';
-import Constants from 'expo-constants';
 
-ExpoNotifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: true,
-  }),
+N.setNotificationHandler({
+  handleNotification: async () => ({ shouldShowAlert:true, shouldPlaySound:true, shouldSetBadge:true }),
 });
 
-export interface PushToken {
-  token: string;
-  type: 'expo' | 'apns' | 'fcm';
-}
-
-// Register device and get push token
-export async function registerForPushNotifications(): Promise<PushToken | null> {
-  if (!Device.isDevice) {
-    console.warn('Push notifications require a physical device');
-    return null;
-  }
-
-  const { status: existingStatus } = await ExpoNotifications.getPermissionsAsync();
-  let finalStatus = existingStatus;
-
-  if (existingStatus !== 'granted') {
-    const { status } = await ExpoNotifications.requestPermissionsAsync();
-    finalStatus = status;
-  }
-
-  if (finalStatus !== 'granted') {
-    console.warn('Push notification permission denied');
-    return null;
-  }
+export async function registerForPush(): Promise<string|null> {
+  const { status: existing } = await N.getPermissionsAsync();
+  const { status } = existing !== 'granted' ? await N.requestPermissionsAsync() : { status: existing };
+  if (status !== 'granted') return null;
 
   if (Platform.OS === 'android') {
-    await ExpoNotifications.setNotificationChannelAsync('default', {
-      name: 'AIBLTY Code',
-      importance: ExpoNotifications.AndroidImportance.MAX,
-      vibrationPattern: [0, 250, 250, 250],
-      lightColor: '#6366F1',
-    });
-
-    await ExpoNotifications.setNotificationChannelAsync('ai-alerts', {
-      name: 'AI Alerts',
-      description: 'AI-generated insights and alerts',
-      importance: ExpoNotifications.AndroidImportance.HIGH,
-      lightColor: '#818CF8',
+    await N.setNotificationChannelAsync('default', {
+      name: 'AIBLTY Code', importance: N.AndroidImportance.MAX,
+      vibrationPattern: [0,250,250,250], lightColor: '#6366F1',
     });
   }
 
-  const projectId = Constants.expoConfig?.extra?.eas?.projectId;
-  const token = await ExpoNotifications.getExpoPushTokenAsync(
-    projectId ? { projectId } : undefined
-  );
-
-  return { token: token.data, type: 'expo' };
+  const token = await N.getExpoPushTokenAsync();
+  return token.data;
 }
 
-// Register token with backend
-export async function syncPushToken(token: PushToken): Promise<void> {
+export async function syncToken(token: string): Promise<void> {
   try {
     await fetch(`${process.env.EXPO_PUBLIC_API_URL}/api/users/push-token`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(token),
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ token, type: 'expo', app: 'AIBLTY Code' }),
     });
-  } catch (e) {
-    console.warn('Failed to sync push token:', e);
-  }
+  } catch (e) { console.warn('Push token sync failed:', e); }
 }
 
-// Schedule local notification
-export async function scheduleLocalNotification(
-  title: string,
-  body: string,
-  trigger?: ExpoNotifications.NotificationTriggerInput,
-  data?: Record<string, string>
-): Promise<string> {
-  return ExpoNotifications.scheduleNotificationAsync({
-    content: {
-      title,
-      body,
-      data: data ?? {},
-      sound: true,
-      badge: 1,
-    },
-    trigger: trigger ?? null,
-  });
+export async function scheduleNotification(title: string, body: string, data?: Record<string,string>): Promise<string> {
+  return N.scheduleNotificationAsync({ content: { title, body, data:data??{}, sound:true }, trigger: null });
 }
 
-// AI notification — for background AI results
-export async function notifyAIResult(
-  headline: string,
-  summary: string,
-  data?: Record<string, string>
-): Promise<string> {
-  return scheduleLocalNotification(
-    `${headline}`,
-    summary,
-    null,
-    { type: 'ai_result', app: 'AIBLTY Code', ...data }
-  );
+export async function notifyAIResult(headline: string, summary: string): Promise<string> {
+  return scheduleNotification(headline, summary, { type: 'ai', app: 'AIBLTY Code' });
 }
 
-// Add notification listeners
-export function addNotificationListeners(
-  onReceive: (n: ExpoNotifications.Notification) => void,
-  onResponse: (r: ExpoNotifications.NotificationResponse) => void
+export function addListeners(
+  onReceive: (n: N.Notification) => void,
+  onResponse: (r: N.NotificationResponse) => void
 ) {
-  const recv = ExpoNotifications.addNotificationReceivedListener(onReceive);
-  const resp = ExpoNotifications.addNotificationResponseReceivedListener(onResponse);
-  return () => { recv.remove(); resp.remove(); };
+  const a = N.addNotificationReceivedListener(onReceive);
+  const b = N.addNotificationResponseReceivedListener(onResponse);
+  return () => { a.remove(); b.remove(); };
 }
 
-export default {
-  registerForPushNotifications,
-  syncPushToken,
-  scheduleLocalNotification,
-  notifyAIResult,
-  addNotificationListeners,
-};
+export default { registerForPush, syncToken, scheduleNotification, notifyAIResult, addListeners };
