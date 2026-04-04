@@ -3,23 +3,18 @@
 import { useEffect } from 'react';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import * as SplashScreen from 'expo-splash-screen';
-import { registerForPushNotifications, syncPushToken } from '../src/services/notifications';
+import * as Splash from 'expo-splash-screen';
+import { registerForPush, syncToken } from '../src/services/notifications';
 import Analytics from '../src/services/analytics';
 
-SplashScreen.preventAutoHideAsync();
+Splash.preventAutoHideAsync();
 
 export default function RootLayout() {
   useEffect(() => {
-    SplashScreen.hideAsync();
+    Splash.hideAsync();
     Analytics.screen('App Launch');
-
-    // Register push notifications
-    registerForPushNotifications().then((token) => {
-      if (token) syncPushToken(token);
-    });
+    registerForPush().then((t) => { if (t) syncToken(t); });
   }, []);
-
   return (
     <>
       <StatusBar style="auto" />
