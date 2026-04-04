@@ -1,93 +1,38 @@
 // Analytics Service — AIBLTY Code
-// Tracks user behaviour and AI usage metrics
-
 import { Platform } from 'react-native';
 
 type EventProperties = Record<string, string | number | boolean | null>;
 
-interface AnalyticsEvent {
-  name: string;
-  properties?: EventProperties;
-  timestamp?: number;
-}
+const queue: Array<{name:string; props:EventProperties; ts:number}> = [];
+let timer: ReturnType<typeof setTimeout> | null = null;
 
-// Batched event queue for efficient sending
-const eventQueue: AnalyticsEvent[] = [];
-let flushTimer: ReturnType<typeof setTimeout> | null = null;
-
-// Core track function
-export function track(eventName: string, properties?: EventProperties): void {
-  const event: AnalyticsEvent = {
-    name: eventName,
-    properties: {
-      ...properties,
-      platform: Platform.OS,
-      app: 'AIBLTY Code',
-      domain: 'developer tools',
-      timestamp: Date.now(),
-    },
-    timestamp: Date.now(),
-  };
-
-  eventQueue.push(event);
-
-  // Flush every 30 events or after 5 seconds
-  if (eventQueue.length >= 30) {
-    flush();
-  } else if (!flushTimer) {
-    flushTimer = setTimeout(flush, 5000);
-  }
+export function track(name: string, props?: EventProperties): void {
+  queue.push({ name, props: { ...props, platform: Platform.OS, app: 'AIBLTY Code', domain: 'developer tools', ts: Date.now() }, ts: Date.now() });
+  if (queue.length >= 30) flush();
+  else if (!timer) timer = setTimeout(flush, 5000);
 }
 
 async function flush(): Promise<void> {
-  if (flushTimer) { clearTimeout(flushTimer); flushTimer = null; }
-  if (eventQueue.length === 0) return;
-
-  const batch = eventQueue.splice(0, eventQueue.length);
-
+  if (timer) { clearTimeout(timer); timer = null; }
+  if (!queue.length) return;
+  const batch = queue.splice(0);
   try {
     await fetch(`${process.env.EXPO_PUBLIC_API_URL}/api/analytics/batch`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: 'POST', headers: {'Content-Type':'application/json'},
       body: JSON.stringify({ events: batch }),
     });
-  } catch {
-    // Silently fail — analytics must never crash the app
-  }
+  } catch {}
 }
 
-// Convenience methods
 export const Analytics = {
-  // Screen views
-  screen: (screenName: string, props?: EventProperties) =>
-    track('screen_view', { screen_name: screenName, ...props }),
-
-  // AI interactions
-  aiQuery: (query: string, domain: string, responseTime?: number) =>
-    track('ai_query', { query: query.slice(0, 100), domain, response_time_ms: responseTime ?? 0 }),
-
-  aiResponse: (success: boolean, model: string, tokens?: number) =>
-    track('ai_response', { success, model, tokens: tokens ?? 0 }),
-
-  agentTask: (taskType: string, success: boolean, duration?: number) =>
-    track('agent_task', { task_type: taskType, success, duration_ms: duration ?? 0 }),
-
-  // Auth
+  screen: (name: string, p?: EventProperties) => track('screen_view', { screen_name: name, ...p }),
+  aiQuery: (q: string, domain: string, ms?: number) => track('ai_query', { query: q.slice(0,100), domain, ms: ms??0 }),
+  aiResponse: (ok: boolean, model: string, tokens?: number) => track('ai_response', { ok, model, tokens: tokens??0 }),
+  agentTask: (type: string, ok: boolean, ms?: number) => track('agent_task', { type, ok, ms: ms??0 }),
   login: (method: string) => track('login', { method }),
   logout: () => track('logout'),
-  register: (method: string) => track('register', { method }),
-
-  // Feature usage
-  featureUsed: (featureName: string, props?: EventProperties) =>
-    track('feature_used', { feature: featureName, ...props }),
-
-  // Errors
-  error: (errorCode: string, message: string, screen?: string) =>
-    track('app_error', { error_code: errorCode, message: message.slice(0, 200), screen: screen ?? 'unknown' }),
-
-  // Business
-  conversion: (goal: string, value?: number) =>
-    track('conversion', { goal, value: value ?? 0 }),
+  featureUsed: (f: string, p?: EventProperties) => track('feature_used', { feature: f, ...p }),
+  error: (code: string, msg: string, screen?: string) => track('app_error', { code, msg: msg.slice(0,200), screen: screen??'' }),
 };
 
 export default Analytics;
