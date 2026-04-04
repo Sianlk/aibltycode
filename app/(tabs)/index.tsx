@@ -1,7 +1,7 @@
 // app/(tabs)/index.tsx — Home screen
-// AIBLTY Code | AI coding assistant & pair programmer
+// AIBLTY Code | AI coding assistant and pair programmer
 import { useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, TextInput, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuthStore } from '../../src/store/authStore';
 import { domainChat } from '../../src/services/ai';
@@ -11,50 +11,46 @@ import Colors from '../../src/theme/colors';
 import Typography from '../../src/theme/typography';
 import Analytics from '../../src/services/analytics';
 
-const QUICK_ACTIONS = [
-        { id: '1', title: 'AI Code Complete', icon: 'sparkles-outline', color: Colors.primary },
-        { id: '2', title: 'Bug Detection', icon: 'sparkles-outline', color: Colors.primary },
-        { id: '3', title: 'Code Review', icon: 'sparkles-outline', color: Colors.primary },
-        { id: '4', title: 'Docs Generator', icon: 'sparkles-outline', color: Colors.primary },
-        { id: '5', title: 'Terminal AI', icon: 'sparkles-outline', color: Colors.primary },
+const ACTIONS = [
+  { id: '1', title: 'AI Code Complete', icon: 'sparkles-outline' },
+  { id: '2', title: 'Bug Detection', icon: 'sparkles-outline' },
+  { id: '3', title: 'Code Review', icon: 'sparkles-outline' },
+  { id: '4', title: 'Docs Generator', icon: 'sparkles-outline' },
+  { id: '5', title: 'Terminal AI', icon: 'sparkles-outline' },
 ];
 
 export default function HomeScreen() {
   const user = useAuthStore((s) => s.user);
   const [prompt, setPrompt] = useState('');
-  const [aiResponse, setAiResponse] = useState('');
+  const [resp, setResp] = useState('');
   const [loading, setLoading] = useState(false);
 
-  async function handleAIQuery() {
+  async function askAI() {
     if (!prompt.trim()) return;
     setLoading(true);
     Analytics.aiQuery(prompt, 'developer tools');
     try {
-      const response = await domainChat(prompt);
-      setAiResponse(response);
+      const r = await domainChat(prompt);
+      setResp(r);
       Analytics.aiResponse(true, 'gpt-4o');
     } catch (e) {
-      setAiResponse('AI unavailable. Please check connection.');
-      Analytics.error('AI_QUERY_FAILED', String(e), 'HomeScreen');
-    } finally {
-      setLoading(false);
-    }
+      setResp('AI unavailable. Check connection.');
+      Analytics.error('AI_FAIL', String(e), 'Home');
+    } finally { setLoading(false); }
   }
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
-      {/* Header */}
+    <ScrollView style={styles.container} contentContainerStyle={styles.content}>
       <View style={styles.header}>
         <View>
           <Text style={styles.greeting}>Hello, {user?.name ?? 'User'} 👋</Text>
-          <Text style={styles.tagline}>AI coding assistant & pair programmer</Text>
+          <Text style={styles.tagline}>AI coding assistant and pair programmer</Text>
         </View>
-        <TouchableOpacity style={styles.notificationBtn}>
+        <TouchableOpacity style={styles.notifBtn}>
           <Ionicons name="notifications-outline" size={24} color={Colors.gray600} />
         </TouchableOpacity>
       </View>
 
-      {/* AI Chat Card */}
       <Card variant="ai" style={styles.aiCard}>
         <View style={styles.aiBadge}>
           <Ionicons name="sparkles" size={14} color={Colors.primary} />
@@ -62,43 +58,27 @@ export default function HomeScreen() {
         </View>
         <TextInput
           style={styles.aiInput}
-          placeholder={`Ask AIBLTY Code AI anything...`}
+          placeholder="Ask AIBLTY Code AI anything..."
           placeholderTextColor={Colors.gray400}
-          value={prompt}
-          onChangeText={setPrompt}
-          multiline
-          maxLength={500}
+          value={prompt} onChangeText={setPrompt} multiline
         />
-        <Button
-          label={loading ? 'Thinking...' : 'Ask AI'}
-          onPress={handleAIQuery}
-          variant="ai"
-          size="sm"
-          loading={loading}
-          disabled={!prompt.trim()}
-        />
-        {aiResponse ? (
-          <View style={styles.aiResponse}>
-            <Text style={styles.aiResponseLabel}>AI Response</Text>
-            <Text style={styles.aiResponseText}>{aiResponse}</Text>
+        <Button label={loading ? 'Thinking...' : 'Ask AI'} onPress={askAI} variant="ai" size="sm" loading={loading} disabled={!prompt.trim()} />
+        {resp ? (
+          <View style={styles.aiResp}>
+            <Text style={styles.aiRespLabel}>AI Response</Text>
+            <Text style={styles.aiRespText}>{resp}</Text>
           </View>
         ) : null}
       </Card>
 
-      {/* Quick Actions */}
       <Text style={styles.sectionTitle}>Quick Actions</Text>
-      <View style={styles.quickGrid}>
-        {QUICK_ACTIONS.map((item) => (
-          <TouchableOpacity
-            key={item.id}
-            style={styles.quickItem}
-            onPress={() => Analytics.featureUsed(item.title)}
-            activeOpacity={0.7}
-          >
-            <View style={[styles.quickIcon, { backgroundColor: Colors.aiBackground }]}>
-              <Ionicons name={item.icon as any} size={22} color={Colors.primary} />
+      <View style={styles.grid}>
+        {ACTIONS.map((item) => (
+          <TouchableOpacity key={item.id} style={styles.gridItem} onPress={()=>Analytics.featureUsed(item.title)} activeOpacity={0.7}>
+            <View style={styles.gridIcon}>
+              <Ionicons name="sparkles-outline" size={22} color={Colors.primary} />
             </View>
-            <Text style={styles.quickLabel} numberOfLines={2}>{item.title}</Text>
+            <Text style={styles.gridLabel} numberOfLines={2}>{item.title}</Text>
           </TouchableOpacity>
         ))}
       </View>
@@ -107,23 +87,22 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.background },
-  content:   { padding: 20, paddingBottom: 40 },
-  header:    { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 24 },
+  container: { flex:1, backgroundColor: Colors.background },
+  content:   { padding:20, paddingBottom:40 },
+  header:    { flexDirection:'row', justifyContent:'space-between', alignItems:'flex-start', marginBottom:24 },
   greeting:  { ...Typography.h2, color: Colors.textPrimary },
-  tagline:   { ...Typography.bodySm, color: Colors.textSecondary, marginTop: 2 },
-  notificationBtn: { padding: 8, borderRadius: 12, backgroundColor: Colors.gray100 },
-  aiCard:    { marginBottom: 28, padding: 16 },
-  aiBadge:   { flexDirection: 'row', alignItems: 'center', marginBottom: 12 },
-  aiBadgeText: { ...Typography.label, color: Colors.primary, marginLeft: 6 },
-  aiInput:   { ...Typography.bodyMd, color: Colors.textPrimary, minHeight: 60, marginBottom: 12, textAlignVertical: 'top' },
-  aiResponse: { marginTop: 16, padding: 12, backgroundColor: Colors.gray50, borderRadius: 10 },
-  aiResponseLabel: { ...Typography.label, color: Colors.textSecondary, marginBottom: 6 },
-  aiResponseText:  { ...Typography.bodyMd, color: Colors.textPrimary },
-  sectionTitle: { ...Typography.h4, color: Colors.textPrimary, marginBottom: 16 },
-  quickGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
-  quickItem: { width: '30%', alignItems: 'center', backgroundColor: Colors.surface, borderRadius: 14, padding: 14,
-    shadowColor: '#000', shadowOffset: {width:0,height:1}, shadowOpacity: 0.06, shadowRadius: 4, elevation: 1 },
-  quickIcon: { width: 44, height: 44, borderRadius: 12, alignItems: 'center', justifyContent: 'center', marginBottom: 8 },
-  quickLabel: { ...Typography.caption, color: Colors.textPrimary, textAlign: 'center' },
+  tagline:   { ...Typography.bodySm, color: Colors.textSecondary, marginTop:2 },
+  notifBtn:  { padding:8, borderRadius:12, backgroundColor: Colors.gray100 },
+  aiCard:    { marginBottom:28, padding:16 },
+  aiBadge:   { flexDirection:'row', alignItems:'center', marginBottom:12 },
+  aiBadgeText: { ...Typography.label, color: Colors.primary, marginLeft:6 },
+  aiInput:   { ...Typography.bodyMd, color: Colors.textPrimary, minHeight:60, marginBottom:12, textAlignVertical:'top' },
+  aiResp:    { marginTop:16, padding:12, backgroundColor: Colors.gray50, borderRadius:10 },
+  aiRespLabel: { ...Typography.label, color: Colors.textSecondary, marginBottom:6 },
+  aiRespText:  { ...Typography.bodyMd, color: Colors.textPrimary },
+  sectionTitle: { ...Typography.h4, color: Colors.textPrimary, marginBottom:16 },
+  grid:      { flexDirection:'row', flexWrap:'wrap', gap:12 },
+  gridItem:  { width:'30%', alignItems:'center', backgroundColor: Colors.surface, borderRadius:14, padding:14, elevation:1 },
+  gridIcon:  { width:44, height:44, borderRadius:12, alignItems:'center', justifyContent:'center', marginBottom:8, backgroundColor: Colors.aiBackground },
+  gridLabel: { ...Typography.caption, color: Colors.textPrimary, textAlign:'center' },
 });
