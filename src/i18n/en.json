@@ -1,0 +1,79 @@
+{
+  "common": {
+    "ok": "OK",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back",
+    "next": "Next",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Retry",
+    "done": "Done",
+    "search": "Search",
+    "filter": "Filter",
+    "share": "Share",
+    "close": "Close"
+  },
+  "auth": {
+    "login": "Sign In",
+    "logout": "Sign Out",
+    "register": "Create Account",
+    "email": "Email address",
+    "password": "Password",
+    "forgotPassword": "Forgot password?",
+    "resetPassword": "Reset Password",
+    "welcomeBack": "Welcome back",
+    "createAccount": "Create your account",
+    "alreadyMember": "Already a member?",
+    "noAccount": "Don\'t have an account?"
+  },
+  "home": {
+    "greeting": "Hello",
+    "aiAssistant": "AI Assistant",
+    "askAnything": "Ask me anything about developer tools...",
+    "quickActions": "Quick Actions",
+    "recentActivity": "Recent Activity",
+    "noActivity": "No recent activity"
+  },
+  "ai": {
+    "thinking": "AI is thinking...",
+    "generating": "Generating response...",
+    "aiPowered": "AI Powered",
+    "askAI": "Ask AIBLTY Code AI",
+    "suggestions": "AI Suggestions",
+    "confidence": "Confidence",
+    "reasoning": "Reasoning",
+    "actions": "Actions taken",
+    "analysing": "Analysing...",
+    "processing": "Processing...",
+    "domain": "developer tools"
+  },
+  "features": {
+    "ai_code_complete": "AI Code Complete",
+    "bug_detection": "Bug Detection",
+    "code_review": "Code Review",
+    "docs_generator": "Docs Generator",
+    "terminal_ai": "Terminal AI",
+    "allFeatures": "All Features"
+  },
+  "profile": {
+    "title": "Profile",
+    "editProfile": "Edit Profile",
+    "settings": "Settings",
+    "notifications": "Notifications",
+    "privacy": "Privacy",
+    "help": "Help & Support",
+    "about": "About AIBLTY Code",
+    "version": "Version"
+  },
+  "errors": {
+    "network": "No internet connection",
+    "timeout": "Request timed out",
+    "auth": "Authentication failed",
+    "permission": "Permission denied",
+    "notFound": "Not found",
+    "serverError": "Server error. Please try again."
+  }
+}
