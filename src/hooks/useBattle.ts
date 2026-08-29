@@ -326,11 +326,9 @@ export function useBattle() {
     if (!currentRoom) return;
 
     if (currentRoom.status === 'waiting' && isHost) {
-      await supabase
-        .from('battle_rooms')
-        .update({ status: 'cancelled' })
-        .eq('id', currentRoom.id);
+      await supabase.rpc('cancel_battle_room', { p_room_id: currentRoom.id });
     }
+
 
     setCurrentRoom(null);
     setCurrentRound(null);
