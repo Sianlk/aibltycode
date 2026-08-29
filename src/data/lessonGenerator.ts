@@ -33,6 +33,26 @@ import {
   webDeepContent2,
   businessDeepContent2,
 } from "./lessonContentExpanded4";
+import { buildMasterySteps, javaTopics, systemsTopics, mathsTopics, type TopicRecord } from "./topicKnowledge";
+import { cyberTopics, aiTopics, businessTopics } from "./topicKnowledge2";
+import { gameDevTopics, computerSystemsTopics, webTopics } from "./topicKnowledge3";
+
+// Merged autonomic-mastery knowledge base: compact expert records expanded on demand
+// into the full 8-step cycle (hook -> definition -> analogy -> drill -> mnemonic ->
+// application -> repetition -> speed check). Covers every module.
+const masteryKnowledgeBase: Record<string, TopicRecord> = {
+  ...javaTopics,
+  ...systemsTopics,
+  ...mathsTopics,
+  ...cyberTopics,
+  ...aiTopics,
+  ...businessTopics,
+  ...gameDevTopics,
+  ...computerSystemsTopics,
+  ...webTopics,
+};
+
+
 
 function generateQuizStep(title: string, question: string, options: { label: string; text: string }[], correct: string, explanation: string, difficulty: "easy" | "medium" | "hard" = "medium"): LessonStep {
   return { type: "quiz", title, difficulty, question, options, correctAnswer: correct, explanation };
