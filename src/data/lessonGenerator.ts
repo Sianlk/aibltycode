@@ -39,6 +39,7 @@ import { gameDevTopics, computerSystemsTopics, webTopics } from "./topicKnowledg
 import { javaTopics4 } from "./topicKnowledge4";
 import { webTopics5 } from "./topicKnowledge5";
 import { mathsTopics6, aiTopics6, businessTopics6, miscTopics6 } from "./topicKnowledge6";
+import { javaTopics7, systemsTopics7, mathsTopics7, cyberTopics7, aiTopics7, businessTopics7, gameTopics7, computerTopics7, webTopics7 } from "./topicKnowledge7";
 
 // Merged autonomic-mastery knowledge base: compact expert records expanded on demand
 // into the full 8-step cycle (hook -> definition -> analogy -> drill -> mnemonic ->
@@ -59,6 +60,15 @@ const masteryKnowledgeBase: Record<string, TopicRecord> = {
   ...aiTopics6,
   ...businessTopics6,
   ...miscTopics6,
+  ...javaTopics7,
+  ...systemsTopics7,
+  ...mathsTopics7,
+  ...cyberTopics7,
+  ...aiTopics7,
+  ...businessTopics7,
+  ...gameTopics7,
+  ...computerTopics7,
+  ...webTopics7,
 };
 
 
