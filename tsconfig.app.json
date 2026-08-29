@@ -40,6 +40,15 @@
     "src/utils/deepLinks.ts",
     "src/utils/pushNotifications.ts",
     "src/config/sentry.config.ts",
-    "src/components/ui/AchievementNotification.tsx"
+    "src/components/ui/AchievementNotification.tsx",
+    "src/services/ai.ts",
+    "src/services/analytics.ts",
+    "src/services/monetization.ts",
+    "src/services/offlineSync.ts",
+    "src/services/api.ts",
+    "src/api",
+    "src/config/ai.config.ts",
+    "src/utils/performance.ts",
+    "src/hooks/useAuth.ts"
   ]
 }
