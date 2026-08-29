@@ -34,6 +34,20 @@ export default function Settings() {
     }
   };
 
+  const [analyticsOn, setAnalyticsOn] = useState(() => hasConsent());
+  const [summary, setSummary] = useState(() => getAnalyticsSummary());
+
+  const handleAnalyticsToggle = (enabled: boolean) => {
+    setConsent(enabled ? "granted" : "denied");
+    setAnalyticsOn(hasConsent());
+    setSummary(getAnalyticsSummary());
+  };
+
+  const handleClearAnalytics = () => {
+    clearAnalyticsData();
+    setSummary(getAnalyticsSummary());
+  };
+
   return (
     <div className="min-h-screen bg-background stars-bg">
       <Header />
