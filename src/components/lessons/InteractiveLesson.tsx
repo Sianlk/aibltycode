@@ -8,6 +8,7 @@ import { useProgress } from "@/hooks/useProgress";
 import { getLessonById, LessonStep } from "@/data/lessons";
 import { CheckCircle, XCircle, ArrowLeft } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
+import { trackLessonCompleted } from "@/lib/privacyAnalytics";
 
 // Fisher-Yates shuffle
 const shuffleArray = <T,>(array: T[]): T[] => {
