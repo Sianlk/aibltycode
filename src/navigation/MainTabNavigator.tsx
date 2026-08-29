@@ -18,7 +18,7 @@ export default function MainTabNavigator() {
         headerShown: false,
         tabBarActiveTintColor: '#6366F1',
         tabBarInactiveTintColor: '#9CA3AF',
-        tabBarStyle: {{ backgroundColor: '#fff', borderTopColor: '#E5E7EB', paddingBottom: 4 }},
+        tabBarStyle: { backgroundColor: '#fff', borderTopColor: '#E5E7EB', paddingBottom: 4 },
       }}
     >
       <Tab.Screen name="Home"     component={HomeScreen}
