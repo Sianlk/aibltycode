@@ -202,33 +202,26 @@ export function useBattle() {
     return room;
   }, [user, toast]);
 
-  // Join an existing room
+  // Join an existing room (server-side validated)
   const joinRoom = useCallback(async (roomCode: string) => {
     if (!user) return null;
 
-    const { data: roomData, error: fetchError } = await supabase
-      .from('battle_rooms')
-      .select('*')
-      .eq('room_code', roomCode.toUpperCase())
-      .eq('status', 'waiting')
-      .single();
+    const { data: joinedId, error: joinError } = await supabase.rpc('join_battle_room', {
+      p_room_code: roomCode.toUpperCase(),
+    });
 
-    if (fetchError || !roomData) {
+    if (joinError || !joinedId) {
       toast({ title: 'Room not found or already started', variant: 'destructive' });
       return null;
     }
 
-    if (roomData.host_id === user.id) {
-      toast({ title: 'You cannot join your own room', variant: 'destructive' });
-      return null;
-    }
-
-    const { error: updateError } = await supabase
+    const { data: roomData, error: fetchError } = await supabase
       .from('battle_rooms')
-      .update({ opponent_id: user.id, status: 'active', started_at: new Date().toISOString() })
-      .eq('id', roomData.id);
+      .select('*')
+      .eq('id', joinedId as string)
+      .single();
 
-    if (updateError) {
+    if (fetchError || !roomData) {
       toast({ title: 'Failed to join room', variant: 'destructive' });
       return null;
     }
@@ -239,7 +232,7 @@ export function useBattle() {
       roomCode: roomData.room_code,
       hostId: roomData.host_id,
       opponentId: user.id,
-      status: 'active',
+      status: roomData.status as BattleRoom['status'],
       gameType: roomData.game_type,
       difficulty: roomData.difficulty || 5,
       totalRounds: roomData.total_rounds || 5,
@@ -247,7 +240,7 @@ export function useBattle() {
       opponentScore: roomData.opponent_score || 0,
       winnerId: roomData.winner_id,
       createdAt: new Date(roomData.created_at),
-      startedAt: new Date(),
+      startedAt: roomData.started_at ? new Date(roomData.started_at) : new Date(),
       endedAt: null,
     };
     setCurrentRoom(room);
@@ -268,7 +261,8 @@ export function useBattle() {
     const questions = shuffleArray(BATTLE_QUESTIONS);
     const question = questions[nextRoundNum % questions.length];
 
-    const { data, error } = await supabase
+    // Insert only — the correct answer is never selected back to the client.
+    const { error } = await supabase
       .from('battle_rounds')
       .insert({
         room_id: currentRoom.id,
@@ -278,9 +272,7 @@ export function useBattle() {
           options: question.options,
         },
         correct_answer: question.correctAnswer,
-      })
-      .select()
-      .single();
+      });
 
     if (error) {
       console.error('Error creating round:', error);
@@ -288,60 +280,55 @@ export function useBattle() {
     }
 
     setRoundStartTime(Date.now());
-    return data;
+    return true;
   }, [currentRoom, currentRound, isHost]);
 
-  // Submit answer
+  // Submit answer — grading and scoring happen server-side
   const submitAnswer = useCallback(async (answerIndex: number) => {
     if (!currentRoom || !currentRound || !user || roundStartTime === null) return;
 
     const timeMs = Date.now() - roundStartTime;
-    const isCorrect = answerIndex === currentRound.correctAnswer;
     const isHostPlayer = user.id === currentRoom.hostId;
 
-    const updateData: Record<string, number | string | null> = {};
-    if (isHostPlayer) {
-      updateData.host_answer = answerIndex;
-      updateData.host_time_ms = timeMs;
-    } else {
-      updateData.opponent_answer = answerIndex;
-      updateData.opponent_time_ms = timeMs;
+    const { error } = await supabase.rpc('submit_battle_answer', {
+      p_round_id: currentRound.id,
+      p_answer: answerIndex,
+      p_time_ms: timeMs,
+    });
+
+    if (error) {
+      console.error('Error submitting answer:', error);
+      return;
     }
 
-    await supabase
-      .from('battle_rounds')
-      .update(updateData as never)
-      .eq('id', currentRound.id);
-
-    // Update local state
     setCurrentRound(prev => prev ? {
       ...prev,
-      ...(isHostPlayer 
+      ...(isHostPlayer
         ? { hostAnswer: answerIndex, hostTimeMs: timeMs }
         : { opponentAnswer: answerIndex, opponentTimeMs: timeMs }
       ),
     } : null);
 
-    // Update score if correct
-    if (isCorrect) {
-      const scoreField = isHostPlayer ? 'host_score' : 'opponent_score';
-      await supabase
-        .from('battle_rooms')
-        .update({ [scoreField]: (isHostPlayer ? currentRoom.hostScore : currentRoom.opponentScore) + 1 } as never)
-        .eq('id', currentRoom.id);
+    // Once both have answered, the server reveals the correct answer.
+    const { data: safeRound } = await supabase.rpc('get_safe_battle_round', {
+      p_round_id: currentRound.id,
+    });
+
+    const revealed = safeRound as Record<string, unknown> | null;
+    if (revealed && typeof revealed.correct_answer === 'number') {
+      setCurrentRound(prev => prev ? { ...prev, correctAnswer: revealed.correct_answer as number } : null);
     }
   }, [currentRoom, currentRound, user, roundStartTime]);
+
 
   // Leave/cancel room
   const leaveRoom = useCallback(async () => {
     if (!currentRoom) return;
 
     if (currentRoom.status === 'waiting' && isHost) {
-      await supabase
-        .from('battle_rooms')
-        .update({ status: 'cancelled' })
-        .eq('id', currentRoom.id);
+      await supabase.rpc('cancel_battle_room', { p_room_id: currentRoom.id });
     }
+
 
     setCurrentRoom(null);
     setCurrentRound(null);
@@ -392,7 +379,7 @@ export function useBattle() {
             roomId: data.room_id as string,
             roundNumber: data.round_number as number,
             question,
-            correctAnswer: data.correct_answer as number,
+            correctAnswer: -1, // hidden until both players have answered
             hostAnswer: data.host_answer as number | null,
             opponentAnswer: data.opponent_answer as number | null,
             hostTimeMs: data.host_time_ms as number | null,
