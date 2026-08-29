@@ -30,6 +30,7 @@ const AITutor = React.lazy(() => import("./pages/AITutor"));
 const CodeSandbox = React.lazy(() => import("./pages/CodeSandbox"));
 const AvatarPage = React.lazy(() => import("./pages/AvatarPage"));
 const InstallApp = React.lazy(() => import("./pages/InstallApp"));
+const LearningPath = React.lazy(() => import("./pages/LearningPath"));
 
 const queryClient = new QueryClient();
 
@@ -48,12 +49,19 @@ const App = () => (
             <Toaster />
             <Sonner />
             <BrowserRouter>
+              <a
+                href="#main-content"
+                className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
+              >
+                Skip to main content
+              </a>
               <Suspense fallback={<PageLoader />}>
                 <Routes>
                   <Route path="/" element={<Index />} />
                   <Route path="/auth" element={<AuthPage />} />
                   <Route path="/pricing" element={<Pricing />} />
                   <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+                  <Route path="/path" element={<ProtectedRoute><LearningPath /></ProtectedRoute>} />
                   <Route path="/game/:gameId" element={<ProtectedRoute><GamePage /></ProtectedRoute>} />
                   <Route path="/module/:moduleId" element={<ProtectedRoute><ModulePage /></ProtectedRoute>} />
                   <Route path="/zone/:zoneId" element={<ProtectedRoute><ZonePage /></ProtectedRoute>} />

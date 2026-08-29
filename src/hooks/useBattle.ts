@@ -261,18 +261,17 @@ export function useBattle() {
     const questions = shuffleArray(BATTLE_QUESTIONS);
     const question = questions[nextRoundNum % questions.length];
 
-    // Insert only — the correct answer is never selected back to the client.
-    const { error } = await supabase
-      .from('battle_rounds')
-      .insert({
-        room_id: currentRoom.id,
-        round_number: nextRoundNum,
-        question: {
-          text: question.text,
-          options: question.options,
-        },
-        correct_answer: question.correctAnswer,
-      });
+    // The round is created server-side; the answer key is stored where no
+    // client can read it and is only revealed once both players have answered.
+    const { error } = await supabase.rpc('create_battle_round', {
+      p_room_id: currentRoom.id,
+      p_round_number: nextRoundNum,
+      p_question: {
+        text: question.text,
+        options: question.options,
+      },
+      p_correct_answer: question.correctAnswer,
+    });
 
     if (error) {
       console.error('Error creating round:', error);

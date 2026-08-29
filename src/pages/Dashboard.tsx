@@ -205,9 +205,17 @@ export default function Dashboard() {
           transition={{ delay: 0.15 }}
           className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-10"
         >
-          <Button 
-            size="lg" 
+          <Button
+            size="lg"
             className={`text-lg h-14 ${isKidsMode ? 'bg-gradient-to-r from-primary to-accent text-white' : 'bg-primary hover:bg-primary/90'}`}
+            onClick={() => navigate('/path')}
+          >
+            {isKidsMode ? '🗺️ My Quest' : 'My Path'}
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            className={`text-lg h-14 ${isKidsMode ? 'border-2 border-primary' : 'border-2'}`}
             onClick={() => {
               const moduleOrder = ["java-foundations","systems-analysis","math-computing","cybersecurity","ai-data-science","business-systems","game-development","computer-systems","web-technologies"];
               const nextModule = moduleOrder.find(m => {
