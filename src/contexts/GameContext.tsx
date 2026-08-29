@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { GameMode, User, Module, Badge, GameProgress } from "@/types/game";
+import { trackRetentionPing } from "@/lib/privacyAnalytics";
 
 interface AccessibilitySettings {
   calmMode: boolean;
@@ -142,6 +143,11 @@ export function GameProvider({ children }: { children: ReactNode }) {
     };
     syncModeFromProfile();
   }, []);
+
+  // Daily retention ping (opt-in only; no-op without consent)
+  useEffect(() => {
+    trackRetentionPing(streak);
+  }, [streak]);
 
   // Apply accessibility classes to document
   useEffect(() => {
