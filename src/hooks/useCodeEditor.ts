@@ -69,9 +69,10 @@ export function useCodeEditor() {
   }, [user]);
 
   const loadChallenges = useCallback(async () => {
+    // Solution code, test cases and expected output are never sent to the client.
     const { data, error } = await supabase
       .from('code_challenges')
-      .select('id, title, description, starter_code, expected_output, test_cases, difficulty, category, hints, xp_reward, created_at')
+      .select('id, title, description, starter_code, difficulty, category, hints, xp_reward, created_at')
       .order('difficulty', { ascending: true });
 
     if (!error && data) {
@@ -80,7 +81,7 @@ export function useCodeEditor() {
         title: c.title,
         description: c.description,
         starterCode: c.starter_code || '',
-        expectedOutput: c.expected_output || '',
+        expectedOutput: '',
         difficulty: c.difficulty || 1,
         category: c.category || 'general',
         hints: (c.hints as string[]) || [],
@@ -88,6 +89,7 @@ export function useCodeEditor() {
       })));
     }
   }, []);
+
 
   const createProject = useCallback(async (title: string, initialCode = '') => {
     if (!user) return null;
