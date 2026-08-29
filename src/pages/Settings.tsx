@@ -269,6 +269,34 @@ export default function Settings() {
                 <p className="text-sm text-muted-foreground">
                   Your progress is securely stored and encrypted. We only collect data necessary for your learning experience.
                 </p>
+
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <p className="font-medium text-foreground">Anonymous learning analytics</p>
+                    <p className="text-sm text-muted-foreground">
+                      Off by default. If you turn it on, we record only lesson completions and daily
+                      return visits with an anonymous id that changes every day — no name, email or answers.
+                    </p>
+                  </div>
+                  <Switch
+                    aria-label="Anonymous learning analytics"
+                    checked={analyticsOn}
+                    onCheckedChange={handleAnalyticsToggle}
+                  />
+                </div>
+
+                {analyticsOn && (
+                  <div className="rounded-lg border border-border p-3 text-sm text-muted-foreground">
+                    <p>
+                      Stored on this device: {summary.total} events ({summary.lessonsCompleted} lesson completions,{" "}
+                      {summary.activeDays} active days).
+                    </p>
+                    <Button variant="outline" size="sm" className="mt-3" onClick={handleClearAnalytics}>
+                      Delete analytics data
+                    </Button>
+                  </div>
+                )}
+
                 <Button variant="outline" size="sm">View Privacy Policy</Button>
               </CardContent>
             </Card>
