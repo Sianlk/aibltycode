@@ -165,9 +165,34 @@ export type Database = {
           },
         ]
       }
-      battle_rounds: {
+      battle_round_answers: {
         Row: {
           correct_answer: number
+          created_at: string
+          round_id: string
+        }
+        Insert: {
+          correct_answer: number
+          created_at?: string
+          round_id: string
+        }
+        Update: {
+          correct_answer?: number
+          created_at?: string
+          round_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "battle_round_answers_round_id_fkey"
+            columns: ["round_id"]
+            isOneToOne: true
+            referencedRelation: "battle_rounds"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      battle_rounds: {
+        Row: {
           created_at: string | null
           host_answer: number | null
           host_time_ms: number | null
@@ -180,7 +205,6 @@ export type Database = {
           round_winner: string | null
         }
         Insert: {
-          correct_answer: number
           created_at?: string | null
           host_answer?: number | null
           host_time_ms?: number | null
@@ -193,7 +217,6 @@ export type Database = {
           round_winner?: string | null
         }
         Update: {
-          correct_answer?: number
           created_at?: string | null
           host_answer?: number | null
           host_time_ms?: number | null
@@ -371,13 +394,6 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "challenge_completions_challenge_id_fkey"
-            columns: ["challenge_id"]
-            isOneToOne: false
-            referencedRelation: "safe_code_challenges"
-            referencedColumns: ["id"]
-          },
-          {
             foreignKeyName: "challenge_completions_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
@@ -471,18 +487,47 @@ export type Database = {
           },
         ]
       }
+      code_challenge_solutions: {
+        Row: {
+          challenge_id: string
+          created_at: string
+          expected_output: string | null
+          solution_code: string | null
+          test_cases: Json | null
+        }
+        Insert: {
+          challenge_id: string
+          created_at?: string
+          expected_output?: string | null
+          solution_code?: string | null
+          test_cases?: Json | null
+        }
+        Update: {
+          challenge_id?: string
+          created_at?: string
+          expected_output?: string | null
+          solution_code?: string | null
+          test_cases?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "code_challenge_solutions_challenge_id_fkey"
+            columns: ["challenge_id"]
+            isOneToOne: true
+            referencedRelation: "code_challenges"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       code_challenges: {
         Row: {
           category: string | null
           created_at: string | null
           description: string
           difficulty: number | null
-          expected_output: string | null
           hints: Json | null
           id: string
-          solution_code: string | null
           starter_code: string | null
-          test_cases: Json | null
           title: string
           xp_reward: number | null
         }
@@ -491,12 +536,9 @@ export type Database = {
           created_at?: string | null
           description: string
           difficulty?: number | null
-          expected_output?: string | null
           hints?: Json | null
           id?: string
-          solution_code?: string | null
           starter_code?: string | null
-          test_cases?: Json | null
           title: string
           xp_reward?: number | null
         }
@@ -505,12 +547,9 @@ export type Database = {
           created_at?: string | null
           description?: string
           difficulty?: number | null
-          expected_output?: string | null
           hints?: Json | null
           id?: string
-          solution_code?: string | null
           starter_code?: string | null
-          test_cases?: Json | null
           title?: string
           xp_reward?: number | null
         }
@@ -1093,97 +1132,20 @@ export type Database = {
         }
         Relationships: []
       }
-      safe_battle_rounds: {
-        Row: {
-          correct_answer: number | null
-          created_at: string | null
-          host_answer: number | null
-          host_time_ms: number | null
-          id: string | null
-          opponent_answer: number | null
-          opponent_time_ms: number | null
-          question: Json | null
-          room_id: string | null
-          round_number: number | null
-          round_winner: string | null
-        }
-        Insert: {
-          correct_answer?: never
-          created_at?: string | null
-          host_answer?: number | null
-          host_time_ms?: number | null
-          id?: string | null
-          opponent_answer?: number | null
-          opponent_time_ms?: number | null
-          question?: Json | null
-          room_id?: string | null
-          round_number?: number | null
-          round_winner?: string | null
-        }
-        Update: {
-          correct_answer?: never
-          created_at?: string | null
-          host_answer?: number | null
-          host_time_ms?: number | null
-          id?: string | null
-          opponent_answer?: number | null
-          opponent_time_ms?: number | null
-          question?: Json | null
-          room_id?: string | null
-          round_number?: number | null
-          round_winner?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "battle_rounds_room_id_fkey"
-            columns: ["room_id"]
-            isOneToOne: false
-            referencedRelation: "battle_rooms"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      safe_code_challenges: {
-        Row: {
-          category: string | null
-          created_at: string | null
-          description: string | null
-          difficulty: number | null
-          hints: Json | null
-          id: string | null
-          starter_code: string | null
-          title: string | null
-          xp_reward: number | null
-        }
-        Insert: {
-          category?: string | null
-          created_at?: string | null
-          description?: string | null
-          difficulty?: number | null
-          hints?: Json | null
-          id?: string | null
-          starter_code?: string | null
-          title?: string | null
-          xp_reward?: number | null
-        }
-        Update: {
-          category?: string | null
-          created_at?: string | null
-          description?: string | null
-          difficulty?: number | null
-          hints?: Json | null
-          id?: string | null
-          starter_code?: string | null
-          title?: string | null
-          xp_reward?: number | null
-        }
-        Relationships: []
-      }
     }
     Functions: {
       award_badge: { Args: { p_badge_id: string }; Returns: boolean }
       cancel_battle_room: { Args: { p_room_id: string }; Returns: undefined }
       clear_parental_pin: { Args: never; Returns: boolean }
+      create_battle_round: {
+        Args: {
+          p_correct_answer: number
+          p_question: Json
+          p_room_id: string
+          p_round_number: number
+        }
+        Returns: string
+      }
       finalize_battle: {
         Args: {
           p_host_score: number
