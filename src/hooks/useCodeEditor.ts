@@ -179,11 +179,10 @@ export function useCodeEditor() {
     setOutput(null);
 
     try {
-      const expectedOutput = currentChallenge?.expectedOutput || '';
-      
       const { data, error } = await supabase.functions.invoke('validate-code', {
-        body: { code, language: 'java', expectedOutput },
+        body: { code, language: 'java', challengeId: currentChallenge?.id ?? null },
       });
+
 
       if (error) throw error;
 
