@@ -86,7 +86,10 @@ function inferCategory(moduleId: string): string {
 }
 
 function generateStepsForTopic(id: string, title: string, desc: string, moduleId: string): LessonStep[] {
+  const known = masteryKnowledgeBase[id];
+  if (known) return buildMasterySteps(known);
   if (moduleId === "java-foundations") return generateJavaSteps(id, title, desc);
+
   if (moduleId === "systems-analysis") return generateSystemsSteps(id, title, desc);
   if (moduleId === "math-computing") return generateMathSteps(id, title, desc);
   if (moduleId === "cybersecurity") return generateCyberSteps(id, title, desc);
