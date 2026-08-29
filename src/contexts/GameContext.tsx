@@ -143,6 +143,11 @@ export function GameProvider({ children }: { children: ReactNode }) {
     syncModeFromProfile();
   }, []);
 
+  // Daily retention ping (opt-in only; no-op without consent)
+  useEffect(() => {
+    trackRetentionPing(streak);
+  }, [streak]);
+
   // Apply accessibility classes to document
   useEffect(() => {
     const root = document.documentElement;
