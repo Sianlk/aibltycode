@@ -28,5 +28,18 @@
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "src/navigation",
+    "src/screens",
+    "src/store",
+    "src/theme",
+    "src/agents",
+    "src/services/notifications.ts",
+    "src/services/biometricAuth.ts",
+    "src/utils/deepLinks.ts",
+    "src/utils/pushNotifications.ts",
+    "src/config/sentry.config.ts",
+    "src/components/ui/AchievementNotification.tsx"
   ]
 }
