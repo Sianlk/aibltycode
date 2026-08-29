@@ -310,7 +310,7 @@ export function useBattle() {
 
     await supabase
       .from('battle_rounds')
-      .update(updateData)
+      .update(updateData as never)
       .eq('id', currentRound.id);
 
     // Update local state
@@ -327,7 +327,7 @@ export function useBattle() {
       const scoreField = isHostPlayer ? 'host_score' : 'opponent_score';
       await supabase
         .from('battle_rooms')
-        .update({ [scoreField]: (isHostPlayer ? currentRoom.hostScore : currentRoom.opponentScore) + 1 })
+        .update({ [scoreField]: (isHostPlayer ? currentRoom.hostScore : currentRoom.opponentScore) + 1 } as never)
         .eq('id', currentRoom.id);
     }
   }, [currentRoom, currentRound, user, roundStartTime]);
