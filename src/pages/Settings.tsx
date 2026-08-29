@@ -1,4 +1,11 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
+import {
+  getAnalyticsSummary,
+  setConsent,
+  hasConsent,
+  clearAnalyticsData,
+} from "@/lib/privacyAnalytics";
 import { Header } from "@/components/layout/Header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
