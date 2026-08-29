@@ -36,6 +36,9 @@ import {
 import { buildMasterySteps, javaTopics, systemsTopics, mathsTopics, type TopicRecord } from "./topicKnowledge";
 import { cyberTopics, aiTopics, businessTopics } from "./topicKnowledge2";
 import { gameDevTopics, computerSystemsTopics, webTopics } from "./topicKnowledge3";
+import { javaTopics4 } from "./topicKnowledge4";
+import { webTopics5 } from "./topicKnowledge5";
+import { mathsTopics6, aiTopics6, businessTopics6, miscTopics6 } from "./topicKnowledge6";
 
 // Merged autonomic-mastery knowledge base: compact expert records expanded on demand
 // into the full 8-step cycle (hook -> definition -> analogy -> drill -> mnemonic ->
@@ -50,6 +53,12 @@ const masteryKnowledgeBase: Record<string, TopicRecord> = {
   ...gameDevTopics,
   ...computerSystemsTopics,
   ...webTopics,
+  ...javaTopics4,
+  ...webTopics5,
+  ...mathsTopics6,
+  ...aiTopics6,
+  ...businessTopics6,
+  ...miscTopics6,
 };
 
 
