@@ -121,7 +121,10 @@ export function InteractiveLesson({ lessonId: propLessonId, onComplete, onExit }
       
       // Save to database
       await completeLesson(moduleId, lessonId, finalScore);
-      
+
+      // Opt-in analytics only (no-op unless the learner granted consent)
+      trackLessonCompleted({ moduleId, lessonId, score: finalScore, stepCount: lesson.steps.length });
+
       if (onComplete) onComplete();
       else navigate(`/module/${moduleId}`);
     }
