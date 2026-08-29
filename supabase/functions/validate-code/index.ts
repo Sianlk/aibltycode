@@ -213,8 +213,33 @@ serve(async (req) => {
   }
 
   try {
-    const { code, language = 'java', expectedOutput = '', testCases = [] } = await req.json();
-    
+    // Require an authenticated caller
+    const authHeader = req.headers.get("Authorization");
+    if (!authHeader?.startsWith("Bearer ")) {
+      return new Response(JSON.stringify({ success: false, errors: ["Unauthorized"] }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const supabase = createClient(
+      Deno.env.get("SUPABASE_URL") ?? "",
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
+      { auth: { persistSession: false } },
+    );
+
+    const { data: userData, error: userError } = await supabase.auth.getUser(
+      authHeader.replace("Bearer ", ""),
+    );
+    if (userError || !userData?.user) {
+      return new Response(JSON.stringify({ success: false, errors: ["Unauthorized"] }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const { code, language = 'java', challengeId = null } = await req.json();
+
     // Input validation
     if (typeof code !== 'string' || code.length > 50000) {
       return new Response(JSON.stringify({ 
@@ -225,8 +250,20 @@ serve(async (req) => {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
-    
+
+    // Expected output is never sent by the client — it is read server-side.
+    let expectedOutput = '';
+    if (typeof challengeId === 'string' && /^[0-9a-f-]{36}$/i.test(challengeId)) {
+      const { data: challenge } = await supabase
+        .from('code_challenges')
+        .select('expected_output')
+        .eq('id', challengeId)
+        .maybeSingle();
+      expectedOutput = challenge?.expected_output ?? '';
+    }
+
     console.log("Validating code:", { language, codeLength: code.length });
+
 
     let result: ValidationResult;
 
