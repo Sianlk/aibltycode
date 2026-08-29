@@ -379,7 +379,7 @@ export function useBattle() {
             roomId: data.room_id as string,
             roundNumber: data.round_number as number,
             question,
-            correctAnswer: data.correct_answer as number,
+            correctAnswer: -1, // hidden until both players have answered
             hostAnswer: data.host_answer as number | null,
             opponentAnswer: data.opponent_answer as number | null,
             hostTimeMs: data.host_time_ms as number | null,
