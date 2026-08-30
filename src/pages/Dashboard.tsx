@@ -333,17 +333,8 @@ export default function Dashboard() {
                 {isKidsMode ? '🛤️ Your Adventure!' : 'Your Learning Path'}
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {[
-                  { id: "java-foundations", title: "Java Programming", icon: "☕", color: "primary" },
-                  { id: "systems-analysis", title: "Systems Analysis", icon: "🌌", color: "accent" },
-                  { id: "math-computing", title: "Maths for Computing", icon: "🔢", color: "warning" },
-                  { id: "cybersecurity", title: "Cybersecurity", icon: "🔐", color: "success" },
-                  { id: "ai-data-science", title: "AI & Data Science", icon: "🤖", color: "secondary" },
-                  { id: "business-systems", title: "Business Systems", icon: "💼", color: "primary" },
-                  { id: "game-development", title: "Game Development", icon: "🎮", color: "accent" },
-                  { id: "computer-systems", title: "Computer Systems & Networking", icon: "🖥️", color: "success" },
-                  { id: "web-technologies", title: "Web Technologies", icon: "🌐", color: "warning" },
-                ].map((mod) => (
+                {modules.map((mod) => (
+
                   <div
                     key={mod.id}
                     onClick={() => navigate(`/module/${mod.id}`)}
