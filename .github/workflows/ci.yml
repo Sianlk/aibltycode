@@ -23,11 +23,17 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Generate canonical dependency lock
-        run: npm install --package-lock-only --ignore-scripts
+      - name: Generate canonical dependency lock if missing
+        run: |
+          if [ ! -f package-lock.json ]; then
+            npm install --package-lock-only --ignore-scripts
+          fi
 
       - name: Clean install
         run: npm ci
+
+      - name: Production dependency security gate
+        run: npm audit --omit=dev --audit-level=high
 
       - name: Curriculum, type, lint and production build gate
         run: npm run verify
