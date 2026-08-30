@@ -1,4 +1,4 @@
-name: Store Publish
+name: Mobile Release Build
 
 on:
   push:
@@ -7,56 +7,73 @@ on:
   workflow_dispatch:
     inputs:
       platform:
-        description: 'Platform to build'
+        description: 'Platform to verify/build'
         required: true
         default: 'all'
         type: choice
         options: [all, ios, android]
-      profile:
-        description: 'EAS build profile'
-        required: true
-        default: 'production'
-        type: choice
-        options: [development, preview, production]
+
+permissions:
+  contents: read
 
 jobs:
-  build-and-submit:
-    name: EAS Build & Submit
+  android:
+    if: github.event_name == 'push' || github.event.inputs.platform == 'all' || github.event.inputs.platform == 'android'
     runs-on: ubuntu-latest
-    environment: production
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Setup Expo
-        uses: expo/expo-github-action@v8
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-java@v4
         with:
-          eas-version: latest
-          token: ${{ secrets.EXPO_TOKEN }}
-
-      - name: Build iOS (production)
-        if: github.event.inputs.platform == 'all' || github.event.inputs.platform == 'ios'
+          distribution: temurin
+          java-version: '21'
+      - run: npm ci
+      - name: Build web and sync Android
+        run: npm run build:android
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
+      - name: Configure Android release signing
+        if: env.ANDROID_KEYSTORE_BASE64 != ''
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         run: |
-          eas build --platform ios --profile ${{ github.event.inputs.profile || 'production' }} --non-interactive
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+          echo "$ANDROID_KEYSTORE_BASE64" | base64 --decode > android/app/upload-keystore.jks
+          cat > android/app/keystore.properties <<EOF
+          storeFile=upload-keystore.jks
+          storePassword=$ANDROID_KEYSTORE_PASSWORD
+          keyAlias=$ANDROID_KEY_ALIAS
+          keyPassword=$ANDROID_KEY_PASSWORD
+          EOF
+      - name: Build Android App Bundle
+        working-directory: android
+        run: ./gradlew bundleRelease
+      - uses: actions/upload-artifact@v4
+        with:
+          name: aibltycode-android-release
+          path: android/app/build/outputs/bundle/release/*.aab
 
-      - name: Build Android (production)
-        if: github.event.inputs.platform == 'all' || github.event.inputs.platform == 'android'
+  ios:
+    if: github.event_name == 'push' || github.event.inputs.platform == 'all' || github.event.inputs.platform == 'ios'
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Build web and sync iOS
+        run: npm run build:ios
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
+      - name: Verify native iOS project without store signing
         run: |
-          eas build --platform android --profile ${{ github.event.inputs.profile || 'production' }} --non-interactive
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-
-      - name: Submit to App Stores
-        if: startsWith(github.ref, 'refs/tags/')
-        run: eas submit --platform all --non-interactive
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+          xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -sdk iphonesimulator CODE_SIGNING_ALLOWED=NO build
