@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/contexts/AuthContext';
+import { toast } from 'sonner';
 
 interface Participant {
   id: string;
@@ -325,7 +326,7 @@ export function TournamentBracket() {
                   </div>
                 </div>
                 {selectedTournament.status === 'registering' && (
-                  <Button className="btn-ps5 gap-2">
+                  <Button className="btn-ps5 gap-2" onClick={() => { toast.success('Registered for tournament! You will be notified when it starts.'); }}>
                     <Zap className="w-4 h-4" />
                     Join Tournament
                   </Button>

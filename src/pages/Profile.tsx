@@ -209,9 +209,10 @@ export default function Profile() {
               <p className="text-sm text-muted-foreground mb-4">
                 Create an account to sync your progress across devices and compete on leaderboards!
               </p>
-              <Button variant="hero">
+              <Button variant="hero" onClick={() => navigate('/auth')}>
                 Create Account
               </Button>
+
             </CardContent>
           </Card>
         </motion.div>
