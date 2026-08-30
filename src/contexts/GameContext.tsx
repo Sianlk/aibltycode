@@ -54,39 +54,19 @@ const defaultAccessibility: AccessibilitySettings = {
   reducedMotion: false,
 };
 
-// Mock modules data
-const initialModules: Module[] = [
-  {
-    id: "java-foundations",
-    title: "Programming with Java",
-    description: "Master Java from basics to advanced UI programming",
-    icon: "☕",
-    color: "primary",
-    lessons: [],
-    unlocked: true,
-    progress: 0,
-  },
-  {
-    id: "systems-analysis",
-    title: "Business Information Systems",
-    description: "Systems analysis, modelling, and professional practices",
-    icon: "🏢",
-    color: "accent",
-    lessons: [],
-    unlocked: true,
-    progress: 0,
-  },
-  {
-    id: "math-computing",
-    title: "Maths for Computing",
-    description: "Essential mathematical concepts for programmers",
-    icon: "🔢",
-    color: "secondary",
-    lessons: [],
-    unlocked: true,
-    progress: 0,
-  },
-];
+// All mastery modules, derived from the shared curriculum registry
+const MODULE_COLORS = ["primary", "accent", "secondary"];
+const initialModules: Module[] = Object.entries(moduleInfo).map(([id, info], i) => ({
+  id,
+  title: info.title,
+  description: moduleDescriptions[id] ?? "",
+  icon: info.icon,
+  color: MODULE_COLORS[i % MODULE_COLORS.length],
+  lessons: [],
+  unlocked: true,
+  progress: 0,
+}));
+
 
 export function GameProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
