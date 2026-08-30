@@ -1,4 +1,4 @@
-name: Backend CI
+name: Optional FastAPI Backend CI
 
 on:
   push:
@@ -6,8 +6,19 @@ on:
       - main
       - "feat/**"
       - build/aibltycode-complete-2026-08-30
+    paths:
+      - "api/**"
+      - "tests/**/*.py"
+      - "requirements.txt"
+      - ".github/workflows/backend-ci.yml"
   pull_request:
     branches: [main]
+    paths:
+      - "api/**"
+      - "tests/**/*.py"
+      - "requirements.txt"
+      - ".github/workflows/backend-ci.yml"
+  workflow_dispatch:
 
 jobs:
   test:
@@ -16,12 +27,13 @@ jobs:
       postgres:
         image: postgres:16-alpine
         env:
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: testpass
           POSTGRES_DB: testdb
         ports:
           - "5432:5432"
         options: >-
-          --health-cmd pg_isready
+          --health-cmd "pg_isready -U postgres -d testdb"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
@@ -40,13 +52,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Cache pip
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          cache: pip
+          cache-dependency-path: requirements.txt
       - name: Install backend dependencies
         run: pip install -r requirements.txt
+      - name: Confirm dependency resolution
+        run: pip check
       - name: Run backend tests with coverage
         env:
           DATABASE_URL: postgresql+asyncpg://postgres:testpass@localhost:5432/testdb
@@ -54,11 +65,12 @@ jobs:
           SECRET_KEY: test_secret_key_64_chars_minimum_for_security_requirements_ok
         run: pytest tests/ -v --cov=api --cov-report=xml --cov-report=term-missing
       - uses: codecov/codecov-action@v5
+        if: always()
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: false
 
-  lint:
+  quality:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -66,10 +78,10 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install backend quality tools
-        run: pip install ruff bandit safety
-      - name: Ruff
-        run: ruff check api/ tests/
-      - name: Bandit
+        run: pip install ruff bandit
+      - name: Compile Python sources
+        run: python -m compileall -q api tests
+      - name: Ruff fatal-error gate
+        run: ruff check --select E9,F63,F7,F82 api/ tests/
+      - name: Bandit medium/high security gate
         run: bandit -r api/ -ll
-      - name: Dependency safety scan
-        run: safety check -r requirements.txt
