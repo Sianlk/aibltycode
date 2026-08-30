@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { supabase } from "@/integrations/supabase/client";
 import { GameMode, User, Module, Badge, GameProgress } from "@/types/game";
 import { trackRetentionPing } from "@/lib/privacyAnalytics";
+import { moduleInfo, moduleDescriptions } from "@/data/moduleData";
 
 interface AccessibilitySettings {
   calmMode: boolean;
