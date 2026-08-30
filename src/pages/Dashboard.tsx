@@ -110,7 +110,7 @@ export default function Dashboard() {
   }, [user, progress]);
 
   const completedLessons = progress.filter(p => p.completed).length;
-  const totalLessons = 850; // Total lessons across all 9 expanded mastery modules
+  const totalLessons = Object.values(moduleLessons).reduce((n, l) => n + l.length, 0);
   const overallProgress = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
 
   if (authLoading) {
