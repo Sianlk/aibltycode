@@ -232,7 +232,10 @@ export default function Dashboard() {
             size="lg" 
             variant="outline"
             className={`text-lg h-14 ${isKidsMode ? 'border-2 border-accent' : 'border-2'}`}
-            onClick={() => document.getElementById('games-section')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => {
+              setActiveTab("games");
+              setTimeout(() => document.getElementById('games-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 120);
+            }}
           >
             <Gamepad2 className="w-5 h-5 mr-2" />
             {isKidsMode ? '🎮 Games' : 'Games'}
