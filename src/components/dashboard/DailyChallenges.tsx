@@ -44,6 +44,7 @@ interface StreakReward {
 }
 
 const DailyChallenges: React.FC = () => {
+  const navigate = useNavigate();
   const { playSound, addXp, gameMode } = useGame();
   const { user } = useAuth();
   const isKidsMode = gameMode === 'kid';
