@@ -346,6 +346,7 @@ export default function Dashboard() {
                   >
                     <div className={`mb-2 ${isKidsMode ? 'text-5xl' : 'text-4xl'}`}>{mod.icon}</div>
                     <h3 className={`font-bold ${isKidsMode ? 'text-lg' : ''}`}>{mod.title}</h3>
+                    <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{mod.description}</p>
                   </div>
                 ))}
               </div>
