@@ -1,0 +1,38 @@
+name: Apply AIBLTYCODE Completion Patches
+
+on:
+  push:
+    branches:
+      - build/aibltycode-complete-2026-08-30
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: build/aibltycode-complete-2026-08-30
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
+      - name: Apply deterministic source patches
+        run: node scripts/apply-completion-patches.mjs
+
+      - name: Commit source integration
+        run: |
+          if git diff --quiet; then
+            echo "Completion patches already applied."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/expandedMasteryGenerator.ts src/data/lessonGenerator.ts src/pages/Dashboard.tsx
+          git commit -m "Complete mastery generator integration and continuation logic"
+          git push origin HEAD:build/aibltycode-complete-2026-08-30
