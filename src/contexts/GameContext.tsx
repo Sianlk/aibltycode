@@ -55,7 +55,7 @@ const defaultAccessibility: AccessibilitySettings = {
 };
 
 // All mastery modules, derived from the shared curriculum registry
-const MODULE_COLORS = ["primary", "accent", "secondary"];
+const MODULE_COLORS: Module["color"][] = ["primary", "accent", "secondary", "success", "warning"];
 const initialModules: Module[] = Object.entries(moduleInfo).map(([id, info], i) => ({
   id,
   title: info.title,
