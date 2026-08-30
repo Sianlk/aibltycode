@@ -112,7 +112,7 @@ export function generateExpandedMasterySteps(
   const profile = profiles[moduleId];
   if (!profile) return null;
 
-  const shortId = lessonId.replace(/^[a-z]+-/, "").replaceAll("-", " ");
+  const shortId = lessonId.replace(/^[a-z]+-/, "").replace(/-/g, " ");
   return [
     quiz(
       `Jargon buster: ${title}`,

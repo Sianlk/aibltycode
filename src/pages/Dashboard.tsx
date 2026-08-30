@@ -222,8 +222,12 @@ export default function Dashboard() {
               const moduleOrder = Object.keys(moduleLessons);
               const nextModule = moduleOrder.find(m => {
                 const done = progress.filter(p => p.moduleId === m && p.completed).length;
-                return done > 0 && done < 50;
-              }) || moduleOrder.find(m => progress.filter(p => p.moduleId === m && p.completed).length === 0) || "java-foundations";
+                const total = moduleLessons[m]?.length ?? 0;
+                return done > 0 && total > 0 && done < total;
+              }) || moduleOrder.find(m => {
+                const total = moduleLessons[m]?.length ?? 0;
+                return total > 0 && progress.filter(p => p.moduleId === m && p.completed).length === 0;
+              }) || "java-foundations";
               navigate(`/module/${nextModule}`);
             }}
           >
