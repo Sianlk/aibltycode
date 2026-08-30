@@ -39,9 +39,75 @@ function shuffleOptions(correct: string, wrong1: string, wrong2: string) {
  * Cycle: Hook -> Plain definition -> Analogy -> Guided drill -> Mnemonic ->
  *        Application quiz -> Repetition drill -> Speed mastery check.
  */
+/**
+ * Plain-English dictionary of jargon a total beginner may meet.
+ * Used to auto-build a "Jargon Buster" step BEFORE any code is shown,
+ * so no term ever appears without being explained first.
+ */
+const JARGON: Record<string, string> = {
+  class: "a container that holds related code (think: a labelled folder)",
+  method: "a named set of instructions you can run whenever you want",
+  function: "a named set of instructions you can run whenever you want",
+  variable: "a labelled box that stores a value",
+  string: "text, written inside quote marks",
+  int: "a whole number (no decimal point)",
+  boolean: "a true/false switch",
+  array: "a numbered row of boxes holding many values",
+  loop: "code that repeats until you tell it to stop",
+  "if": "a decision: do this only when something is true",
+  object: "a thing in code that has data and actions",
+  compile: "translate your code into something the computer can run",
+  syntax: "the grammar rules of a language",
+  parameter: "information you hand to a method so it can do its job",
+  "return": "the answer a method hands back to you",
+  query: "a question you ask a database",
+  database: "an organised store of information",
+  server: "a computer that answers requests from other computers",
+  api: "a menu of requests one program can make to another",
+  algorithm: "a step-by-step recipe for solving a problem",
+  encryption: "scrambling data so only the right person can read it",
+  binary: "counting with only 0s and 1s, the language of chips",
+  css: "the rules that decide how a web page looks",
+  html: "the building blocks that describe what is on a web page",
+  json: "a simple text format for sending data between programs",
+  model: "a program that has learned patterns from examples",
+  dataset: "a collection of examples used for learning or analysis",
+  container: "a sealed box holding an app plus everything it needs to run",
+  git: "a tool that saves every version of your work",
+  formula: "an instruction in a spreadsheet cell that calculates a result",
+  macro: "a recorded set of steps a spreadsheet can replay for you",
+};
+
+function jargonBuster(title: string, texts: string[]): LessonStep | null {
+  const haystack = texts.join(" ").toLowerCase();
+  const found = Object.keys(JARGON)
+    .filter((k) => new RegExp(`\\b${k}\\b`).test(haystack))
+    .slice(0, 6);
+  if (found.length === 0) return null;
+  const list = found.map((k) => `• ${k} = ${JARGON[k]}`).join("\n");
+  const first = found[0];
+  return {
+    type: "quiz",
+    title: `Jargon buster: ${title}`,
+    difficulty: "easy",
+    question: `Before we touch anything technical, here are the only words you need. Read them, then answer.\n\n${list}\n\nIn plain English, what does "${first}" mean?`,
+    codeExample: list,
+    options: shuffleOptions(
+      JARGON[first],
+      "a setting that changes your screen colour",
+      "a paid upgrade you must buy first"
+    ),
+    correctAnswer: "A",
+    explanation: `Now every word coming up already makes sense. Keep this list in your head:\n${list}`,
+  };
+}
+
 export function buildMasterySteps(rec: TopicRecord): LessonStep[] {
   const [title, definition, analogy, mnemonic, example, quizQ, correct, wrong1, wrong2] = rec;
+  const intro = jargonBuster(title, [definition, example, quizQ]);
   return [
+    ...(intro ? [intro] : []),
+
     q(
       `Why ${title} matters`,
       `Imagine you are starting from zero knowledge. Why do people learn ${title}?`,

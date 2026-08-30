@@ -83,6 +83,7 @@ export default function Dashboard() {
   const isKidsMode = gameMode === "kid";
   
   const [stats, setStats] = useState({ xp: 0, streak: 0, gamesPlayed: 0 });
+  const [activeTab, setActiveTab] = useState("zones");
 
   useEffect(() => {
     if (!authLoading && !user) navigate('/auth');
@@ -231,7 +232,10 @@ export default function Dashboard() {
             size="lg" 
             variant="outline"
             className={`text-lg h-14 ${isKidsMode ? 'border-2 border-accent' : 'border-2'}`}
-            onClick={() => document.getElementById('games-section')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => {
+              setActiveTab("games");
+              setTimeout(() => document.getElementById('games-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 120);
+            }}
           >
             <Gamepad2 className="w-5 h-5 mr-2" />
             {isKidsMode ? '🎮 Games' : 'Games'}
@@ -248,7 +252,7 @@ export default function Dashboard() {
         </motion.div>
 
         {/* Content Tabs */}
-        <Tabs defaultValue="zones" className="w-full">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-6 mb-6">
             <TabsTrigger value="zones" className="flex items-center gap-1 text-xs sm:text-sm">
               <Map className="w-3 h-3 sm:w-4 sm:h-4" />
