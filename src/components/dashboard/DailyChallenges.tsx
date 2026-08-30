@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { useGame } from '@/contexts/GameContext';
 import { useAuth } from '@/contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import { 
   Calendar, Clock, Flame, Gift, Trophy, Zap, Star, Target, 
   ChevronRight, CheckCircle, Lock, Sparkles, Timer
