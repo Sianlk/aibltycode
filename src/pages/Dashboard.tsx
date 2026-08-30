@@ -252,7 +252,7 @@ export default function Dashboard() {
         </motion.div>
 
         {/* Content Tabs */}
-        <Tabs defaultValue="zones" className="w-full">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-6 mb-6">
             <TabsTrigger value="zones" className="flex items-center gap-1 text-xs sm:text-sm">
               <Map className="w-3 h-3 sm:w-4 sm:h-4" />
