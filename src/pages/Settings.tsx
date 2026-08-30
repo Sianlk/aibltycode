@@ -318,7 +318,7 @@ export default function Settings() {
                   </div>
                 )}
 
-                <Button variant="outline" size="sm">View Privacy Policy</Button>
+                <Button variant="outline" size="sm" onClick={() => window.open('/privacy.html', '_blank', 'noopener')}>View Privacy Policy</Button>
               </CardContent>
             </Card>
           </motion.div>
