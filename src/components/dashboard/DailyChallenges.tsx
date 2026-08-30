@@ -358,22 +358,23 @@ const DailyChallenges: React.FC = () => {
             Quick Start
           </h3>
           <div className="grid grid-cols-2 gap-2">
-            <Button variant="outline" className="h-auto py-3 flex-col gap-1">
+            <Button variant="outline" className="h-auto py-3 flex-col gap-1" onClick={() => navigate('/game/pacman')}>
               <span className="text-2xl">🎮</span>
               <span className="text-sm">Play Game</span>
             </Button>
-            <Button variant="outline" className="h-auto py-3 flex-col gap-1">
+            <Button variant="outline" className="h-auto py-3 flex-col gap-1" onClick={() => navigate('/path')}>
               <span className="text-2xl">📚</span>
               <span className="text-sm">Learn</span>
             </Button>
-            <Button variant="outline" className="h-auto py-3 flex-col gap-1">
+            <Button variant="outline" className="h-auto py-3 flex-col gap-1" onClick={() => navigate('/game/spaced-rep')}>
               <span className="text-2xl">🔄</span>
               <span className="text-sm">Review</span>
             </Button>
-            <Button variant="outline" className="h-auto py-3 flex-col gap-1">
+            <Button variant="outline" className="h-auto py-3 flex-col gap-1" onClick={() => navigate('/battle')}>
               <span className="text-2xl">⚔️</span>
               <span className="text-sm">Challenge</span>
             </Button>
+
           </div>
         </CardContent>
       </Card>
