@@ -12,6 +12,7 @@ import { useAdmin } from "@/hooks/useAdmin";
 import { useSubscription } from "@/hooks/useSubscription";
 import { SubscriptionGate } from "@/components/subscription/SubscriptionGate";
 import { zones } from "@/data/learningSystem";
+import { moduleLessons } from "@/data/moduleData";
 import { ProjectSubmission } from "@/components/dashboard/ProjectSubmission";
 import DailyChallenges from "@/components/dashboard/DailyChallenges";
 import AchievementsGallery from "@/components/dashboard/AchievementsGallery";
