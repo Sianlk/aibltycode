@@ -12,6 +12,7 @@ import { useAdmin } from "@/hooks/useAdmin";
 import { useSubscription } from "@/hooks/useSubscription";
 import { SubscriptionGate } from "@/components/subscription/SubscriptionGate";
 import { zones } from "@/data/learningSystem";
+import { moduleLessons } from "@/data/moduleData";
 import { ProjectSubmission } from "@/components/dashboard/ProjectSubmission";
 import DailyChallenges from "@/components/dashboard/DailyChallenges";
 import AchievementsGallery from "@/components/dashboard/AchievementsGallery";
@@ -110,7 +111,7 @@ export default function Dashboard() {
   }, [user, progress]);
 
   const completedLessons = progress.filter(p => p.completed).length;
-  const totalLessons = 850; // Total lessons across all 9 expanded mastery modules
+  const totalLessons = Object.values(moduleLessons).reduce((n, l) => n + l.length, 0);
   const overallProgress = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
 
   if (authLoading) {
@@ -218,7 +219,7 @@ export default function Dashboard() {
             variant="outline"
             className={`text-lg h-14 ${isKidsMode ? 'border-2 border-primary' : 'border-2'}`}
             onClick={() => {
-              const moduleOrder = ["java-foundations","systems-analysis","math-computing","cybersecurity","ai-data-science","business-systems","game-development","computer-systems","web-technologies"];
+              const moduleOrder = Object.keys(moduleLessons);
               const nextModule = moduleOrder.find(m => {
                 const done = progress.filter(p => p.moduleId === m && p.completed).length;
                 return done > 0 && done < 50;
@@ -333,17 +334,8 @@ export default function Dashboard() {
                 {isKidsMode ? '🛤️ Your Adventure!' : 'Your Learning Path'}
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {[
-                  { id: "java-foundations", title: "Java Programming", icon: "☕", color: "primary" },
-                  { id: "systems-analysis", title: "Systems Analysis", icon: "🌌", color: "accent" },
-                  { id: "math-computing", title: "Maths for Computing", icon: "🔢", color: "warning" },
-                  { id: "cybersecurity", title: "Cybersecurity", icon: "🔐", color: "success" },
-                  { id: "ai-data-science", title: "AI & Data Science", icon: "🤖", color: "secondary" },
-                  { id: "business-systems", title: "Business Systems", icon: "💼", color: "primary" },
-                  { id: "game-development", title: "Game Development", icon: "🎮", color: "accent" },
-                  { id: "computer-systems", title: "Computer Systems & Networking", icon: "🖥️", color: "success" },
-                  { id: "web-technologies", title: "Web Technologies", icon: "🌐", color: "warning" },
-                ].map((mod) => (
+                {modules.map((mod) => (
+
                   <div
                     key={mod.id}
                     onClick={() => navigate(`/module/${mod.id}`)}
@@ -355,6 +347,7 @@ export default function Dashboard() {
                   >
                     <div className={`mb-2 ${isKidsMode ? 'text-5xl' : 'text-4xl'}`}>{mod.icon}</div>
                     <h3 className={`font-bold ${isKidsMode ? 'text-lg' : ''}`}>{mod.title}</h3>
+                    <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{mod.description}</p>
                   </div>
                 ))}
               </div>
