@@ -102,14 +102,23 @@ const lessonMetadataCount = originalLessonCount + extraLessonCount;
 assert(lessonMetadataCount >= 700, `lesson metadata floor met (${lessonMetadataCount} >= 700)`);
 
 // Verify every visible dashboard game resolves to a real game component unless it
-// intentionally links to a standalone route (battle/sandbox).
+// intentionally links to a standalone route (currently battle/sandbox).
 const gameBlock = dashboard.match(/const gameModes = \[([\s\S]*?)\n\];/);
 const dashboardGameIds = gameBlock
   ? [...gameBlock[1].matchAll(/\{\s*id:\s*["']([^"']+)["']/g)].map((m) => m[1])
   : [];
-const linkGameIds = gameBlock
-  ? [...gameBlock[1].matchAll(/\{\s*id:\s*["']([^"']+)["'][\s\S]*?link:\s*["'][^"']+["'][^}]*\}/g)].map((m) => m[1])
-  : [];
+const linkedGameIds = new Set();
+if (gameBlock) {
+  for (const objectMatch of gameBlock[1].matchAll(/\{([^{}]+)\}/g)) {
+    const body = objectMatch[1];
+    const id = body.match(/\bid:\s*["']([^"']+)["']/)?.[1];
+    const link = body.match(/\blink:\s*["']([^"']+)["']/)?.[1];
+    if (id && link) {
+      linkedGameIds.add(id);
+      assert(app.includes(`path="${link}"`) || app.includes(`path='${link}'`), `standalone game route registered: ${id} -> ${link}`);
+    }
+  }
+}
 const componentBlock = gamePage.match(/const gameComponents[^=]*=\s*\{([\s\S]*?)\n\};/);
 const componentIds = new Set();
 if (componentBlock) {
@@ -118,20 +127,24 @@ if (componentBlock) {
   }
 }
 for (const id of dashboardGameIds) {
-  assert(componentIds.has(id) || linkGameIds.includes(id), `dashboard game resolves: ${id}`);
+  assert(componentIds.has(id) || linkedGameIds.has(id), `dashboard game resolves: ${id}`);
 }
 assert(dashboardGameIds.length >= 25, `learning tool/game floor met (${dashboardGameIds.length} >= 25)`);
 
+// Core navigable surfaces that exist in the production app. Keep this list tied
+// to actual product routes so the gate catches accidental deletion rather than
+// requiring invented/renamed pages.
 const requiredRoutes = [
-  '/dashboard', '/auth', '/path', '/sandbox', '/ai-tutor', '/battle',
-  '/analytics', '/certification', '/glossary', '/profile', '/settings',
+  '/dashboard', '/auth', '/pricing', '/path', '/sandbox', '/tutor', '/battle',
+  '/analytics', '/profile', '/settings', '/leaderboard', '/avatar', '/install',
 ];
 for (const route of requiredRoutes) {
   assert(app.includes(`path="${route}"`) || app.includes(`path='${route}'`), `route registered: ${route}`);
 }
 assert(/path=["']\/module\/:moduleId["']/.test(app), 'dynamic module route registered');
-assert(/path=["']\/lesson\/:lessonId["']/.test(app), 'dynamic lesson route registered');
+assert(/path=["']\/lesson\/:moduleId\/:lessonId["']/.test(app), 'dynamic lesson route registered');
 assert(/path=["']\/game\/:gameId["']/.test(app), 'dynamic game route registered');
+assert(/path=["']\/zone\/:zoneId["']/.test(app), 'dynamic zone route registered');
 
 const reactMajor = String(pkg.dependencies?.react || '').match(/\d+/)?.[0];
 const reactDomMajor = String(pkg.dependencies?.['react-dom'] || '').match(/\d+/)?.[0];
