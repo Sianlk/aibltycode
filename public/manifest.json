@@ -1,34 +1,69 @@
 {
-  "name": "AIBLTY Code",
-  "short_name": "AIBLTYCode",
-  "description": "AIBLTY Code is your AI-powered coding companion \u2014 intelligent autocomplete, code review, refactoring, and deployment pipelines in one beautiful app.",
-  "start_url": "/",
+  "name": "AIblty — Learn to Code, Build Apps & Master Tech",
+  "short_name": "AIblty",
+  "description": "790+ interactive lessons and 30+ games that take you from absolute zero to expert in coding, web development, AI, cybersecurity, data, game development and cloud. Kids Mode and Pro Mode included.",
+  "start_url": "/dashboard",
+  "scope": "/",
+  "id": "/",
   "display": "standalone",
-  "background_color": "#F5F3FF",
-  "theme_color": "#6366F1",
+  "display_override": ["standalone", "minimal-ui", "browser"],
   "orientation": "portrait-primary",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["education", "productivity", "games"],
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "/logo192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "/logo512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/logo512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
       "src": "/favicon.svg",
       "sizes": "any",
-      "type": "image/svg+xml"
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ],
-  "categories": [
-    "productivity",
-    "utilities"
-  ],
-  "screenshots": []
+  "shortcuts": [
+    {
+      "name": "Today's adaptive path",
+      "short_name": "My path",
+      "description": "Jump straight into the lessons picked for you today",
+      "url": "/path"
+    },
+    {
+      "name": "AI Tutor",
+      "short_name": "Tutor",
+      "description": "Ask the AI tutor anything about code",
+      "url": "/tutor"
+    },
+    {
+      "name": "Code Sandbox",
+      "short_name": "Sandbox",
+      "description": "Write and run code instantly",
+      "url": "/sandbox"
+    },
+    {
+      "name": "Leaderboard",
+      "short_name": "Ranks",
+      "description": "See how you rank",
+      "url": "/leaderboard"
+    }
+  ]
 }

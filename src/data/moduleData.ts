@@ -1,6 +1,7 @@
 // Shared module/lesson metadata - imported by both ModulePage and LessonPage
 // to ensure lesson registration always happens regardless of navigation path
 import { registerLessonMetadata } from "@/data/lessons";
+import { extraModuleLessons, extraModuleInfo, extraModuleDescriptions } from "@/data/moduleDataExtra";
 
 export const moduleLessons: Record<string, { id: string; title: string; description: string; icon: string; xpReward: number }[]> = {
   // ==================== JAVA / PROGRAMMING ====================
@@ -828,6 +829,7 @@ export const moduleLessons: Record<string, { id: string; title: string; descript
     { id: "microservices-web", title: "Microservices Architecture", description: "Service-based backend design", icon: "🔲", xpReward: 225 },
     { id: "serverless-functions", title: "Serverless Functions", description: "AWS Lambda, Vercel, Supabase", icon: "⚡", xpReward: 200 },
   ],
+  ...extraModuleLessons,
 };
 
 export const moduleInfo: Record<string, { title: string; icon: string }> = {
@@ -840,6 +842,20 @@ export const moduleInfo: Record<string, { title: string; icon: string }> = {
   "game-development": { title: "Game Development", icon: "🎮" },
   "computer-systems": { title: "Computer Systems & Networking", icon: "🖥️" },
   "web-technologies": { title: "Web Technologies", icon: "🌐" },
+  ...extraModuleInfo,
+};
+
+export const moduleDescriptions: Record<string, string> = {
+  "java-foundations": "Master Java from absolute basics to advanced object-oriented programming",
+  "systems-analysis": "Systems analysis, modelling, and professional practice",
+  "math-computing": "Essential mathematics and logic for programmers",
+  "cybersecurity": "Threats, defence, ethical hacking and secure design",
+  "ai-data-science": "Data, machine learning, deep learning and analytics",
+  "business-systems": "ERP, CRM, e-commerce and enterprise information systems",
+  "game-development": "Game design, engines, physics and shipping games",
+  "computer-systems": "Hardware, operating systems, networking and architecture",
+  "web-technologies": "HTML, CSS, APIs, hosting and modern web platforms",
+  ...extraModuleDescriptions,
 };
 
 // Register all lesson metadata at module load time for auto-generation fallback
@@ -847,3 +863,4 @@ export const moduleInfo: Record<string, { title: string; icon: string }> = {
 Object.entries(moduleLessons).forEach(([moduleId, lessons]) => {
   registerLessonMetadata(lessons, moduleId);
 });
+

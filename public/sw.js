@@ -2,14 +2,20 @@
  * Service Worker — offline-first PWA with stale-while-revalidate caching.
  * Supports background sync for deferred form submissions.
  */
-const CACHE_NAME = "app-v1.0.0";
-const STATIC_ASSETS = ["/", "/index.html", "/style.css", "/script.js", "/public/manifest.json"];
+const CACHE_NAME = "aiblty-v1.1.0";
+// Only real, existing files — a missing entry makes cache.addAll() reject and
+// the whole service worker fail to install.
+const STATIC_ASSETS = ["/", "/index.html", "/manifest.json", "/favicon.png", "/logo192.png", "/logo512.png"];
 const API_CACHE_TTL = 60 * 1000; // 1 minute for API responses
 
-// Install: pre-cache static assets
+// Install: pre-cache static assets (tolerate any individual miss)
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(STATIC_ASSETS))
+    caches.open(CACHE_NAME).then((cache) =>
+      Promise.all(
+        STATIC_ASSETS.map((asset) => cache.add(asset).catch(() => undefined))
+      )
+    )
   );
   self.skipWaiting();
 });
@@ -24,13 +30,33 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
-// Fetch: network-first for API, cache-first for static
+// Fetch: network-first for navigation + API, stale-while-revalidate for static
 self.addEventListener("fetch", (event) => {
   const { request } = event;
+  if (request.method !== "GET") return;
+
   const url = new URL(request.url);
+
+  // Never touch cross-origin traffic (auth, database, payments, analytics).
+  if (url.origin !== self.location.origin) return;
 
   // Never cache auth or payment endpoints
   if (url.pathname.startsWith("/api/v1/auth") || url.pathname.startsWith("/api/v1/payments")) {
+    return;
+  }
+
+  // App-shell navigation: try network, fall back to the cached shell offline
+  // so every client-side route keeps working without a connection.
+  if (request.mode === "navigate") {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put("/index.html", clone));
+          return response;
+        })
+        .catch(async () => (await caches.match("/index.html")) || Response.error())
+    );
     return;
   }
 
@@ -48,9 +74,20 @@ self.addEventListener("fetch", (event) => {
         .catch(() => caches.match(request))
     );
   } else {
-    // Cache-first for static assets
+    // Stale-while-revalidate for static assets
     event.respondWith(
-      caches.match(request).then((cached) => cached || fetch(request))
+      caches.match(request).then((cached) => {
+        const network = fetch(request)
+          .then((response) => {
+            if (response.ok && response.type === "basic") {
+              const clone = response.clone();
+              caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+            }
+            return response;
+          })
+          .catch(() => cached);
+        return cached || network;
+      })
     );
   }
 });
