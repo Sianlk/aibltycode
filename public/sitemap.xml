@@ -1,4149 +1,4149 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.aiblty.com/</loc>
+    <loc>https://aiblty.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/auth</loc>
+    <loc>https://aiblty.com/auth</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/pricing</loc>
+    <loc>https://aiblty.com/pricing</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/install</loc>
+    <loc>https://aiblty.com/install</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/module/java-foundations</loc>
+    <loc>https://aiblty.com/module/java-foundations</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/module/systems-analysis</loc>
+    <loc>https://aiblty.com/module/systems-analysis</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/module/math-computing</loc>
+    <loc>https://aiblty.com/module/math-computing</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/module/cybersecurity</loc>
+    <loc>https://aiblty.com/module/cybersecurity</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/module/ai-data-science</loc>
+    <loc>https://aiblty.com/module/ai-data-science</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/module/business-systems</loc>
+    <loc>https://aiblty.com/module/business-systems</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/module/game-development</loc>
+    <loc>https://aiblty.com/module/game-development</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/module/computer-systems</loc>
+    <loc>https://aiblty.com/module/computer-systems</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/module/web-technologies</loc>
+    <loc>https://aiblty.com/module/web-technologies</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/zone/logic-district</loc>
+    <loc>https://aiblty.com/zone/logic-district</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/zone/data-city</loc>
+    <loc>https://aiblty.com/zone/data-city</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/zone/security-sector</loc>
+    <loc>https://aiblty.com/zone/security-sector</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/zone/algorithm-arcade</loc>
+    <loc>https://aiblty.com/zone/algorithm-arcade</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/zone/ai-lab</loc>
+    <loc>https://aiblty.com/zone/ai-lab</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/zone/dev-studio</loc>
+    <loc>https://aiblty.com/zone/dev-studio</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/game/pattern</loc>
+    <loc>https://aiblty.com/game/pattern</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/game/typing</loc>
+    <loc>https://aiblty.com/game/typing</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/game/ordering</loc>
+    <loc>https://aiblty.com/game/ordering</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/game/debugging</loc>
+    <loc>https://aiblty.com/game/debugging</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/game/structure-builder</loc>
+    <loc>https://aiblty.com/game/structure-builder</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/game/erd-builder</loc>
+    <loc>https://aiblty.com/game/erd-builder</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/game/sql-query</loc>
+    <loc>https://aiblty.com/game/sql-query</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/game/excel-master</loc>
+    <loc>https://aiblty.com/game/excel-master</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/game/graph-visualizer</loc>
+    <loc>https://aiblty.com/game/graph-visualizer</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/game/cybersecurity</loc>
+    <loc>https://aiblty.com/game/cybersecurity</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/game/system-design</loc>
+    <loc>https://aiblty.com/game/system-design</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/game/complexity-arcade</loc>
+    <loc>https://aiblty.com/game/complexity-arcade</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/game/speed</loc>
+    <loc>https://aiblty.com/game/speed</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/game/pacman</loc>
+    <loc>https://aiblty.com/game/pacman</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/game/ai-data</loc>
+    <loc>https://aiblty.com/game/ai-data</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/game/flashcards</loc>
+    <loc>https://aiblty.com/game/flashcards</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/game/spaced-rep</loc>
+    <loc>https://aiblty.com/game/spaced-rep</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/game/project-planner</loc>
+    <loc>https://aiblty.com/game/project-planner</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/game/use-case</loc>
+    <loc>https://aiblty.com/game/use-case</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/game/game-dev</loc>
+    <loc>https://aiblty.com/game/game-dev</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/hello-world</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/hello-world</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/jdk-setup</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/jdk-setup</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/java-basics</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/java-basics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/comments</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/comments</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/variables</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/variables</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/data-types</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/data-types</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/type-casting</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/type-casting</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/constants</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/constants</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/variable-scope</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/variable-scope</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/operators</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/operators</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/comparison-ops</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/comparison-ops</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/logical-ops</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/logical-ops</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/assignment-ops</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/assignment-ops</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/bitwise-ops</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/bitwise-ops</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/ternary-op</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/ternary-op</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/strings</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/strings</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/string-methods</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/string-methods</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/string-comparison</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/string-comparison</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/string-builder</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/string-builder</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/string-formatting</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/string-formatting</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/if-statements</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/if-statements</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/else-elseif</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/else-elseif</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/nested-if</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/nested-if</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/switch-statements</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/switch-statements</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/switch-expressions</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/switch-expressions</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/for-loops</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/for-loops</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/while-loops</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/while-loops</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/do-while</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/do-while</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/enhanced-for</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/enhanced-for</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/break-continue</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/break-continue</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/nested-loops</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/nested-loops</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/methods</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/methods</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/parameters-return</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/parameters-return</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/method-overloading</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/method-overloading</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/recursion</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/recursion</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/varargs</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/varargs</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/arrays</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/arrays</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/array-operations</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/array-operations</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/multidim-arrays</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/multidim-arrays</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/array-algorithms</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/array-algorithms</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/arrays-class</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/arrays-class</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/arraylist</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/arraylist</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/arraylist-methods</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/arraylist-methods</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/wrapper-classes</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/wrapper-classes</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/autoboxing</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/autoboxing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/classes</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/classes</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/instance-vars</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/instance-vars</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/constructors</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/constructors</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/constructor-overload</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/constructor-overload</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/this-keyword</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/this-keyword</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/encapsulation</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/encapsulation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/access-modifiers</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/access-modifiers</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/getters-setters</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/getters-setters</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/static-members</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/static-members</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/inheritance</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/inheritance</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/super-keyword</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/super-keyword</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/method-overriding</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/method-overriding</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/object-class</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/object-class</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/polymorphism</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/polymorphism</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/dynamic-binding</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/dynamic-binding</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/instanceof-op</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/instanceof-op</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/upcasting-downcasting</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/upcasting-downcasting</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/abstract-classes</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/abstract-classes</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/abstract-methods</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/abstract-methods</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/interfaces</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/interfaces</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/interface-default</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/interface-default</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/multiple-interfaces</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/multiple-interfaces</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/exceptions</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/exceptions</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/try-catch</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/try-catch</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/multiple-catch</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/multiple-catch</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/finally-block</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/finally-block</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/throw-throws</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/throw-throws</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/custom-exceptions</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/custom-exceptions</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/file-io</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/file-io</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/file-class</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/file-class</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/buffered-io</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/buffered-io</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/serialization</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/serialization</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/collections</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/collections</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/list-interface</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/list-interface</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/set-interface</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/set-interface</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/map-interface</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/map-interface</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/iterators</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/iterators</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/collections-utility</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/collections-utility</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/generics</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/generics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/generic-classes</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/generic-classes</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/generic-methods</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/generic-methods</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/wildcards</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/wildcards</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/lambda-expressions</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/lambda-expressions</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/functional-interfaces</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/functional-interfaces</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/streams-intro</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/streams-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/stream-operations</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/stream-operations</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/collectors</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/collectors</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/javafx-intro</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/javafx-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/javafx-controls</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/javafx-controls</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/javafx-layouts</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/javafx-layouts</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/javafx-events</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/javafx-events</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/javafx-css</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/javafx-css</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/threads-intro</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/threads-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/synchronization</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/synchronization</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/executor-framework</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/executor-framework</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/concurrent-collections</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/concurrent-collections</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/junit-testing</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/junit-testing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/test-driven-dev</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/test-driven-dev</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/singleton-pattern</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/singleton-pattern</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/factory-pattern</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/factory-pattern</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/observer-pattern</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/observer-pattern</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/mvc-pattern</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/mvc-pattern</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/strategy-pattern</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/strategy-pattern</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/project-structure</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/project-structure</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/maven-gradle</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/maven-gradle</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/logging</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/logging</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/database-jdbc</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/database-jdbc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/spring-boot-intro</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/spring-boot-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/java-foundations/rest-api-java</loc>
+    <loc>https://aiblty.com/lesson/java-foundations/rest-api-java</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/what-is-system</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/what-is-system</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/systems-thinking</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/systems-thinking</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/system-types</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/system-types</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/system-components</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/system-components</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/stakeholders</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/stakeholders</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/stakeholder-analysis</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/stakeholder-analysis</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/requirements</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/requirements</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/requirements-elicitation</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/requirements-elicitation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/requirements-doc</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/requirements-doc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/requirements-validation</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/requirements-validation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/use-cases</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/use-cases</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/use-case-diagrams</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/use-case-diagrams</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/use-case-descriptions</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/use-case-descriptions</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/include-extend</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/include-extend</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/user-stories</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/user-stories</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/acceptance-criteria</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/acceptance-criteria</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/story-mapping</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/story-mapping</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/process-modelling</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/process-modelling</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/dfd-intro</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/dfd-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/dfd-levels</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/dfd-levels</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/dfd-symbols</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/dfd-symbols</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/bpmn-intro</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/bpmn-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/flowcharts</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/flowcharts</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/swimlane-diagrams</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/swimlane-diagrams</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/data-modelling</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/data-modelling</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/erd-intro</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/erd-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/entities-attributes</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/entities-attributes</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/relationships</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/relationships</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/cardinality</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/cardinality</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/normalization</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/normalization</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/erd-mastery</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/erd-mastery</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/class-diagrams</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/class-diagrams</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/uml-notation</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/uml-notation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/class-relationships</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/class-relationships</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/inheritance-uml</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/inheritance-uml</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/interfaces-uml</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/interfaces-uml</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/design-patterns-intro</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/design-patterns-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/sequence-diagrams</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/sequence-diagrams</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/messages-lifelines</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/messages-lifelines</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/fragments</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/fragments</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/state-diagrams</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/state-diagrams</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/activity-diagrams</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/activity-diagrams</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/project-planning</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/project-planning</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/wbs</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/wbs</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/gantt-charts</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/gantt-charts</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/critical-path</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/critical-path</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/pert</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/pert</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/kanban-trello</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/kanban-trello</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/resource-allocation</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/resource-allocation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/sdlc-overview</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/sdlc-overview</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/waterfall-model</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/waterfall-model</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/v-model</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/v-model</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/iterative-model</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/iterative-model</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/spiral-model</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/spiral-model</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/prototyping</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/prototyping</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/agile-intro</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/agile-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/scrum-framework</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/scrum-framework</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/scrum-roles</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/scrum-roles</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/sprint-planning</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/sprint-planning</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/daily-scrum</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/daily-scrum</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/sprint-review</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/sprint-review</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/retrospectives</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/retrospectives</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/kanban-method</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/kanban-method</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/risk-management</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/risk-management</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/risk-assessment</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/risk-assessment</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/risk-mitigation</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/risk-mitigation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/security-basics</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/security-basics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/security-requirements</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/security-requirements</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/testing-strategies</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/testing-strategies</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/test-planning</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/test-planning</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/quality-assurance</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/quality-assurance</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/compliance</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/compliance</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/documentation</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/documentation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/devops-systems</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/devops-systems</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/cloud-deployment-sa</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/cloud-deployment-sa</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/microservices</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/microservices</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/api-design-sa</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/api-design-sa</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/systems-integration</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/systems-integration</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/systems-analysis/legacy-migration</loc>
+    <loc>https://aiblty.com/lesson/systems-analysis/legacy-migration</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/number-systems</loc>
+    <loc>https://aiblty.com/lesson/math-computing/number-systems</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/decimal-system</loc>
+    <loc>https://aiblty.com/lesson/math-computing/decimal-system</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/binary-basics</loc>
+    <loc>https://aiblty.com/lesson/math-computing/binary-basics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/counting-binary</loc>
+    <loc>https://aiblty.com/lesson/math-computing/counting-binary</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/binary-arithmetic</loc>
+    <loc>https://aiblty.com/lesson/math-computing/binary-arithmetic</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/binary-subtraction</loc>
+    <loc>https://aiblty.com/lesson/math-computing/binary-subtraction</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/binary-multiplication</loc>
+    <loc>https://aiblty.com/lesson/math-computing/binary-multiplication</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/binary-division</loc>
+    <loc>https://aiblty.com/lesson/math-computing/binary-division</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/twos-complement</loc>
+    <loc>https://aiblty.com/lesson/math-computing/twos-complement</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/ones-complement</loc>
+    <loc>https://aiblty.com/lesson/math-computing/ones-complement</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/octal-system</loc>
+    <loc>https://aiblty.com/lesson/math-computing/octal-system</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/hex-system</loc>
+    <loc>https://aiblty.com/lesson/math-computing/hex-system</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/hex-conversions</loc>
+    <loc>https://aiblty.com/lesson/math-computing/hex-conversions</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/binary-to-hex</loc>
+    <loc>https://aiblty.com/lesson/math-computing/binary-to-hex</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/hex-to-binary</loc>
+    <loc>https://aiblty.com/lesson/math-computing/hex-to-binary</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/octal-conversions</loc>
+    <loc>https://aiblty.com/lesson/math-computing/octal-conversions</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/floating-point-intro</loc>
+    <loc>https://aiblty.com/lesson/math-computing/floating-point-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/ieee-754</loc>
+    <loc>https://aiblty.com/lesson/math-computing/ieee-754</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/mantissa-exponent</loc>
+    <loc>https://aiblty.com/lesson/math-computing/mantissa-exponent</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/float-precision</loc>
+    <loc>https://aiblty.com/lesson/math-computing/float-precision</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/logic-gates</loc>
+    <loc>https://aiblty.com/lesson/math-computing/logic-gates</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/and-gate</loc>
+    <loc>https://aiblty.com/lesson/math-computing/and-gate</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/or-gate</loc>
+    <loc>https://aiblty.com/lesson/math-computing/or-gate</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/not-gate</loc>
+    <loc>https://aiblty.com/lesson/math-computing/not-gate</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/xor-gate</loc>
+    <loc>https://aiblty.com/lesson/math-computing/xor-gate</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/nand-nor</loc>
+    <loc>https://aiblty.com/lesson/math-computing/nand-nor</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/gate-combinations</loc>
+    <loc>https://aiblty.com/lesson/math-computing/gate-combinations</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/truth-tables</loc>
+    <loc>https://aiblty.com/lesson/math-computing/truth-tables</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/boolean-algebra</loc>
+    <loc>https://aiblty.com/lesson/math-computing/boolean-algebra</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/demorgans-laws</loc>
+    <loc>https://aiblty.com/lesson/math-computing/demorgans-laws</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/boolean-simplification</loc>
+    <loc>https://aiblty.com/lesson/math-computing/boolean-simplification</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/karnaugh-maps</loc>
+    <loc>https://aiblty.com/lesson/math-computing/karnaugh-maps</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/sum-of-products</loc>
+    <loc>https://aiblty.com/lesson/math-computing/sum-of-products</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/product-of-sums</loc>
+    <loc>https://aiblty.com/lesson/math-computing/product-of-sums</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/sets-basics</loc>
+    <loc>https://aiblty.com/lesson/math-computing/sets-basics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/set-operations</loc>
+    <loc>https://aiblty.com/lesson/math-computing/set-operations</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/set-difference</loc>
+    <loc>https://aiblty.com/lesson/math-computing/set-difference</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/symmetric-difference</loc>
+    <loc>https://aiblty.com/lesson/math-computing/symmetric-difference</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/venn-diagrams</loc>
+    <loc>https://aiblty.com/lesson/math-computing/venn-diagrams</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/subsets</loc>
+    <loc>https://aiblty.com/lesson/math-computing/subsets</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/cartesian-product</loc>
+    <loc>https://aiblty.com/lesson/math-computing/cartesian-product</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/probability-basics</loc>
+    <loc>https://aiblty.com/lesson/math-computing/probability-basics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/sample-space</loc>
+    <loc>https://aiblty.com/lesson/math-computing/sample-space</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/probability-rules</loc>
+    <loc>https://aiblty.com/lesson/math-computing/probability-rules</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/conditional-probability</loc>
+    <loc>https://aiblty.com/lesson/math-computing/conditional-probability</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/bayes-theorem</loc>
+    <loc>https://aiblty.com/lesson/math-computing/bayes-theorem</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/independence</loc>
+    <loc>https://aiblty.com/lesson/math-computing/independence</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/expected-value</loc>
+    <loc>https://aiblty.com/lesson/math-computing/expected-value</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/graphs-intro</loc>
+    <loc>https://aiblty.com/lesson/math-computing/graphs-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/graph-types</loc>
+    <loc>https://aiblty.com/lesson/math-computing/graph-types</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/graph-representation</loc>
+    <loc>https://aiblty.com/lesson/math-computing/graph-representation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/paths-cycles</loc>
+    <loc>https://aiblty.com/lesson/math-computing/paths-cycles</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/connectivity</loc>
+    <loc>https://aiblty.com/lesson/math-computing/connectivity</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/graph-properties</loc>
+    <loc>https://aiblty.com/lesson/math-computing/graph-properties</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/trees-basics</loc>
+    <loc>https://aiblty.com/lesson/math-computing/trees-basics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/binary-trees</loc>
+    <loc>https://aiblty.com/lesson/math-computing/binary-trees</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/bst</loc>
+    <loc>https://aiblty.com/lesson/math-computing/bst</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/tree-traversal</loc>
+    <loc>https://aiblty.com/lesson/math-computing/tree-traversal</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/balanced-trees</loc>
+    <loc>https://aiblty.com/lesson/math-computing/balanced-trees</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/spanning-trees</loc>
+    <loc>https://aiblty.com/lesson/math-computing/spanning-trees</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/graph-algorithms</loc>
+    <loc>https://aiblty.com/lesson/math-computing/graph-algorithms</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/bfs</loc>
+    <loc>https://aiblty.com/lesson/math-computing/bfs</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/dfs</loc>
+    <loc>https://aiblty.com/lesson/math-computing/dfs</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/dijkstra</loc>
+    <loc>https://aiblty.com/lesson/math-computing/dijkstra</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/topological-sort</loc>
+    <loc>https://aiblty.com/lesson/math-computing/topological-sort</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/big-o-intro</loc>
+    <loc>https://aiblty.com/lesson/math-computing/big-o-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/constant-linear</loc>
+    <loc>https://aiblty.com/lesson/math-computing/constant-linear</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/logarithmic</loc>
+    <loc>https://aiblty.com/lesson/math-computing/logarithmic</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/quadratic</loc>
+    <loc>https://aiblty.com/lesson/math-computing/quadratic</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/exponential</loc>
+    <loc>https://aiblty.com/lesson/math-computing/exponential</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/complexity-comparison</loc>
+    <loc>https://aiblty.com/lesson/math-computing/complexity-comparison</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/space-complexity</loc>
+    <loc>https://aiblty.com/lesson/math-computing/space-complexity</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/functions-math</loc>
+    <loc>https://aiblty.com/lesson/math-computing/functions-math</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/function-types</loc>
+    <loc>https://aiblty.com/lesson/math-computing/function-types</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/relations</loc>
+    <loc>https://aiblty.com/lesson/math-computing/relations</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/equivalence-relations</loc>
+    <loc>https://aiblty.com/lesson/math-computing/equivalence-relations</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/algebra-basics</loc>
+    <loc>https://aiblty.com/lesson/math-computing/algebra-basics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/linear-equations</loc>
+    <loc>https://aiblty.com/lesson/math-computing/linear-equations</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/matrices-basics</loc>
+    <loc>https://aiblty.com/lesson/math-computing/matrices-basics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/matrix-operations</loc>
+    <loc>https://aiblty.com/lesson/math-computing/matrix-operations</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/matrix-identity</loc>
+    <loc>https://aiblty.com/lesson/math-computing/matrix-identity</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/matrix-inverse</loc>
+    <loc>https://aiblty.com/lesson/math-computing/matrix-inverse</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/stats-intro</loc>
+    <loc>https://aiblty.com/lesson/math-computing/stats-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/mean-median-mode</loc>
+    <loc>https://aiblty.com/lesson/math-computing/mean-median-mode</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/range-variance</loc>
+    <loc>https://aiblty.com/lesson/math-computing/range-variance</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/standard-deviation</loc>
+    <loc>https://aiblty.com/lesson/math-computing/standard-deviation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/normal-distribution</loc>
+    <loc>https://aiblty.com/lesson/math-computing/normal-distribution</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/correlation</loc>
+    <loc>https://aiblty.com/lesson/math-computing/correlation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/math-computing/hypothesis-testing</loc>
+    <loc>https://aiblty.com/lesson/math-computing/hypothesis-testing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/cyber-intro</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/cyber-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/cia-triad</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/cia-triad</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/threat-landscape</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/threat-landscape</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/attack-types</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/attack-types</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/social-engineering</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/social-engineering</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/malware-types</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/malware-types</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/phishing-attacks</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/phishing-attacks</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/dos-ddos</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/dos-ddos</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/network-security</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/network-security</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/firewalls</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/firewalls</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/ids-ips</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/ids-ips</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/vpn</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/vpn</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/network-monitoring</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/network-monitoring</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/wireless-security</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/wireless-security</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/cryptography-intro</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/cryptography-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/symmetric-encryption</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/symmetric-encryption</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/asymmetric-encryption</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/asymmetric-encryption</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/hashing</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/hashing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/digital-signatures</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/digital-signatures</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/pki</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/pki</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/tls-ssl</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/tls-ssl</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/web-security-vulns</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/web-security-vulns</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/xss-attacks</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/xss-attacks</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/sql-injection</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/sql-injection</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/csrf-attacks</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/csrf-attacks</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/secure-coding</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/secure-coding</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/auth-security</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/auth-security</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/password-security</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/password-security</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/access-control-sec</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/access-control-sec</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/identity-management</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/identity-management</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/incident-response</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/incident-response</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/ir-lifecycle</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/ir-lifecycle</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/digital-forensics</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/digital-forensics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/security-policies</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/security-policies</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/compliance-frameworks</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/compliance-frameworks</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/risk-analysis-cyber</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/risk-analysis-cyber</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/security-awareness</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/security-awareness</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/cloud-security</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/cloud-security</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/container-security</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/container-security</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/devsecops</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/devsecops</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/pentest-intro</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/pentest-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/pentest-recon</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/pentest-recon</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/pentest-scanning</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/pentest-scanning</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/pentest-exploitation</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/pentest-exploitation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/pentest-post</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/pentest-post</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/pentest-reporting</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/pentest-reporting</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/kali-linux</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/kali-linux</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/comptia-domains</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/comptia-domains</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/comptia-threats</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/comptia-threats</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/comptia-architecture</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/comptia-architecture</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/comptia-implementation</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/comptia-implementation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/comptia-operations</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/comptia-operations</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/comptia-governance</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/comptia-governance</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/soc-intro</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/soc-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/siem</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/siem</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/log-analysis</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/log-analysis</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/threat-intelligence</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/threat-intelligence</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/vulnerability-management</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/vulnerability-management</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/endpoint-security</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/endpoint-security</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/zero-trust</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/zero-trust</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/cloud-sec-advanced</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/cloud-sec-advanced</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/mobile-security</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/mobile-security</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/red-team-blue-team</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/red-team-blue-team</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/cybersecurity/security-automation</loc>
+    <loc>https://aiblty.com/lesson/cybersecurity/security-automation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/ai-intro</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/ai-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/ai-history</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/ai-history</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/ai-types</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/ai-types</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/ai-applications</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/ai-applications</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/ml-intro</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/ml-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/ml-types</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/ml-types</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/supervised-learning</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/supervised-learning</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/unsupervised-learning</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/unsupervised-learning</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/reinforcement-learning</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/reinforcement-learning</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/data-collection</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/data-collection</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/data-types-ds</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/data-types-ds</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/data-cleaning</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/data-cleaning</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/data-normalization</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/data-normalization</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/feature-engineering</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/feature-engineering</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/eda</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/eda</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/data-viz-intro</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/data-viz-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/chart-types</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/chart-types</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/statistical-plots</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/statistical-plots</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/heatmaps</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/heatmaps</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/dashboards</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/dashboards</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/linear-regression</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/linear-regression</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/multiple-regression</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/multiple-regression</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/polynomial-regression</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/polynomial-regression</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/regularization</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/regularization</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/regression-evaluation</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/regression-evaluation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/classification</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/classification</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/logistic-regression</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/logistic-regression</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/knn</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/knn</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/naive-bayes</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/naive-bayes</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/svm</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/svm</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/classification-metrics</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/classification-metrics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/decision-trees</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/decision-trees</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/tree-pruning</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/tree-pruning</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/random-forests</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/random-forests</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/gradient-boosting</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/gradient-boosting</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/ensemble-methods</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/ensemble-methods</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/clustering-intro</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/clustering-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/kmeans</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/kmeans</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/hierarchical</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/hierarchical</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/dbscan</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/dbscan</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/cluster-evaluation</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/cluster-evaluation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/train-test-split</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/train-test-split</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/cross-validation</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/cross-validation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/overfitting</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/overfitting</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/underfitting</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/underfitting</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/bias-variance</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/bias-variance</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/hyperparameter-tuning</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/hyperparameter-tuning</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/neural-networks</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/neural-networks</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/perceptron</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/perceptron</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/mlp</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/mlp</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/activation-functions</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/activation-functions</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/backpropagation</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/backpropagation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/deep-learning</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/deep-learning</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/cnn-intro</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/cnn-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/rnn-intro</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/rnn-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/lstm</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/lstm</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/transfer-learning</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/transfer-learning</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/ethics-in-ai</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/ethics-in-ai</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/ai-bias</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/ai-bias</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/explainable-ai</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/explainable-ai</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/ai-in-industry</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/ai-in-industry</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/model-deployment</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/model-deployment</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/nlp-intro</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/nlp-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/text-preprocessing</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/text-preprocessing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/word-embeddings</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/word-embeddings</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/transformers</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/transformers</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/llms</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/llms</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/prompt-engineering</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/prompt-engineering</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/cv-intro</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/cv-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/image-processing</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/image-processing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/object-detection</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/object-detection</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/image-segmentation</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/image-segmentation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/gan-intro</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/gan-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/robotics-intro</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/robotics-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/robot-kinematics</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/robot-kinematics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/sensors-actuators</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/sensors-actuators</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/robot-programming</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/robot-programming</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/autonomous-systems</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/autonomous-systems</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/iot-ai</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/iot-ai</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/mlops-intro</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/mlops-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/ml-pipelines</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/ml-pipelines</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/model-monitoring</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/model-monitoring</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/data-engineering</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/data-engineering</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/spark-basics</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/spark-basics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/python-for-ds</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/python-for-ds</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/r-programming</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/r-programming</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/ai-chatbot-creation</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/ai-chatbot-creation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/gpt-fundamentals</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/gpt-fundamentals</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/custom-gpt-builder</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/custom-gpt-builder</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/fine-tuning-models</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/fine-tuning-models</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/rag-systems</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/rag-systems</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/ai-api-integration</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/ai-api-integration</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/langchain-intro</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/langchain-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/vector-databases</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/vector-databases</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/ai-agents</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/ai-agents</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/data-analytics-intro</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/data-analytics-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/sql-for-analytics</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/sql-for-analytics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/excel-analytics</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/excel-analytics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/tableau-powerbi</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/tableau-powerbi</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/ab-testing</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/ab-testing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/predictive-analytics</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/predictive-analytics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/robotics-hardware</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/robotics-hardware</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/robot-sensors-advanced</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/robot-sensors-advanced</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/robot-vision</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/robot-vision</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/robot-manipulation</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/robot-manipulation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/drone-programming</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/drone-programming</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/ai-data-science/industrial-automation</loc>
+    <loc>https://aiblty.com/lesson/ai-data-science/industrial-automation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/bis-intro</loc>
+    <loc>https://aiblty.com/lesson/business-systems/bis-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/info-systems-role</loc>
+    <loc>https://aiblty.com/lesson/business-systems/info-systems-role</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/business-processes</loc>
+    <loc>https://aiblty.com/lesson/business-systems/business-processes</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/digital-transformation</loc>
+    <loc>https://aiblty.com/lesson/business-systems/digital-transformation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/info-system-types</loc>
+    <loc>https://aiblty.com/lesson/business-systems/info-system-types</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/tps</loc>
+    <loc>https://aiblty.com/lesson/business-systems/tps</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/mis</loc>
+    <loc>https://aiblty.com/lesson/business-systems/mis</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/dss</loc>
+    <loc>https://aiblty.com/lesson/business-systems/dss</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/eis</loc>
+    <loc>https://aiblty.com/lesson/business-systems/eis</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/kms</loc>
+    <loc>https://aiblty.com/lesson/business-systems/kms</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/erp-systems</loc>
+    <loc>https://aiblty.com/lesson/business-systems/erp-systems</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/crm-systems</loc>
+    <loc>https://aiblty.com/lesson/business-systems/crm-systems</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/scm-systems</loc>
+    <loc>https://aiblty.com/lesson/business-systems/scm-systems</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/enterprise-integration</loc>
+    <loc>https://aiblty.com/lesson/business-systems/enterprise-integration</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/saas-cloud</loc>
+    <loc>https://aiblty.com/lesson/business-systems/saas-cloud</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/database-fundamentals</loc>
+    <loc>https://aiblty.com/lesson/business-systems/database-fundamentals</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/sql-basics</loc>
+    <loc>https://aiblty.com/lesson/business-systems/sql-basics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/data-modelling-bis</loc>
+    <loc>https://aiblty.com/lesson/business-systems/data-modelling-bis</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/data-warehousing</loc>
+    <loc>https://aiblty.com/lesson/business-systems/data-warehousing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/bi-tools</loc>
+    <loc>https://aiblty.com/lesson/business-systems/bi-tools</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/data-governance</loc>
+    <loc>https://aiblty.com/lesson/business-systems/data-governance</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/ecommerce-intro</loc>
+    <loc>https://aiblty.com/lesson/business-systems/ecommerce-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/ecommerce-platforms</loc>
+    <loc>https://aiblty.com/lesson/business-systems/ecommerce-platforms</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/payment-systems</loc>
+    <loc>https://aiblty.com/lesson/business-systems/payment-systems</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/digital-marketing-intro</loc>
+    <loc>https://aiblty.com/lesson/business-systems/digital-marketing-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/content-strategy</loc>
+    <loc>https://aiblty.com/lesson/business-systems/content-strategy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/social-media-business</loc>
+    <loc>https://aiblty.com/lesson/business-systems/social-media-business</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/it-governance</loc>
+    <loc>https://aiblty.com/lesson/business-systems/it-governance</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/itil-framework</loc>
+    <loc>https://aiblty.com/lesson/business-systems/itil-framework</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/change-management</loc>
+    <loc>https://aiblty.com/lesson/business-systems/change-management</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/business-continuity</loc>
+    <loc>https://aiblty.com/lesson/business-systems/business-continuity</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/it-strategy</loc>
+    <loc>https://aiblty.com/lesson/business-systems/it-strategy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/outsourcing</loc>
+    <loc>https://aiblty.com/lesson/business-systems/outsourcing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/ethics-business-it</loc>
+    <loc>https://aiblty.com/lesson/business-systems/ethics-business-it</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/gdpr-business</loc>
+    <loc>https://aiblty.com/lesson/business-systems/gdpr-business</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/green-it</loc>
+    <loc>https://aiblty.com/lesson/business-systems/green-it</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/emerging-tech</loc>
+    <loc>https://aiblty.com/lesson/business-systems/emerging-tech</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/innovation-management</loc>
+    <loc>https://aiblty.com/lesson/business-systems/innovation-management</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/business-analytics-intro</loc>
+    <loc>https://aiblty.com/lesson/business-systems/business-analytics-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/financial-systems</loc>
+    <loc>https://aiblty.com/lesson/business-systems/financial-systems</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/hr-systems</loc>
+    <loc>https://aiblty.com/lesson/business-systems/hr-systems</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/project-management-bis</loc>
+    <loc>https://aiblty.com/lesson/business-systems/project-management-bis</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/agile-business</loc>
+    <loc>https://aiblty.com/lesson/business-systems/agile-business</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/roi-analysis</loc>
+    <loc>https://aiblty.com/lesson/business-systems/roi-analysis</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/startup-tech</loc>
+    <loc>https://aiblty.com/lesson/business-systems/startup-tech</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/seo-business</loc>
+    <loc>https://aiblty.com/lesson/business-systems/seo-business</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/seo-keyword-research</loc>
+    <loc>https://aiblty.com/lesson/business-systems/seo-keyword-research</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/seo-on-page-bis</loc>
+    <loc>https://aiblty.com/lesson/business-systems/seo-on-page-bis</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/seo-content-marketing</loc>
+    <loc>https://aiblty.com/lesson/business-systems/seo-content-marketing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/seo-analytics-bis</loc>
+    <loc>https://aiblty.com/lesson/business-systems/seo-analytics-bis</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/google-ads</loc>
+    <loc>https://aiblty.com/lesson/business-systems/google-ads</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/social-media-ads</loc>
+    <loc>https://aiblty.com/lesson/business-systems/social-media-ads</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/email-marketing</loc>
+    <loc>https://aiblty.com/lesson/business-systems/email-marketing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/marketing-funnels</loc>
+    <loc>https://aiblty.com/lesson/business-systems/marketing-funnels</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/conversion-optimization</loc>
+    <loc>https://aiblty.com/lesson/business-systems/conversion-optimization</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/analytics-tools-bis</loc>
+    <loc>https://aiblty.com/lesson/business-systems/analytics-tools-bis</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/brand-strategy</loc>
+    <loc>https://aiblty.com/lesson/business-systems/brand-strategy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/influencer-marketing</loc>
+    <loc>https://aiblty.com/lesson/business-systems/influencer-marketing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/affiliate-marketing</loc>
+    <loc>https://aiblty.com/lesson/business-systems/affiliate-marketing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/customer-analytics</loc>
+    <loc>https://aiblty.com/lesson/business-systems/customer-analytics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/marketing-automation</loc>
+    <loc>https://aiblty.com/lesson/business-systems/marketing-automation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/competitive-analysis</loc>
+    <loc>https://aiblty.com/lesson/business-systems/competitive-analysis</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/saas-metrics</loc>
+    <loc>https://aiblty.com/lesson/business-systems/saas-metrics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/product-management</loc>
+    <loc>https://aiblty.com/lesson/business-systems/product-management</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/ux-business</loc>
+    <loc>https://aiblty.com/lesson/business-systems/ux-business</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/cloud-services-bis</loc>
+    <loc>https://aiblty.com/lesson/business-systems/cloud-services-bis</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/api-economy</loc>
+    <loc>https://aiblty.com/lesson/business-systems/api-economy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/cyber-risk-business</loc>
+    <loc>https://aiblty.com/lesson/business-systems/cyber-risk-business</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/whmcs-hosting</loc>
+    <loc>https://aiblty.com/lesson/business-systems/whmcs-hosting</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/vps-hosting</loc>
+    <loc>https://aiblty.com/lesson/business-systems/vps-hosting</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/hosting-fundamentals</loc>
+    <loc>https://aiblty.com/lesson/business-systems/hosting-fundamentals</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/digital-marketing-strategy</loc>
+    <loc>https://aiblty.com/lesson/business-systems/digital-marketing-strategy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/social-media-marketing</loc>
+    <loc>https://aiblty.com/lesson/business-systems/social-media-marketing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/saas-business-model</loc>
+    <loc>https://aiblty.com/lesson/business-systems/saas-business-model</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/business-systems/excel-formulas-deep</loc>
+    <loc>https://aiblty.com/lesson/business-systems/excel-formulas-deep</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/game-dev-intro</loc>
+    <loc>https://aiblty.com/lesson/game-development/game-dev-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/game-genres</loc>
+    <loc>https://aiblty.com/lesson/game-development/game-genres</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/game-design-doc</loc>
+    <loc>https://aiblty.com/lesson/game-development/game-design-doc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/game-engines</loc>
+    <loc>https://aiblty.com/lesson/game-development/game-engines</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/game-loop</loc>
+    <loc>https://aiblty.com/lesson/game-development/game-loop</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/ecs-pattern</loc>
+    <loc>https://aiblty.com/lesson/game-development/ecs-pattern</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/scene-management</loc>
+    <loc>https://aiblty.com/lesson/game-development/scene-management</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/input-handling</loc>
+    <loc>https://aiblty.com/lesson/game-development/input-handling</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/2d-graphics</loc>
+    <loc>https://aiblty.com/lesson/game-development/2d-graphics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/sprite-animation</loc>
+    <loc>https://aiblty.com/lesson/game-development/sprite-animation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/tilemap-systems</loc>
+    <loc>https://aiblty.com/lesson/game-development/tilemap-systems</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/camera-systems</loc>
+    <loc>https://aiblty.com/lesson/game-development/camera-systems</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/particle-effects</loc>
+    <loc>https://aiblty.com/lesson/game-development/particle-effects</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/game-physics</loc>
+    <loc>https://aiblty.com/lesson/game-development/game-physics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/collision-detection</loc>
+    <loc>https://aiblty.com/lesson/game-development/collision-detection</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/physics-engines</loc>
+    <loc>https://aiblty.com/lesson/game-development/physics-engines</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/rigid-body</loc>
+    <loc>https://aiblty.com/lesson/game-development/rigid-body</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/game-ai-intro</loc>
+    <loc>https://aiblty.com/lesson/game-development/game-ai-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/pathfinding</loc>
+    <loc>https://aiblty.com/lesson/game-development/pathfinding</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/behavior-trees</loc>
+    <loc>https://aiblty.com/lesson/game-development/behavior-trees</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/state-machines-game</loc>
+    <loc>https://aiblty.com/lesson/game-development/state-machines-game</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/steering-behaviors</loc>
+    <loc>https://aiblty.com/lesson/game-development/steering-behaviors</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/game-audio</loc>
+    <loc>https://aiblty.com/lesson/game-development/game-audio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/ui-game</loc>
+    <loc>https://aiblty.com/lesson/game-development/ui-game</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/save-systems</loc>
+    <loc>https://aiblty.com/lesson/game-development/save-systems</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/level-design</loc>
+    <loc>https://aiblty.com/lesson/game-development/level-design</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/game-balance</loc>
+    <loc>https://aiblty.com/lesson/game-development/game-balance</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/multiplayer-basics</loc>
+    <loc>https://aiblty.com/lesson/game-development/multiplayer-basics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/netcode</loc>
+    <loc>https://aiblty.com/lesson/game-development/netcode</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/lobby-systems</loc>
+    <loc>https://aiblty.com/lesson/game-development/lobby-systems</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/3d-basics</loc>
+    <loc>https://aiblty.com/lesson/game-development/3d-basics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/3d-modeling-intro</loc>
+    <loc>https://aiblty.com/lesson/game-development/3d-modeling-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/lighting-shaders</loc>
+    <loc>https://aiblty.com/lesson/game-development/lighting-shaders</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/unity-intro</loc>
+    <loc>https://aiblty.com/lesson/game-development/unity-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/unity-scripting</loc>
+    <loc>https://aiblty.com/lesson/game-development/unity-scripting</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/unity-physics</loc>
+    <loc>https://aiblty.com/lesson/game-development/unity-physics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/unity-ui</loc>
+    <loc>https://aiblty.com/lesson/game-development/unity-ui</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/unity-animation</loc>
+    <loc>https://aiblty.com/lesson/game-development/unity-animation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/game-testing</loc>
+    <loc>https://aiblty.com/lesson/game-development/game-testing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/game-optimization</loc>
+    <loc>https://aiblty.com/lesson/game-development/game-optimization</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/game-publishing</loc>
+    <loc>https://aiblty.com/lesson/game-development/game-publishing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/game-monetization</loc>
+    <loc>https://aiblty.com/lesson/game-development/game-monetization</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/game-marketing</loc>
+    <loc>https://aiblty.com/lesson/game-development/game-marketing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/godot-intro</loc>
+    <loc>https://aiblty.com/lesson/game-development/godot-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/godot-gdscript</loc>
+    <loc>https://aiblty.com/lesson/game-development/godot-gdscript</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/godot-scenes</loc>
+    <loc>https://aiblty.com/lesson/game-development/godot-scenes</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/unreal-intro</loc>
+    <loc>https://aiblty.com/lesson/game-development/unreal-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/unreal-blueprints</loc>
+    <loc>https://aiblty.com/lesson/game-development/unreal-blueprints</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/procedural-generation</loc>
+    <loc>https://aiblty.com/lesson/game-development/procedural-generation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/terrain-generation</loc>
+    <loc>https://aiblty.com/lesson/game-development/terrain-generation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/inventory-systems</loc>
+    <loc>https://aiblty.com/lesson/game-development/inventory-systems</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/dialogue-systems</loc>
+    <loc>https://aiblty.com/lesson/game-development/dialogue-systems</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/quest-systems</loc>
+    <loc>https://aiblty.com/lesson/game-development/quest-systems</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/game-economy</loc>
+    <loc>https://aiblty.com/lesson/game-development/game-economy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/shader-programming</loc>
+    <loc>https://aiblty.com/lesson/game-development/shader-programming</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/post-processing</loc>
+    <loc>https://aiblty.com/lesson/game-development/post-processing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/animation-state-machines</loc>
+    <loc>https://aiblty.com/lesson/game-development/animation-state-machines</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/ragdoll-physics</loc>
+    <loc>https://aiblty.com/lesson/game-development/ragdoll-physics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/spatial-audio</loc>
+    <loc>https://aiblty.com/lesson/game-development/spatial-audio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/game-analytics</loc>
+    <loc>https://aiblty.com/lesson/game-development/game-analytics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/live-operations</loc>
+    <loc>https://aiblty.com/lesson/game-development/live-operations</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/modding-support</loc>
+    <loc>https://aiblty.com/lesson/game-development/modding-support</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/game-accessibility</loc>
+    <loc>https://aiblty.com/lesson/game-development/game-accessibility</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/game-narrative</loc>
+    <loc>https://aiblty.com/lesson/game-development/game-narrative</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/world-building</loc>
+    <loc>https://aiblty.com/lesson/game-development/world-building</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/game-ux</loc>
+    <loc>https://aiblty.com/lesson/game-development/game-ux</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/vr-game-dev</loc>
+    <loc>https://aiblty.com/lesson/game-development/vr-game-dev</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/game-development/ar-game-dev</loc>
+    <loc>https://aiblty.com/lesson/game-development/ar-game-dev</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/comp-arch-intro</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/comp-arch-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/cpu-basics</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/cpu-basics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/fetch-execute</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/fetch-execute</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/memory-hierarchy</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/memory-hierarchy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/storage-devices</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/storage-devices</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/motherboard</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/motherboard</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/io-devices</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/io-devices</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/gpu-basics</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/gpu-basics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/os-intro</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/os-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/process-management</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/process-management</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/memory-management</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/memory-management</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/file-systems</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/file-systems</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/scheduling</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/scheduling</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/linux-basics</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/linux-basics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/shell-scripting</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/shell-scripting</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/networking-intro</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/networking-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/network-types</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/network-types</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/osi-model</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/osi-model</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/tcp-ip-model</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/tcp-ip-model</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/ip-addressing</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/ip-addressing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/subnetting-basics</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/subnetting-basics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/dns-intro</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/dns-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/dhcp</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/dhcp</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/tcp-udp</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/tcp-udp</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/http-https</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/http-https</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/routing-basics</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/routing-basics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/switching</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/switching</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/vlan</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/vlan</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/nat-pat</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/nat-pat</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/cloud-computing</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/cloud-computing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/virtualization</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/virtualization</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/containers-intro</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/containers-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/server-admin</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/server-admin</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/network-security-cs</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/network-security-cs</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/troubleshooting</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/troubleshooting</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/lmc-intro</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/lmc-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/lmc-instructions</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/lmc-instructions</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/lmc-programs</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/lmc-programs</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/lmc-loops</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/lmc-loops</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/assembly-intro</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/assembly-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/instruction-set</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/instruction-set</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/pipelining</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/pipelining</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/cache-strategies</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/cache-strategies</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/ram-types</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/ram-types</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/bus-architecture</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/bus-architecture</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/interrupts</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/interrupts</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/dma</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/dma</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/bios-uefi</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/bios-uefi</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/boot-process</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/boot-process</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/deadlocks</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/deadlocks</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/concurrency-os</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/concurrency-os</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/disk-scheduling</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/disk-scheduling</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/permissions</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/permissions</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/ethernet</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/ethernet</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/wifi-standards</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/wifi-standards</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/arp</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/arp</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/icmp</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/icmp</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/ftp-smtp</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/ftp-smtp</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/network-topologies</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/network-topologies</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/subnetting-advanced</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/subnetting-advanced</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/ipv6-addressing</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/ipv6-addressing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/routing-protocols</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/routing-protocols</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/network-design</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/network-design</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/sdn-intro</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/sdn-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/kubernetes-intro</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/kubernetes-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/disaster-recovery</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/disaster-recovery</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/performance-monitoring</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/performance-monitoring</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/visual-studio-code</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/visual-studio-code</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/ide-comparison</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/ide-comparison</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/python-intro</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/python-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/python-data-structures</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/python-data-structures</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/github-workflow</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/github-workflow</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/sql-fundamentals</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/sql-fundamentals</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/networking-fundamentals</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/networking-fundamentals</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/operating-systems</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/operating-systems</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/terraform-intro</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/terraform-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/ansible-intro</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/ansible-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/aws-core-services</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/aws-core-services</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/computer-systems/cloud-certifications</loc>
+    <loc>https://aiblty.com/lesson/computer-systems/cloud-certifications</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/web-intro</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/web-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/web-architecture</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/web-architecture</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/http-basics</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/http-basics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/web-browsers</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/web-browsers</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/html-intro</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/html-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/html-structure</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/html-structure</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/html-text</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/html-text</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/html-links</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/html-links</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/html-images</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/html-images</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/html-lists</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/html-lists</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/html-tables</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/html-tables</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/css-intro</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/css-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/css-selectors</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/css-selectors</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/css-colors</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/css-colors</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/css-text</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/css-text</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/css-box-model</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/css-box-model</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/css-display</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/css-display</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/web-planning</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/web-planning</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/wireframing</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/wireframing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/site-maps</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/site-maps</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/user-flows</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/user-flows</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/mockups</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/mockups</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/html-forms</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/html-forms</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/form-elements</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/form-elements</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/html-semantic</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/html-semantic</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/html5-apis</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/html5-apis</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/html-multimedia</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/html-multimedia</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/svg-basics</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/svg-basics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/html-meta</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/html-meta</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/html-responsive</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/html-responsive</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/html-iframes</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/html-iframes</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/html-data-attrs</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/html-data-attrs</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/html-templates</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/html-templates</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/css-flexbox</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/css-flexbox</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/css-grid</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/css-grid</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/css-positioning</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/css-positioning</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/css-responsive</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/css-responsive</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/css-animations</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/css-animations</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/css-transforms</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/css-transforms</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/css-variables</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/css-variables</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/css-pseudo</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/css-pseudo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/js-intro</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/js-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/js-variables</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/js-variables</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/js-operators</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/js-operators</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/js-control-flow</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/js-control-flow</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/js-functions</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/js-functions</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/js-arrays</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/js-arrays</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/js-objects</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/js-objects</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/dom-intro</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/dom-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/dom-selection</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/dom-selection</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/dom-manipulation</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/dom-manipulation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/js-events</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/js-events</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/js-async</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/js-async</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/fetch-api</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/fetch-api</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/json-handling</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/json-handling</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/local-storage</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/local-storage</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/form-validation</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/form-validation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/web-accessibility</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/web-accessibility</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/screen-readers</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/screen-readers</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/keyboard-nav</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/keyboard-nav</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/cross-browser</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/cross-browser</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/web-security</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/web-security</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/content-security</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/content-security</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/secure-forms</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/secure-forms</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/seo-fundamentals</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/seo-fundamentals</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/analytics</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/analytics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/performance</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/performance</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/version-control</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/version-control</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/deployment</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/deployment</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/maintenance</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/maintenance</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/html-best-practices</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/html-best-practices</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/css-best-practices</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/css-best-practices</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/js-best-practices</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/js-best-practices</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/code-organization</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/code-organization</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/testing-debugging</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/testing-debugging</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/progressive-enhancement</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/progressive-enhancement</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/typescript-intro</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/typescript-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/ts-types</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/ts-types</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/react-intro</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/react-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/react-hooks</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/react-hooks</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/react-state</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/react-state</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/nextjs-intro</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/nextjs-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/tailwind-css</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/tailwind-css</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/pwa-intro</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/pwa-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/service-workers</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/service-workers</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/web-app-manifest</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/web-app-manifest</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/push-notifications</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/push-notifications</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/responsive-mastery</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/responsive-mastery</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/seo-technical</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/seo-technical</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/seo-on-page</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/seo-on-page</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/seo-off-page</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/seo-off-page</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/schema-markup</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/schema-markup</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/core-web-vitals</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/core-web-vitals</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/rest-api</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/rest-api</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/graphql-intro</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/graphql-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/api-authentication</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/api-authentication</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/api-documentation</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/api-documentation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/websockets</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/websockets</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/fullstack-architecture</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/fullstack-architecture</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/database-integration</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/database-integration</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/auth-implementation</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/auth-implementation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/file-upload</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/file-upload</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/web-deployment-advanced</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/web-deployment-advanced</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/web-app-security-advanced</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/web-app-security-advanced</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/mobile-app-intro</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/mobile-app-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/react-native</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/react-native</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/flutter-intro</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/flutter-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/capacitor-apps</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/capacitor-apps</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/app-store-publishing</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/app-store-publishing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/app-monetization</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/app-monetization</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/nodejs-intro</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/nodejs-intro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/express-api</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/express-api</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/python-web</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/python-web</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/microservices-web</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/microservices-web</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.aiblty.com/lesson/web-technologies/serverless-functions</loc>
+    <loc>https://aiblty.com/lesson/web-technologies/serverless-functions</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-  <url><loc>https://www.aiblty.com/path</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aiblty.com/path</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
 </urlset>
