@@ -219,7 +219,7 @@ export default function Dashboard() {
             variant="outline"
             className={`text-lg h-14 ${isKidsMode ? 'border-2 border-primary' : 'border-2'}`}
             onClick={() => {
-              const moduleOrder = ["java-foundations","systems-analysis","math-computing","cybersecurity","ai-data-science","business-systems","game-development","computer-systems","web-technologies"];
+              const moduleOrder = Object.keys(moduleLessons);
               const nextModule = moduleOrder.find(m => {
                 const done = progress.filter(p => p.moduleId === m && p.completed).length;
                 return done > 0 && done < 50;
