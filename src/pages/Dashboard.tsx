@@ -83,6 +83,7 @@ export default function Dashboard() {
   const isKidsMode = gameMode === "kid";
   
   const [stats, setStats] = useState({ xp: 0, streak: 0, gamesPlayed: 0 });
+  const [activeTab, setActiveTab] = useState("zones");
 
   useEffect(() => {
     if (!authLoading && !user) navigate('/auth');
