@@ -1,6 +1,7 @@
 // Shared module/lesson metadata - imported by both ModulePage and LessonPage
 // to ensure lesson registration always happens regardless of navigation path
 import { registerLessonMetadata } from "@/data/lessons";
+import { extraModuleLessons, extraModuleInfo, extraModuleDescriptions } from "@/data/moduleDataExtra";
 
 export const moduleLessons: Record<string, { id: string; title: string; description: string; icon: string; xpReward: number }[]> = {
   // ==================== JAVA / PROGRAMMING ====================
