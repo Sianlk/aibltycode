@@ -23,11 +23,8 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Generate canonical dependency lock if missing
-        run: |
-          if [ ! -f package-lock.json ]; then
-            npm install --package-lock-only --ignore-scripts
-          fi
+      - name: Regenerate canonical dependency lock
+        run: npm install --package-lock-only --ignore-scripts
 
       - name: Clean install
         run: npm ci
@@ -35,7 +32,7 @@ jobs:
       - name: Production dependency security gate
         run: npm audit --omit=dev --audit-level=high
 
-      - name: Curriculum, type, lint and production build gate
+      - name: Unit, curriculum, type, lint and production build gate
         run: npm run verify
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL || 'https://example.supabase.co' }}
