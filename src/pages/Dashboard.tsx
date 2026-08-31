@@ -15,6 +15,7 @@ import { zones } from "@/data/learningSystem";
 import { moduleLessons } from "@/data/moduleData";
 import { ProjectSubmission } from "@/components/dashboard/ProjectSubmission";
 import DailyChallenges from "@/components/dashboard/DailyChallenges";
+import { ReviewDueBanner } from "@/components/dashboard/ReviewDueBanner";
 import AchievementsGallery from "@/components/dashboard/AchievementsGallery";
 import { Gamepad2, Flame, Star, Trophy, Crown, Settings, Map, BookOpen, BarChart3, Award, Target, Medal, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -127,6 +128,7 @@ export default function Dashboard() {
       <Header />
 
       <main className="container mx-auto px-4 pt-24 pb-12 max-w-4xl">
+        <ReviewDueBanner />
         {/* Admin & Subscription Status */}
         {(isAdmin || inTrial || subscribed) && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mb-4 flex gap-2 flex-wrap">

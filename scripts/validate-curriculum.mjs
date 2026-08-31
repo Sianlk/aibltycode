@@ -21,6 +21,7 @@ const lessonGenerator = read('src/data/lessonGenerator.ts');
 const expandedMasteryGenerator = read('src/data/expandedMasteryGenerator.ts');
 const retentionEngine = read('src/data/retentionEngine.ts');
 const retentionGate = read('src/components/lessons/RetentionGate.tsx');
+const reviewDueBanner = read('src/components/dashboard/ReviewDueBanner.tsx');
 const skillMastery = read('src/hooks/useSkillMastery.ts');
 const pkg = JSON.parse(read('package.json'));
 const gitignore = read('.gitignore');
@@ -133,6 +134,9 @@ assert(/Professional transfer/i.test(retentionGate), 'professional transfer is r
 assert(retentionEngine.includes('scheduleLocalReview'), 'anonymous/offline review scheduling exists');
 assert(retentionEngine.includes('getDueLocalReviews'), 'due-review retrieval exists');
 assert(retentionEngine.includes('retentionEngineSelfTest'), 'retention scheduling self-test exists');
+assert(dashboard.includes('ReviewDueBanner'), 'dashboard surfaces autonomous due-review reminders');
+assert(reviewDueBanner.includes('getDueLocalReviews'), 'dashboard review reminder reads due retention schedule');
+assert(reviewDueBanner.includes('/game/spaced-rep'), 'dashboard review reminder opens universal review queue');
 assert(/1\s*day[\s\S]*6\s*days|1 day -> 6 days/.test(skillMastery), 'signed-in spaced repetition follows 1-day then 6-day progression');
 assert(!/const repetitions\s*=\s*0\s*;/.test(skillMastery), 'spaced repetition does not reset successful repetitions on every review');
 assert(/currentInterval\s*<=\s*1\s*\?\s*1\s*:\s*2/.test(skillMastery), 'persisted SM-2 phase is inferred from review interval');
