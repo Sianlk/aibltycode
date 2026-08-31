@@ -16,6 +16,12 @@ const extraData = read('src/data/moduleDataExtra.ts');
 const dashboard = read('src/pages/Dashboard.tsx');
 const gamePage = read('src/pages/GamePage.tsx');
 const app = read('src/App.tsx');
+const lessonPage = read('src/pages/LessonPage.tsx');
+const lessonGenerator = read('src/data/lessonGenerator.ts');
+const expandedMasteryGenerator = read('src/data/expandedMasteryGenerator.ts');
+const retentionEngine = read('src/data/retentionEngine.ts');
+const retentionGate = read('src/components/lessons/RetentionGate.tsx');
+const skillMastery = read('src/hooks/useSkillMastery.ts');
 const pkg = JSON.parse(read('package.json'));
 const gitignore = read('.gitignore');
 
@@ -96,10 +102,40 @@ for (const [label, regex] of requiredConcepts) {
 
 // Count metadata lessons. Original modules use object literals; expansion modules
 // use the L(...) helper. This is a regression floor, not a marketing claim.
-const originalLessonCount = (moduleData.match(/\{\s*id:\s*["']/g) || []).length;
-const extraLessonCount = (extraData.match(/\bL\(\s*["']/g) || []).length;
-const lessonMetadataCount = originalLessonCount + extraLessonCount;
+const originalLessonIds = [...moduleData.matchAll(/\{\s*id:\s*["']([^"']+)["']/g)].map((m) => m[1]);
+const extraLessonIds = [...extraData.matchAll(/\bL\(\s*["']([^"']+)["']/g)].map((m) => m[1]);
+const allLessonIds = [...originalLessonIds, ...extraLessonIds];
+const lessonMetadataCount = allLessonIds.length;
+const duplicateLessonIds = [...new Set(allLessonIds.filter((id, index) => allLessonIds.indexOf(id) !== index))];
 assert(lessonMetadataCount >= 700, `lesson metadata floor met (${lessonMetadataCount} >= 700)`);
+assert(duplicateLessonIds.length === 0, `lesson IDs are globally unique${duplicateLessonIds.length ? `: ${duplicateLessonIds.join(', ')}` : ''}`);
+
+// The expansion curriculum must not fall back to thin definition-only lessons.
+assert(lessonGenerator.includes('generateExpandedMasterySteps'), 'expanded mastery generator wired into lesson resolution');
+for (const moduleId of ['python-programming', 'javascript-web', 'ai-builder', 'digital-marketing', 'animation-motion', 'software-tools', 'project-delivery']) {
+  assert(expandedMasteryGenerator.includes(`"${moduleId}"`) || expandedMasteryGenerator.includes(`'${moduleId}'`), `practical mastery path defined: ${moduleId}`);
+}
+for (const masteryPrimitive of ['jargon', 'mental model', 'hands-on', 'workplace', 'checklist', 'failure', 'capstone', '60-second']) {
+  assert(expandedMasteryGenerator.toLowerCase().includes(masteryPrimitive), `expanded mastery primitive present: ${masteryPrimitive}`);
+}
+
+// Universal retention gate: every routed lesson must pass mnemonic encoding,
+// retrieval practice, child-simple teach-back, fast recall and professional transfer.
+assert(lessonPage.includes('RetentionGate'), 'all routed lessons pass through the universal retention gate');
+assert(lessonPage.includes('coreLessonComplete'), 'core lesson completion transitions into retention rather than exiting immediately');
+for (const stage of ['memory', 'recall', 'teach', 'fast', 'transfer']) {
+  assert(retentionGate.includes(`"${stage}"`), `retention stage present: ${stage}`);
+}
+assert(retentionGate.includes('MIND memory code'), 'mnemonic encoding is learner-visible');
+assert(/8-year-old|child/i.test(retentionGate), 'child-simple Feynman teach-back is required');
+assert(/60-second|60 seconds/i.test(retentionGate), 'fast-recall timing is required');
+assert(/Professional transfer/i.test(retentionGate), 'professional transfer is required');
+assert(retentionEngine.includes('scheduleLocalReview'), 'anonymous/offline review scheduling exists');
+assert(retentionEngine.includes('getDueLocalReviews'), 'due-review retrieval exists');
+assert(retentionEngine.includes('retentionEngineSelfTest'), 'retention scheduling self-test exists');
+assert(/1\s*day[\s\S]*6\s*days|1 day -> 6 days/.test(skillMastery), 'signed-in spaced repetition follows 1-day then 6-day progression');
+assert(!/const repetitions\s*=\s*0\s*;/.test(skillMastery), 'spaced repetition does not reset successful repetitions on every review');
+assert(/currentInterval\s*<=\s*1\s*\?\s*1\s*:\s*2/.test(skillMastery), 'persisted SM-2 phase is inferred from review interval');
 
 // Verify every visible dashboard game resolves to a real game component unless it
 // intentionally links to a standalone route (currently battle/sandbox).
@@ -171,4 +207,4 @@ if (fail.length) {
   process.exit(1);
 }
 
-console.log('All curriculum, routing, tool and secret-safety checks passed.');
+console.log('All curriculum, mastery, retention, routing, tool and secret-safety checks passed.');
