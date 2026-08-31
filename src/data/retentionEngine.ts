@@ -184,7 +184,7 @@ export function evaluateRecall(
   const words = normalized.split(/\s+/).filter(Boolean);
   const keywordMatches = expectedKeywords.filter((keyword) => normalized.includes(normalizeRecall(keyword)));
   return {
-    passed: words.length >= minWords && keywordMatches.length >= Math.min(minKeywordMatches, Math.max(expectedKeywords.length, 1)),
+    passed: words.length >= minWords && (expectedKeywords.length === 0 || keywordMatches.length >= Math.min(minKeywordMatches, expectedKeywords.length)),
     wordCount: words.length,
     keywordMatches
   };
