@@ -1,0 +1,63 @@
+name: Completion Repair
+
+on:
+  push:
+    branches:
+      - build/aibltycode-complete-2026-08-30
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout completion branch
+        uses: actions/checkout@v6
+        with:
+          ref: build/aibltycode-complete-2026-08-30
+          fetch-depth: 0
+
+      - name: Apply exact safe repairs
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          curriculum = Path('src/data/moduleDataExtra.ts')
+          text = curriculum.read_text()
+          replacements = {
+              'L("js-variables",': 'L("jsweb-variables",',
+              'L("js-operators",': 'L("jsweb-operators",',
+              'L("js-functions",': 'L("jsweb-functions",',
+              'L("js-arrays",': 'L("jsweb-arrays",',
+              'L("js-objects",': 'L("jsweb-objects",',
+              'L("js-events",': 'L("jsweb-events",',
+          }
+          for old, new in replacements.items():
+              count = text.count(old)
+              if count not in (0, 1):
+                  raise SystemExit(f'Expected 0 or 1 occurrence of {old}, found {count}')
+              text = text.replace(old, new)
+          curriculum.write_text(text)
+
+          retention = Path('src/data/retentionEngine.ts')
+          text = retention.read_text()
+          old = 'passed: words.length >= minWords && keywordMatches.length >= Math.min(minKeywordMatches, Math.max(expectedKeywords.length, 1)),'
+          new = 'passed: words.length >= minWords && (expectedKeywords.length === 0 || keywordMatches.length >= Math.min(minKeywordMatches, expectedKeywords.length)),'
+          if old in text:
+              text = text.replace(old, new)
+          retention.write_text(text)
+          PY
+
+      - name: Commit repairs when required
+        run: |
+          if git diff --quiet; then
+            echo "No completion repair required."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/moduleDataExtra.ts src/data/retentionEngine.ts
+          git commit -m "fix: remove curriculum ID collisions and harden recall validation"
+          git push origin HEAD:build/aibltycode-complete-2026-08-30
