@@ -49,6 +49,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
+      - name: Verify checked-out release source
+        run: |
+          echo "HEAD=$(git rev-parse HEAD)"
+          echo "Tracked tests:"
+          git ls-files tests
+          echo "ASGI test transport:"
+          grep -n "ASGITransport" tests/conftest.py || true
+          test ! -e tests/test_user_logic.py
+          test ! -d backend
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
