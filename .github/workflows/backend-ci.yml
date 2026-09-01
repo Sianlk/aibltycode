@@ -58,6 +58,8 @@ jobs:
         run: pip install -r requirements.txt
       - name: Confirm dependency resolution
         run: pip check
+      - name: Smoke-test canonical backend imports
+        run: python -c "import slowapi; import api.main"
       - name: Run backend tests with coverage
         env:
           DATABASE_URL: postgresql+asyncpg://postgres:testpass@localhost:5432/testdb
