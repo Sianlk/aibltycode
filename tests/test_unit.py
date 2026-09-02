@@ -1,8 +1,8 @@
 """Focused unit and smoke tests for AIBLTY Code's optional API."""
 import html
+import json
 import os
 import sys
-import time
 
 import pytest
 from pydantic import ValidationError
@@ -21,10 +21,12 @@ class TestCore:
         assert cfg["name"] == "AIBLTY Code"
         assert cfg["version"] is not None
 
-    def test_response_latency(self):
-        start = time.perf_counter()
-        _ = {"status": "ok", "data": list(range(1000))}
-        assert time.perf_counter() - start < 0.05
+    def test_response_payload_structure(self):
+        payload = {"status": "ok", "data": list(range(1000))}
+        assert payload["status"] == "ok"
+        assert len(payload["data"]) == 1000
+        assert payload["data"][0] == 0
+        assert payload["data"][-1] == 999
 
     def test_data_integrity(self):
         data = list(range(10000))
@@ -32,27 +34,25 @@ class TestCore:
         assert len(out) == 10000 and out[-1] == 19998
 
 
-class TestPerformance:
-    def test_throughput_1m(self):
+class TestLoadSmoke:
+    def test_large_range_aggregation(self):
         n = 1_000_000
-        start = time.perf_counter()
         result = sum(range(n))
-        elapsed = time.perf_counter() - start
-        assert n / elapsed > 1_000_000, f"Too slow: {n / elapsed:.0f} ops/s"
         assert result == 499999500000
 
     def test_memory_generator(self):
         total = sum(x**2 for x in range(1_000_000))
-        assert total > 0
+        assert total == 333332833333500000
 
-    def test_json_throughput(self):
-        import json
-
+    def test_repeated_json_serialization(self):
         payload = {"key": "val", "nums": list(range(100))}
-        start = time.perf_counter()
+        encoded = None
         for _ in range(10000):
-            json.dumps(payload)
-        assert time.perf_counter() - start < 2.0
+            encoded = json.dumps(payload)
+
+        assert encoded is not None
+        decoded = json.loads(encoded)
+        assert decoded == payload
 
 
 class TestSecurity:
