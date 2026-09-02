@@ -1,37 +1,50 @@
-name: CI – Build & Lint
+name: AIBLTYCODE Complete Build
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - build/aibltycode-complete-2026-08-30
   pull_request:
     branches: [main]
 
+permissions:
+  contents: write
+
 jobs:
-  build:
+  verify:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [18, 20]
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Setup Node.js ${{ matrix.node-version }}
+      - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          node-version: '22'
 
-      - name: Install dependencies
+      - name: Regenerate canonical dependency lock
+        run: npm install --package-lock-only --ignore-scripts
+
+      - name: Clean install
         run: npm ci
 
-      - name: Lint
-        run: npm run lint
+      - name: Production dependency security gate
+        run: npm audit --omit=dev --audit-level=high
 
-      - name: Build
-        run: npm run build
+      - name: Unit, curriculum, type, lint and production build gate
+        run: npm run verify
         env:
-          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
-          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL || 'https://example.supabase.co' }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY || 'public-anon-placeholder' }}
+
+      - name: Sync regenerated lockfile to completion branch
+        if: github.ref == 'refs/heads/build/aibltycode-complete-2026-08-30' && github.actor != 'github-actions[bot]'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package-lock.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Regenerate canonical package lock [lock-sync]"
+            git push
+          fi

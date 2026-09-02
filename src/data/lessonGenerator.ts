@@ -33,6 +33,46 @@ import {
   webDeepContent2,
   businessDeepContent2,
 } from "./lessonContentExpanded4";
+import { buildMasterySteps, javaTopics, systemsTopics, mathsTopics, type TopicRecord } from "./topicKnowledge";
+import { cyberTopics, aiTopics, businessTopics } from "./topicKnowledge2";
+import { gameDevTopics, computerSystemsTopics, webTopics } from "./topicKnowledge3";
+import { javaTopics4 } from "./topicKnowledge4";
+import { webTopics5 } from "./topicKnowledge5";
+import { mathsTopics6, aiTopics6, businessTopics6, miscTopics6 } from "./topicKnowledge6";
+import { javaTopics7, systemsTopics7, mathsTopics7, cyberTopics7, aiTopics7, businessTopics7, gameTopics7, computerTopics7, webTopics7 } from "./topicKnowledge7";
+import { generateExpandedMasterySteps } from "./expandedMasteryGenerator";
+
+// Merged autonomic-mastery knowledge base: compact expert records expanded on demand
+// into the full 8-step cycle (hook -> definition -> analogy -> drill -> mnemonic ->
+// application -> repetition -> speed check). Covers every module.
+const masteryKnowledgeBase: Record<string, TopicRecord> = {
+  ...javaTopics,
+  ...systemsTopics,
+  ...mathsTopics,
+  ...cyberTopics,
+  ...aiTopics,
+  ...businessTopics,
+  ...gameDevTopics,
+  ...computerSystemsTopics,
+  ...webTopics,
+  ...javaTopics4,
+  ...webTopics5,
+  ...mathsTopics6,
+  ...aiTopics6,
+  ...businessTopics6,
+  ...miscTopics6,
+  ...javaTopics7,
+  ...systemsTopics7,
+  ...mathsTopics7,
+  ...cyberTopics7,
+  ...aiTopics7,
+  ...businessTopics7,
+  ...gameTopics7,
+  ...computerTopics7,
+  ...webTopics7,
+};
+
+
 
 function generateQuizStep(title: string, question: string, options: { label: string; text: string }[], correct: string, explanation: string, difficulty: "easy" | "medium" | "hard" = "medium"): LessonStep {
   return { type: "quiz", title, difficulty, question, options, correctAnswer: correct, explanation };
@@ -61,12 +101,26 @@ function inferCategory(moduleId: string): string {
     "game-development": "Game Development",
     "computer-systems": "Computer Systems",
     "web-technologies": "Web Technologies",
+    "python-programming": "Python Programming",
+    "javascript-web": "JavaScript & Modern Web",
+    "ai-builder": "AI Builder",
+    "digital-marketing": "Digital Marketing & SEO",
+    "animation-motion": "Animation & Motion",
+    "software-tools": "Professional Software & IT",
+    "project-delivery": "Project Delivery",
   };
   return map[moduleId] || "General";
 }
 
 function generateStepsForTopic(id: string, title: string, desc: string, moduleId: string): LessonStep[] {
+  const known = masteryKnowledgeBase[id];
+  if (known) return buildMasterySteps(known);
+
+  const expandedSteps = generateExpandedMasterySteps(id, title, desc, moduleId);
+  if (expandedSteps) return expandedSteps;
+
   if (moduleId === "java-foundations") return generateJavaSteps(id, title, desc);
+
   if (moduleId === "systems-analysis") return generateSystemsSteps(id, title, desc);
   if (moduleId === "math-computing") return generateMathSteps(id, title, desc);
   if (moduleId === "cybersecurity") return generateCyberSteps(id, title, desc);

@@ -64,7 +64,11 @@ export function useSkillMastery() {
   const [loading, setLoading] = useState(true);
 
   const fetchSkills = useCallback(async () => {
-    if (!user) return;
+    if (!user) {
+      setSkills([]);
+      setLoading(false);
+      return;
+    }
     
     try {
       // Use raw query since table may not be in generated types yet
@@ -182,7 +186,11 @@ export function useSpacedRepetition() {
   const [loading, setLoading] = useState(true);
 
   const fetchDueItems = useCallback(async () => {
-    if (!user) return;
+    if (!user) {
+      setDueItems([]);
+      setLoading(false);
+      return;
+    }
 
     const { data, error } = await supabase
       .from('spaced_repetition')
@@ -208,7 +216,9 @@ export function useSpacedRepetition() {
   ) => {
     if (!user) return;
 
-    // Get existing data
+    // Get existing data. The current schema stores interval/ease but not a
+    // repetition counter, so infer the SM-2 phase from the persisted interval:
+    // 1 day = first successful repetition; 6+ days = mature repetition.
     const { data: existing } = await supabase
       .from('spaced_repetition')
       .select('*')
@@ -218,9 +228,9 @@ export function useSpacedRepetition() {
 
     const currentEaseFactor = existing?.ease_factor || 2.5;
     const currentInterval = existing?.interval_days || 1;
-    const repetitions = 0; // Track this if needed
+    const repetitions = !existing ? 0 : currentInterval <= 1 ? 1 : 2;
 
-    // Apply SM-2 algorithm
+    // Apply SM-2 algorithm: 1 day -> 6 days -> expanding adaptive intervals.
     const { easeFactor, interval } = calculateSM2(
       quality,
       currentEaseFactor,

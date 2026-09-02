@@ -12,8 +12,10 @@ import { useAdmin } from "@/hooks/useAdmin";
 import { useSubscription } from "@/hooks/useSubscription";
 import { SubscriptionGate } from "@/components/subscription/SubscriptionGate";
 import { zones } from "@/data/learningSystem";
+import { moduleLessons } from "@/data/moduleData";
 import { ProjectSubmission } from "@/components/dashboard/ProjectSubmission";
 import DailyChallenges from "@/components/dashboard/DailyChallenges";
+import { ReviewDueBanner } from "@/components/dashboard/ReviewDueBanner";
 import AchievementsGallery from "@/components/dashboard/AchievementsGallery";
 import { Gamepad2, Flame, Star, Trophy, Crown, Settings, Map, BookOpen, BarChart3, Award, Target, Medal, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -83,6 +85,7 @@ export default function Dashboard() {
   const isKidsMode = gameMode === "kid";
   
   const [stats, setStats] = useState({ xp: 0, streak: 0, gamesPlayed: 0 });
+  const [activeTab, setActiveTab] = useState("zones");
 
   useEffect(() => {
     if (!authLoading && !user) navigate('/auth');
@@ -109,7 +112,7 @@ export default function Dashboard() {
   }, [user, progress]);
 
   const completedLessons = progress.filter(p => p.completed).length;
-  const totalLessons = 850; // Total lessons across all 9 expanded mastery modules
+  const totalLessons = Object.values(moduleLessons).reduce((n, l) => n + l.length, 0);
   const overallProgress = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
 
   if (authLoading) {
@@ -125,6 +128,7 @@ export default function Dashboard() {
       <Header />
 
       <main className="container mx-auto px-4 pt-24 pb-12 max-w-4xl">
+        <ReviewDueBanner />
         {/* Admin & Subscription Status */}
         {(isAdmin || inTrial || subscribed) && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mb-4 flex gap-2 flex-wrap">
@@ -205,15 +209,27 @@ export default function Dashboard() {
           transition={{ delay: 0.15 }}
           className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-10"
         >
-          <Button 
-            size="lg" 
+          <Button
+            size="lg"
             className={`text-lg h-14 ${isKidsMode ? 'bg-gradient-to-r from-primary to-accent text-white' : 'bg-primary hover:bg-primary/90'}`}
+            onClick={() => navigate('/path')}
+          >
+            {isKidsMode ? '🗺️ My Quest' : 'My Path'}
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            className={`text-lg h-14 ${isKidsMode ? 'border-2 border-primary' : 'border-2'}`}
             onClick={() => {
-              const moduleOrder = ["java-foundations","systems-analysis","math-computing","cybersecurity","ai-data-science","business-systems","game-development","computer-systems","web-technologies"];
+              const moduleOrder = Object.keys(moduleLessons);
               const nextModule = moduleOrder.find(m => {
                 const done = progress.filter(p => p.moduleId === m && p.completed).length;
-                return done > 0 && done < 50;
-              }) || moduleOrder.find(m => progress.filter(p => p.moduleId === m && p.completed).length === 0) || "java-foundations";
+                const total = moduleLessons[m]?.length ?? 0;
+                return done > 0 && total > 0 && done < total;
+              }) || moduleOrder.find(m => {
+                const total = moduleLessons[m]?.length ?? 0;
+                return total > 0 && progress.filter(p => p.moduleId === m && p.completed).length === 0;
+              }) || "java-foundations";
               navigate(`/module/${nextModule}`);
             }}
           >
@@ -223,7 +239,10 @@ export default function Dashboard() {
             size="lg" 
             variant="outline"
             className={`text-lg h-14 ${isKidsMode ? 'border-2 border-accent' : 'border-2'}`}
-            onClick={() => document.getElementById('games-section')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => {
+              setActiveTab("games");
+              setTimeout(() => document.getElementById('games-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 120);
+            }}
           >
             <Gamepad2 className="w-5 h-5 mr-2" />
             {isKidsMode ? '🎮 Games' : 'Games'}
@@ -240,7 +259,7 @@ export default function Dashboard() {
         </motion.div>
 
         {/* Content Tabs */}
-        <Tabs defaultValue="zones" className="w-full">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-6 mb-6">
             <TabsTrigger value="zones" className="flex items-center gap-1 text-xs sm:text-sm">
               <Map className="w-3 h-3 sm:w-4 sm:h-4" />
@@ -321,17 +340,8 @@ export default function Dashboard() {
                 {isKidsMode ? '🛤️ Your Adventure!' : 'Your Learning Path'}
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {[
-                  { id: "java-foundations", title: "Java Programming", icon: "☕", color: "primary" },
-                  { id: "systems-analysis", title: "Systems Analysis", icon: "🌌", color: "accent" },
-                  { id: "math-computing", title: "Maths for Computing", icon: "🔢", color: "warning" },
-                  { id: "cybersecurity", title: "Cybersecurity", icon: "🔐", color: "success" },
-                  { id: "ai-data-science", title: "AI & Data Science", icon: "🤖", color: "secondary" },
-                  { id: "business-systems", title: "Business Systems", icon: "💼", color: "primary" },
-                  { id: "game-development", title: "Game Development", icon: "🎮", color: "accent" },
-                  { id: "computer-systems", title: "Computer Systems & Networking", icon: "🖥️", color: "success" },
-                  { id: "web-technologies", title: "Web Technologies", icon: "🌐", color: "warning" },
-                ].map((mod) => (
+                {modules.map((mod) => (
+
                   <div
                     key={mod.id}
                     onClick={() => navigate(`/module/${mod.id}`)}
@@ -343,6 +353,7 @@ export default function Dashboard() {
                   >
                     <div className={`mb-2 ${isKidsMode ? 'text-5xl' : 'text-4xl'}`}>{mod.icon}</div>
                     <h3 className={`font-bold ${isKidsMode ? 'text-lg' : ''}`}>{mod.title}</h3>
+                    <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{mod.description}</p>
                   </div>
                 ))}
               </div>
