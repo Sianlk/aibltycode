@@ -47,6 +47,11 @@ jobs:
           --health-timeout 5s
           --health-retries 5
 
+    env:
+      DATABASE_URL: postgresql+asyncpg://postgres:testpass@localhost:5432/testdb
+      REDIS_URL: redis://localhost:6379
+      SECRET_KEY: test_secret_key_64_chars_minimum_for_security_requirements_ok
+
     steps:
       - uses: actions/checkout@v6
       - name: Verify checked-out release source
@@ -69,11 +74,17 @@ jobs:
         run: pip check
       - name: Smoke-test canonical backend imports
         run: python -c "import slowapi; import api.main"
-      - name: Run backend tests with coverage
-        env:
-          DATABASE_URL: postgresql+asyncpg://postgres:testpass@localhost:5432/testdb
-          REDIS_URL: redis://localhost:6379
-          SECRET_KEY: test_secret_key_64_chars_minimum_for_security_requirements_ok
+      - name: API route tests
+        run: pytest tests/test_api.py -v
+      - name: Authentication tests
+        run: pytest tests/test_auth.py -v
+      - name: Health tests
+        run: pytest tests/test_health.py -v
+      - name: Payment tests
+        run: pytest tests/test_payments.py -v
+      - name: Unit and security smoke tests
+        run: pytest tests/test_unit.py -v
+      - name: Run full backend suite with coverage
         run: pytest tests/ -v --cov=api --cov-report=xml --cov-report=term-missing
       - uses: codecov/codecov-action@v5
         if: always()
