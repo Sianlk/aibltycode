@@ -49,6 +49,7 @@ jobs:
 
     env:
       DATABASE_URL: postgresql+asyncpg://postgres:testpass@localhost:5432/testdb
+      TEST_DATABASE_URL: postgresql+asyncpg://postgres:testpass@localhost:5432/testdb
       REDIS_URL: redis://localhost:6379
       SECRET_KEY: test_secret_key_64_chars_minimum_for_security_requirements_ok
 
