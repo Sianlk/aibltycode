@@ -18,6 +18,8 @@ aiosqlite==0.20.0
 # Auth & Security
 python-jose[cryptography]==3.3.0
 passlib[bcrypt]==1.7.4
+# Passlib 1.7.4 expects the legacy bcrypt backend metadata removed in newer bcrypt releases.
+bcrypt==4.0.1
 python-multipart==0.0.12
 email-validator==2.3.0
 cryptography==43.0.3
