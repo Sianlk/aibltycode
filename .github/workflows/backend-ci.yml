@@ -74,8 +74,18 @@ jobs:
         run: pip check
       - name: Smoke-test canonical backend imports
         run: python -c "import slowapi; import api.main"
-      - name: API route tests
-        run: pytest tests/test_api.py -v
+      - name: API health contract
+        run: pytest tests/test_api.py::test_health -v
+      - name: API weak-password validation
+        run: pytest tests/test_api.py::test_register_validates_password -v
+      - name: API username validation
+        run: pytest tests/test_api.py::test_register_validates_username -v
+      - name: API invalid-login contract
+        run: pytest tests/test_api.py::test_login_invalid_credentials -v
+      - name: API protected-route contract
+        run: pytest tests/test_api.py::test_protected_route_requires_auth -v
+      - name: API rate-limit contract
+        run: pytest tests/test_api.py::test_rate_limit_headers -v
       - name: Authentication tests
         run: pytest tests/test_auth.py -v
       - name: Health tests
