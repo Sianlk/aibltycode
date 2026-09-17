@@ -4,6 +4,7 @@ import os
 import pytest_asyncio
 from httpx import ASGITransport, AsyncClient
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
+from sqlalchemy.pool import NullPool
 
 from api.core.db import Base, get_db
 from api.main import app
@@ -18,7 +19,14 @@ if not TEST_DATABASE_URL:
         "TEST_DATABASE_URL must point to a dedicated disposable PostgreSQL test database"
     )
 
-test_engine = create_async_engine(TEST_DATABASE_URL, echo=False, pool_pre_ping=True)
+# pytest-asyncio uses a fresh event loop for each test. Asyncpg connections are
+# bound to the loop that created them, so pooled connections must never leak
+# across tests. NullPool gives every fixture use a fresh PostgreSQL connection.
+test_engine = create_async_engine(
+    TEST_DATABASE_URL,
+    echo=False,
+    poolclass=NullPool,
+)
 TestSessionLocal = async_sessionmaker(test_engine, expire_on_commit=False)
 
 
