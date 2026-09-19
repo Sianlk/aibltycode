@@ -25,6 +25,11 @@ const reviewDueBanner = read('src/components/dashboard/ReviewDueBanner.tsx');
 const skillMastery = read('src/hooks/useSkillMastery.ts');
 const pkg = JSON.parse(read('package.json'));
 const gitignore = read('.gitignore');
+const seoGenerator = read('scripts/generate-seo-pages.mjs');
+const storeWorkflow = read('.github/workflows/store-publish.yml');
+const deleteAccountPage = read('public/delete-account.html');
+const dockerApi = read('Dockerfile');
+const dockerWeb = read('Dockerfile.web');
 
 const requiredModules = [
   'java-foundations',
@@ -118,7 +123,7 @@ const extraLessonIds = [...extraData.matchAll(/\bL\(\s*["']([^"']+)["']/g)].map(
 const allLessonIds = [...originalLessonIds, ...extraLessonIds];
 const lessonMetadataCount = allLessonIds.length;
 const duplicateLessonIds = [...new Set(allLessonIds.filter((id, index) => allLessonIds.indexOf(id) !== index))];
-assert(lessonMetadataCount >= 700, `lesson metadata floor met (${lessonMetadataCount} >= 700)`);
+assert(lessonMetadataCount >= 1200, `lesson metadata floor met (${lessonMetadataCount} >= 1200)`);
 assert(duplicateLessonIds.length === 0, `lesson IDs are globally unique${duplicateLessonIds.length ? `: ${duplicateLessonIds.join(', ')}` : ''}`);
 
 // The expansion curriculum must not fall back to thin definition-only lessons.
@@ -209,6 +214,13 @@ for (const sensitive of ['.env', 'android/app/keystore.properties', 'android/app
 assert(gitignore.includes('.env'), '.env is gitignored');
 assert(gitignore.includes('upload-keystore.jks'), 'Android upload keystore is gitignored');
 assert(gitignore.includes('keystore.properties'), 'Android signing properties are gitignored');
+assert(seoGenerator.includes('curriculum.html') && seoGenerator.includes('sitemap.xml') && seoGenerator.includes('llms.txt'), 'generated SEO discovery layer exists');
+assert(seoGenerator.includes('/courses/'), 'crawlable public course pages are generated');
+assert(deleteAccountPage.includes('Delete your AIblty account') && deleteAccountPage.includes('privacy@sianlk.com'), 'public account deletion resource exists');
+assert(storeWorkflow.includes('GOOGLE_PLAY_SERVICE_ACCOUNT_JSON'), 'Google Play release credential gate exists');
+assert(storeWorkflow.includes('ANDROID_KEYSTORE_BASE64'), 'Android production signing gate exists');
+assert(dockerApi.includes('api.main:app') && dockerApi.includes('/api/v1/health'), 'standalone FastAPI container uses canonical app and health route');
+assert(dockerWeb.includes('npm run build') && dockerWeb.includes('nginx'), 'standalone frontend container exists');
 
 console.log(`AIBLTYCODE completeness gate: ${pass.length} checks passed.`);
 console.log(`Curriculum metadata lessons detected: ${lessonMetadataCount}`);
