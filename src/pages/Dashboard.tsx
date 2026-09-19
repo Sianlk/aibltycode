@@ -13,7 +13,7 @@ import { useSubscription } from "@/hooks/useSubscription";
 import { SubscriptionGate } from "@/components/subscription/SubscriptionGate";
 import { zones } from "@/data/learningSystem";
 import { moduleLessons, moduleInfo } from "@/data/moduleData";
-import { moduleGameMap, unlockedModuleGames, nextGameUnlockAt } from "@/data/moduleGameMap";
+import { moduleGameMap, unlockedModuleGames, nextGameUnlockAt, getZoneState } from "@/data/moduleGameMap";
 import { Lock } from "lucide-react";
 import { ProjectSubmission } from "@/components/dashboard/ProjectSubmission";
 import DailyChallenges from "@/components/dashboard/DailyChallenges";
@@ -116,6 +116,15 @@ export default function Dashboard() {
   const completedLessons = progress.filter(p => p.completed).length;
   const totalLessons = Object.values(moduleLessons).reduce((n, l) => n + l.length, 0);
   const overallProgress = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
+
+  // Real per-course progress, used to unlock zones and practice games.
+  const completedByModule: Record<string, number> = {};
+  progress.filter(p => p.completed).forEach(p => {
+    completedByModule[p.moduleId] = (completedByModule[p.moduleId] ?? 0) + 1;
+  });
+  const totalByModule: Record<string, number> = Object.fromEntries(
+    Object.entries(moduleLessons).map(([id, list]) => [id, list.length])
+  );
 
   if (authLoading) {
     return (
@@ -294,17 +303,29 @@ export default function Dashboard() {
               <h2 className={`text-xl font-bold text-foreground mb-4 flex items-center gap-2 ${isKidsMode ? 'text-2xl' : ''}`}>
                 {isKidsMode ? '🌍 Explore the World!' : 'Learning Zones'}
               </h2>
+              <p className="text-sm text-muted-foreground mb-4">
+                {isKidsMode
+                  ? 'Finish a lesson in a course to open its world!'
+                  : 'Each zone opens when you complete a lesson in one of its courses, and fills up as you finish more.'}
+              </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {zones.map((zone, index) => (
-                  <ZoneCard
-                    key={zone.id}
-                    zone={zone}
-                    index={index}
-                    unlocked={index < 4}
-                    progress={Math.max(0, 80 - index * 15)}
-                    gamesCompleted={Math.max(0, 4 - index)}
-                  />
-                ))}
+                {zones.map((zone, index) => {
+                  const state = getZoneState(zone.id, completedByModule, totalByModule);
+                  const gateTitle = state.gateModuleId ? moduleInfo[state.gateModuleId]?.title : undefined;
+                  return (
+                    <ZoneCard
+                      key={zone.id}
+                      zone={zone}
+                      index={index}
+                      unlocked={state.unlocked}
+                      progress={state.percent}
+                      lessonsDone={state.lessonsDone}
+                      lessonsTotal={state.lessonsTotal}
+                      unlockHint={gateTitle ? `Complete a lesson in ${gateTitle} to open this zone` : undefined}
+                      onUnlockClick={state.gateModuleId ? () => navigate(`/module/${state.gateModuleId}`) : undefined}
+                    />
+                  );
+                })}
               </div>
             </motion.section>
 
