@@ -373,6 +373,77 @@ export default function Dashboard() {
                 ))}
               </div>
             </motion.section>
+
+            {/* Games unlocked by your course lessons */}
+            <motion.section
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.15 }}
+              className="mt-10"
+            >
+              <h2 className={`text-xl font-bold text-foreground mb-1 ${isKidsMode ? 'text-2xl' : ''}`}>
+                {isKidsMode ? '🔓 Games You Unlocked!' : 'Unlocked by your lessons'}
+              </h2>
+              <p className="text-sm text-muted-foreground mb-4">
+                {isKidsMode
+                  ? 'Finish lessons to open more games in each course!'
+                  : 'Each course opens more practice games as you complete its lessons.'}
+              </p>
+              <div className="space-y-4">
+                {Object.keys(moduleGameMap).map((moduleId) => {
+                  const info = moduleInfo[moduleId];
+                  if (!info) return null;
+                  const done = progress.filter((p) => p.moduleId === moduleId && p.completed).length;
+                  const unlocked = unlockedModuleGames(moduleId, done);
+                  const all = moduleGameMap[moduleId].games;
+                  const nextAt = nextGameUnlockAt(moduleId, done);
+                  return (
+                    <div key={moduleId} className="rounded-xl border border-border bg-card p-4">
+                      <div className="flex items-center justify-between gap-2 mb-3">
+                        <button
+                          onClick={() => navigate(`/module/${moduleId}`)}
+                          className="flex items-center gap-2 font-semibold hover:text-primary transition-colors"
+                        >
+                          <span className="text-2xl">{info.icon}</span>
+                          {info.title}
+                        </button>
+                        <span className="text-xs text-muted-foreground">
+                          {done} lesson{done === 1 ? '' : 's'} done
+                        </span>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {all.map((gameId) => {
+                          const meta = gameModes.find((g) => g.id === gameId);
+                          const isUnlocked = unlocked.includes(gameId);
+                          return (
+                            <Button
+                              key={gameId}
+                              size="sm"
+                              variant={isUnlocked ? 'secondary' : 'outline'}
+                              disabled={!isUnlocked}
+                              onClick={() => navigate(`/game/${gameId}`)}
+                              className="text-xs"
+                            >
+                              {isUnlocked ? (
+                                <span className="mr-1">{meta?.emoji ?? '🎮'}</span>
+                              ) : (
+                                <Lock className="mr-1 h-3 w-3" />
+                              )}
+                              {meta?.title ?? gameId}
+                            </Button>
+                          );
+                        })}
+                      </div>
+                      {nextAt !== null && (
+                        <p className="mt-2 text-xs text-muted-foreground">
+                          Next game unlocks at {nextAt} lessons.
+                        </p>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </motion.section>
           </TabsContent>
 
           {/* Daily Challenges Tab */}
