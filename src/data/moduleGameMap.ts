@@ -63,3 +63,44 @@ export function nextGameUnlockAt(moduleId: string, lessonsCompleted: number): nu
   if (unlocked >= link.games.length) return null;
   return unlocked * link.unlockEvery;
 }
+
+/** Courses that feed a zone. */
+export function getZoneModules(zoneId: string): string[] {
+  return Object.entries(moduleGameMap)
+    .filter(([, link]) => link.zoneId === zoneId)
+    .map(([moduleId]) => moduleId);
+}
+
+/** Zones that are open before any lesson is completed, so a new learner can start. */
+export const starterZones = ["logic-district", "script-lab", "web-forge"];
+
+export interface ZoneState {
+  unlocked: boolean;
+  percent: number;
+  lessonsDone: number;
+  lessonsTotal: number;
+  /** Course whose first lesson opens this zone (when locked). */
+  gateModuleId?: string;
+}
+
+/**
+ * Real zone state from lesson progress: a zone opens as soon as the learner
+ * completes a lesson in any course mapped to it, and its progress bar tracks
+ * how much of those courses is done.
+ */
+export function getZoneState(
+  zoneId: string,
+  completedByModule: Record<string, number>,
+  totalByModule: Record<string, number>,
+): ZoneState {
+  const mods = getZoneModules(zoneId);
+  const lessonsDone = mods.reduce((n, m) => n + (completedByModule[m] ?? 0), 0);
+  const lessonsTotal = mods.reduce((n, m) => n + (totalByModule[m] ?? 0), 0);
+  return {
+    unlocked: lessonsDone > 0 || starterZones.includes(zoneId),
+    percent: lessonsTotal > 0 ? Math.round((lessonsDone / lessonsTotal) * 100) : 0,
+    lessonsDone,
+    lessonsTotal,
+    gateModuleId: mods[0],
+  };
+}
