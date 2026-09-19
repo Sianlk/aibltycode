@@ -12,7 +12,9 @@ import { useAdmin } from "@/hooks/useAdmin";
 import { useSubscription } from "@/hooks/useSubscription";
 import { SubscriptionGate } from "@/components/subscription/SubscriptionGate";
 import { zones } from "@/data/learningSystem";
-import { moduleLessons } from "@/data/moduleData";
+import { moduleLessons, moduleInfo } from "@/data/moduleData";
+import { moduleGameMap, unlockedModuleGames, nextGameUnlockAt } from "@/data/moduleGameMap";
+import { Lock } from "lucide-react";
 import { ProjectSubmission } from "@/components/dashboard/ProjectSubmission";
 import DailyChallenges from "@/components/dashboard/DailyChallenges";
 import AchievementsGallery from "@/components/dashboard/AchievementsGallery";
@@ -68,6 +70,7 @@ const gameModes = [
   { id: "adaptive", title: "Adaptive Learning", description: "AI-powered practice", icon: "typing" as const, color: "secondary" as const, emoji: "🧠" },
   { id: "voice-coach", title: "Voice Coach", description: "Read code aloud", icon: "typing" as const, color: "accent" as const, emoji: "🗣️" },
   { id: "puzzle-builder", title: "Code Puzzles", description: "Build code pieces", icon: "ordering" as const, color: "primary" as const, emoji: "🧩" },
+  { id: "chatbot-builder", title: "Chatbot Builder Lab", description: "Build & test a real AI bot", icon: "typing" as const, color: "accent" as const, emoji: "🤖" },
   
   // Multiplayer & Sandbox
   { id: "battle", title: "Multiplayer Battle", description: "Challenge friends!", icon: "speed" as const, color: "warning" as const, emoji: "⚔️", link: "/battle" },
