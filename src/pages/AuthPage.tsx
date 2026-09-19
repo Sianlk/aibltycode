@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
 import { Code2, Zap, Trophy, GraduationCap, Gamepad2, ArrowLeft } from 'lucide-react';
 import { z } from 'zod';
+import { Seo } from "@/components/seo/Seo";
 
 const authSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -60,7 +61,7 @@ const AuthPage: React.FC = () => {
         toast.error(error.message);
       }
     } else {
-      toast.success('Account created! Welcome to AibiltyCode.');
+      toast.success('Account created! Welcome to AIblty.');
       navigate('/dashboard');
     }
   };
@@ -108,9 +109,9 @@ const AuthPage: React.FC = () => {
             className="inline-flex items-center gap-2 mb-4"
           >
             <Code2 className="h-10 w-10 text-primary" />
-            <span className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              AibiltyCode
-            </span>
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              Sign in to AIblty
+            </h1>
           </motion.div>
           <p className="text-muted-foreground">Master coding &amp; tech from scratch</p>
         </div>
