@@ -118,10 +118,10 @@ export function buildMasterySteps(rec: TopicRecord): LessonStep[] {
     ),
     q(
       `${title} in plain words`,
-      `Explain ${title} to a 10-year-old. Which sentence is right?`,
+      `Explain ${title} to a 5-year-old. Which sentence is right?`,
       shuffleOptions(definition, `It is a way to make your screen brighter`, `It is a type of computer virus`),
       "A",
-      `Correct. Say it out loud once: "${definition}" Saying it aloud builds the memory trace faster than reading.`,
+      `Correct. Say it out loud once: "${definition}" Tiny tip: use one tiny example from daily life. Saying it aloud builds the memory trace faster than reading.`,
       "easy"
     ),
     q(
