@@ -95,7 +95,7 @@ export function RetentionGate({ lessonId, onMastered, onExit }: RetentionGatePro
   const checkTeachBack = () => {
     const result = evaluateRecall(answer, plan.keyTerms, 14, 1);
     if (!result.passed) {
-      fail(`Make it simpler and fuller: at least 14 words, one key idea, why it matters, and a tiny example. Useful terms: ${plan.keyTerms.slice(0, 4).join(", ")}.`);
+      fail(`Make it five-year-old simple but complete: at least 14 words, one key idea, why it matters, and a tiny everyday example. Useful terms: ${plan.keyTerms.slice(0, 4).join(", ")}.`);
       return;
     }
     moveTo("fast");
@@ -237,7 +237,7 @@ export function RetentionGate({ lessonId, onMastered, onExit }: RetentionGatePro
             </div>
             <div className="rounded-xl bg-primary/5 p-4 text-sm">
               <Lightbulb className="mr-2 inline h-4 w-4" />
-              Child-simple rule: if you cannot explain it simply without looking, it is not mastered yet.
+              Five-year-old rule: if you cannot explain it simply without looking, it is not mastered yet.
             </div>
             <Button className="w-full" size="lg" onClick={() => moveTo("recall")}>I have the hook — test me</Button>
           </CardContent>
