@@ -13,7 +13,7 @@ import { useSubscription } from "@/hooks/useSubscription";
 import { SubscriptionGate } from "@/components/subscription/SubscriptionGate";
 import { zones } from "@/data/learningSystem";
 import { moduleLessons, moduleInfo } from "@/data/moduleData";
-import { moduleGameMap, unlockedModuleGames, nextGameUnlockAt } from "@/data/moduleGameMap";
+import { moduleGameMap, unlockedModuleGames, nextGameUnlockAt, getZoneState } from "@/data/moduleGameMap";
 import { Lock } from "lucide-react";
 import { ProjectSubmission } from "@/components/dashboard/ProjectSubmission";
 import DailyChallenges from "@/components/dashboard/DailyChallenges";
@@ -116,6 +116,15 @@ export default function Dashboard() {
   const completedLessons = progress.filter(p => p.completed).length;
   const totalLessons = Object.values(moduleLessons).reduce((n, l) => n + l.length, 0);
   const overallProgress = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
+
+  // Real per-course progress, used to unlock zones and practice games.
+  const completedByModule: Record<string, number> = {};
+  progress.filter(p => p.completed).forEach(p => {
+    completedByModule[p.moduleId] = (completedByModule[p.moduleId] ?? 0) + 1;
+  });
+  const totalByModule: Record<string, number> = Object.fromEntries(
+    Object.entries(moduleLessons).map(([id, list]) => [id, list.length])
+  );
 
   if (authLoading) {
     return (
