@@ -303,17 +303,29 @@ export default function Dashboard() {
               <h2 className={`text-xl font-bold text-foreground mb-4 flex items-center gap-2 ${isKidsMode ? 'text-2xl' : ''}`}>
                 {isKidsMode ? '🌍 Explore the World!' : 'Learning Zones'}
               </h2>
+              <p className="text-sm text-muted-foreground mb-4">
+                {isKidsMode
+                  ? 'Finish a lesson in a course to open its world!'
+                  : 'Each zone opens when you complete a lesson in one of its courses, and fills up as you finish more.'}
+              </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {zones.map((zone, index) => (
-                  <ZoneCard
-                    key={zone.id}
-                    zone={zone}
-                    index={index}
-                    unlocked={index < 4}
-                    progress={Math.max(0, 80 - index * 15)}
-                    gamesCompleted={Math.max(0, 4 - index)}
-                  />
-                ))}
+                {zones.map((zone, index) => {
+                  const state = getZoneState(zone.id, completedByModule, totalByModule);
+                  const gateTitle = state.gateModuleId ? moduleInfo[state.gateModuleId]?.title : undefined;
+                  return (
+                    <ZoneCard
+                      key={zone.id}
+                      zone={zone}
+                      index={index}
+                      unlocked={state.unlocked}
+                      progress={state.percent}
+                      lessonsDone={state.lessonsDone}
+                      lessonsTotal={state.lessonsTotal}
+                      unlockHint={gateTitle ? `Complete a lesson in ${gateTitle} to open this zone` : undefined}
+                      onUnlockClick={state.gateModuleId ? () => navigate(`/module/${state.gateModuleId}`) : undefined}
+                    />
+                  );
+                })}
               </div>
             </motion.section>
 
