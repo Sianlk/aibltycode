@@ -43,6 +43,8 @@ const requiredModules = [
   'animation-motion',
   'software-tools',
   'project-delivery',
+  'degree-computing-core',
+  'cad-bim',
 ];
 
 const curriculumSource = `${moduleData}\n${extraData}`;
@@ -95,6 +97,14 @@ const requiredConcepts = [
   ['ITIL', /ITIL/i],
   ['Git/GitHub', /Git & GitHub|GitHub Workflow/i],
   ['app publishing', /App Store Publishing|Play Store/i],
+  ['CAD', /What Is CAD|CAD Standards|AutoLISP|DWG|DXF/i],
+  ['BIM', /What Is BIM|ISO 19650|Revit|Navisworks|IFC|COBie/i],
+  ['data communications', /Data Communications|OSI Model|TCP\/IP|Subnetting/i],
+  ['information systems strategy', /Information Systems, Strategy|Business.IT Strategic Alignment|Enterprise Architecture/i],
+  ['professional development', /Mental Wealth|Professional Fitness|Skills Audit|Career Plan/i],
+  ['database systems degree core', /CN5000|Normalisation|Transactions & ACID|Query Plans/i],
+  ['systems administration degree core', /CN5008|Systems Administration|Active Directory|System Hardening/i],
+  ['cyber security degree core', /CN5010|Threat Modelling|Incident Response|Digital Forensics/i],
 ];
 
 for (const [label, regex] of requiredConcepts) {
@@ -113,7 +123,7 @@ assert(duplicateLessonIds.length === 0, `lesson IDs are globally unique${duplica
 
 // The expansion curriculum must not fall back to thin definition-only lessons.
 assert(lessonGenerator.includes('generateExpandedMasterySteps'), 'expanded mastery generator wired into lesson resolution');
-for (const moduleId of ['python-programming', 'javascript-web', 'ai-builder', 'digital-marketing', 'animation-motion', 'software-tools', 'project-delivery']) {
+for (const moduleId of ['python-programming', 'javascript-web', 'ai-builder', 'digital-marketing', 'animation-motion', 'software-tools', 'project-delivery', 'degree-computing-core', 'cad-bim']) {
   assert(expandedMasteryGenerator.includes(`"${moduleId}"`) || expandedMasteryGenerator.includes(`'${moduleId}'`), `practical mastery path defined: ${moduleId}`);
 }
 for (const masteryPrimitive of ['jargon', 'mental model', 'hands-on', 'workplace', 'checklist', 'failure', 'capstone', '60-second']) {
@@ -128,7 +138,7 @@ for (const stage of ['memory', 'recall', 'teach', 'fast', 'transfer']) {
   assert(retentionGate.includes(`"${stage}"`), `retention stage present: ${stage}`);
 }
 assert(retentionGate.includes('MIND memory code'), 'mnemonic encoding is learner-visible');
-assert(/8-year-old|child/i.test(retentionGate), 'child-simple Feynman teach-back is required');
+assert(/5-year-old|five-year-old|child/i.test(retentionGate), 'age-five child-simple Feynman teach-back is required');
 assert(/60-second|60 seconds/i.test(retentionGate), 'fast-recall timing is required');
 assert(/Professional transfer/i.test(retentionGate), 'professional transfer is required');
 assert(retentionEngine.includes('scheduleLocalReview'), 'anonymous/offline review scheduling exists');
@@ -204,6 +214,7 @@ console.log(`AIBLTYCODE completeness gate: ${pass.length} checks passed.`);
 console.log(`Curriculum metadata lessons detected: ${lessonMetadataCount}`);
 console.log(`Dashboard learning tools/games detected: ${dashboardGameIds.length}`);
 console.log(`Required modules detected: ${requiredModules.length}`);
+console.log('Age-five -> degree -> professional -> expert/professor learning ladder enforced for expansion paths.');
 
 if (fail.length) {
   console.error(`\n${fail.length} check(s) failed:`);
