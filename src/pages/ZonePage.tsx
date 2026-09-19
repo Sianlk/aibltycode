@@ -114,6 +114,35 @@ export default function ZonePage() {
           </div>
         </motion.div>
 
+        {/* AI Builder Studio entry */}
+        {zone.id === 'ai-forge' && (
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.05 }}
+            className="mb-8"
+          >
+            <button
+              onClick={() => navigate('/ai-studio')}
+              className="w-full rounded-2xl border-2 border-primary/40 bg-gradient-to-br from-primary/15 via-card to-accent/10 p-5 text-left transition-all hover:border-primary"
+            >
+              <div className="flex items-center gap-4">
+                <span className="text-4xl">🤖</span>
+                <div className="flex-1">
+                  <h2 className={`font-bold ${isKidsMode ? 'text-2xl' : 'text-xl'}`}>
+                    {isKidsMode ? '🚀 Build Your Own Robot Helper!' : 'AI Builder Studio'}
+                  </h2>
+                  <p className="text-sm text-muted-foreground">
+                    Write a few lines in plain English and talk to a real working assistant you built
+                    yourself — with every step explained.
+                  </p>
+                </div>
+                <span className="hidden text-sm font-semibold text-primary sm:block">Open →</span>
+              </div>
+            </button>
+          </motion.section>
+        )}
+
         {/* Mission Briefing */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
