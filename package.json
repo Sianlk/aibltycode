@@ -22,7 +22,9 @@
     "open:ios": "npx cap open ios",
     "sync": "npx cap sync",
     "build:android": "npm run build && npx cap sync android",
-    "build:ios": "npm run build && npx cap sync ios"
+    "build:ios": "npm run build && npx cap sync ios",
+    "seo:generate": "node scripts/generate-seo-pages.mjs",
+    "prebuild": "npm run seo:generate"
   },
   "dependencies": {
     "@capacitor/android": "^8.3.0",
