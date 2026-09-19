@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useGame } from "@/contexts/GameContext";
 import { useProgress } from "@/hooks/useProgress";
 import { moduleLessons, moduleInfo } from "@/data/moduleData";
+import { getModuleGames, getModuleZone, unlockedModuleGames, nextGameUnlockAt } from "@/data/moduleGameMap";
 import { ArrowLeft, PlayCircle, CheckCircle, Lock, Star } from "lucide-react";
 import { Seo } from "@/components/seo/Seo";
 
@@ -31,6 +32,10 @@ const ModulePage = forwardRef<HTMLDivElement>((_, ref) => {
   }
 
   const completedCount = lessons.filter(l => isLessonCompleted(l.id)).length;
+  const moduleGames = moduleId ? getModuleGames(moduleId) : [];
+  const unlockedGames = moduleId ? unlockedModuleGames(moduleId, completedCount) : [];
+  const nextUnlock = moduleId ? nextGameUnlockAt(moduleId, completedCount) : null;
+  const zoneId = moduleId ? getModuleZone(moduleId) : undefined;
 
   const handleStartLesson = (lessonId: string) => {
     playSound("click");
