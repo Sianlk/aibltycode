@@ -8,6 +8,7 @@ import { useGame } from "@/contexts/GameContext";
 import { useProgress } from "@/hooks/useProgress";
 import { moduleLessons, moduleInfo } from "@/data/moduleData";
 import { ArrowLeft, PlayCircle, CheckCircle, Lock, Star } from "lucide-react";
+import { Seo } from "@/components/seo/Seo";
 
 const ModulePage = forwardRef<HTMLDivElement>((_, ref) => {
   const { moduleId } = useParams<{ moduleId: string }>();
@@ -43,6 +44,11 @@ const ModulePage = forwardRef<HTMLDivElement>((_, ref) => {
 
   return (
     <div ref={ref} className="min-h-screen bg-background stars-bg">
+      <Seo
+        title={`${info.title} | AIblty`}
+        description={`Learn ${info.title} from zero. ${lessons.length} beginner-to-expert lessons with guided drills, quizzes, mnemonics and games on AIblty.`}
+        path={`/module/${moduleId}`}
+      />
       <Header />
 
       <main className="container mx-auto px-4 pt-24 pb-12 max-w-2xl">
