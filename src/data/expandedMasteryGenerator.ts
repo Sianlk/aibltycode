@@ -66,6 +66,23 @@ const profiles: Record<string, ExpandedProfile> = {
     safety: "make ownership explicit, surface risks early, control scope changes and never report progress without evidence",
     practical: (title, description) => `DELIVERY CARD — ${title}\nOutcome: ${description}\nScope: write what is IN and explicitly what is OUT.\nMethod: explain why Waterfall, Agile/Scrum, Kanban or hybrid fits this work.\nWork: break the outcome into verifiable deliverables.\nOwners: assign one accountable owner per item.\nDependencies: record blockers and sequencing.\nRisk: probability x impact x mitigation x owner.\nAcceptance: define objective done criteria.\nEvidence: identify the metric, demo, test or sign-off that proves completion.`,
   },
+
+  "degree-computing-core": {
+    label: "degree-level computing practice",
+    workplace: "a university lab, technical report or real computing service where claims must be evidenced and reproducible",
+    analogy: "a city: networks are roads, databases are organised stores, systems administration keeps utilities running, security protects people, and strategy decides what to build",
+    artifact: "a degree-standard lab artefact or report with diagram, implementation, verification evidence, reflection and references",
+    safety: "work only in authorised labs, protect credentials and personal data, back up before change, document assumptions, verify with evidence and cite reliable sources",
+    practical: (title, description) => `DEGREE LAB — ${title}\nPurpose: ${description}\n1. Explain it to a five-year-old in one sentence.\n2. Draw the system or process before touching tools.\n3. Build/configure/query one small working example.\n4. Capture evidence: command, query, packet, diagram, screenshot or result.\n5. Test one failure/edge case and explain why it happened.\n6. Link the result to a real organisation or computing service.\n7. Critique one limitation or alternative.\n8. Write a 100-word degree-level conclusion with evidence and references.`,
+  },
+  "cad-bim": {
+    label: "CAD, BIM and digital construction",
+    workplace: "a coordinated design/construction project where drawings, models, information, revisions and responsibilities must stay accurate across disciplines",
+    analogy: "digital LEGO with a shared instruction book: geometry shows the pieces, BIM data says what each piece is, and the common data environment keeps everyone on the right revision",
+    artifact: "a checked drawing/model/coordination deliverable with units, coordinates, naming, revision, issue status and verification evidence",
+    safety: "confirm units and coordinates first, preserve source files, follow naming/revision rules, validate exchanges, never overwrite issued information, and apply ISO 19650/security-minded information management",
+    practical: (title, description) => `CAD/BIM LAB — ${title}\nPurpose: ${description}\nBEGINNER: name the object/process in plain words and sketch it by hand.\nBUILD: create the smallest accurate CAD/BIM example with correct units and coordinates.\nINFORMATION: add the minimum useful properties/parameters.\nCOORDINATE: check alignment, references/links and interfaces.\nVERIFY: measure, audit or clash-check the result.\nISSUE CONTROL: record file/container name, revision, status and owner.\nINTEROPERABILITY: state what happens when exchanged (DWG/DXF/IFC/BCF where relevant).\nEXPERT CHECK: explain one failure mode, one automation opportunity and one standards requirement.`,
+  },
 };
 
 const quiz = (
@@ -129,7 +146,7 @@ export function generateExpandedMasterySteps(
       `${profile.analogy}. The lesson concept is ${description.toLowerCase()}.`,
       `Treat every system as a black box and skip the fundamentals`,
       `Memorise terminology but never connect it to a real task`,
-      `A useful mental model links the new term to something familiar, then replaces the analogy with the precise professional meaning.`,
+      `A useful mental model links the new term to something familiar, then replaces the analogy with the precise professional meaning. Tiny tip: draw the analogy in 10 seconds before moving on.`,
       "easy",
     ),
     typing(
