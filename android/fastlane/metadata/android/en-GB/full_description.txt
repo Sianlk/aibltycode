@@ -1,0 +1,55 @@
+AIblty is a structured technology learning platform that starts with zero assumed knowledge and builds toward degree, professional and expert-level mastery.
+
+The curriculum contains 1,200+ structured topics across 18 learning tracks, including:
+
+• Java programming
+• Python programming
+• JavaScript, HTML, CSS, TypeScript and modern web development
+• SQL and database systems
+• Data science, machine learning and AI
+• AI assistants, RAG, agents, evaluation, monitoring and governance
+• Cybersecurity, secure development, incident response and digital forensics
+• Data communications, networking, Cisco concepts and packet analysis
+• Computer systems and systems administration
+• Cloud, containers, virtualisation, automation and infrastructure as code
+• Information systems, strategy and management
+• Excel, Power BI, enterprise systems, SAP/Sage and professional IT tools
+• Agile, Scrum, Kanban, Waterfall, PRINCE2, ITIL and project delivery
+• CAD from first drawing to professional QA, 3D and automation
+• BIM, Revit concepts, ISO 19650, IFC/openBIM, coordination, clash detection, 4D/5D/6D and digital twins
+• Animation, motion and game development
+• Digital marketing, SEO, analytics and growth
+
+HOW AIblty TEACHES
+
+Every subject follows a mastery loop designed to make knowledge retrievable rather than merely familiar:
+
+1. Five-year-old-simple explanation — technical terms are introduced in plain language with no assumed background.
+2. Memory hooks — the MIND method links Meaning, Image, Name and Doing.
+3. Guided practice — learners type, configure, query, diagram, analyse or build a real artefact.
+4. No-peeking retrieval — learners must pull the idea back from memory.
+5. Teach-back — explain the idea simply enough that a young beginner could understand it.
+6. Fast recall — repeat until the key idea can be retrieved accurately in under 60 seconds.
+7. Professional transfer — explain where, how and why the skill is used in real work.
+8. Spaced review — successful recall schedules the next memory check automatically.
+
+LEARN THROUGH GAMES
+
+AIblty includes a broad set of learning games and practice tools, plus a curriculum-wide spaced-repetition queue. Games reinforce memory, terminology, code patterns, debugging, speed, sequencing and problem solving rather than replacing the underlying teaching.
+
+LEVEL 5 COMPUTING PATH
+
+The degree-core pathway includes Data Communications and Networks; Information Systems, Strategy and Management; Professional Development and Career Planning; Database Systems; Systems Administration; and Cyber Security. Topics progress from foundations through university-style labs, evidence, critique, capstones and research-level thinking.
+
+CAD & BIM PATH
+
+The CAD/BIM pathway moves from units, coordinates, layers and drawing standards through BIM information management, ISO 19650, Revit/Navisworks concepts, IFC/COBie, clash workflows, 4D/5D/6D, Dynamo/API automation, digital twins, interoperability and research-level evaluation.
+
+ACCESSIBILITY & CONTROL
+
+AIblty includes calm mode, reduced motion, high contrast, step-by-step learning and simplified/pro learning modes. Anonymous learning analytics are optional and off by default.
+
+AIblty accounts are intended for users aged 13 and over. The five-year-old-simple teaching style describes the clarity of the explanations, not the minimum account age.
+
+Privacy: https://aiblty.com/privacy.html
+Account deletion: https://aiblty.com/delete-account.html
