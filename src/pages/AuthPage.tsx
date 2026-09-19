@@ -96,6 +96,11 @@ const AuthPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 flex items-center justify-center p-4">
+      <Seo
+        title="Sign In or Create Your Free Account | AIblty"
+        description="Create your free AIblty account to start learning coding, AI, web, data and cybersecurity from zero — choose kids mode or adult mode at sign up."
+        path="/auth"
+      />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

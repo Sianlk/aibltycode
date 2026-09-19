@@ -46,7 +46,7 @@ const ModulePage = forwardRef<HTMLDivElement>((_, ref) => {
     <div ref={ref} className="min-h-screen bg-background stars-bg">
       <Seo
         title={`${info.title} | AIblty`}
-        description={`${info.description ?? `Master ${info.title} step by step.`} ${lessons.length} beginner-to-expert lessons with drills, quizzes and games.`}
+        description={`Learn ${info.title} from zero. ${lessons.length} beginner-to-expert lessons with guided drills, quizzes, mnemonics and games on AIblty.`}
         path={`/module/${moduleId}`}
       />
       <Header />

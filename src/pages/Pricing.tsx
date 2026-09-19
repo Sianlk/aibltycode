@@ -93,6 +93,11 @@ export default function Pricing() {
 
   return (
     <div className="min-h-screen bg-background">
+      <Seo
+        title="Pricing — Free, Pro & Team Plans | AIblty"
+        description="Compare AIblty plans: start free with 3 modules and 5 games, or unlock every module, game, spaced repetition and offline mode with Pro."
+        path="/pricing"
+      />
       <Header />
 
       <main className="container mx-auto px-4 pt-24 pb-12">
