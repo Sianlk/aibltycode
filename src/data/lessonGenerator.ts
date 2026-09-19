@@ -108,6 +108,8 @@ function inferCategory(moduleId: string): string {
     "animation-motion": "Animation & Motion",
     "software-tools": "Professional Software & IT",
     "project-delivery": "Project Delivery",
+    "degree-computing-core": "Level 5 Computing Degree Core",
+    "cad-bim": "CAD & BIM",
   };
   return map[moduleId] || "General";
 }
