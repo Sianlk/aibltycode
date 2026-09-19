@@ -135,6 +135,48 @@ const ModulePage = forwardRef<HTMLDivElement>((_, ref) => {
             );
           })}
         </motion.div>
+
+        {/* Practice games unlocked by this course */}
+        {moduleGames.length > 0 && (
+          <motion.section
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="mt-10"
+          >
+            <h2 className="text-xl font-bold mb-1">Practice games</h2>
+            <p className="text-sm text-muted-foreground mb-4">
+              Play what you have just learned. More games open as you complete lessons.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {moduleGames.map((gameId) => {
+                const isUnlocked = unlockedGames.includes(gameId);
+                return (
+                  <Button
+                    key={gameId}
+                    size="sm"
+                    variant={isUnlocked ? "secondary" : "outline"}
+                    disabled={!isUnlocked}
+                    onClick={() => navigate(`/game/${gameId}`)}
+                  >
+                    {!isUnlocked && <Lock className="mr-1 h-3 w-3" />}
+                    {gameId.replace(/-/g, " ")}
+                  </Button>
+                );
+              })}
+            </div>
+            {nextUnlock !== null && (
+              <p className="mt-2 text-xs text-muted-foreground">
+                Next game unlocks at {nextUnlock} completed lessons.
+              </p>
+            )}
+            {zoneId && (
+              <Button variant="ghost" className="mt-3" onClick={() => navigate(`/zone/${zoneId}`)}>
+                Explore the full zone →
+              </Button>
+            )}
+          </motion.section>
+        )}
       </main>
     </div>
   );
