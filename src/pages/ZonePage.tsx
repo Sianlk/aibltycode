@@ -32,6 +32,14 @@ const gameIconMap: Record<string, { icon: "typing" | "ordering" | "speed"; emoji
   'game-dev': { icon: 'speed', emoji: '🎮' },
   'draw-io': { icon: 'ordering', emoji: '📐' },
   'plantuml': { icon: 'typing', emoji: '📝' },
+  'chatbot-builder': { icon: 'typing', emoji: '🤖' },
+  'html-css': { icon: 'typing', emoji: '🎨' },
+  'pc-builder': { icon: 'ordering', emoji: '🖥️' },
+  'subnetting': { icon: 'typing', emoji: '🌐' },
+  'network-protocols': { icon: 'ordering', emoji: '📡' },
+  'puzzle-builder': { icon: 'ordering', emoji: '🧩' },
+  'lmc-simulator': { icon: 'typing', emoji: '👨‍💼' },
+  'number-systems': { icon: 'typing', emoji: '🔢' },
 };
 
 export default function ZonePage() {
