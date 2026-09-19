@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
 import {
   getAnalyticsSummary,
@@ -14,7 +15,7 @@ import { useGame } from "@/contexts/GameContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useSubscription } from "@/hooks/useSubscription";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Volume2, VolumeX, Zap, Gamepad2, Shield, Eye, Brain, Accessibility, Crown, User, CreditCard } from "lucide-react";
+import { ArrowLeft, Volume2, VolumeX, Zap, Gamepad2, Shield, Eye, Brain, Accessibility, Crown, User, CreditCard, Trash2 } from "lucide-react";
 
 export default function Settings() {
   const navigate = useNavigate();
@@ -35,6 +36,7 @@ export default function Settings() {
   };
 
   const [analyticsOn, setAnalyticsOn] = useState(() => hasConsent());
+  const [deletingAccount, setDeletingAccount] = useState(false);
   const [summary, setSummary] = useState(() => getAnalyticsSummary());
 
   const handleAnalyticsToggle = (enabled: boolean) => {
@@ -46,6 +48,30 @@ export default function Settings() {
   const handleClearAnalytics = () => {
     clearAnalyticsData();
     setSummary(getAnalyticsSummary());
+  };
+
+  const handleDeleteAccount = async () => {
+    if (!user) return;
+    const confirmation = window.prompt(
+      "This permanently deletes your AIblty account, learning progress and profile, and cancels active subscriptions. Type DELETE to continue."
+    );
+    if (confirmation !== "DELETE") return;
+
+    setDeletingAccount(true);
+    try {
+      const { error } = await supabase.functions.invoke("delete-account", { method: "POST" });
+      if (error) throw error;
+      clearAnalyticsData();
+      localStorage.removeItem("aibltycode-xp");
+      localStorage.removeItem("aibltycode-streak");
+      await supabase.auth.signOut();
+      navigate("/", { replace: true });
+    } catch (error) {
+      console.error("Account deletion failed", error);
+      window.alert("We could not delete the account automatically. Please use /delete-account.html or contact privacy@sianlk.com.");
+    } finally {
+      setDeletingAccount(false);
+    }
   };
 
   return (
@@ -318,7 +344,21 @@ export default function Settings() {
                   </div>
                 )}
 
-                <Button variant="outline" size="sm" onClick={() => window.open('/privacy.html', '_blank', 'noopener')}>View Privacy Policy</Button>
+                <div className="flex flex-wrap gap-2">
+                  <Button variant="outline" size="sm" onClick={() => window.open('/privacy.html', '_blank', 'noopener')}>View Privacy Policy</Button>
+                  <Button variant="outline" size="sm" onClick={() => window.open('/delete-account.html', '_blank', 'noopener')}>Account deletion help</Button>
+                </div>
+
+                <div className="rounded-lg border border-destructive/30 bg-destructive/5 p-4">
+                  <p className="font-medium text-foreground">Delete account and learning data</p>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    Permanently deletes your AIblty profile and learning data and cancels active subscriptions. Billing records that must be retained for legal, tax or fraud-prevention reasons may remain with the payment provider as explained in the privacy policy.
+                  </p>
+                  <Button variant="destructive" size="sm" className="mt-3" disabled={deletingAccount || !user} onClick={handleDeleteAccount}>
+                    <Trash2 className="mr-2 h-4 w-4" />
+                    {deletingAccount ? "Deleting…" : "Delete my account"}
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           </motion.div>
