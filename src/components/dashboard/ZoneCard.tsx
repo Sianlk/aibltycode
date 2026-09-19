@@ -11,10 +11,14 @@ interface ZoneCardProps {
   unlocked?: boolean;
   progress?: number;
   gamesCompleted?: number;
+  lessonsDone?: number;
+  lessonsTotal?: number;
+  unlockHint?: string;
+  onUnlockClick?: () => void;
 }
 
 export const ZoneCard = forwardRef<HTMLDivElement, ZoneCardProps>(
-  ({ zone, index, unlocked = true, progress = 0, gamesCompleted = 0 }, ref) => {
+  ({ zone, index, unlocked = true, progress = 0, gamesCompleted = 0, lessonsDone, lessonsTotal, unlockHint, onUnlockClick }, ref) => {
     const navigate = useNavigate();
     const { gameMode } = useGame();
     const isKidsMode = gameMode === "kid";
