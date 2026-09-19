@@ -54,18 +54,24 @@ export const ZoneCard = forwardRef<HTMLDivElement, ZoneCardProps>(
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: index * 0.1 }}
-        onClick={() => unlocked && navigate(`/zone/${zone.id}`)}
+        onClick={() => (unlocked ? navigate(`/zone/${zone.id}`) : onUnlockClick?.())}
         className={`
           relative rounded-2xl border-2 p-5 cursor-pointer transition-all duration-300
           ${bgGradients[zone.color as keyof typeof bgGradients]}
           ${colorClasses[zone.color as keyof typeof colorClasses]}
-          ${!unlocked ? 'opacity-60 cursor-not-allowed' : 'hover:scale-[1.02]'}
+          ${!unlocked ? 'opacity-70' : 'hover:scale-[1.02]'}
         `}
       >
         {/* Lock overlay for locked zones */}
         {!unlocked && (
-          <div className="absolute inset-0 bg-background/50 rounded-2xl flex items-center justify-center z-10">
-            <Lock className="w-8 h-8 text-muted-foreground" />
+          <div className="absolute inset-0 bg-background/70 rounded-2xl flex flex-col items-center justify-center gap-2 z-10 p-4 text-center">
+            <Lock className="w-7 h-7 text-muted-foreground" />
+            <p className="text-xs font-medium text-muted-foreground">
+              {unlockHint ?? 'Complete a lesson in one of its courses to open this zone'}
+            </p>
+            {onUnlockClick && (
+              <span className="text-xs font-semibold text-primary">Start that course →</span>
+            )}
           </div>
         )}
 
@@ -84,7 +90,11 @@ export const ZoneCard = forwardRef<HTMLDivElement, ZoneCardProps>(
         {/* Progress bar */}
         <div className="mb-3">
           <div className="flex justify-between text-xs text-muted-foreground mb-1">
-            <span>{gamesCompleted}/{games.length} games</span>
+            <span>
+              {lessonsTotal
+                ? `${lessonsDone ?? 0}/${lessonsTotal} lessons`
+                : `${gamesCompleted}/${games.length} games`}
+            </span>
             <span>{progress}%</span>
           </div>
           <div className="h-2 bg-muted rounded-full overflow-hidden">
