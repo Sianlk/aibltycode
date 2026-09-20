@@ -44,6 +44,7 @@ import { pythonTopics8, jsTopics8 } from "./topicKnowledge8";
 import { aiBuilderTopics9, marketingTopics9 } from "./topicKnowledge9";
 import { animationTopics10, softwareToolsTopics10, projectDeliveryTopics10 } from "./topicKnowledge10";
 import { expansionTopics } from "./moduleDataExpansion";
+import { legacyGapTopics } from "./legacyGapKnowledge";
 
 // Merged autonomic-mastery knowledge base: compact expert records expanded on demand
 // into the full 8-step cycle (hook -> definition -> analogy -> drill -> mnemonic ->
@@ -81,6 +82,7 @@ const masteryKnowledgeBase: Record<string, TopicRecord> = {
   ...softwareToolsTopics10,
   ...projectDeliveryTopics10,
   ...expansionTopics,
+  ...legacyGapTopics,
 };
 
 
