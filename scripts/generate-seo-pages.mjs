@@ -82,10 +82,13 @@ const head = (title, description, url, jsonLd) => `<!doctype html>
 <meta name="description" content="${esc(description)}">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <link rel="canonical" href="${url}">
-<meta property="og:type" content="website"><meta property="og:site_name" content="AIblty">
+<meta property="og:type" content="website"><meta property="og:site_name" content="AIblty"><meta property="og:locale" content="en_GB">
 <meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}">
-<meta property="og:url" content="${url}"><meta property="og:image" content="${canonical}/app-icon.png">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="${canonical}/app-icon.png">
+<meta property="og:url" content="${url}"><meta property="og:image" content="${canonical}/app-icon.png"><meta property="og:image:alt" content="${esc(title)}">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@AIblty">
+<meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(description)}">
+<meta name="twitter:image" content="${canonical}/app-icon.png"><meta name="twitter:image:alt" content="${esc(title)}">
+<link rel="icon" type="image/png" href="/favicon.png">
 <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
 <style>
 body{font-family:system-ui,-apple-system,sans-serif;max-width:1050px;margin:auto;padding:32px 20px;line-height:1.55;color:#0f172a}
@@ -161,13 +164,19 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://w
 fs.writeFileSync(path.join(publicDir, "sitemap.xml"), sitemap);
 
 fs.writeFileSync(path.join(publicDir, "robots.txt"),
-`User-agent: *
-Allow: /
-
-User-agent: Googlebot
+`User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: *
 Allow: /
 
 Sitemap: ${canonical}/sitemap.xml
