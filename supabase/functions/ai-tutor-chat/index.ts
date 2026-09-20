@@ -38,10 +38,10 @@ serve(async (req) => {
     console.log("Authenticated user:", userId);
 
     const { messages, isKidMode = false, currentTopic = '' } = await req.json();
-    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
+    const AI_API_KEY = Deno.env.get("AI_API_KEY");
     
-    if (!LOVABLE_API_KEY) {
-      throw new Error("LOVABLE_API_KEY is not configured");
+    if (!AI_API_KEY) {
+      throw new Error("AI_API_KEY is not configured");
     }
 
     const systemPrompt = isKidMode 
@@ -89,16 +89,16 @@ Format guidelines:
 - Bold key terms
 - Keep explanations focused but thorough`;
 
-    console.log("Calling Lovable AI with messages:", messages.length);
+    console.log("Calling configured AI provider with messages:", messages.length);
 
-    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+    const response = await fetch(`${(Deno.env.get("AI_BASE_URL") ?? "https://api.openai.com/v1").replace(/\\\/$/, "")}/chat/completions`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${LOVABLE_API_KEY}`,
+        Authorization: `Bearer ${AI_API_KEY}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "google/gemini-2.5-flash",
+        model: Deno.env.get("AI_MODEL") ?? "gpt-4o-mini",
         messages: [
           { role: "system", content: systemPrompt },
           ...messages,
