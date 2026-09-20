@@ -87,6 +87,7 @@ export const Header = forwardRef<HTMLDivElement>((_, ref) => {
             variant="ghost"
             size="icon"
             onClick={handleSoundToggle}
+            aria-label={soundEnabled ? "Mute sound" : "Unmute sound"}
             className="text-muted-foreground hover:text-foreground"
           >
             {soundEnabled ? (
@@ -102,6 +103,7 @@ export const Header = forwardRef<HTMLDivElement>((_, ref) => {
               variant="ghost"
               size="icon"
               onClick={() => navigate("/admin")}
+              aria-label="Admin dashboard"
               className="text-primary hover:text-primary/80"
               title="Admin Dashboard"
             >
@@ -114,6 +116,7 @@ export const Header = forwardRef<HTMLDivElement>((_, ref) => {
             variant="ghost"
             size="icon"
             onClick={() => navigate("/settings")}
+            aria-label="Settings"
             className="text-muted-foreground hover:text-foreground"
           >
             <Settings className="w-5 h-5" />
@@ -125,6 +128,7 @@ export const Header = forwardRef<HTMLDivElement>((_, ref) => {
               variant="outline"
               size="icon"
               onClick={() => navigate("/profile")}
+              aria-label="Your profile"
               className="rounded-full"
             >
               <User className="w-5 h-5" />
