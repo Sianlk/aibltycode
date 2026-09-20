@@ -28,6 +28,16 @@ export const moduleGameMap: Record<string, ModuleGameLink> = {
   "animation-motion": { zoneId: "motion-studio", games: ["html-css", "pattern", "flashcards"], unlockEvery: 3 },
   "software-tools": { zoneId: "office-tower", games: ["excel-master", "sql-query", "pc-builder", "subnetting", "network-protocols"], unlockEvery: 3 },
   "project-delivery": { zoneId: "dev-studio", games: ["project-planner", "use-case", "draw-io", "plantuml"], unlockEvery: 3 },
+  "early-digital-foundations": { zoneId: "logic-district", games: ["pattern", "ordering", "puzzle-builder", "pacman", "spaced-rep"], unlockEvery: 2 },
+  "digital-literacy-safety": { zoneId: "security-sector", games: ["cybersecurity", "flashcards", "spaced-rep", "ordering"], unlockEvery: 3 },
+  "databases-sql": { zoneId: "data-city", games: ["sql-query", "erd-builder", "ordering", "debugging"], unlockEvery: 3 },
+  "robotics-iot": { zoneId: "office-tower", games: ["pc-builder", "structure-builder", "pattern", "debugging"], unlockEvery: 3 },
+  "cloud-devops": { zoneId: "cloud-hub", games: ["system-design", "network-protocols", "subnetting", "debugging"], unlockEvery: 3 },
+  "ui-ux-product": { zoneId: "web-forge", games: ["html-css", "puzzle-builder", "project-planner", "flashcards"], unlockEvery: 3 },
+  "mobile-apps": { zoneId: "dev-studio", games: ["structure-builder", "debugging", "project-planner", "flashcards"], unlockEvery: 3 },
+  "data-bi": { zoneId: "data-city", games: ["excel-master", "graph-visualizer", "sql-query", "flashcards"], unlockEvery: 3 },
+  "research-computing": { zoneId: "algorithm-arcade", games: ["complexity-arcade", "graph-visualizer", "spaced-rep", "flashcards"], unlockEvery: 3 },
+  "tech-entrepreneurship": { zoneId: "office-tower", games: ["project-planner", "excel-master", "use-case", "flashcards"], unlockEvery: 3 },
 };
 
 export function getModuleGames(moduleId: string): string[] {
@@ -72,7 +82,7 @@ export function getZoneModules(zoneId: string): string[] {
 }
 
 /** Zones that are open before any lesson is completed, so a new learner can start. */
-export const starterZones = ["logic-district", "script-lab", "web-forge"];
+export const starterZones = ["logic-district", "script-lab", "web-forge", "security-sector"];
 
 export interface ZoneState {
   unlocked: boolean;
