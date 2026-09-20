@@ -2,6 +2,9 @@ name: Mobile Release & Google Play Publish
 
 on:
   push:
+    branches:
+      - main
+      - build/aibltycode-complete-2026-08-30
     tags:
       - 'v*'
   workflow_dispatch:
@@ -40,6 +43,7 @@ jobs:
       ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
       GOOGLE_PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
       ANDROID_VERSION_CODE: ${{ github.run_number }}
+      COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
     steps:
       - uses: actions/checkout@v6
 
@@ -51,11 +55,30 @@ jobs:
             echo "version_name=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
             echo "track=production" >> "$GITHUB_OUTPUT"
             echo "publish=true" >> "$GITHUB_OUTPUT"
-          else
+          elif [[ "${GITHUB_REF}" == "refs/heads/main" && "${COMMIT_MESSAGE}" == *"[play-release]"* ]]; then
+            echo "version_name=1.0.${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
+            echo "track=production" >> "$GITHUB_OUTPUT"
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+          elif [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
             echo "version_name=1.0.${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
             echo "track=${{ github.event.inputs.track || 'internal' }}" >> "$GITHUB_OUTPUT"
             echo "publish=${{ github.event.inputs.publish_android || 'false' }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "version_name=1.0.${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
+            echo "track=internal" >> "$GITHUB_OUTPUT"
+            echo "publish=false" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: Report credential readiness without exposing secrets
+        shell: bash
+        run: |
+          for name in VITE_SUPABASE_URL VITE_SUPABASE_PUBLISHABLE_KEY ANDROID_KEYSTORE_BASE64 ANDROID_KEYSTORE_PASSWORD ANDROID_KEY_ALIAS ANDROID_KEY_PASSWORD GOOGLE_PLAY_SERVICE_ACCOUNT_JSON; do
+            if [[ -n "${!name}" ]]; then
+              echo "$name=configured"
+            else
+              echo "$name=missing"
+            fi
+          done
 
       - name: Fail closed unless production build secrets exist
         shell: bash
@@ -147,9 +170,10 @@ jobs:
           track: ${{ steps.release.outputs.track }}
           status: completed
           inAppUpdatePriority: 2
+          whatsNewDirectory: play-store/whatsnew
 
   ios-verification:
-    if: github.event_name != 'push' && (github.event.inputs.platform == 'all' || github.event.inputs.platform == 'ios')
+    if: github.event_name == 'workflow_dispatch' && (github.event.inputs.platform == 'all' || github.event.inputs.platform == 'ios')
     runs-on: macos-latest
     env:
       VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
