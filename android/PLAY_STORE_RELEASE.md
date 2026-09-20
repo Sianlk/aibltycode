@@ -62,6 +62,6 @@ fastlane android release # production
 
 ## Notes
 
-- The release AAB bundles all web assets locally. It does **not** depend on the Lovable preview URL.
+- The release AAB bundles all web assets locally. It bundles all web assets locally and does not depend on any external site builder or preview service.
 - The service worker / PWA offline support remains active inside the WebView.
 - For iOS App Store release, run `npm run build:ios` and archive in Xcode.
