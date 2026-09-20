@@ -2,14 +2,11 @@
 const ALLOWED_ORIGINS = [
   "https://aiblty.com",
   "https://www.aiblty.com",
-  "https://aibltycode.lovable.app",
   "http://localhost:8080",
   "http://localhost:5173",
 ];
 
 const ALLOWED_ORIGIN_PATTERNS = [
-  /^https:\/\/[a-z0-9-]+\.lovable\.app$/i,
-  /^https:\/\/[a-z0-9-]+\.lovableproject\.com$/i,
   /^capacitor:\/\/localhost$/i,
   /^ionic:\/\/localhost$/i,
 ];
