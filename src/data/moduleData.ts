@@ -2,6 +2,7 @@
 // to ensure lesson registration always happens regardless of navigation path
 import { registerLessonMetadata } from "@/data/lessons";
 import { extraModuleLessons, extraModuleInfo, extraModuleDescriptions } from "@/data/moduleDataExtra";
+import { expansionModuleLessons, expansionModuleInfo, expansionModuleDescriptions } from "@/data/moduleDataExpansion";
 
 export const moduleLessons: Record<string, { id: string; title: string; description: string; icon: string; xpReward: number }[]> = {
   // ==================== JAVA / PROGRAMMING ====================
@@ -830,6 +831,7 @@ export const moduleLessons: Record<string, { id: string; title: string; descript
     { id: "serverless-functions", title: "Serverless Functions", description: "AWS Lambda, Vercel, Supabase", icon: "⚡", xpReward: 200 },
   ],
   ...extraModuleLessons,
+  ...expansionModuleLessons,
 };
 
 export const moduleInfo: Record<string, { title: string; icon: string }> = {
@@ -843,6 +845,7 @@ export const moduleInfo: Record<string, { title: string; icon: string }> = {
   "computer-systems": { title: "Computer Systems & Networking", icon: "🖥️" },
   "web-technologies": { title: "Web Technologies", icon: "🌐" },
   ...extraModuleInfo,
+  ...expansionModuleInfo,
 };
 
 export const moduleDescriptions: Record<string, string> = {
@@ -856,6 +859,7 @@ export const moduleDescriptions: Record<string, string> = {
   "computer-systems": "Hardware, operating systems, networking and architecture",
   "web-technologies": "HTML, CSS, APIs, hosting and modern web platforms",
   ...extraModuleDescriptions,
+  ...expansionModuleDescriptions,
 };
 
 // Register all lesson metadata at module load time for auto-generation fallback
