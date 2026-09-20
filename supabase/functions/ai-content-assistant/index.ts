@@ -60,7 +60,7 @@ Format as JSON with fields: title, description, lessons (array of {title, diffic
 Return the improved content in the same format.`;
     }
 
-    const response = await fetch(`${(Deno.env.get("AI_BASE_URL") ?? "https://api.openai.com/v1").replace(/\\\/$/, "")}/chat/completions`, {
+    const response = await fetch(`${(Deno.env.get("AI_BASE_URL") ?? "https://api.openai.com/v1").replace(/\/$/, "")}/chat/completions`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${AI_API_KEY}`,
