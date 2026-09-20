@@ -31,6 +31,7 @@ const CodeSandbox = React.lazy(() => import("./pages/CodeSandbox"));
 const AvatarPage = React.lazy(() => import("./pages/AvatarPage"));
 const InstallApp = React.lazy(() => import("./pages/InstallApp"));
 const LearningPath = React.lazy(() => import("./pages/LearningPath"));
+const AIBuilderStudio = React.lazy(() => import("./pages/AIBuilderStudio"));
 
 const queryClient = new QueryClient();
 
@@ -65,6 +66,7 @@ const App = () => (
                   <Route path="/game/:gameId" element={<ProtectedRoute><GamePage /></ProtectedRoute>} />
                   <Route path="/module/:moduleId" element={<ProtectedRoute><ModulePage /></ProtectedRoute>} />
                   <Route path="/zone/:zoneId" element={<ProtectedRoute><ZonePage /></ProtectedRoute>} />
+                  <Route path="/ai-studio" element={<ProtectedRoute><AIBuilderStudio /></ProtectedRoute>} />
                   <Route path="/lesson/:moduleId/:lessonId" element={<ProtectedRoute><LessonPage /></ProtectedRoute>} />
                   <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
                   <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
