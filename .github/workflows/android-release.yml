@@ -45,7 +45,7 @@ jobs:
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         run: |
           echo "$ANDROID_KEYSTORE_BASE64" | base64 -d > android/app/upload-keystore.jks
-          cat > android/keystore.properties <<EOF
+          cat > android/app/keystore.properties <<EOF
           storeFile=upload-keystore.jks
           storePassword=$ANDROID_KEYSTORE_PASSWORD
           keyAlias=$ANDROID_KEY_ALIAS
@@ -67,4 +67,4 @@ jobs:
 
       - name: Clean secrets
         if: always()
-        run: rm -f fastlane/google-play-key.json android/app/upload-keystore.jks android/keystore.properties
+        run: rm -f fastlane/google-play-key.json android/app/upload-keystore.jks android/app/keystore.properties
