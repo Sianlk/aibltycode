@@ -9,7 +9,7 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "typecheck": "tsc -p tsconfig.app.json --noEmit",
-    "test": "vitest run && node scripts/validate-curriculum.mjs",
+    "test": "vitest run && node scripts/validate-curriculum.mjs && npm run seo:validate",
     "test:unit": "vitest run",
     "curriculum:validate": "node scripts/validate-curriculum.mjs",
     "verify": "npm run test && npm run typecheck && npm run lint && npm run build",
@@ -24,6 +24,7 @@
     "build:android": "npm run build && npx cap sync android",
     "build:ios": "npm run build && npx cap sync ios",
     "seo:generate": "node scripts/generate-seo-pages.mjs",
+    "seo:validate": "node scripts/generate-seo-pages.mjs && node scripts/validate-seo.mjs",
     "prebuild": "npm run seo:generate"
   },
   "dependencies": {
