@@ -43,6 +43,7 @@ import { javaTopics7, systemsTopics7, mathsTopics7, cyberTopics7, aiTopics7, bus
 import { pythonTopics8, jsTopics8 } from "./topicKnowledge8";
 import { aiBuilderTopics9, marketingTopics9 } from "./topicKnowledge9";
 import { animationTopics10, softwareToolsTopics10, projectDeliveryTopics10 } from "./topicKnowledge10";
+import { expansionTopics } from "./moduleDataExpansion";
 
 // Merged autonomic-mastery knowledge base: compact expert records expanded on demand
 // into the full 8-step cycle (hook -> definition -> analogy -> drill -> mnemonic ->
@@ -79,6 +80,7 @@ const masteryKnowledgeBase: Record<string, TopicRecord> = {
   ...animationTopics10,
   ...softwareToolsTopics10,
   ...projectDeliveryTopics10,
+  ...expansionTopics,
 };
 
 
@@ -110,6 +112,16 @@ function inferCategory(moduleId: string): string {
     "game-development": "Game Development",
     "computer-systems": "Computer Systems",
     "web-technologies": "Web Technologies",
+    "early-digital-foundations": "Early Digital Foundations",
+    "digital-literacy-safety": "Digital Literacy & Safety",
+    "databases-sql": "Databases & SQL",
+    "robotics-iot": "Robotics & IoT",
+    "cloud-devops": "Cloud & DevOps",
+    "ui-ux-product": "UI/UX & Product Design",
+    "mobile-apps": "Mobile App Engineering",
+    "data-bi": "Data Analytics & BI",
+    "research-computing": "Research Computing",
+    "tech-entrepreneurship": "Technology Entrepreneurship",
   };
   return map[moduleId] || "General";
 }
