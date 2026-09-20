@@ -8,6 +8,7 @@ import { useProgress } from "@/hooks/useProgress";
 import { getLessonById, LessonStep } from "@/data/lessons";
 import { CheckCircle, XCircle, ArrowLeft } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
+import { trackLessonCompleted } from "@/lib/privacyAnalytics";
 
 // Fisher-Yates shuffle
 const shuffleArray = <T,>(array: T[]): T[] => {
@@ -120,7 +121,10 @@ export function InteractiveLesson({ lessonId: propLessonId, onComplete, onExit }
       
       // Save to database
       await completeLesson(moduleId, lessonId, finalScore);
-      
+
+      // Opt-in analytics only (no-op unless the learner granted consent)
+      trackLessonCompleted({ moduleId, lessonId, score: finalScore, stepCount: lesson.steps.length });
+
       if (onComplete) onComplete();
       else navigate(`/module/${moduleId}`);
     }

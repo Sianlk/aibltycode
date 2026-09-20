@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Android signing keystore & credentials (keep these private)
+android/app/upload-keystore.jks
+android/app/keystore.properties
+android/keystore.properties
+fastlane/google-play-key.json
+fastlane/*.p8
+fastlane/app_store_connect_api_key.json

@@ -1,81 +1,71 @@
-# Fastfile for AIBLTY Code
-default_platform(:ios)
+# Fastfile for AIblty (Capacitor Android release automation)
+# Requires: GOOGLE_PLAY_KEY_FILE (service account JSON), Android SDK + JDK 17,
+# and the upload keystore referenced by android/keystore.properties.
 
-before_all do
-  ensure_env_vars(
-    env_vars: ["EXPO_TOKEN"]
-  )
-end
-
-# gym is the Fastlane action for building iOS apps (alias for build_ios_app)
-platform :ios do
-  desc "Build and upload to TestFlight"
-  lane :beta do
-    setup_ci if ENV["CI"]
-    build_app_with_eas(
-      platform: "ios",
-      profile: "preview"
-    )
-    upload_to_testflight(
-      api_key_path: "fastlane/app_store_connect_api_key.json",
-      skip_waiting_for_build_processing: true
-    )
-    slack(
-      message: "✅ AIBLTY Code iOS beta build uploaded to TestFlight!",
-      success: true
-    ) if ENV["SLACK_URL"]
-  end
-
-  desc "Release to App Store"
-  lane :release do
-    gym(export_method: 'app-store') # build IPA
-    setup_ci if ENV["CI"]
-    build_app_with_eas(
-      platform: "ios",
-      profile: "production"
-    )
-    upload_to_app_store(
-      api_key_path: "fastlane/app_store_connect_api_key.json",
-      skip_screenshots: false,
-      screenshots_path: "fastlane/screenshots/ios",
-      metadata_path: "fastlane/metadata/ios",
-      submit_for_review: true,
-      automatic_release: false,
-      force: true
-    )
-  end
-end
+default_platform(:android)
 
 platform :android do
-  desc "Build and upload to Google Play Internal Testing"
-  lane :beta do
-    setup_ci if ENV["CI"]
-    build_app_with_eas(
-      platform: "android",
-      profile: "preview"
-    )
-    upload_to_play_store(
-      track: "internal",
-      aab: lane_context[SharedValues::GRADLE_AAB_OUTPUT_PATH]
+  desc "Build the web app and sync it into the Android project"
+  lane :prepare do
+    sh("cd .. && npm ci && npm run build && npx cap sync android")
+  end
+
+  desc "Build a signed release AAB"
+  lane :build_aab do
+    prepare
+    gradle(
+      project_dir: "android",
+      task: "bundle",
+      build_type: "Release"
     )
   end
 
-  desc "Release to Google Play Production"
-  lane :release do
-    gym(export_method: 'app-store') # build IPA
-    setup_ci if ENV["CI"]
-    build_app_with_eas(
-      platform: "android",
-      profile: "production"
+  desc "Upload to Google Play internal testing"
+  lane :beta do
+    build_aab
+    upload_to_play_store(
+      track: "internal",
+      aab: lane_context[SharedValues::GRADLE_AAB_OUTPUT_PATH],
+      release_status: "draft",
+      skip_upload_apk: true,
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
     )
+  end
+
+  desc "Promote the latest internal build to production"
+  lane :promote do
+    upload_to_play_store(
+      track: "internal",
+      track_promote_to: "production",
+      skip_upload_aab: true,
+      skip_upload_apk: true,
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+  end
+
+  desc "Build and release straight to production (staged 20% rollout)"
+  lane :release do
+    build_aab
     upload_to_play_store(
       track: "production",
+      aab: lane_context[SharedValues::GRADLE_AAB_OUTPUT_PATH],
+      rollout: "0.2",
+      metadata_path: "fastlane/metadata/android",
+      skip_upload_apk: true
+    )
+  end
+
+  desc "Upload store listing text, screenshots and feature graphic only"
+  lane :listing do
+    upload_to_play_store(
+      skip_upload_aab: true,
+      skip_upload_apk: true,
+      skip_upload_changelogs: false,
       metadata_path: "fastlane/metadata/android"
     )
   end
-end
-
-# Helper: build with EAS CLI
-def build_app_with_eas(platform:, profile:)
-  sh("npx eas-cli build --platform #{platform} --profile #{profile} --non-interactive --no-wait")
 end

@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
 import { Code2, Zap, Trophy, GraduationCap, Gamepad2, ArrowLeft } from 'lucide-react';
 import { z } from 'zod';
+import { Seo } from "@/components/seo/Seo";
 
 const authSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -17,6 +18,7 @@ const authSchema = z.object({
 });
 
 type UserMode = 'kid' | 'pro';
+type LearnerBand = 'early' | 'young' | 'adult';
 
 const AuthPage: React.FC = () => {
   const { user, signUp, signIn } = useAuth();
@@ -26,6 +28,8 @@ const AuthPage: React.FC = () => {
   const [displayName, setDisplayName] = useState('');
   const [loading, setLoading] = useState(false);
   const [selectedMode, setSelectedMode] = useState<UserMode | null>(null);
+  const [learnerBand, setLearnerBand] = useState<LearnerBand | null>(null);
+  const [guardianConsent, setGuardianConsent] = useState(false);
   const [showModeSelection, setShowModeSelection] = useState(false);
 
   useEffect(() => {
@@ -35,8 +39,13 @@ const AuthPage: React.FC = () => {
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!selectedMode) {
+    if (!selectedMode || !learnerBand) {
       setShowModeSelection(true);
+      return;
+    }
+
+    if ((learnerBand === 'early' || learnerBand === 'young') && !guardianConsent) {
+      toast.error('A parent or guardian must create and manage accounts for learners under 16.');
       return;
     }
 
@@ -49,6 +58,7 @@ const AuthPage: React.FC = () => {
       }
     }
     
+    localStorage.setItem('aibltycode-learner-band', learnerBand);
     setLoading(true);
     const { error } = await signUp(email, password, displayName, selectedMode);
     setLoading(false);
@@ -60,7 +70,7 @@ const AuthPage: React.FC = () => {
         toast.error(error.message);
       }
     } else {
-      toast.success('Account created! Welcome to AibiltyCode.');
+      toast.success('Account created! Welcome to AIblty.');
       navigate('/dashboard');
     }
   };
@@ -88,13 +98,26 @@ const AuthPage: React.FC = () => {
     }
   };
 
-  const handleModeSelect = (mode: UserMode) => {
+  const handleModeSelect = (band: LearnerBand, mode: UserMode) => {
+    setLearnerBand(band);
     setSelectedMode(mode);
+    setGuardianConsent(false);
     setShowModeSelection(false);
   };
 
+  const learnerLabel = learnerBand === 'early'
+    ? 'Early Learner (ages 5–7)'
+    : learnerBand === 'young'
+      ? 'Young Coder (ages 8–15)'
+      : 'Teen & Adult Learner (16+)';
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 flex items-center justify-center p-4">
+      <Seo
+        title="Sign In or Create Your Free Account | AIblty"
+        description="Create your free AIblty account to start learning coding, AI, web, data and cybersecurity from age 5 and from zero knowledge, with age-appropriate learner modes."
+        path="/auth"
+      />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -108,9 +131,9 @@ const AuthPage: React.FC = () => {
             className="inline-flex items-center gap-2 mb-4"
           >
             <Code2 className="h-10 w-10 text-primary" />
-            <span className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              AibiltyCode
-            </span>
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              Sign in to AIblty
+            </h1>
           </motion.div>
           <p className="text-muted-foreground">Master coding &amp; tech from scratch</p>
         </div>
@@ -164,37 +187,44 @@ const AuthPage: React.FC = () => {
                         <p className="text-sm text-muted-foreground">Choose the experience that fits you</p>
                       </div>
 
-                      <button
-                        onClick={() => handleModeSelect('kid')}
-                        className="w-full p-5 rounded-xl border-2 border-border bg-card hover:border-primary/60 hover:bg-primary/5 transition-all text-left flex items-start gap-4 group"
-                      >
-                        <div className="w-14 h-14 rounded-xl bg-warning/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                          <Gamepad2 className="w-7 h-7 text-warning" />
-                        </div>
-                        <div>
-                          <p className="font-bold text-foreground text-lg">Young Coder</p>
-                          <p className="text-sm text-muted-foreground mt-1">
-                            Ages 8–16 · Fun games, mascots, bright colours, and step-by-step adventures. 
-                            Parental controls included.
-                          </p>
-                        </div>
-                      </button>
-
-                      <button
-                        onClick={() => handleModeSelect('pro')}
-                        className="w-full p-5 rounded-xl border-2 border-border bg-card hover:border-primary/60 hover:bg-primary/5 transition-all text-left flex items-start gap-4 group"
-                      >
-                        <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                          <GraduationCap className="w-7 h-7 text-primary" />
-                        </div>
-                        <div>
-                          <p className="font-bold text-foreground text-lg">Adult Learner</p>
-                          <p className="text-sm text-muted-foreground mt-1">
-                            Ages 16+ · Professional interface, career-focused tracks, and industry tools. 
-                            Zero experience needed.
-                          </p>
-                        </div>
-                      </button>
+                      {[
+                        {
+                          band: 'early' as LearnerBand,
+                          mode: 'kid' as UserMode,
+                          title: 'Early Learner',
+                          copy: 'Ages 5–7 · Picture-led games, short guided steps, read-aloud support, repetition and mnemonics. Parent or guardian account required.',
+                          icon: <Gamepad2 className="w-7 h-7 text-warning" />,
+                        },
+                        {
+                          band: 'young' as LearnerBand,
+                          mode: 'kid' as UserMode,
+                          title: 'Young Coder',
+                          copy: 'Ages 8–15 · Games, mascots, projects and progressive mastery. Parent or guardian account required.',
+                          icon: <Gamepad2 className="w-7 h-7 text-warning" />,
+                        },
+                        {
+                          band: 'adult' as LearnerBand,
+                          mode: 'pro' as UserMode,
+                          title: 'Teen & Adult Learner',
+                          copy: 'Ages 16+ · Career and research pathways from complete beginner to advanced practice.',
+                          icon: <GraduationCap className="w-7 h-7 text-primary" />,
+                        },
+                      ].map((option) => (
+                        <button
+                          key={option.band}
+                          type="button"
+                          onClick={() => handleModeSelect(option.band, option.mode)}
+                          className="w-full p-5 rounded-xl border-2 border-border bg-card hover:border-primary/60 hover:bg-primary/5 transition-all text-left flex items-start gap-4 group"
+                        >
+                          <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                            {option.icon}
+                          </div>
+                          <div>
+                            <p className="font-bold text-foreground text-lg">{option.title}</p>
+                            <p className="text-sm text-muted-foreground mt-1">{option.copy}</p>
+                          </div>
+                        </button>
+                      ))}
 
                       <Button
                         variant="ghost"
@@ -243,7 +273,7 @@ const AuthPage: React.FC = () => {
                                 <GraduationCap className="w-5 h-5 text-primary" />
                               )}
                               <span className="text-sm font-medium text-foreground">
-                                {selectedMode === 'kid' ? 'Young Coder' : 'Adult Learner'}
+                                {learnerLabel}
                               </span>
                             </div>
                             <button
@@ -254,6 +284,21 @@ const AuthPage: React.FC = () => {
                               Change
                             </button>
                           </div>
+                        )}
+
+                        {(learnerBand === 'early' || learnerBand === 'young') && (
+                          <label className="flex items-start gap-3 rounded-lg border border-border p-3 text-sm text-muted-foreground">
+                            <input
+                              type="checkbox"
+                              checked={guardianConsent}
+                              onChange={(event) => setGuardianConsent(event.target.checked)}
+                              className="mt-1 h-4 w-4"
+                              required
+                            />
+                            <span>
+                              I am the learner's parent or legal guardian and consent to creating and managing this account.
+                            </span>
+                          </label>
                         )}
 
                         <Button type="submit" className="w-full" disabled={loading}>

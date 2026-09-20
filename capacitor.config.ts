@@ -19,10 +19,9 @@ const config: CapacitorConfig = {
   ios: {
     contentInset: 'automatic'
   },
-  server: {
-    url: "https://b0eb3ecf-036d-4ec9-a3b5-c5b82e54db6a.lovableproject.com?forceHideBadge=true",
-    cleartext: true
-  }
+  // server.url is intentionally left empty for release builds so the app serves
+  // bundled local assets. Enable live-reload only during local development via
+  // `npx cap run android --live-reload`.
 };
 
 export default config;

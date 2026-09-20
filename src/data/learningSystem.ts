@@ -412,6 +412,96 @@ export const gameMappings: GameMapping[] = [
   }
 ];
 
+// ============ EXTENDED ZONES & GAMES (new curriculum modules) ============
+const standardDifficulties = {
+  easy: { timeLimit: 120, complexity: 1, hintsAvailable: 4, penaltyMultiplier: 0.5, xpMultiplier: 1 },
+  medium: { timeLimit: 90, complexity: 2, hintsAvailable: 2, penaltyMultiplier: 0.75, xpMultiplier: 1.5 },
+  hard: { timeLimit: 60, complexity: 3, hintsAvailable: 1, penaltyMultiplier: 1, xpMultiplier: 2 },
+  expert: { timeLimit: 45, complexity: 4, hintsAvailable: 0, penaltyMultiplier: 1.5, xpMultiplier: 3 },
+};
+
+function makeMapping(
+  id: string,
+  name: string,
+  zone: string,
+  cognitiveGoal: GameMapping['cognitiveGoal'],
+  skills: string[]
+): GameMapping {
+  return {
+    id,
+    name,
+    zone,
+    cognitiveGoal,
+    skills,
+    difficulties: standardDifficulties,
+    automationMetrics: { speedTarget: 20, accuracyTarget: 90, noHintsRequired: false, streakRequired: 5 },
+  };
+}
+
+zones.push(
+  {
+    id: 'ai-forge',
+    name: 'AI Forge',
+    description: 'Build real chatbots, custom GPTs and AI agents — then test them live',
+    icon: '🤖',
+    color: 'accent',
+    gradient: 'from-accent/20 via-primary/10 to-secondary/5',
+    games: ['chatbot-builder', 'ai-data', 'flashcards', 'spaced-rep'],
+    skills: ['prompt-design', 'system-prompts', 'guardrails', 'rag', 'agents', 'ai-auditing'],
+  },
+  {
+    id: 'script-lab',
+    name: 'Python Script Lab',
+    description: 'Type, debug and automate with Python until it is second nature',
+    icon: '🐍',
+    color: 'success',
+    gradient: 'from-success/20 via-primary/10 to-accent/5',
+    games: ['typing', 'debugging', 'pattern', 'ordering', 'puzzle-builder'],
+    skills: ['variables', 'loops', 'functions', 'data-structures', 'automation'],
+  },
+  {
+    id: 'web-forge',
+    name: 'Web Forge',
+    description: 'HTML, CSS, JavaScript and React built by hand, live in the browser',
+    icon: '🌐',
+    color: 'primary',
+    gradient: 'from-primary/20 via-secondary/10 to-success/5',
+    games: ['html-css', 'typing', 'puzzle-builder', 'debugging'],
+    skills: ['html', 'css', 'javascript', 'dom', 'react', 'typescript'],
+  },
+  {
+    id: 'motion-studio',
+    name: 'Motion Studio',
+    description: 'Animate interfaces, timing curves and motion graphics',
+    icon: '🎬',
+    color: 'secondary',
+    gradient: 'from-secondary/20 via-accent/10 to-primary/5',
+    games: ['html-css', 'pattern', 'flashcards'],
+    skills: ['keyframes', 'easing', 'transforms', 'timelines', 'storyboarding'],
+  },
+  {
+    id: 'office-tower',
+    name: 'Pro Tools Tower',
+    description: 'Excel, SAP, Cisco, hosting and hardware — the tools real jobs use',
+    icon: '🧰',
+    color: 'warning',
+    gradient: 'from-warning/20 via-primary/10 to-success/5',
+    games: ['excel-master', 'pc-builder', 'subnetting', 'network-protocols', 'sql-query'],
+    skills: ['formulas', 'macros', 'erp', 'cisco-ios', 'hosting', 'hardware'],
+  }
+);
+
+gameMappings.push(
+  makeMapping('chatbot-builder', 'Chatbot Builder Lab', 'ai-forge', 'transfer', ['prompt-design', 'system-prompts', 'guardrails']),
+  makeMapping('puzzle-builder', 'Code Puzzle Builder', 'script-lab', 'procedural', ['functions', 'data-structures']),
+  makeMapping('html-css', 'HTML & CSS Playground', 'web-forge', 'procedural', ['html', 'css', 'keyframes']),
+  makeMapping('pc-builder', 'PC Builder Lab', 'office-tower', 'problem-solving', ['hardware']),
+  makeMapping('subnetting', 'IP Subnetting', 'office-tower', 'problem-solving', ['cisco-ios', 'hosting']),
+  makeMapping('network-protocols', 'Network Protocols', 'office-tower', 'recall', ['cisco-ios']),
+  makeMapping('lmc-simulator', 'LMC Simulator', 'office-tower', 'procedural', ['hardware']),
+  makeMapping('number-systems', 'Number Systems', 'script-lab', 'recall', ['variables'])
+);
+
 // ============ LEVEL REQUIREMENTS ============
 export const levelRequirements: LevelRequirements[] = [
   { level: 'novice', minAccuracy: 0, minAttempts: 0, maxAvgSpeed: 999, streakRequired: 0, xpRequired: 0 },
