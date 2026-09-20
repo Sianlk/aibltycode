@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { toast } from 'sonner';
+import { enqueue, flushQueue, isOnline, queuedLessonCompletions, type QueuedWrite } from '@/lib/offlineQueue';
 
 interface UserProgress {
   lessonId: string;
@@ -16,6 +17,22 @@ interface GameScore {
   score: number;
   timeTaken?: number;
   accuracy?: number;
+}
+
+/** Overlay locally queued (not yet synced) completions on server progress. */
+function mergeQueued(serverProgress: UserProgress[]): UserProgress[] {
+  const queued = queuedLessonCompletions();
+  if (queued.length === 0) return serverProgress;
+  const merged = [...serverProgress];
+  for (const q of queued) {
+    const idx = merged.findIndex((p) => p.lessonId === q.lessonId);
+    if (idx >= 0) {
+      merged[idx] = { ...merged[idx], completed: true, score: Math.max(merged[idx].score, q.score) };
+    } else {
+      merged.push({ lessonId: q.lessonId, moduleId: q.moduleId, completed: true, score: q.score, attempts: 1 });
+    }
+  }
+  return merged;
 }
 
 export function useProgress() {
@@ -42,15 +59,17 @@ export function useProgress() {
         throw error;
       }
 
-      setProgress(data?.map((p: any) => ({
+      setProgress(mergeQueued(data?.map((p: any) => ({
         lessonId: p.lesson_key || '',
         moduleId: p.module_key || '',
         completed: p.completed || false,
         score: p.score || 0,
         attempts: p.attempts || 0,
-      })) || []);
+      })) || []));
     } catch (err) {
+      // Offline or transient failure: still show anything completed locally.
       console.error('Error fetching progress:', err);
+      setProgress((prev) => mergeQueued(prev));
     } finally {
       setLoading(false);
     }
@@ -60,14 +79,12 @@ export function useProgress() {
     fetchProgress();
   }, [fetchProgress]);
 
-  // Complete a lesson
-  const completeLesson = useCallback(async (moduleId: string, lessonId: string, score: number = 100) => {
-    if (!user) {
-      toast.error('Please sign in to save progress');
-      return;
-    }
+  // Push a completion to the backend. Throws when it cannot be saved so the
+  // caller can queue it for a later retry.
+  const syncLessonCompletion = useCallback(async (moduleId: string, lessonId: string, score: number = 100) => {
+    if (!user) throw new Error('not-authenticated');
 
-    try {
+    {
       // Check if progress exists
       const { data: existing, error: fetchError } = await supabase
         .from('user_progress')
@@ -111,8 +128,7 @@ export function useProgress() {
 
       if (result.error) {
         console.error('Save progress error:', result.error);
-        toast.error('Failed to save progress');
-        return;
+        throw result.error;
       }
 
       // Update profile XP
@@ -146,13 +162,57 @@ export function useProgress() {
           .eq('user_id', user.id);
       }
 
+    }
+  }, [user]);
+
+  // Replay anything saved while offline.
+  const flushPending = useCallback(async () => {
+    if (!user || !isOnline()) return;
+    const flushed = await flushQueue(async (item: QueuedWrite) => {
+      if (item.kind === 'lesson') {
+        await syncLessonCompletion(item.moduleId, item.lessonId, item.score);
+      }
+    });
+    if (flushed > 0) {
+      toast.success(`Synced ${flushed} offline ${flushed === 1 ? 'result' : 'results'}`);
+      await fetchProgress();
+    }
+  }, [user, syncLessonCompletion, fetchProgress]);
+
+  useEffect(() => {
+    flushPending();
+    const onOnline = () => flushPending();
+    window.addEventListener('online', onOnline);
+    return () => window.removeEventListener('online', onOnline);
+  }, [flushPending]);
+
+  // Complete a lesson — saves online, queues locally when offline.
+  const completeLesson = useCallback(async (moduleId: string, lessonId: string, score: number = 100) => {
+    if (!user) {
+      toast.error('Please sign in to save progress');
+      return;
+    }
+
+    const queueLocally = () => {
+      enqueue({ kind: 'lesson', moduleId, lessonId, score, at: Date.now() });
+      setProgress((prev) => mergeQueued(prev));
+      toast.success('Saved offline — will sync when you reconnect');
+    };
+
+    if (!isOnline()) {
+      queueLocally();
+      return;
+    }
+
+    try {
+      await syncLessonCompletion(moduleId, lessonId, score);
       toast.success('Progress saved!');
       await fetchProgress();
     } catch (err) {
       console.error('Error saving progress:', err);
-      toast.error('Failed to save progress');
+      queueLocally();
     }
-  }, [user, fetchProgress]);
+  }, [user, syncLessonCompletion, fetchProgress]);
 
   // Save game score
   const saveGameScore = useCallback(async (gameScore: GameScore) => {
