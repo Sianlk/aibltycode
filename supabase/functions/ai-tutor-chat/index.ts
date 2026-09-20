@@ -38,10 +38,10 @@ serve(async (req) => {
     console.log("Authenticated user:", userId);
 
     const { messages, isKidMode = false, currentTopic = '' } = await req.json();
-    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
+    const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
     
-    if (!LOVABLE_API_KEY) {
-      throw new Error("LOVABLE_API_KEY is not configured");
+    if (!OPENAI_API_KEY) {
+      throw new Error("OPENAI_API_KEY is not configured");
     }
 
     const systemPrompt = isKidMode 
@@ -89,16 +89,16 @@ Format guidelines:
 - Bold key terms
 - Keep explanations focused but thorough`;
 
-    console.log("Calling Lovable AI with messages:", messages.length);
+    console.log("Calling configured AI provider with messages:", messages.length);
 
-    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${LOVABLE_API_KEY}`,
+        Authorization: `Bearer ${OPENAI_API_KEY}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "google/gemini-2.5-flash",
+        model: Deno.env.get("OPENAI_MODEL") ?? "gpt-4o-mini",
         messages: [
           { role: "system", content: systemPrompt },
           ...messages,
@@ -109,7 +109,7 @@ Format guidelines:
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error("AI gateway error:", response.status, errorText);
+      console.error("AI provider error:", response.status, errorText);
       
       if (response.status === 429) {
         return new Response(JSON.stringify({ error: "Too many requests. Please wait a moment and try again." }), {
@@ -118,7 +118,7 @@ Format guidelines:
         });
       }
       if (response.status === 402) {
-        return new Response(JSON.stringify({ error: "AI credits exhausted. Please add more credits to continue." }), {
+        return new Response(JSON.stringify({ error: "AI quota is unavailable. Please try again later." }), {
           status: 402,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
