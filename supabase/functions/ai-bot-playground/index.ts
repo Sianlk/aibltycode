@@ -2,7 +2,8 @@ import { buildCorsHeaders } from "../_shared/cors.ts";
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
 
-const MODEL = "google/gemini-2.5-flash";
+const MODEL = Deno.env.get("AI_MODEL") ?? "gpt-4o-mini";
+const AI_BASE_URL = (Deno.env.get("AI_BASE_URL") ?? "https://api.openai.com/v1").replace(/\\\/$/, "");
 const MAX_PROMPT_CHARS = 4000;
 
 serve(async (req) => {
@@ -34,8 +35,8 @@ serve(async (req) => {
       return json({ error: "Unauthorized" }, 401);
     }
 
-    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
-    if (!LOVABLE_API_KEY) {
+    const AI_API_KEY = Deno.env.get("AI_API_KEY");
+    if (!AI_API_KEY) {
       return json({ error: "AI is not configured" }, 500);
     }
 
@@ -87,10 +88,10 @@ serve(async (req) => {
       ];
     }
 
-    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+    const response = await fetch(`${AI_BASE_URL}/chat/completions`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${LOVABLE_API_KEY}`,
+        Authorization: `Bearer ${AI_API_KEY}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ model: MODEL, messages }),
