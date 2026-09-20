@@ -1,0 +1,30 @@
+Build practical technology skills from absolute zero with AIblty — an interactive learning platform for teens aged 13+ and adults.
+
+LEARN BY DOING
+AIblty combines plain-English explanations with guided practice, interactive challenges, memory hooks, retrieval practice, teach-back, fast recall and spaced repetition. The goal is not simply to recognise terminology: you learn to explain, build, verify and apply each concept.
+
+18 MASTERY TRACKS AND 1,200+ STRUCTURED TOPICS
+Learn Java, Python, JavaScript, HTML/CSS, systems analysis, maths for computing, cybersecurity, AI and data science, AI agents and RAG, business systems, game development, computer systems, networking and Cisco, databases and SQL, cloud and infrastructure, digital marketing and SEO, professional project delivery, degree computing core, CAD and BIM.
+
+30+ INTERACTIVE LEARNING TOOLS
+Practise through code typing, debugging, SQL exercises, networking activities, web playgrounds, simulators, recall games, quizzes and project-style challenges.
+
+BUILT FOR RETENTION
+Lessons use simple definitions, jargon busters, everyday mental models, mnemonics, guided practice, no-peeking retrieval, simple-language teach-back, 60-second recall, professional transfer and spaced review.
+
+FROM BEGINNER TO PROFESSIONAL APPLICATION
+Start with no assumed technical knowledge. Progress through foundations, practical labs and failure-mode checks into degree-style evidence, workplace application and expert-level thinking.
+
+AI TUTOR
+Ask questions and get extra explanations while learning. AIblty supports learning and practice while encouraging users to verify important professional decisions.
+
+PROGRESS THAT GUIDES YOUR NEXT STEP
+Track XP, streaks, achievements, mastery, due reviews and progress across the curriculum.
+
+WORKS ACROSS DEVICES
+Use AIblty on supported Android devices and on the web. Core web learning assets support installable, offline-capable study where available.
+
+AUDIENCE
+AIblty accounts are designed for users aged 13 and over. Simple teaching modes use child-simple explanations as a learning technique for any age; AIblty is not marketed as an under-13 children's app.
+
+Start from zero and build real, demonstrable technology skills.
