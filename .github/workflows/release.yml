@@ -6,7 +6,6 @@ on:
       - 'v*'
 
 permissions:
-  releases: write
   contents: write
 
 jobs:
@@ -20,14 +19,14 @@ jobs:
 
       - name: Extract version
         id: version
-        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> "$GITHUB_OUTPUT"
 
       - name: Generate release notes
         id: notes
         run: |
-          echo "NOTES<<EOF" >> $GITHUB_OUTPUT
-          git log --pretty=format:"- %s" $(git describe --tags --abbrev=0 HEAD^)..HEAD 2>/dev/null || echo "- Initial release" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          echo "NOTES<<EOF" >> "$GITHUB_OUTPUT"
+          git log --pretty=format:"- %s" $(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || git rev-list --max-parents=0 HEAD)..HEAD >> "$GITHUB_OUTPUT" || true
+          echo "EOF" >> "$GITHUB_OUTPUT"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -35,16 +34,9 @@ jobs:
           name: Release ${{ steps.version.outputs.VERSION }}
           body: |
             ## What's Changed
-
             ${{ steps.notes.outputs.NOTES }}
 
-            ## Installation
-
-            **iOS**: Available on App Store Connect (TestFlight → Production)
-            **Android**: Available on Google Play Console (Internal → Production)
-            **Backend**: Docker image tagged `${{ steps.version.outputs.VERSION }}`
-
-            See [CHANGELOG.md](CHANGELOG.md) for full details.
+            Web, Android and iOS release artifacts are produced by the mobile/store build workflow when release credentials are configured.
           draft: false
           prerelease: ${{ contains(github.ref, '-rc') || contains(github.ref, '-beta') || contains(github.ref, '-alpha') }}
           generate_release_notes: true

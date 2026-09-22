@@ -1,0 +1,8 @@
+/build/*
+!/build/.npmkeep
+
+# Release signing material must stay local / in CI secrets
+keystore.properties
+upload-keystore.jks
+*.jks
+*.keystore

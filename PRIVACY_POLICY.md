@@ -1,72 +1,58 @@
-# Privacy Policy — AIBLTY Code
+# Privacy Policy — AIblty / AIBLTYCODE
 
-**Effective Date:** April 4, 2026
-**Last Updated:** April 4, 2026
+**Last updated: 19 September 2026**
 
-## 1. Introduction
-AIBLTY Code ("we", "our", "us") by Sianlk Ltd is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our AIBLTY Code application.
+AIblty / AIBLTYCODE is a technology learning platform operated by Sianlk. This policy explains how personal data is used for accounts, learning progress, subscriptions, optional AI features and service security.
 
-## 2. Information We Collect
-### 2.1 Information You Provide
-- Account information (email address, name, profile picture)
-- AI queries and conversations within the developer tools domain
-- User-generated content and preferences
+## 1. Data we process
 
-### 2.2 Automatically Collected
-- Usage analytics (feature usage, session duration, crash reports)
-- Device information (OS version, device model, app version)
-- Performance metrics (anonymised AI response times)
+- **Account data:** email address, authentication identifiers and profile information you choose to provide.
+- **Learning data:** lesson progress, XP, streaks, badges, skill/review state and multiplayer participation linked to your account.
+- **Subscription data:** subscription/customer identifiers and status. Payment card details are processed by Stripe and are not stored by AIblty.
+- **Optional AI interactions:** content needed to answer a tutor/content-assistant request may be sent to the configured AI service provider.
+- **Optional analytics:** anonymous learning analytics are off by default. When enabled, limited completion/return events are recorded under an anonymous identifier and can be deleted in Settings.
+- **Device/app data:** limited technical data may be processed by hosting, authentication, security or error-monitoring providers to operate and secure the service.
 
-### 2.3 We DO NOT Collect
-- Government IDs or financial details (processed by Stripe directly)
-- Location data without explicit consent
-- Contacts or photos unless you explicitly share them for AI analysis
+The current Android release requests internet access. It does not request contacts, precise location, SMS/call logs, microphone or camera permissions.
 
-## 3. How We Use Your Information
-- Provide and improve AIBLTY Code AI services in the developer tools domain
-- Personalise your experience and AI responses
-- Send service notifications (you can opt out)
-- Comply with legal obligations
+## 2. Why we use data
 
-## 4. AI Data Processing
-Your queries to our AI assistant are:
-- Processed securely via OpenAI/Anthropic with data processing agreements
-- Not used to train third-party models
-- Retained for 30 days for debugging, then permanently deleted
-- Never sold to third parties
+We process data to authenticate users, save and synchronise learning progress, provide subscriptions, run learning/gaming features, fulfil support and deletion requests, prevent abuse and improve reliability. We do not sell personal data.
 
-## 5. Data Sharing
-We share data only with:
-- **Service Providers**: OpenAI, Stripe, Sentry, DigitalOcean (under DPAs)
-- **Legal Requirements**: When required by law
-- **Business Transfers**: With your consent in case of acquisition
+## 3. Service providers
 
-## 6. Your Rights (GDPR/CCPA/PIPEDA)
-You have the right to:
-- Access your data (export at any time from Profile > Data)
-- Correct inaccurate data
-- Delete your account and all data
-- Opt out of marketing
-- Data portability (JSON format)
+AIblty uses Supabase for authentication/database services and Stripe for payments/subscriptions. Optional AI features may send the minimum content required to the configured AI provider. Providers process data under their own contractual and privacy obligations.
 
-**To exercise rights:** privacy@sianlk.com or in-app at Profile > Privacy
+## 4. Age and simplified learning
 
-## 7. Data Retention
-- Account data: Retained until deletion requested
-- AI conversations: 30 days
-- Analytics: 90 days (anonymised)
-- Backups: 7 days
+AIblty's learning design deliberately explains technical concepts in language simple enough for a five-year-old to understand, then progressively advances to degree, professional and expert material. That is a teaching method, not an account-age statement.
 
-## 8. Security
-We implement: TLS 1.3, AES-256 encryption at rest, SOC2-compliant infrastructure on DigitalOcean, and annual penetration testing.
+AIblty accounts are intended for users aged **13 or over** unless a separately configured parent/guardian-managed version is offered under applicable child/family rules.
 
-## 9. Children's Privacy
-AIBLTY Code is not intended for users under 13 (or 16 in the EU). We do not knowingly collect data from children.
+## 5. Retention
 
-## 10. Updates
-We notify you of material changes via email and in-app notification with 30 days notice.
+Account and learning data are retained while an account is active and deleted when the account is permanently deleted, subject to limited backups/provider retention. Payment/transaction records may be retained where required for tax, accounting, chargeback, fraud-prevention or other legal obligations.
 
-## 11. Contact
-**Sianlk Ltd**
-Email: privacy@sianlk.com
-Website: https://sianlk.com/privacy
+## 6. Account and data deletion
+
+Users can permanently delete their account inside the app at **Settings → Privacy → Delete my account**.
+
+A public deletion route is also available at:
+
+https://aiblty.com/delete-account.html
+
+Deletion cancels active AIblty subscriptions and deletes or anonymises the account, profile and associated learning records. Payment providers may separately retain records required by law.
+
+## 7. Security
+
+We use authenticated access controls, least-privilege database/service roles for privileged operations, HTTPS transport supplied by our hosting/services, secret separation and automated build/security checks. No online system can guarantee absolute security.
+
+## 8. Your rights
+
+Depending on your jurisdiction, you may have rights to access, correct, export, object to certain processing or delete personal data. Use the in-app controls or contact us to exercise a right.
+
+## 9. Contact
+
+Privacy enquiries and deletion requests: **privacy@sianlk.com**
+
+Public privacy policy: https://aiblty.com/privacy.html

@@ -1,102 +1,93 @@
-# AIblty - Store Listing Assets
+# AIblty — Google Play Store Listing
 
-## App Name
-AIblty - Master Tech Skills
+## App name
+AIblty — Master Tech Skills
 
-## Short Description (80 chars)
-Learn Java, AI, Cybersecurity, Web Dev & more through interactive coding games.
+## Short description
+Learn coding, AI, cyber, web, cloud, data, CAD & more through active practice.
 
-## Full Description (4000 chars max)
-Master technology skills through play with AIblty — the complete tech learning platform featuring 9 mastery courses and 850+ interactive lessons.
+## Full description
+Build practical technology skills from absolute zero with AIblty — an interactive learning platform designed for teens aged 13+ and adults who want to progress from beginner foundations to degree, workplace and expert-level application.
 
-🎮 LEARN BY PLAYING
-Forget boring tutorials. AIblty turns complex tech concepts into engaging games, typing challenges, and interactive quizzes. Build real skills through hands-on practice.
+### Learn by doing
+AIblty combines plain-English explanations with guided practice, interactive challenges, memory hooks, retrieval practice, teach-back, fast recall and spaced repetition. The goal is not just to recognise terminology — it is to explain, build, verify and apply each concept.
 
-📚 9 MASTERY COURSES
-• Java Programming — From basics to Spring Boot, Design Patterns & Concurrency
-• Systems Analysis — SDLC, Agile, UML, DevOps, Cloud & Microservices
-• Maths for Computing — Number Systems, Logic, Probability, Graph Theory & Big-O
-• Cybersecurity — CompTIA Security+, Pen Testing, SOC, SIEM & Zero Trust
-• AI & Data Science — NLP, Computer Vision, Robotics, MLOps & Spark
-• Business Systems — SaaS, AWS (Full Suite), ERP, Digital Marketing & DevOps
-• Game Development — 3D Modelling, Physics, AI, Architecture & Animation
-• Computer Systems — Hardware, LMC, OS, Networking & Subnetting
-• Web Technologies — HTML, CSS, JS, React, Next.js, PWA, SEO & APIs
+### 18 mastery tracks and 1,200+ structured topics
+The curriculum covers:
+- Java programming
+- Python programming
+- JavaScript and modern web development
+- HTML and CSS
+- Systems analysis
+- Mathematics for computing
+- Cybersecurity
+- AI and data science
+- AI agents, RAG, evaluation and monitoring
+- Business and enterprise systems
+- Game development
+- Computer systems and hardware
+- Networking, Cisco and systems administration
+- Databases and SQL
+- Cloud, containers, CI/CD and infrastructure
+- Digital marketing, analytics and SEO
+- Professional project delivery
+- Degree computing core, CAD and BIM
 
-🕹️ 25+ INTERACTIVE GAMES
-Code Typing, Debugging, SQL Queries, ERD Builder, PC Builder, Pattern Recognition, HTML/CSS Playground, LMC Simulator, Network Protocols, Graph Visualizer, and many more.
+### 30+ interactive learning tools
+Practise through code typing, debugging, SQL exercises, architecture and networking activities, web playgrounds, simulators, recall games, quizzes and project-style challenges.
 
-🤖 AI TUTOR
-Get instant help from an AI-powered coding tutor. Ask questions, get explanations, and receive personalized guidance as you learn.
+### Designed for genuine retention
+Every routed lesson is reinforced with:
+- a simple definition and jargon buster
+- an everyday mental model or visual anchor
+- a mnemonic or memory hook
+- guided hands-on practice
+- no-peeking retrieval
+- Feynman-style teach-back in simple language
+- a 60-second recall check
+- a professional-transfer task
+- spaced review based on recall quality
 
-⚔️ MULTIPLAYER BATTLES
-Challenge friends in real-time coding battles. Climb the leaderboard and prove your skills.
+### AI tutor and learning support
+Use the in-app tutor to ask questions and get additional explanations. AIblty is designed to support learning, not replace your own judgement or professional verification.
 
-🏆 GAMIFICATION
-• XP & levelling system
-• Daily challenges & streaks
-• Achievement badges
-• Avatar customization
-• Leaderboards
+### Progress and motivation
+Track XP, streaks, achievements, mastery, due reviews and learning progress across the curriculum.
 
-👨‍👩‍👧 KID MODE
-A special mode with simplified language and fun emojis, perfect for young learners getting started with coding.
+### Works across devices
+Use AIblty on supported Android devices and on the web. Core web learning assets can be installed for offline-capable study where supported.
 
-📱 WORKS EVERYWHERE
-Install on your phone, tablet, or desktop. Works offline after installation.
+### Audience
+AIblty accounts are designed for users aged 13 and over. “Simple” teaching modes use child-simple explanations as a learning technique for any age; the app is not marketed as an under-13 children’s app.
 
-Start your journey from absolute beginner to professional tech expert — all through the power of play.
+Start with no assumed technical knowledge and build toward real, demonstrable technology skills.
 
 ## Category
 Education
 
-## Tags/Keywords
-coding, programming, learn to code, java, cybersecurity, AI, data science, web development, computer science, education, games, interactive learning, coding games, tech skills, CompTIA, AWS, React, SQL
+## Target audience
+- Teens aged 13–17
+- Adults 18+
+- Do not select under-13 target groups unless the shipped product and data practices are intentionally changed to comply with Google Play Families requirements.
 
-## Content Rating
-Everyone / 4+
+## Privacy and support
+- Privacy policy: https://aiblty.com/privacy.html
+- Account deletion: https://aiblty.com/delete-account.html
+- Support: https://aiblty.com/support.html
 
-## Screenshots Needed
-1. Landing page (hero section)
-2. Dashboard with modules
-3. Game in action (HTML/CSS Playground)
-4. AI Tutor chat
-5. Lesson with typing challenge
-6. Leaderboard
-7. Module page with lesson list
-8. Multiplayer battle lobby
+## Package
+`com.aibltycode.app`
 
-## App Icon
-- 1024x1024: src/assets/app-icon-1024.png
-- Use Android Studio's Image Asset tool to generate mipmap sizes from the 1024px icon
-- Use Xcode's Asset Catalog for iOS icon sets
+## Store assets in repository
+- App icon: `src/assets/app-icon-1024.png`
+- Feature graphic: `assets/graphics/feature-graphic.svg`
+- Android screenshots: `fastlane/screenshots/android/en-US/`
 
-## Build Instructions
-
-### Android (.aab for Play Store)
-```bash
-git pull
-npm install
-npm run build
-npx cap sync android
-# Open in Android Studio:
-npx cap open android
-# Build > Generate Signed Bundle / APK > Android App Bundle
-```
-
-### iOS (.ipa for App Store)
-```bash
-git pull
-npm install
-npm run build
-npx cap sync ios
-# Open in Xcode:
-npx cap open ios
-# Product > Archive > Distribute App
-```
-
-## Privacy Policy URL
-(Required for store submission - create and host at your domain)
-
-## Support URL
-(Required for store submission - create and host at your domain)
+## Play Console declarations
+Complete declarations from the shipped build, not from assumptions:
+- Ads: current source contains no ad SDK; declare “No” unless that changes.
+- App access: provide reviewer credentials if protected learning content requires sign-in.
+- Data safety: disclose account/profile/learning progress, subscription identifiers, optional AI request content and diagnostics actually enabled.
+- Account deletion URL: https://aiblty.com/delete-account.html
+- Content rating: complete the IARC questionnaire from the actual app features.
+- Target audience: 13+ only unless Families-policy compliance is intentionally implemented.

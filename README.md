@@ -1,115 +1,113 @@
-# AIBLTY Code — AI coding assistant
+# AIBLTYCODE
 
-![Version](https://img.shields.io/badge/version-1.1.0-blue?style=flat-square)
-![Platform](https://img.shields.io/badge/platform-iOS%20%7C%20Android%20%7C%20Web-6366F1.svg?style=flat-square)
-![AI](https://img.shields.io/badge/AI-GPT--4o%20%7C%20Claude-%238B5CF6?style=flat-square)
-![Deploy](https://img.shields.io/badge/deploy-DigitalOcean-0080FF?style=flat-square&logo=digitalocean)
-![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)
-[![CI](https://github.com/Sianlk/aibltycode/workflows/backend-ci/badge.svg)](https://github.com/Sianlk/aibltycode/actions)
+AIBLTYCODE is a gamified, zero-to-expert technology learning platform for web, mobile and installable PWA use. The canonical application is the Lovable-connected Vite/React codebase in this repository, backed by Supabase and packaged for iOS/Android with Capacitor.
 
-> **AI coding assistant** — Built by [Sianlk](https://sianlk.com) using proprietary AI workforce technology.
+## Product scope
 
-## Features
-`AI Code Complete` `Bug Detection` `Code Review` `Docs Generator` `Terminal AI`
+The curriculum registry currently enforces 16 major learning modules and more than 1,000 lesson metadata entries. Subjects include:
 
-## Tech Stack
+- Java, Python, JavaScript, TypeScript and modern web development
+- HTML, CSS, React, APIs, databases and deployment
+- computer hardware, operating systems, networking and architecture
+- Cisco IOS, switching, routing, Packet Tracer and legacy-system integration
+- cybersecurity and secure design
+- AI/data science, LLMs, custom GPTs, RAG, agents, tool calling, auditing and monitoring
+- business systems including ERP, CRM, SAP, Sage, Excel and Power BI
+- SEO, analytics, digital marketing and conversion optimisation
+- animation, motion, Three.js and accessible UX motion
+- systems analysis, mathematics for computing and game development
+- Waterfall, Agile, Scrum, Kanban, PRINCE2, ITIL and delivery tooling
+
+A structural completeness gate prevents required modules, routes, tools, lessons or signing-secret safeguards from being silently removed.
+
+## Learning experience
+
+AIBLTYCODE combines lesson progression with interactive practice, including code typing and ordering, debugging, pattern recognition, spaced repetition, subnetting, networking protocols, PC building, LMC/number systems, HTML/CSS practice, SQL, ERD design, graph algorithms, Excel, UML, cybersecurity, AI/data science, project planning, adaptive learning, voice coaching, multiplayer battle and a code sandbox.
+
+Newer curriculum modules use a subject-aware mastery generator that produces practical exercises, professional checks, failure-mode reasoning, mini-capstones and teach-back/speed-recall steps rather than generic filler lessons.
+
+## Canonical stack
 
 | Layer | Technology |
-|-------|-----------|
-| Mobile | React Native + Expo SDK 52, Expo Router v4 |
-| AI Engine | GPT-4o, Claude 3.5 Sonnet, Custom embeddings |
-| AI Workforce | Proprietary multi-agent orchestration |
-| Backend | FastAPI 0.115, Python 3.12, PostgreSQL 16, Redis 7 |
-| Infrastructure | DigitalOcean App Platform + Container Registry |
-| Monitoring | Sentry, Prometheus, Grafana |
-| CI/CD | GitHub Actions → DigitalOcean (auto-deploy on push) |
+| --- | --- |
+| Web application | Vite 5 + React 18 + TypeScript |
+| UI | Tailwind CSS + Radix/shadcn-style components + Framer Motion |
+| Routing | React Router |
+| Data/auth | Supabase |
+| Serverless functions | Supabase Edge Functions |
+| State/query | React Context, Zustand and TanStack Query |
+| Charts | Recharts |
+| PWA | vite-plugin-pwa |
+| Native packaging | Capacitor 8 for Android/iOS |
+| CI | GitHub Actions |
+| Source sync | GitHub ↔ Lovable connected project |
 
-## Quick Start
+## Quick start
+
+Prerequisites: Node.js 22+ and npm.
 
 ```bash
-# Mobile
 npm install
-npx expo start
+cp .env.example .env
+npm run dev
+```
 
-# Backend  
+Configure the Vite/Supabase values in `.env` before using authenticated/data-backed features.
+
+## Verification
+
+Run the same production gate used by GitHub Actions:
+
+```bash
+npm run verify
+```
+
+That performs:
+
+1. curriculum/spec completeness validation
+2. TypeScript type checking
+3. ESLint validation
+4. a production Vite build
+
+Individual commands are also available:
+
+```bash
+npm run curriculum:validate
+npm run typecheck
+npm run lint
+npm run build
+```
+
+## Android and iOS
+
+```bash
+npm run build:android
+npm run open:android
+
+npm run build:ios
+npm run open:ios
+```
+
+Release signing credentials must be supplied outside Git. `.env`, Android keystores and `keystore.properties` are explicitly excluded from version control.
+
+## Optional FastAPI backend
+
+The repository also retains an optional/reference Python FastAPI backend under `api/` for advanced self-hosted API deployments. It is **not the canonical backend for the Lovable/Vite application**, which uses Supabase. Its requirements and CI are isolated so legacy Python maintenance cannot falsely block normal frontend/Lovable releases.
+
+```bash
+python -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-uvicorn app.main:app --reload
-
-# Deploy to DigitalOcean
-doctl auth init
-bash .do/deploy.sh
+pytest tests/ -v
 ```
 
-## DigitalOcean Deployment
+## Repository safety and sync
 
-This app is pre-configured for instant DigitalOcean App Platform deployment:
-
-1. **Create DO account**: https://cloud.digitalocean.com
-2. **Install doctl**: `brew install doctl` (macOS) or see [docs](https://docs.digitalocean.com/reference/doctl/)
-3. **Authenticate**: `doctl auth init`
-4. **Deploy**: `bash .do/deploy.sh`
-
-Or import `.do/app.yaml` directly in the DigitalOcean console.
-
-**Required Secrets** (set in DO App Platform dashboard):
-- `DATABASE_URL` — PostgreSQL connection string
-- `SECRET_KEY` — 64-char random string
-- `OPENAI_API_KEY` — OpenAI API key
-- `SENTRY_DSN` — Sentry project DSN
-
-## API Documentation
-
-Live API docs: `https://aibltycode.sianlk.com/docs`
-
-### Key Endpoints
-```
-GET  /health              — Health check
-GET  /                    — Service info  
-POST /api/ai/complete     — AI completion (domain: developer tools)
-POST /api/ai/agent        — AI workforce agent task
-WS   /ws/ai               — Real-time AI streaming
-POST /api/analytics/batch — Analytics ingestion
-POST /api/users/push-token — Push notification registration
-```
-
-## Architecture
-
-```
-Mobile (Expo Router)
-  ├── app/(tabs)/index.tsx  — AI-powered home
-  ├── app/(tabs)/ai.tsx     — AI Workforce agents
-  ├── src/agents/           — AIWorkforceAgent
-  ├── src/services/         — AI, Analytics, Notifications
-  └── src/theme/            — Design system
-
-Backend (FastAPI)
-  ├── app/main.py           — Routes + WebSocket
-  ├── alembic/              — DB migrations
-  └── tests/                — pytest suite
-
-Infrastructure
-  ├── .do/app.yaml          — DO App Platform spec
-  ├── .do/deploy.sh         — One-click deploy
-  ├── k8s/                  — Kubernetes manifests
-  ├── Dockerfile            — Production container
-  └── docker-compose.yml    — Local development
-```
-
-## AI Workforce System
-
-AIBLTY Code uses proprietary AI workforce agents (created by Sianlk):
-
-- **Analyst Agent** — Expert developer tools analysis with reasoning chains
-- **Advisor Agent** — Strategic recommendations and forecasting
-- **Automator Agent** — Autonomous task execution for developer tools workflows
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md). All contributions welcome!
+- `main` is the canonical branch once a completion build has passed verification.
+- Lovable should remain connected to the same GitHub repository rather than being treated as a separate fork.
+- Never commit `.env`, upload keystores, signing property files, API secrets or store credentials.
+- If a signing credential has ever appeared in Git history, rotate it even after the file is removed from current branches.
 
 ## License
 
-MIT © [Sianlk Ltd](https://sianlk.com)
-
----
-*AIBLTY Code is built by Sianlk — pioneer in AI-powered developer tools technology.*
+MIT © Sianlk Ltd

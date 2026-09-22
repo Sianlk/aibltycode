@@ -15,11 +15,11 @@ ARG APP_VERSION=1.1.0
 ARG BUILD_TIME=unknown
 LABEL maintainer="Sianlk <dev@sianlk.com>"
 LABEL org.opencontainers.image.title="AIBLTY Code"
-LABEL org.opencontainers.image.description="AI coding assistant"
+LABEL org.opencontainers.image.description="AIBLTYCODE learning platform API"
 LABEL org.opencontainers.image.version="${APP_VERSION}"
 LABEL org.opencontainers.image.created="${BUILD_TIME}"
 LABEL org.opencontainers.image.vendor="Sianlk"
-LABEL org.opencontainers.image.url="https://aibltycode.sianlk.com"
+LABEL org.opencontainers.image.url="https://aiblty.com"
 LABEL org.opencontainers.image.source="https://github.com/Sianlk/aibltycode"
 
 # Security: non-root user
@@ -47,7 +47,7 @@ EXPOSE 8000
 
 # Health check
 HEALTHCHECK --interval=15s --timeout=5s --start-period=20s --retries=3 \
-  CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=4)"
+  CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/v1/health', timeout=4)"
 
 # Security: prevent privilege escalation in entrypoint
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -56,6 +56,6 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     APP_VERSION=${APP_VERSION} \
     ENVIRONMENT=production
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", \
+CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000", \
      "--workers", "2", "--loop", "uvloop", "--http", "h11", \
      "--access-log", "--proxy-headers", "--forwarded-allow-ips", "*"]

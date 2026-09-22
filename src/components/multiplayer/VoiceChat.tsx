@@ -23,7 +23,7 @@ export function VoiceChat({ roomId, isEnabled = false, onToggle }: VoiceChatProp
   const streamRef = useRef<MediaStream | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number | undefined>(undefined);
 
   // Simulate audio level visualization
   const updateAudioLevel = useCallback(() => {

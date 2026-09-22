@@ -123,7 +123,7 @@ export function HeroSection() {
                 onClick={() => navigate(user ? `/module/${course.id}` : "/auth")}
               >
                 <div className="mb-2 text-2xl">{typeof course.icon === 'string' ? course.icon : course.icon}</div>
-                <h3 className="font-semibold text-foreground text-sm mb-1 line-clamp-1">{course.label}</h3>
+                <h2 className="font-semibold text-foreground text-sm mb-1 line-clamp-1">{course.label}</h2>
                 <p className="text-xs text-muted-foreground line-clamp-2">{course.desc}</p>
               </motion.div>
             ))}

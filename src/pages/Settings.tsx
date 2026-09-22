@@ -1,4 +1,12 @@
+import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
+import {
+  getAnalyticsSummary,
+  setConsent,
+  hasConsent,
+  clearAnalyticsData,
+} from "@/lib/privacyAnalytics";
 import { Header } from "@/components/layout/Header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -7,7 +15,7 @@ import { useGame } from "@/contexts/GameContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useSubscription } from "@/hooks/useSubscription";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Volume2, VolumeX, Zap, Gamepad2, Shield, Eye, Brain, Accessibility, Crown, User, CreditCard } from "lucide-react";
+import { ArrowLeft, Volume2, VolumeX, Zap, Gamepad2, Shield, Eye, Brain, Accessibility, Crown, User, CreditCard, Trash2 } from "lucide-react";
 
 export default function Settings() {
   const navigate = useNavigate();
@@ -24,6 +32,45 @@ export default function Settings() {
     setSoundEnabled(enabled);
     if (enabled) {
       setTimeout(() => playSound("click"), 50);
+    }
+  };
+
+  const [analyticsOn, setAnalyticsOn] = useState(() => hasConsent());
+  const [deletingAccount, setDeletingAccount] = useState(false);
+  const [summary, setSummary] = useState(() => getAnalyticsSummary());
+
+  const handleAnalyticsToggle = (enabled: boolean) => {
+    setConsent(enabled ? "granted" : "denied");
+    setAnalyticsOn(hasConsent());
+    setSummary(getAnalyticsSummary());
+  };
+
+  const handleClearAnalytics = () => {
+    clearAnalyticsData();
+    setSummary(getAnalyticsSummary());
+  };
+
+  const handleDeleteAccount = async () => {
+    if (!user) return;
+    const confirmation = window.prompt(
+      "This permanently deletes your AIblty account, learning progress and profile, and cancels active subscriptions. Type DELETE to continue."
+    );
+    if (confirmation !== "DELETE") return;
+
+    setDeletingAccount(true);
+    try {
+      const { error } = await supabase.functions.invoke("delete-account", { method: "POST" });
+      if (error) throw error;
+      clearAnalyticsData();
+      localStorage.removeItem("aibltycode-xp");
+      localStorage.removeItem("aibltycode-streak");
+      await supabase.auth.signOut();
+      navigate("/", { replace: true });
+    } catch (error) {
+      console.error("Account deletion failed", error);
+      window.alert("We could not delete the account automatically. Please use /delete-account.html or contact privacy@sianlk.com.");
+    } finally {
+      setDeletingAccount(false);
     }
   };
 
@@ -269,7 +316,49 @@ export default function Settings() {
                 <p className="text-sm text-muted-foreground">
                   Your progress is securely stored and encrypted. We only collect data necessary for your learning experience.
                 </p>
-                <Button variant="outline" size="sm">View Privacy Policy</Button>
+
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <p className="font-medium text-foreground">Anonymous learning analytics</p>
+                    <p className="text-sm text-muted-foreground">
+                      Off by default. If you turn it on, we record only lesson completions and daily
+                      return visits with an anonymous id that changes every day — no name, email or answers.
+                    </p>
+                  </div>
+                  <Switch
+                    aria-label="Anonymous learning analytics"
+                    checked={analyticsOn}
+                    onCheckedChange={handleAnalyticsToggle}
+                  />
+                </div>
+
+                {analyticsOn && (
+                  <div className="rounded-lg border border-border p-3 text-sm text-muted-foreground">
+                    <p>
+                      Stored on this device: {summary.total} events ({summary.lessonsCompleted} lesson completions,{" "}
+                      {summary.activeDays} active days).
+                    </p>
+                    <Button variant="outline" size="sm" className="mt-3" onClick={handleClearAnalytics}>
+                      Delete analytics data
+                    </Button>
+                  </div>
+                )}
+
+                <div className="flex flex-wrap gap-2">
+                  <Button variant="outline" size="sm" onClick={() => window.open('/privacy.html', '_blank', 'noopener')}>View Privacy Policy</Button>
+                  <Button variant="outline" size="sm" onClick={() => window.open('/delete-account.html', '_blank', 'noopener')}>Account deletion help</Button>
+                </div>
+
+                <div className="rounded-lg border border-destructive/30 bg-destructive/5 p-4">
+                  <p className="font-medium text-foreground">Delete account and learning data</p>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    Permanently deletes your AIblty profile and learning data and cancels active subscriptions. Billing records that must be retained for legal, tax or fraud-prevention reasons may remain with the payment provider as explained in the privacy policy.
+                  </p>
+                  <Button variant="destructive" size="sm" className="mt-3" disabled={deletingAccount || !user} onClick={handleDeleteAccount}>
+                    <Trash2 className="mr-2 h-4 w-4" />
+                    {deletingAccount ? "Deleting…" : "Delete my account"}
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           </motion.div>

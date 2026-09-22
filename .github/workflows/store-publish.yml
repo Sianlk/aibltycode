@@ -1,62 +1,197 @@
-name: Store Publish
+name: Mobile Release & Google Play Publish
 
 on:
   push:
+    branches:
+      - main
+      - build/aibltycode-complete-2026-08-30
     tags:
       - 'v*'
   workflow_dispatch:
     inputs:
       platform:
-        description: 'Platform to build'
+        description: 'Platform to verify/build'
         required: true
-        default: 'all'
+        default: 'android'
         type: choice
-        options: [all, ios, android]
-      profile:
-        description: 'EAS build profile'
+        options: [android, ios, all]
+      track:
+        description: 'Google Play track (Android only)'
         required: true
-        default: 'production'
+        default: 'internal'
         type: choice
-        options: [development, preview, production]
+        options: [internal, alpha, beta, production]
+      publish_android:
+        description: 'Upload the signed AAB to Google Play'
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  contents: read
 
 jobs:
-  build-and-submit:
-    name: EAS Build & Submit
+  android:
+    if: github.event_name == 'push' || github.event.inputs.platform == 'all' || github.event.inputs.platform == 'android'
     runs-on: ubuntu-latest
-    environment: production
+    env:
+      VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+      VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
+      ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+      ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+      ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+      ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      GOOGLE_PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+      ANDROID_VERSION_CODE: ${{ github.run_number }}
+      COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-node@v4
+      - name: Resolve Android release metadata
+        id: release
+        shell: bash
+        run: |
+          if [[ "${GITHUB_REF}" == refs/tags/v* ]]; then
+            echo "version_name=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+            echo "track=production" >> "$GITHUB_OUTPUT"
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+          elif [[ "${GITHUB_REF}" == "refs/heads/main" && "${COMMIT_MESSAGE}" == *"[play-release]"* ]]; then
+            echo "version_name=1.0.${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
+            echo "track=production" >> "$GITHUB_OUTPUT"
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+          elif [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
+            echo "version_name=1.0.${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
+            echo "track=${{ github.event.inputs.track || 'internal' }}" >> "$GITHUB_OUTPUT"
+            echo "publish=${{ github.event.inputs.publish_android || 'false' }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "version_name=1.0.${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
+            echo "track=internal" >> "$GITHUB_OUTPUT"
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Report credential readiness without exposing secrets
+        shell: bash
+        run: |
+          for name in VITE_SUPABASE_URL VITE_SUPABASE_PUBLISHABLE_KEY ANDROID_KEYSTORE_BASE64 ANDROID_KEYSTORE_PASSWORD ANDROID_KEY_ALIAS ANDROID_KEY_PASSWORD GOOGLE_PLAY_SERVICE_ACCOUNT_JSON; do
+            if [[ -n "${!name}" ]]; then
+              echo "$name=configured"
+            else
+              echo "$name=missing"
+            fi
+          done
+
+      - name: Fail closed unless production build secrets exist
+        shell: bash
+        run: |
+          required=(
+            VITE_SUPABASE_URL
+            VITE_SUPABASE_PUBLISHABLE_KEY
+            ANDROID_KEYSTORE_BASE64
+            ANDROID_KEYSTORE_PASSWORD
+            ANDROID_KEY_ALIAS
+            ANDROID_KEY_PASSWORD
+          )
+          missing=0
+          for name in "${required[@]}"; do
+            if [[ -z "${!name}" ]]; then
+              echo "::error::Missing required Android release secret: $name"
+              missing=1
+            fi
+          done
+          exit "$missing"
+
+      - uses: actions/setup-node@v6
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: '22'
+          cache: npm
 
-      - name: Install dependencies
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Install verified dependencies
         run: npm ci
 
-      - name: Setup Expo
-        uses: expo/expo-github-action@v8
+      - name: Run complete release gate
+        run: npm run verify
+
+      - name: Build web and sync Android
+        env:
+          ANDROID_VERSION_NAME: ${{ steps.release.outputs.version_name }}
+        run: npm run build:android
+
+      - name: Configure Android release signing
+        shell: bash
+        run: |
+          printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > android/app/upload-keystore.jks
+          cat > android/app/keystore.properties <<EOF
+          storeFile=upload-keystore.jks
+          storePassword=$ANDROID_KEYSTORE_PASSWORD
+          keyAlias=$ANDROID_KEY_ALIAS
+          keyPassword=$ANDROID_KEY_PASSWORD
+          EOF
+
+      - name: Build signed Android App Bundle
+        working-directory: android
+        env:
+          ANDROID_VERSION_NAME: ${{ steps.release.outputs.version_name }}
+          ANDROID_VERSION_CODE: ${{ env.ANDROID_VERSION_CODE }}
+        run: ./gradlew clean bundleRelease
+
+      - name: Verify signed bundle exists
+        shell: bash
+        run: |
+          test -f android/app/build/outputs/bundle/release/app-release.aab
+          test -s android/app/build/outputs/bundle/release/app-release.aab
+
+      - uses: actions/upload-artifact@v4
         with:
-          eas-version: latest
-          token: ${{ secrets.EXPO_TOKEN }}
+          name: aibltycode-android-${{ steps.release.outputs.version_name }}
+          path: android/app/build/outputs/bundle/release/app-release.aab
+          if-no-files-found: error
 
-      - name: Build iOS (production)
-        if: github.event.inputs.platform == 'all' || github.event.inputs.platform == 'ios'
+      - name: Require Google Play service account for publishing
+        if: steps.release.outputs.publish == 'true'
+        shell: bash
         run: |
-          eas build --platform ios --profile ${{ github.event.inputs.profile || 'production' }} --non-interactive
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+          if [[ -z "$GOOGLE_PLAY_SERVICE_ACCOUNT_JSON" ]]; then
+            echo "::error::GOOGLE_PLAY_SERVICE_ACCOUNT_JSON is required to publish to Google Play."
+            exit 1
+          fi
 
-      - name: Build Android (production)
-        if: github.event.inputs.platform == 'all' || github.event.inputs.platform == 'android'
+      - name: Publish signed AAB to Google Play
+        if: steps.release.outputs.publish == 'true'
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+          packageName: com.aibltycode.app
+          releaseFiles: android/app/build/outputs/bundle/release/app-release.aab
+          track: ${{ steps.release.outputs.track }}
+          status: completed
+          inAppUpdatePriority: 2
+          whatsNewDirectory: play-store/whatsnew
+
+  ios-verification:
+    if: github.event_name == 'workflow_dispatch' && (github.event.inputs.platform == 'all' || github.event.inputs.platform == 'ios')
+    runs-on: macos-latest
+    env:
+      VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+      VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Require web runtime configuration
+        shell: bash
         run: |
-          eas build --platform android --profile ${{ github.event.inputs.profile || 'production' }} --non-interactive
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-
-      - name: Submit to App Stores
-        if: startsWith(github.ref, 'refs/tags/')
-        run: eas submit --platform all --non-interactive
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+          test -n "$VITE_SUPABASE_URL" || { echo "::error::Missing VITE_SUPABASE_URL"; exit 1; }
+          test -n "$VITE_SUPABASE_PUBLISHABLE_KEY" || { echo "::error::Missing VITE_SUPABASE_PUBLISHABLE_KEY"; exit 1; }
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Build web and sync iOS
+        run: npm run build:ios
+      - name: Verify native iOS project without App Store signing
+        run: |
+          xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -sdk iphonesimulator CODE_SIGNING_ALLOWED=NO build

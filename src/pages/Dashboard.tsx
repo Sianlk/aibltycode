@@ -12,8 +12,12 @@ import { useAdmin } from "@/hooks/useAdmin";
 import { useSubscription } from "@/hooks/useSubscription";
 import { SubscriptionGate } from "@/components/subscription/SubscriptionGate";
 import { zones } from "@/data/learningSystem";
+import { moduleLessons, moduleInfo } from "@/data/moduleData";
+import { moduleGameMap, unlockedModuleGames, nextGameUnlockAt, getZoneState } from "@/data/moduleGameMap";
+import { Lock } from "lucide-react";
 import { ProjectSubmission } from "@/components/dashboard/ProjectSubmission";
 import DailyChallenges from "@/components/dashboard/DailyChallenges";
+import { ReviewDueBanner } from "@/components/dashboard/ReviewDueBanner";
 import AchievementsGallery from "@/components/dashboard/AchievementsGallery";
 import { Gamepad2, Flame, Star, Trophy, Crown, Settings, Map, BookOpen, BarChart3, Award, Target, Medal, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -67,6 +71,7 @@ const gameModes = [
   { id: "adaptive", title: "Adaptive Learning", description: "AI-powered practice", icon: "typing" as const, color: "secondary" as const, emoji: "🧠" },
   { id: "voice-coach", title: "Voice Coach", description: "Read code aloud", icon: "typing" as const, color: "accent" as const, emoji: "🗣️" },
   { id: "puzzle-builder", title: "Code Puzzles", description: "Build code pieces", icon: "ordering" as const, color: "primary" as const, emoji: "🧩" },
+  { id: "chatbot-builder", title: "Chatbot Builder Lab", description: "Build & test a real AI bot", icon: "typing" as const, color: "accent" as const, emoji: "🤖" },
   
   // Multiplayer & Sandbox
   { id: "battle", title: "Multiplayer Battle", description: "Challenge friends!", icon: "speed" as const, color: "warning" as const, emoji: "⚔️", link: "/battle" },
@@ -83,6 +88,7 @@ export default function Dashboard() {
   const isKidsMode = gameMode === "kid";
   
   const [stats, setStats] = useState({ xp: 0, streak: 0, gamesPlayed: 0 });
+  const [activeTab, setActiveTab] = useState("zones");
 
   useEffect(() => {
     if (!authLoading && !user) navigate('/auth');
@@ -109,8 +115,17 @@ export default function Dashboard() {
   }, [user, progress]);
 
   const completedLessons = progress.filter(p => p.completed).length;
-  const totalLessons = 850; // Total lessons across all 9 expanded mastery modules
+  const totalLessons = Object.values(moduleLessons).reduce((n, l) => n + l.length, 0);
   const overallProgress = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
+
+  // Real per-course progress, used to unlock zones and practice games.
+  const completedByModule: Record<string, number> = {};
+  progress.filter(p => p.completed).forEach(p => {
+    completedByModule[p.moduleId] = (completedByModule[p.moduleId] ?? 0) + 1;
+  });
+  const totalByModule: Record<string, number> = Object.fromEntries(
+    Object.entries(moduleLessons).map(([id, list]) => [id, list.length])
+  );
 
   if (authLoading) {
     return (
@@ -125,6 +140,7 @@ export default function Dashboard() {
       <Header />
 
       <main className="container mx-auto px-4 pt-24 pb-12 max-w-4xl">
+        <ReviewDueBanner />
         {/* Admin & Subscription Status */}
         {(isAdmin || inTrial || subscribed) && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mb-4 flex gap-2 flex-wrap">
@@ -205,11 +221,19 @@ export default function Dashboard() {
           transition={{ delay: 0.15 }}
           className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-10"
         >
-          <Button 
-            size="lg" 
+          <Button
+            size="lg"
             className={`text-lg h-14 ${isKidsMode ? 'bg-gradient-to-r from-primary to-accent text-white' : 'bg-primary hover:bg-primary/90'}`}
+            onClick={() => navigate('/path')}
+          >
+            {isKidsMode ? '🗺️ My Quest' : 'My Path'}
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            className={`text-lg h-14 ${isKidsMode ? 'border-2 border-primary' : 'border-2'}`}
             onClick={() => {
-              const moduleOrder = ["java-foundations","systems-analysis","math-computing","cybersecurity","ai-data-science","business-systems","game-development","computer-systems","web-technologies"];
+              const moduleOrder = Object.keys(moduleLessons);
               const nextModule = moduleOrder.find(m => {
                 const done = progress.filter(p => p.moduleId === m && p.completed).length;
                 return done > 0 && done < 50;
@@ -223,7 +247,10 @@ export default function Dashboard() {
             size="lg" 
             variant="outline"
             className={`text-lg h-14 ${isKidsMode ? 'border-2 border-accent' : 'border-2'}`}
-            onClick={() => document.getElementById('games-section')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => {
+              setActiveTab("games");
+              setTimeout(() => document.getElementById('games-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 120);
+            }}
           >
             <Gamepad2 className="w-5 h-5 mr-2" />
             {isKidsMode ? '🎮 Games' : 'Games'}
@@ -240,7 +267,7 @@ export default function Dashboard() {
         </motion.div>
 
         {/* Content Tabs */}
-        <Tabs defaultValue="zones" className="w-full">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-6 mb-6">
             <TabsTrigger value="zones" className="flex items-center gap-1 text-xs sm:text-sm">
               <Map className="w-3 h-3 sm:w-4 sm:h-4" />
@@ -278,17 +305,29 @@ export default function Dashboard() {
               <h2 className={`text-xl font-bold text-foreground mb-4 flex items-center gap-2 ${isKidsMode ? 'text-2xl' : ''}`}>
                 {isKidsMode ? '🌍 Explore the World!' : 'Learning Zones'}
               </h2>
+              <p className="text-sm text-muted-foreground mb-4">
+                {isKidsMode
+                  ? 'Finish a lesson in a course to open its world!'
+                  : 'Each zone opens when you complete a lesson in one of its courses, and fills up as you finish more.'}
+              </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {zones.map((zone, index) => (
-                  <ZoneCard
-                    key={zone.id}
-                    zone={zone}
-                    index={index}
-                    unlocked={index < 4}
-                    progress={Math.max(0, 80 - index * 15)}
-                    gamesCompleted={Math.max(0, 4 - index)}
-                  />
-                ))}
+                {zones.map((zone, index) => {
+                  const state = getZoneState(zone.id, completedByModule, totalByModule);
+                  const gateTitle = state.gateModuleId ? moduleInfo[state.gateModuleId]?.title : undefined;
+                  return (
+                    <ZoneCard
+                      key={zone.id}
+                      zone={zone}
+                      index={index}
+                      unlocked={state.unlocked}
+                      progress={state.percent}
+                      lessonsDone={state.lessonsDone}
+                      lessonsTotal={state.lessonsTotal}
+                      unlockHint={gateTitle ? `Complete a lesson in ${gateTitle} to open this zone` : undefined}
+                      onUnlockClick={state.gateModuleId ? () => navigate(`/module/${state.gateModuleId}`) : undefined}
+                    />
+                  );
+                })}
               </div>
             </motion.section>
 
@@ -321,17 +360,8 @@ export default function Dashboard() {
                 {isKidsMode ? '🛤️ Your Adventure!' : 'Your Learning Path'}
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {[
-                  { id: "java-foundations", title: "Java Programming", icon: "☕", color: "primary" },
-                  { id: "systems-analysis", title: "Systems Analysis", icon: "🌌", color: "accent" },
-                  { id: "math-computing", title: "Maths for Computing", icon: "🔢", color: "warning" },
-                  { id: "cybersecurity", title: "Cybersecurity", icon: "🔐", color: "success" },
-                  { id: "ai-data-science", title: "AI & Data Science", icon: "🤖", color: "secondary" },
-                  { id: "business-systems", title: "Business Systems", icon: "💼", color: "primary" },
-                  { id: "game-development", title: "Game Development", icon: "🎮", color: "accent" },
-                  { id: "computer-systems", title: "Computer Systems & Networking", icon: "🖥️", color: "success" },
-                  { id: "web-technologies", title: "Web Technologies", icon: "🌐", color: "warning" },
-                ].map((mod) => (
+                {modules.map((mod) => (
+
                   <div
                     key={mod.id}
                     onClick={() => navigate(`/module/${mod.id}`)}
@@ -343,6 +373,7 @@ export default function Dashboard() {
                   >
                     <div className={`mb-2 ${isKidsMode ? 'text-5xl' : 'text-4xl'}`}>{mod.icon}</div>
                     <h3 className={`font-bold ${isKidsMode ? 'text-lg' : ''}`}>{mod.title}</h3>
+                    <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{mod.description}</p>
                   </div>
                 ))}
               </div>
@@ -363,6 +394,77 @@ export default function Dashboard() {
                 {gameModes.map((game, index) => (
                   <GameModeCard key={game.id} {...game} index={index} />
                 ))}
+              </div>
+            </motion.section>
+
+            {/* Games unlocked by your course lessons */}
+            <motion.section
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.15 }}
+              className="mt-10"
+            >
+              <h2 className={`text-xl font-bold text-foreground mb-1 ${isKidsMode ? 'text-2xl' : ''}`}>
+                {isKidsMode ? '🔓 Games You Unlocked!' : 'Unlocked by your lessons'}
+              </h2>
+              <p className="text-sm text-muted-foreground mb-4">
+                {isKidsMode
+                  ? 'Finish lessons to open more games in each course!'
+                  : 'Each course opens more practice games as you complete its lessons.'}
+              </p>
+              <div className="space-y-4">
+                {Object.keys(moduleGameMap).map((moduleId) => {
+                  const info = moduleInfo[moduleId];
+                  if (!info) return null;
+                  const done = progress.filter((p) => p.moduleId === moduleId && p.completed).length;
+                  const unlocked = unlockedModuleGames(moduleId, done);
+                  const all = moduleGameMap[moduleId].games;
+                  const nextAt = nextGameUnlockAt(moduleId, done);
+                  return (
+                    <div key={moduleId} className="rounded-xl border border-border bg-card p-4">
+                      <div className="flex items-center justify-between gap-2 mb-3">
+                        <button
+                          onClick={() => navigate(`/module/${moduleId}`)}
+                          className="flex items-center gap-2 font-semibold hover:text-primary transition-colors"
+                        >
+                          <span className="text-2xl">{info.icon}</span>
+                          {info.title}
+                        </button>
+                        <span className="text-xs text-muted-foreground">
+                          {done} lesson{done === 1 ? '' : 's'} done
+                        </span>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {all.map((gameId) => {
+                          const meta = gameModes.find((g) => g.id === gameId);
+                          const isUnlocked = unlocked.includes(gameId);
+                          return (
+                            <Button
+                              key={gameId}
+                              size="sm"
+                              variant={isUnlocked ? 'secondary' : 'outline'}
+                              disabled={!isUnlocked}
+                              onClick={() => navigate(`/game/${gameId}`)}
+                              className="text-xs"
+                            >
+                              {isUnlocked ? (
+                                <span className="mr-1">{meta?.emoji ?? '🎮'}</span>
+                              ) : (
+                                <Lock className="mr-1 h-3 w-3" />
+                              )}
+                              {meta?.title ?? gameId}
+                            </Button>
+                          );
+                        })}
+                      </div>
+                      {nextAt !== null && (
+                        <p className="mt-2 text-xs text-muted-foreground">
+                          Next game unlocks at {nextAt} lessons.
+                        </p>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </motion.section>
           </TabsContent>

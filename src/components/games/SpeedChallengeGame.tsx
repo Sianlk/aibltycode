@@ -101,7 +101,7 @@ export function SpeedChallengeGame() {
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [showResult, setShowResult] = useState<"correct" | "wrong" | null>(null);
   const [shuffledQuestions, setShuffledQuestions] = useState<SpeedQuestion[]>([]);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // Shuffle questions on game start
   const startGame = () => {

@@ -5,30 +5,65 @@ on:
     - cron: "0 4 * * 1"   # Every Monday 04:00 UTC
   workflow_dispatch:
     inputs:
+      base_url:
+        description: "API base URL (falls back to PRODUCTION_URL secret)"
+        required: false
+        default: ""
       vus:
         description: "Virtual users"
+        required: false
         default: "50"
       duration:
         description: "Duration (e.g. 60s)"
+        required: false
         default: "60s"
 
 jobs:
   load-test:
     runs-on: ubuntu-latest
+    env:
+      INPUT_BASE_URL: ${{ github.event.inputs.base_url }}
+      PRODUCTION_URL: ${{ secrets.PRODUCTION_URL }}
     steps:
       - uses: actions/checkout@v6
+
+      - name: Resolve load-test target
+        id: target
+        shell: bash
+        run: |
+          TARGET="${INPUT_BASE_URL:-$PRODUCTION_URL}"
+          if [ -z "$TARGET" ]; then
+            echo "run_test=false" >> "$GITHUB_OUTPUT"
+            echo "No production URL configured; load test skipped safely."
+          else
+            echo "run_test=true" >> "$GITHUB_OUTPUT"
+            echo "base_url=$TARGET" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Install k6
+        if: steps.target.outputs.run_test == 'true'
         run: |
-          curl -L https://github.com/grafana/k6/releases/download/v0.50.0/k6-v0.50.0-linux-amd64.tar.gz | tar xz
+          curl --fail --location --silent --show-error \
+            https://github.com/grafana/k6/releases/download/v0.50.0/k6-v0.50.0-linux-amd64.tar.gz \
+            | tar xz
           sudo mv k6-v0.50.0-linux-amd64/k6 /usr/local/bin/k6
+
       - name: Run load test
+        if: steps.target.outputs.run_test == 'true'
         env:
-          BASE_URL: ${{ secrets.PRODUCTION_URL || "http://localhost:8000" }}
+          BASE_URL: ${{ steps.target.outputs.base_url }}
+          VUS: ${{ github.event.inputs.vus || '50' }}
+          DURATION: ${{ github.event.inputs.duration || '60s' }}
         run: |
-          k6 run tests/load_test.js             --vus ${{ github.event.inputs.vus || 50 }}             --duration ${{ github.event.inputs.duration || "60s" }}             --out json=load-test-results.json             -e BASE_URL=$BASE_URL
+          k6 run tests/load_test.js \
+            --vus "$VUS" \
+            --duration "$DURATION" \
+            --out json=load-test-results.json \
+            -e BASE_URL="$BASE_URL"
+
       - name: Upload results
         uses: actions/upload-artifact@v4
-        if: always()
+        if: always() && steps.target.outputs.run_test == 'true'
         with:
           name: k6-results-${{ github.run_id }}
           path: load-test-results.json
