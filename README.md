@@ -101,7 +101,9 @@ pip install -r requirements.txt
 pytest tests/ -v
 ```
 
-## Production ownership\n\n- Canonical public URLs: `https://aiblty.com` and `https://www.aiblty.com`.\n- `https://aibltycode.lovable.app` is a legacy host and must redirect to the canonical site.\n- Frontend releases are built from GitHub Actions, not from Lovable hosting.\n- Database migrations and Edge Function source are version-controlled under `supabase/`.\n- Runtime secrets belong in GitHub/Supabase deployment settings, never in the repository.\n\n## Repository safety and sync
+## Production ownership
+
+- Canonical public URLs: `https://aiblty.com` and `https://www.aiblty.com`.\n- `https://aibltycode.lovable.app` is a legacy host and must redirect to the canonical site.\n- Frontend releases are built from GitHub Actions, not from Lovable hosting.\n- Database migrations and Edge Function source are version-controlled under `supabase/`.\n- Runtime secrets belong in GitHub/Supabase deployment settings, never in the repository.\n\n## Repository safety and sync
 
 - `main` is the canonical branch once a completion build has passed verification.
 - Lovable may remain connected for editing, but GitHub `main` is authoritative and production must not depend on `*.lovable.app`.

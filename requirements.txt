@@ -1,5 +1,5 @@
 # AIBLTY Code — Optional legacy/reference FastAPI backend requirements
-# The live Lovable/Vite application uses Supabase; this backend remains available
+# The production Vite/React application uses Supabase; this backend remains available
 # for self-hosted/advanced API deployments and is tested independently.
 
 # Core

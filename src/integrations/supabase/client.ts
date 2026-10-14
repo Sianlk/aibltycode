@@ -1,4 +1,5 @@
-// Production browser client. GitHub is the source of truth; no Lovable auth broker is required.\nimport { createClient } from '@supabase/supabase-js';
+// Production browser client. GitHub is the source of truth; no Lovable auth broker is required.
+import { createClient } from '@supabase/supabase-js';
 import type { Database } from './types';
 
 const DEFAULT_SUPABASE_URL = 'https://lzeebofvztpwfzfrxthl.supabase.co';
