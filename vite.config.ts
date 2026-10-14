@@ -18,6 +18,10 @@ export default defineConfig(({ mode }) => ({
       includeAssets: ["favicon.png", "app-icon.png"],
       workbox: {
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
+        // Activate new releases immediately and drop old precaches so stale pages can't blank the app.
+        skipWaiting: true,
+        clientsClaim: true,
+        cleanupOutdatedCaches: true,
         navigateFallbackDenylist: [/^\/~oauth/],
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
       },
