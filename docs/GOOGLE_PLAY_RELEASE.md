@@ -1,6 +1,6 @@
 # Google Play Release — AIBLTYCODE
 
-Canonical package: `com.aibltycode.app`
+Canonical package: `www.aiblty.com`
 
 Public privacy policy: https://aiblty.com/privacy.html  
 Public account deletion resource: https://aiblty.com/delete-account.html
