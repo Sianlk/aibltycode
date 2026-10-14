@@ -3,8 +3,8 @@
 ## Build produced
 
 - **AAB file**: `android/app/build/outputs/bundle/release/app-release.aab`
-- **Package name**: `com.aibltycode.app`
-- **Version**: `1.0` (`versionCode 1`)
+- **Package name**: `www.aiblty.com`
+- **Version**: `1.1.0` (`versionCode 2` minimum for the next update)
 - **Size**: ~4.8 MB
 - **Signing**: Release AAB is signed with the upload keystore configured in `android/app/build.gradle`.
 
@@ -20,7 +20,7 @@ Open `android/app/keystore.properties` to view the store/key passwords and alias
 ## Release steps in Google Play Console
 
 1. Go to [Google Play Console](https://play.google.com/console).
-2. Select the app with package name `com.aibltycode.app`.
+2. Select the app with package name `www.aiblty.com`.
 3. Navigate to **Release > Production > Create new release**.
 4. If this is the first release, enable **Google Play App Signing** when prompted. Choose to **Use existing app signing key** or let Google generate one.
 5. Upload `android/app/build/outputs/bundle/release/app-release.aab`.
