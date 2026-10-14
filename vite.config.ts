@@ -4,7 +4,8 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 import { VitePWA } from "vite-plugin-pwa";
 
-// https://vitejs.dev/config/
+// GitHub is the production source of truth. componentTagger is editor-only and
+// excluded from production builds.
 export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
@@ -18,6 +19,9 @@ export default defineConfig(({ mode }) => ({
       includeAssets: ["favicon.png", "app-icon.png"],
       workbox: {
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
+        skipWaiting: true,
+        clientsClaim: true,
+        cleanupOutdatedCaches: true,
         navigateFallbackDenylist: [/^\/~oauth/],
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
       },
