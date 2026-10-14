@@ -19,19 +19,32 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
+    const fallback = window.setTimeout(() => setLoading(false), 6000);
+    let subscription: { unsubscribe: () => void } | undefined;
 
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
+    try {
+      subscription = supabase.auth.onAuthStateChange((_event, session) => {
+        setSession(session);
+        setUser(session?.user ?? null);
+        setLoading(false);
+      }).data.subscription;
+    } catch (error) {
+      console.error("Auth listener failed:", error);
       setLoading(false);
-    });
+    }
 
-    return () => subscription.unsubscribe();
+    supabase.auth.getSession()
+      .then(({ data: { session } }) => {
+        setSession(session);
+        setUser(session?.user ?? null);
+      })
+      .catch((error) => console.error("Auth session check failed:", error))
+      .finally(() => setLoading(false));
+
+    return () => {
+      window.clearTimeout(fallback);
+      subscription?.unsubscribe();
+    };
   }, []);
 
   const signUp = async (email: string, password: string, displayName: string, mode: 'kid' | 'pro' = 'pro') => {
@@ -45,7 +58,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     });
 
-    // After signup, update the profile mode
     if (!error && data.user) {
       setTimeout(async () => {
         await supabase.from('profiles').update({ mode }).eq('id', data.user!.id);

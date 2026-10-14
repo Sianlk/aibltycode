@@ -1,6 +1,6 @@
 # AIBLTYCODE
 
-AIBLTYCODE is a gamified, zero-to-expert technology learning platform for web, mobile and installable PWA use. The canonical application is the Lovable-connected Vite/React codebase in this repository, backed by Supabase and packaged for iOS/Android with Capacitor.
+AIBLTYCODE is a gamified, zero-to-expert technology learning platform for web, mobile and installable PWA use. The canonical application is the GitHub-owned Vite/React codebase in this repository, backed by Supabase and packaged for iOS/Android with Capacitor. Production must build from GitHub; Lovable may be used as an editor but is not a production host or runtime dependency.
 
 ## Product scope
 
@@ -30,7 +30,7 @@ Newer curriculum modules use a subject-aware mastery generator that produces pra
 
 | Layer | Technology |
 | --- | --- |
-| Web application | Vite 5 + React 18 + TypeScript |
+| Web application | Vite + React 18 + TypeScript |
 | UI | Tailwind CSS + Radix/shadcn-style components + Framer Motion |
 | Routing | React Router |
 | Data/auth | Supabase |
@@ -40,7 +40,7 @@ Newer curriculum modules use a subject-aware mastery generator that produces pra
 | PWA | vite-plugin-pwa |
 | Native packaging | Capacitor 8 for Android/iOS |
 | CI | GitHub Actions |
-| Source sync | GitHub ↔ Lovable connected project |
+| Source of truth | GitHub `main` |
 
 ## Quick start
 
@@ -92,7 +92,7 @@ Release signing credentials must be supplied outside Git. `.env`, Android keysto
 
 ## Optional FastAPI backend
 
-The repository also retains an optional/reference Python FastAPI backend under `api/` for advanced self-hosted API deployments. It is **not the canonical backend for the Lovable/Vite application**, which uses Supabase. Its requirements and CI are isolated so legacy Python maintenance cannot falsely block normal frontend/Lovable releases.
+The repository also retains an optional/reference Python FastAPI backend under `api/` for advanced self-hosted API deployments. It is **not the canonical backend for the production web application**, which currently uses Supabase. Its requirements and CI are isolated so legacy Python maintenance cannot falsely block normal web releases.
 
 ```bash
 python -m venv .venv
@@ -101,10 +101,10 @@ pip install -r requirements.txt
 pytest tests/ -v
 ```
 
-## Repository safety and sync
+## Production ownership\n\n- Canonical public URLs: `https://aiblty.com` and `https://www.aiblty.com`.\n- `https://aibltycode.lovable.app` is a legacy host and must redirect to the canonical site.\n- Frontend releases are built from GitHub Actions, not from Lovable hosting.\n- Database migrations and Edge Function source are version-controlled under `supabase/`.\n- Runtime secrets belong in GitHub/Supabase deployment settings, never in the repository.\n\n## Repository safety and sync
 
 - `main` is the canonical branch once a completion build has passed verification.
-- Lovable should remain connected to the same GitHub repository rather than being treated as a separate fork.
+- Lovable may remain connected for editing, but GitHub `main` is authoritative and production must not depend on `*.lovable.app`.
 - Never commit `.env`, upload keystores, signing property files, API secrets or store credentials.
 - If a signing credential has ever appeared in Git history, rotate it even after the file is removed from current branches.
 

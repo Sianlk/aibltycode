@@ -1,15 +1,15 @@
-// Shared CORS handling: restrict cross-origin access to known app origins.
+// Shared CORS handling: restrict cross-origin access to the canonical app,
+// local development, native shells and explicit editor preview hosts.
 const ALLOWED_ORIGINS = [
   "https://aiblty.com",
   "https://www.aiblty.com",
-  "https://aibltycode.lovable.app",
   "http://localhost:8080",
   "http://localhost:5173",
 ];
 
 const ALLOWED_ORIGIN_PATTERNS = [
-  /^https:\/\/[a-z0-9-]+\.lovable\.app$/i,
-  /^https:\/\/[a-z0-9-]+\.lovableproject\.com$/i,
+  /^https:\/\/(?:id-preview(?:-[a-z0-9]+)?|project)--[0-9a-f-]+(?:-dev)?\.lovable\.app$/i,
+  /^https:\/\/(?:id-preview(?:-[a-z0-9]+)?|project)--[0-9a-f-]+(?:-dev)?\.lovableproject(?:-dev)?\.com$/i,
   /^capacitor:\/\/localhost$/i,
   /^ionic:\/\/localhost$/i,
 ];
