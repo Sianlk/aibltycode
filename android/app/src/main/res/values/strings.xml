@@ -2,6 +2,6 @@
 <resources>
     <string name="app_name">AIblty</string>
     <string name="title_activity_main">AIblty</string>
-    <string name="package_name">com.aibltycode.app</string>
-    <string name="custom_url_scheme">com.aibltycode.app</string>
+    <string name="package_name">www.aiblty.com</string>
+    <string name="custom_url_scheme">www.aiblty.com</string>
 </resources>
