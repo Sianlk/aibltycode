@@ -1,3 +1,3 @@
 # Google Play (Android) — AIblty
 json_key_file(ENV["GOOGLE_PLAY_KEY_FILE"] || "fastlane/google-play-key.json")
-package_name("com.aibltycode.app")
+package_name("www.aiblty.com")
