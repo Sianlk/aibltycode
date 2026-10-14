@@ -19,19 +19,32 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      setSession(session);
-      setUser(session?.user ?? null);
+    // Never leave the app stuck on "Loading..." if auth is slow or unreachable.
+    const fallback = window.setTimeout(() => setLoading(false), 6000);
+    let subscription: { unsubscribe: () => void } | undefined;
+    try {
+      subscription = supabase.auth.onAuthStateChange((event, session) => {
+        setSession(session);
+        setUser(session?.user ?? null);
+        setLoading(false);
+      }).data.subscription;
+    } catch (e) {
+      console.error("Auth listener failed:", e);
       setLoading(false);
-    });
+    }
 
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
+    supabase.auth.getSession()
+      .then(({ data: { session } }) => {
+        setSession(session);
+        setUser(session?.user ?? null);
+      })
+      .catch((e) => console.error("Auth session check failed:", e))
+      .finally(() => setLoading(false));
 
-    return () => subscription.unsubscribe();
+    return () => {
+      window.clearTimeout(fallback);
+      subscription?.unsubscribe();
+    };
   }, []);
 
   const signUp = async (email: string, password: string, displayName: string, mode: 'kid' | 'pro' = 'pro') => {
