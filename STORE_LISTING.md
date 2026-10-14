@@ -76,7 +76,7 @@ Education
 - Support: https://aiblty.com/support.html
 
 ## Package
-`com.aibltycode.app`
+`www.aiblty.com`
 
 ## Store assets in repository
 - App icon: `src/assets/app-icon-1024.png`
