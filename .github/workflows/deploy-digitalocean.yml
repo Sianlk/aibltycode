@@ -1,7 +1,7 @@
-name: Deploy to DigitalOcean App Platform
+name: Legacy Optional DigitalOcean Backend
+# Legacy optional self-hosted backend path. It is NOT the canonical AIBLTY web
+# production deployment. Run manually only if deliberately testing that stack.
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
     inputs:
       environment:
