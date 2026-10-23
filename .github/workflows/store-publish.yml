@@ -1,12 +1,8 @@
 name: Mobile Release & Google Play Publish
 
+# Build/publish releases are deliberately opt-in. Ordinary pushes are covered by CI.
+# Never publish to production based only on a Git tag or commit message.
 on:
-  push:
-    branches:
-      - main
-      - build/aibltycode-complete-2026-08-30
-    tags:
-      - 'v*'
   workflow_dispatch:
     inputs:
       platform:
@@ -22,9 +18,9 @@ on:
         type: choice
         options: [internal, alpha, beta, production]
       publish_android:
-        description: 'Upload the signed AAB to Google Play'
+        description: 'Explicitly upload signed AAB to Google Play (requires credentials and approval)'
         required: true
-        default: true
+        default: false
         type: boolean
 
 permissions:
@@ -32,7 +28,7 @@ permissions:
 
 jobs:
   android:
-    if: github.event_name == 'push' || github.event.inputs.platform == 'all' || github.event.inputs.platform == 'android'
+    if: github.event.inputs.platform == 'all' || github.event.inputs.platform == 'android'
     runs-on: ubuntu-latest
     env:
       VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
@@ -51,23 +47,10 @@ jobs:
         id: release
         shell: bash
         run: |
-          if [[ "${GITHUB_REF}" == refs/tags/v* ]]; then
-            echo "version_name=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
-            echo "track=production" >> "$GITHUB_OUTPUT"
-            echo "publish=true" >> "$GITHUB_OUTPUT"
-          elif [[ "${GITHUB_REF}" == "refs/heads/main" && "${COMMIT_MESSAGE}" == *"[play-release]"* ]]; then
-            echo "version_name=1.0.${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
-            echo "track=production" >> "$GITHUB_OUTPUT"
-            echo "publish=true" >> "$GITHUB_OUTPUT"
-          elif [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
-            echo "version_name=1.0.${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
-            echo "track=${{ github.event.inputs.track || 'internal' }}" >> "$GITHUB_OUTPUT"
-            echo "publish=${{ github.event.inputs.publish_android || 'false' }}" >> "$GITHUB_OUTPUT"
-          else
-            echo "version_name=1.0.${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
-            echo "track=internal" >> "$GITHUB_OUTPUT"
-            echo "publish=false" >> "$GITHUB_OUTPUT"
-          fi
+          # Manual dispatch only. Publishing never occurs on a push or tag.
+          echo "version_name=1.0.${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
+          echo "track=${{ github.event.inputs.track || 'internal' }}" >> "$GITHUB_OUTPUT"
+          echo "publish=${{ github.event.inputs.publish_android || 'false' }}" >> "$GITHUB_OUTPUT"
 
       - name: Report credential readiness without exposing secrets
         shell: bash
